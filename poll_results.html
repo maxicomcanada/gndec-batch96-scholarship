@@ -497,121 +497,47 @@ const SECTIONS = [
 ];
 
 /* ============================================================
-   Counter fetching with localStorage cache + rate-limit-safe
-   throttling. Backend (abacus.jasoncameron.dev) returns HTTP 429
-   when ~125 parallel reads hit it, so we:
-   1. Cache each value in localStorage for 25 seconds
-   2. Refetch in BATCHES of 4 with 350ms delay between batches
-   3. On 429, retry with exponential backoff
-   This keeps the dashboard responsive AND avoids rate limits.
+   Single-shot aggregated fetch via Cloudflare Pages Function
+   at /api/results. The function batches & edge-caches all 99
+   counters server-side, so the dashboard makes ONE request
+   instead of 99, avoiding the abacus.jasoncameron.dev 429s.
 ============================================================ */
-const CACHE_TTL_MS = 60000;     // 60s cache so most fetches hit cache
-const BATCH_SIZE = 4;
-const BATCH_DELAY_MS = 350;
-const CACHE_KEY_PREFIX = "gndec_counter_";
-let fetchInProgress = false;    // Lock to prevent stacked auto-refresh runs
-
-function getCached(key) {
-  try {
-    const raw = localStorage.getItem(CACHE_KEY_PREFIX + key);
-    if (!raw) return null;
-    const { v, t } = JSON.parse(raw);
-    if (Date.now() - t > CACHE_TTL_MS) return null;
-    return v;
-  } catch (e) { return null; }
-}
-function setCached(key, value) {
-  try {
-    localStorage.setItem(CACHE_KEY_PREFIX + key, JSON.stringify({ v: value, t: Date.now() }));
-  } catch (e) {}
-}
-
-async function fetchCounterFresh(key, retries = 3) {
-  for (let attempt = 0; attempt < retries; attempt++) {
-    try {
-      const r = await fetch(`https://abacus.jasoncameron.dev/get/${TALLY_NS}/${key}`, { cache: 'no-store' });
-      if (r.ok) {
-        const data = await r.json();
-        return data.value || 0;
-      }
-      if (r.status === 429) {
-        // Back off and retry
-        await new Promise(res => setTimeout(res, 600 * (attempt + 1)));
-        continue;
-      }
-      if (r.status === 404) return 0; // Key doesn't exist yet
-    } catch (e) {
-      await new Promise(res => setTimeout(res, 300));
-    }
-  }
-  return null; // Give up — caller will fall back to cache
-}
+let fetchInProgress = false;
 
 async function loadAllResults(forceFresh = false) {
-  // Lock so concurrent auto-refreshes don't stack
   if (fetchInProgress) return;
   fetchInProgress = true;
   try {
-    // Build the full list of keys to fetch
-    const keys = [{ key: "total_submissions", isTotal: true }];
-    SECTIONS.forEach(sec => sec.questions.forEach(q => {
-      q.opts.forEach(opt => keys.push({ key: `${q.id}__${opt.k}`, qId: q.id, optKey: opt.k }));
-    }));
-
-    // Pull from cache; collect keys still needing fresh fetching
-    const fresh = [];
-    const results = [];
-    keys.forEach(k => {
-      if (!forceFresh) {
-        const cached = getCached(k.key);
-        if (cached !== null) {
-          results.push({ ...k, value: cached });
-          return;
-        }
-      }
-      fresh.push(k);
-    });
-
-    // Show loading state ONLY if results area is empty (initial load)
-    // Auto-refresh updates silently in background
     const loadingEl = document.getElementById('loadingState');
     const resultsEl = document.getElementById('resultsContainer');
     const isInitialLoad = resultsEl.style.display === 'none';
-    if (loadingEl && fresh.length > 0 && isInitialLoad) {
+    if (isInitialLoad && loadingEl) {
       loadingEl.style.display = 'block';
+      loadingEl.querySelector('div:last-child').textContent = 'Fetching live results…';
     }
 
-    // Fetch remaining keys in throttled batches
-    let done = 0;
-    for (let i = 0; i < fresh.length; i += BATCH_SIZE) {
-      const batch = fresh.slice(i, i + BATCH_SIZE);
-      const batchResults = await Promise.all(
-        batch.map(async k => {
-          const value = await fetchCounterFresh(k.key);
-          if (value !== null) setCached(k.key, value);
-          return { ...k, value: value === null ? (getCached(k.key) || 0) : value };
-        })
-      );
-      results.push(...batchResults);
-      done += batch.length;
-      if (loadingEl && fresh.length > 0 && isInitialLoad) {
+    // One request to /api/results — function aggregates everything
+    const url = forceFresh ? '/api/results?nocache=' + Date.now() : '/api/results';
+    const resp = await fetch(url, { cache: 'no-store' });
+    if (!resp.ok) {
+      console.error('Failed to load results:', resp.status);
+      if (isInitialLoad && loadingEl) {
         loadingEl.querySelector('div:last-child').textContent =
-          `Fetching live results… ${done}/${fresh.length}`;
+          'Could not load results. Retrying in 30s…';
       }
-      if (i + BATCH_SIZE < fresh.length) {
-        await new Promise(res => setTimeout(res, BATCH_DELAY_MS));
-      }
+      return;
     }
+    const payload = await resp.json();
+    const counters = payload.counters || {};
 
     // Aggregate into question structure
-    const data = { total: 0, byQuestion: {} };
-    results.forEach(r => {
-      if (r.isTotal) data.total = r.value;
-      else {
-        if (!data.byQuestion[r.qId]) data.byQuestion[r.qId] = {};
-        data.byQuestion[r.qId][r.optKey] = r.value;
-      }
-    });
+    const data = { total: counters.total_submissions || 0, byQuestion: {} };
+    SECTIONS.forEach(sec => sec.questions.forEach(q => {
+      data.byQuestion[q.id] = {};
+      q.opts.forEach(opt => {
+        data.byQuestion[q.id][opt.k] = counters[`${q.id}__${opt.k}`] || 0;
+      });
+    }));
 
     renderResults(data);
   } finally {

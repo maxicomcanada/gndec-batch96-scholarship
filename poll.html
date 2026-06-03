@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>1996 Batch Scholarship Rubric Poll</title>
+<style>
+:root {
+  --navy: #0b2240;
+  --kesari: #ff7518;
+  --wheat: #e8c168;
+  --maroon: #6b1d2c;
+  --punjab-green: #1e6b3a;
+  --cream: #faf6ec;
+  --ink: #1a1a2e;
+  --muted: #6b6b80;
+  --line: #e5d6b8;
+  --card-bg: #ffffff;
+  --good: #22c55e;
+  --bad: #dc2626;
+  --shadow: 0 4px 24px rgba(11, 34, 64, 0.08);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.55;
+  font-size: 16px;
+  min-height: 100vh;
+}
+.banner {
+  background: linear-gradient(135deg, var(--navy) 0%, #143866 100%);
+  color: var(--cream);
+  padding: 28px 20px 26px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 12% 30%, var(--kesari) 0.7px, transparent 1px),
+    radial-gradient(circle at 88% 70%, var(--wheat) 0.7px, transparent 1px),
+    radial-gradient(circle at 50% 50%, var(--kesari) 0.5px, transparent 1px);
+  background-size: 40px 40px, 32px 32px, 60px 60px;
+  opacity: 0.18;
+  pointer-events: none;
+}
+.banner-title { font-size: 22px; font-weight: 800; margin: 0 0 6px; letter-spacing: 0.5px; position: relative; z-index: 1; }
+.banner-sub { font-size: 14px; opacity: 0.9; margin: 0; position: relative; z-index: 1; }
+.kesari-line { height: 4px; background: linear-gradient(90deg, var(--kesari) 0%, var(--wheat) 50%, var(--kesari) 100%); }
+.wrap { max-width: 720px; margin: 0 auto; padding: 22px 16px 60px; }
+
+.intro {
+  background: var(--card-bg);
+  border-radius: 14px;
+  padding: 22px 20px;
+  margin-bottom: 22px;
+  box-shadow: var(--shadow);
+  border-left: 5px solid var(--kesari);
+}
+.intro h2 { margin: 0 0 10px; font-size: 18px; color: var(--navy); }
+.intro p { margin: 0 0 9px; font-size: 14px; color: var(--ink); }
+.intro .principles {
+  background: #fff7e6;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 13px;
+  margin-top: 12px;
+  color: var(--maroon);
+}
+.intro .principles b { display: block; margin-bottom: 6px; font-size: 13px; color: var(--navy); }
+.intro .principles ul { margin: 0; padding-left: 18px; }
+.intro .principles li { margin-bottom: 3px; line-height: 1.4; }
+.intro .secure-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--punjab-green);
+  color: white;
+  padding: 5px 11px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  margin-top: 12px;
+}
+
+/* Section headers between question groups */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 26px 4px 14px;
+  padding: 10px 14px;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--maroon) 100%);
+  border-radius: 10px;
+  color: white;
+}
+.section-header .num {
+  background: var(--wheat);
+  color: var(--maroon);
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.section-header .ttl { font-size: 14px; font-weight: 700; letter-spacing: 0.3px; }
+
+.identity {
+  background: var(--card-bg);
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 18px;
+  box-shadow: var(--shadow);
+}
+.identity label { display: block; font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+.identity input {
+  width: 100%;
+  padding: 11px 13px;
+  font-size: 15px;
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+  font-family: inherit;
+  margin-bottom: 12px;
+}
+.identity input:focus { outline: 2px solid var(--kesari); outline-offset: 1px; }
+.identity .opt { font-size: 12px; color: var(--muted); font-weight: 400; }
+.identity .note { font-size: 11px; color: var(--muted); margin: -4px 0 0; }
+
+.q {
+  background: var(--card-bg);
+  border-radius: 14px;
+  padding: 18px 18px 12px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow);
+  border-top: 3px solid var(--punjab-green);
+}
+.q-num {
+  display: inline-block;
+  background: var(--navy);
+  color: var(--cream);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+}
+.q-title { font-size: 16px; font-weight: 700; color: var(--navy); margin: 0 0 4px; line-height: 1.35; }
+.q-hint { font-size: 13px; color: var(--muted); margin: 0 0 14px; line-height: 1.45; }
+.opts { display: flex; flex-direction: column; gap: 8px; padding: 0; margin: 0; list-style: none; }
+.opt-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 13px;
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  cursor: pointer;
+  background: #fdfbf4;
+  transition: border 0.15s, background 0.15s;
+  user-select: none;
+}
+.opt-label:hover { border-color: var(--kesari); }
+.opt-label input[type="radio"],
+.opt-label input[type="checkbox"] {
+  margin-top: 3px;
+  accent-color: var(--kesari);
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+.opt-label:has(input:checked) { border-color: var(--punjab-green); background: #f0fdf4; }
+.opt-text { font-size: 14.5px; flex: 1; line-height: 1.4; }
+.opt-text b { color: var(--navy); }
+
+.submit-area {
+  background: var(--card-bg);
+  border-radius: 14px;
+  padding: 18px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  margin-top: 24px;
+}
+.submit-area textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 11px 13px;
+  font-size: 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+  font-family: inherit;
+  margin-bottom: 14px;
+  resize: vertical;
+}
+.btn {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--kesari) 0%, var(--maroon) 100%);
+  color: white;
+  font-size: 17px;
+  font-weight: 700;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100%;
+  font-family: inherit;
+  letter-spacing: 0.3px;
+  box-shadow: 0 4px 12px rgba(255, 117, 24, 0.25);
+}
+.btn:active { transform: translateY(1px); }
+.btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.lockout {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 28px 22px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  margin-top: 20px;
+  border-top: 4px solid var(--punjab-green);
+}
+.lockout .icon { font-size: 56px; line-height: 1; margin-bottom: 10px; }
+.lockout h2 { margin: 0 0 8px; font-size: 20px; color: var(--navy); }
+.lockout p { font-size: 14px; color: var(--ink); margin: 0 0 14px; }
+.lockout .prev {
+  background: #f0fdf4;
+  border: 1px solid var(--punjab-green);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 12px;
+  text-align: left;
+  color: var(--ink);
+  margin-bottom: 14px;
+  max-height: 280px;
+  overflow-y: auto;
+  line-height: 1.55;
+}
+.lockout .prev b { color: var(--navy); }
+.lockout .share-btn {
+  display: inline-block;
+  background: var(--punjab-green);
+  color: white;
+  padding: 11px 22px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 700;
+  margin: 6px 4px;
+  font-size: 14px;
+}
+
+.foot { text-align: center; font-size: 12px; color: var(--muted); padding: 20px 0; }
+.foot a { color: var(--navy); text-decoration: none; }
+.security-note {
+  font-size: 11px;
+  color: var(--muted);
+  background: #f5efe2;
+  border-radius: 6px;
+  padding: 8px 10px;
+  margin-top: 6px;
+  line-height: 1.45;
+}
+
+.progress-bar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: 5px;
+  background: rgba(11, 34, 64, 0.1);
+  margin: -22px -16px 18px;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--kesari), var(--maroon));
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+@media (max-width: 480px) {
+  .banner { padding: 22px 16px 20px; }
+  .banner-title { font-size: 19px; }
+  .wrap { padding: 18px 12px 50px; }
+  .q { padding: 16px 14px 10px; }
+  .q-title { font-size: 15px; }
+  .opt-text { font-size: 14px; }
+  .section-header .ttl { font-size: 13px; }
+}
+</style>
+</head>
+<body>
+
+<div class="banner">
+  <h1 class="banner-title">🎓 1996 Batch Scholarship Selection Poll</h1>
+  <p class="banner-sub">GNDEC Alumni · Help us finalize how we score deserving students</p>
+</div>
+<div class="kesari-line"></div>
+
+<div class="wrap">
+
+  <div id="loadingState" style="text-align:center; padding:40px 20px; font-size:14px; color:var(--muted);">
+    🔄 Loading poll...
+  </div>
+
+  <div class="lockout" id="lockoutScreen" style="display:none;">
+    <div class="icon">✅</div>
+    <h2>You've already voted</h2>
+    <p>This device has already submitted a response to the poll. Thank you for participating! 🙏</p>
+    <div class="prev" id="prevVoteSummary"></div>
+    <p style="font-size:13px;">One vote per person ensures fair averaging. If you genuinely need to change your answers, contact <a href="mailto:maxicomcanada@gmail.com" style="color:var(--maroon);">maxicomcanada@gmail.com</a>.</p>
+    <a class="share-btn" id="shareBtnLock" href="#">📤 Share Poll on WhatsApp</a>
+    <a class="share-btn" style="background:var(--maroon);" href="poll_results.html">📊 View Live Results</a>
+    <a class="share-btn" style="background:var(--navy);" href="/">🏠 Back to Portal</a>
+  </div>
+
+  <div id="formContainer" style="display:none;">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+    <div class="intro">
+      <h2>Sat Sri Akal batchmate 🙏</h2>
+      <p>We are <b>collecting batch input</b> to finalize the scoring rubric for this year's scholarship awards. Your vote becomes one weighted opinion — final rubric = batch average.</p>
+      <div class="principles">
+        <b>Program principles you'll be voting on:</b>
+        <ul>
+          <li>Helping financially weak families above all</li>
+          <li>Girl-child education</li>
+          <li>Orphan & single-parent students</li>
+          <li>Punjab domicile (our home state)</li>
+          <li>Rewarding hard work — students who work alongside studies</li>
+          <li>Academic merit & clean record (no reappears)</li>
+          <li>Special achievements at college/state/national levels</li>
+          <li>Continuity for previous beneficiaries</li>
+          <li>Teacher / HOD recommendation</li>
+          <li>First-generation college students</li>
+        </ul>
+      </div>
+      <p style="margin-top:14px; font-size:13px;">⏱ <b>18 questions · ~5 minutes</b> · One vote per device · Anonymous</p>
+      <span class="secure-badge">🔒 One Vote Per Device · Anonymous Ballot</span>
+    </div>
+
+    <form id="pollForm" onsubmit="return false;">
+      <div class="identity">
+        <label>Your name <span class="opt">(displayed back to you, not stored remotely)</span></label>
+        <input type="text" name="name" placeholder="e.g. Tejpreet Singh" required>
+      </div>
+
+      <!-- ============== SECTION 1: FINANCIAL NEED ============== -->
+      <div class="section-header"><div class="num">A</div><div class="ttl">FINANCIAL NEED — The Soul of the Scholarship</div></div>
+
+      <!-- Q1 -->
+      <div class="q">
+        <span class="q-num">Q1</span>
+        <h3 class="q-title">FAMILY INCOME — how much should annual family income weigh in scoring?</h3>
+        <p class="q-hint">Out of a total 100 score points, this is the slice given to income-based need alone.</p>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q1_income_weight" value="A" required><span class="opt-text"><b>10 points</b> — small slice, need is just one of many factors</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q1_income_weight" value="B"><span class="opt-text"><b>20 points</b> — moderate weight</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q1_income_weight" value="C"><span class="opt-text"><b>30 points</b> — significant, biggest single factor</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q1_income_weight" value="D"><span class="opt-text"><b>40 points</b> — dominant factor</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q1_income_weight" value="E"><span class="opt-text"><b>50+ points</b> — income decides everything</span></label></li>
+        </ul>
+      </div>
+
+      <!-- Q2 -->
+      <div class="q">
+        <span class="q-num">Q2</span>
+        <h3 class="q-title">INCOME MEASUREMENT — how should we calculate "poor enough"?</h3>
+        <p class="q-hint">Family of 7 earning ₹3 lakh vs family of 2 earning ₹3 lakh — very different reality.</p>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q2_income_method" value="A" required><span class="opt-text"><b>Total annual family income</b> only (simple brackets)</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q2_income_method" value="B"><span class="opt-text"><b>Per-person income</b> (total ÷ family dependents) — fair to large families</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q2_income_method" value="C"><span class="opt-text"><b>Both</b> — total income AND per-capita</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q2_income_method" value="D"><span class="opt-text"><b>Income + asset check</b> (house/land/vehicle owned)</span></label></li>
+        </ul>
+      </div>
+
+      <!-- Q3 -->
+      <div class="q">
+        <span class="q-num">Q3</span>
+        <h3 class="q-title">FAMILY ASSETS CHECK — should owned property count against need?</h3>
+        <p class="q-hint">A family may report low income but own land/shop/multiple vehicles. Should this affect scoring?</p>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q3_assets" value="A" required><span class="opt-text"><b>Don't check assets</b> — income is enough</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q3_assets" value="B"><span class="opt-text"><b>Soft signal only</b> — note it, don't score</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q3_assets" value="C"><span class="opt-text"><b>Score it</b>: rented house = +5, owns large land/multiple vehicles = -5</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q3_assets" value="D"><span class="opt-text"><b>Mandatory verification</b> — require documents</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q3_assets" value="E"><span class="opt-text"><b>Disqualify</b> if family owns car or multiple properties</span></label></li>
+        </ul>
+      </div>
+
+      <!-- Q4 -->
+      <div class="q">
+        <span class="q-num">Q4</span>
+        <h3 class="q-title">NUMBER OF DEPENDENTS — should family size matter beyond per-capita?</h3>
+        <p class="q-hint">A family supporting 6 dependents on one earner faces deeper hardship.</p>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q4_dependents" value="A" required><span class="opt-text"><b>Don't consider family size</b> — income tells the full story</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q4_dependents" value="B"><span class="opt-text"><b>3 points</b> bonus for families with 5+ dependents</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q4_dependents" value="C"><span class="opt-text"><b>Tiered</b>: 3 dep=0, 4 dep=2, 5 dep=4, 6+ dep=5 pts</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q4_dependents" value="D"><span class="opt-text"><b>Use only for per-capita calculation</b>, no separate bonus</span></label></li>
+        </ul>
+      </div>
+
+      <!-- ============== SECTION 2: FAMILY CIRCUMSTANCES ============== -->
+      <div class="section-header"><div class="num">B</div><div class="ttl">FAMILY CIRCUMSTANCES — Hardships Beyond Income</div></div>
+
+      <!-- Q5 -->
+      <div class="q">
+        <span class="q-num">Q5</span>
+        <h3 class="q-title">PARENTS STATUS — how much should loss of parent(s) count?</h3>
+        <p class="q-hint">Orphan or single-parent students carry hardships income alone can't capture.</p>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q5_parents" value="A" required><span class="opt-text"><b>No special weight</b> — decide case by case</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q5_parents" value="B"><span class="opt-text"><b>5 points</b> for any orphan or single-parent student</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q5_parents" value="C"><span class="opt-text"><b>10 pts</b> if one parent deceased, <b>15 pts</b> if both</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q5_parents" value="D"><span class="opt-text"><b>15 pts</b> if one deceased, <b>25 pts</b> if both — strong priority</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q5_parents" value="E"><span class="opt-text"><b>Auto-shortlist</b> any orphan student (both parents deceased)</span></label></li>
+        </ul>
+      </div>
+
+      <!-- Q6 -->
+      <div class="q">
+        <span class="q-num">Q6</span>
+        <h3 class="q-title">SINGLE-PARENT / WIDOW HOUSEHOLD — mother as sole earner. Weight?</h3>
+        <p class="q-hint">Cases where the mother alone supports the family but both parents are technically alive.</p>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q6_widow" value="A" required><span class="opt-text"><b>0 points</b> — already covered under parents status</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q6_widow" value="B"><span class="opt-text"><b>3 points</b></span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q6_widow" value="C"><span class="opt-text"><b>5 points</b></span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q6_widow" value="D"><span class="opt-text"><b>10 points</b></span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q6_widow" value="E"><span class="opt-text"><b>Auto-shortlist</b> widow-mother households</span></label></li>
+        </ul>
+      </div>
+
+      <!-- Q7 -->
+      <div class="q">
+        <span class="q-num">Q7</span>
+        <h3 class="q-title">DISABILITY / CHRONIC ILLNESS — student or parent with medical disability (with certificate)</h3>
+        <p class="q-hint">Recognized disability adds hidden costs of treatment & care.</p>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q7_disability" value="A" required><span class="opt-text"><b>0 points</b> — not a scoring factor</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q7_disability" value="B"><span class="opt-text"><b>3 points</b></span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q7_disability" value="C"><span class="opt-text"><b>5 points</b></span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q7_disability" value="D"><span class="opt-text"><b>10 points</b> — significant hardship</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q7_disability" value="E"><span class="opt-text"><b>Auto-shortlist</b> certified disability cases</span></label></li>
+        </ul>
+      </div>
+
+      <!-- Q8 -->
+      <div class="q">
+        <span class="q-num">Q8</span>
+        <h3 class="q-title">FIRST-GENERATION COLLEGE STUDENT — neither parent finished a degree</h3>
+        <p class="q-hint">Breaking generational barriers. New idea, gaining importance globally in admissions.</p>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q8_firstgen" value="A" required><span class="opt-text"><b>0 points</b> — don't track</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q8_firstgen" value="B"><span class="opt-text"><b>3 points</b></span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q8_firstgen" value="C"><span class="opt-text"><b>5 points</b></span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q8_firstgen" value="D"><span class="opt-text"><b>8 points</b></span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q8_firstgen" value="E"><span class="opt-text"><b>10 points</b> — strong priority for breaking the cycle</span></label></li>
+        </ul>
+      </div>
+
+      <!-- ============== SECTION 3: GENDER & GEOGRAPHY ============== -->
+      <div class="section-header"><div class="num">C</div><div class="ttl">PRIORITY GROUPS — Gender, Geography, Domicile</div></div>
+
+      <!-- Q9 -->
+      <div class="q">
+        <span class="q-num">Q9</span>
+        <h3 class="q-title">GIRL CHILD — priority for girls' education. Weight?</h3>
+        <p class="q-hint">Girls in many parts of Punjab still face higher barriers to college.</p>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q9_girl" value="A" required><span class="opt-text"><b>0 points</b> — gender-neutral selection</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q9_girl" value="B"><span class="opt-text"><b>3 points</b> — light encouragement</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q9_girl" value="C"><span class="opt-text"><b>5 points</b> — meaningful preference</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q9_girl" value="D"><span class="opt-text"><b>10 points</b> — strong girl-child priority</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q9_girl" value="E"><span class="opt-text"><b>Reserve 50%</b> of awards exclusively for girls</span></label></li>
+        </ul>
+      </div>
+
+      <!-- Q10 -->
+      <div class="q">
+        <span class="q-num">Q10</span>
+        <h3 class="q-title">🪷 PUNJAB DOMICILE — preference for Punjab-born students?</h3>
+        <p class="q-hint">GNDEC's roots are in Punjab. Should home-state students get a scoring boost?</p>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q10_punjab" value="A" required><span class="opt-text"><b>No preference</b> — all India students treated equally</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q10_punjab" value="B"><span class="opt-text"><b>+5% bonus</b> to final score</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q10_punjab" value="C"><span class="opt-text"><b>+10% bonus</b> to final score</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q10_punjab" value="D"><span class="opt-text"><b>+20% bonus</b> to final score (meaningful priority)</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q10_punjab" value="E"><span class="opt-text"><b>+30% bonus</b> — strong home-state priority</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q10_punjab" value="F"><span class="opt-text"><b>Punjab-only</b> — non-domicile students not eligible</span></label></li>
+        </ul>
+      </div>
+
+      <!-- Q11 -->
+      <div class="q">
+        <span class="q-num">Q11</span>
+        <h3 class="q-title">RURAL BACKGROUND — how should we classify geography?</h3>
+        <p class="q-hint">A student from a 2,000-person village faces different barriers than one from Ludhiana city.</p>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q11_rural" value="A" required><span class="opt-text"><b>Don't consider</b> geography</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q11_rural" value="B"><span class="opt-text"><b>Simple flag</b>: rural = +3 pts, urban = 0</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q11_rural" value="C"><span class="opt-text"><b>Tiered</b>: village <5K = 5 pts, town 5K-50K = 2 pts, city >50K = 0</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q11_rural" value="D"><span class="opt-text"><b>Tiered + extra bonus</b> for villages with no nearby college</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q11_rural" value="E"><span class="opt-text"><b>Border villages of Punjab</b> get maximum bonus (8 pts)</span></label></li>
+        </ul>
+      </div>
+
+      <!-- ============== SECTION 4: ACADEMICS ============== -->
+      <div class="section-header"><div class="num">D</div><div class="ttl">ACADEMIC PERFORMANCE — Proving They Can Succeed</div></div>
+
+      <!-- Q12 -->
+      <div class="q">
+        <span class="q-num">Q12</span>
+        <h3 class="q-title">ACADEMIC MARKS — weight for percentage/grades?</h3>
+        <p class="q-hint">Across last 2 semesters average. Higher = more reward.</p>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q12_marks" value="A" required><span class="opt-text"><b>5 points</b> — this is need-based, not merit-based</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q12_marks" value="B"><span class="opt-text"><b>10 points</b> — basic merit floor</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q12_marks" value="C"><span class="opt-text"><b>15 points</b> — balanced</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q12_marks" value="D"><span class="opt-text"><b>20 points</b> — strong merit signal</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q12_marks" value="E"><span class="opt-text"><b>25 points</b> — merit weighs as much as need</span></label></li>
+        </ul>
+      </div>
+
+      <!-- Q13 -->
+      <div class="q">
+        <span class="q-num">Q13</span>
+        <h3 class="q-title">NO BACKLOGS / NO EXAM REAPPEARS — reward students who pass every paper first try?</h3>
+        <p class="q-hint">Clean academic record shows discipline & focus despite hardship.</p>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q13_backlogs" value="A" required><span class="opt-text"><b>0 points</b> — no special weight</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q13_backlogs" value="B"><span class="opt-text"><b>3 points</b> for clean record</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q13_backlogs" value="C"><span class="opt-text"><b>5 points</b> for clean record</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q13_backlogs" value="D"><span class="opt-text"><b>10 points</b> for clean record</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q13_backlogs" value="E"><span class="opt-text"><b>Mandatory</b> — any reappear = automatic disqualification</span></label></li>
+        </ul>
+      </div>
+
+      <!-- Q14 -->
+      <div class="q">
+        <span class="q-num">Q14</span>
+        <h3 class="q-title">ACADEMIC TREND — should improvement across semesters matter?</h3>
+        <p class="q-hint">A student going 60% → 75% → 85% shows resilience.</p>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q14_trend" value="A" required><span class="opt-text"><b>0 points</b> — only the final average matters</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q14_trend" value="B"><span class="opt-text"><b>3 points</b> bonus for improving trend</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q14_trend" value="C"><span class="opt-text"><b>5 points</b> bonus for improving trend</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q14_trend" value="D"><span class="opt-text"><b>5 pts</b> for improvement, <b>-2 pts</b> for declining trend</span></label></li>
+        </ul>
+      </div>
+
+      <!-- ============== SECTION 5: CHARACTER ============== -->
+      <div class="section-header"><div class="num">E</div><div class="ttl">CHARACTER & EFFORT — Beyond Marks</div></div>
+
+      <!-- Q15 -->
+      <div class="q">
+        <span class="q-num">Q15</span>
+        <h3 class="q-title">WORKING ALONGSIDE STUDIES — student doing part-time job to support themselves</h3>
+        <p class="q-hint">Self-help shows character. Should we reward it?</p>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q15_working" value="A" required><span class="opt-text"><b>0 points</b> — not relevant to need scoring</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q15_working" value="B"><span class="opt-text"><b>3 points</b> — small recognition</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q15_working" value="C"><span class="opt-text"><b>5 points</b> — meaningful recognition for self-help</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q15_working" value="D"><span class="opt-text"><b>10 points</b> — significant character signal</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q15_working" value="E"><span class="opt-text"><b>Required</b> — non-working students not eligible</span></label></li>
+        </ul>
+      </div>
+
+      <!-- Q16 -->
+      <div class="q">
+        <span class="q-num">Q16</span>
+        <h3 class="q-title">SPECIAL AWARDS & ACHIEVEMENTS — how should we score multi-level recognition?</h3>
+        <p class="q-hint">Student may be College Sports Captain, State Math Olympiad winner, National Hockey player, etc.</p>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q16_awards" value="A" required><span class="opt-text"><b>No achievement bonus</b> — focus only on need</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q16_awards" value="B"><span class="opt-text"><b>Flat 3 points</b> if any achievement at any level</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q16_awards" value="C"><span class="opt-text"><b>Tiered (max 5)</b>: College 1 / Univ 2 / State 3 / National 4 / Intl 5</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q16_awards" value="D"><span class="opt-text"><b>Tiered (max 10)</b>: College 2 / Univ 4 / State 6 / National 8 / Intl 10</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q16_awards" value="E"><span class="opt-text"><b>Big tiered (max 15)</b>: College 3 / State 6 / National 10 / Intl 15</span></label></li>
+        </ul>
+      </div>
+
+      <!-- Q17 -->
+      <div class="q">
+        <span class="q-num">Q17</span>
+        <h3 class="q-title">TEACHER / HOD RECOMMENDATION — how should we use the reference letter?</h3>
+        <p class="q-hint">Faculty know student character & circumstances better than any form.</p>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q17_recommendation" value="A" required><span class="opt-text"><b>Not required</b> — application form is enough</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q17_recommendation" value="B"><span class="opt-text"><b>Required to verify</b> — but no score points</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q17_recommendation" value="C"><span class="opt-text"><b>5 points</b> for strong recommendation (rated 1-5 by committee)</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q17_recommendation" value="D"><span class="opt-text"><b>10 points</b> calibrated by committee — meaningful signal</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q17_recommendation" value="E"><span class="opt-text"><b>15 points</b> — HOD letter is critical for selection</span></label></li>
+        </ul>
+      </div>
+
+      <!-- Q18 -->
+      <div class="q">
+        <span class="q-num">Q18</span>
+        <h3 class="q-title">LEADERSHIP / NSS / NCC / VOLUNTEERING — student giving back to community</h3>
+        <p class="q-hint">Class rep, NSS volunteer, sports captain, social service. Does this matter?</p>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q18_leadership" value="A" required><span class="opt-text"><b>0 points</b> — not relevant</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q18_leadership" value="B"><span class="opt-text"><b>3 points</b> for active involvement</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q18_leadership" value="C"><span class="opt-text"><b>5 points</b> for active involvement</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q18_leadership" value="D"><span class="opt-text"><b>10 points</b> — character matters as much as need</span></label></li>
+        </ul>
+      </div>
+
+      <!-- ============== SECTION 6: POLICY & CONTINUITY ============== -->
+      <div class="section-header"><div class="num">F</div><div class="ttl">POLICY DECISIONS — Continuity, Fairness, Awards</div></div>
+
+      <!-- Q19 -->
+      <div class="q">
+        <span class="q-num">Q19</span>
+        <h3 class="q-title">PREVIOUS BENEFICIARY — what policy for students we already helped?</h3>
+        <p class="q-hint">Student got our scholarship last year, applies again. Continue or rotate?</p>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q19_previous" value="A" required><span class="opt-text"><b>Disqualify</b> — give fresh students the chance</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q19_previous" value="B"><span class="opt-text"><b>Eligible</b> but no bonus — start fresh</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q19_previous" value="C"><span class="opt-text"><b>+5 points</b> continuity bonus</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q19_previous" value="D"><span class="opt-text"><b>+10 points</b> continuity bonus</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q19_previous" value="E"><span class="opt-text"><b>Auto-renew</b> if marks stay at 70%+</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q19_previous" value="F"><span class="opt-text"><b>Auto-renew</b> if simply passing — we finish what we start</span></label></li>
+        </ul>
+      </div>
+
+      <!-- Q20 -->
+      <div class="q">
+        <span class="q-num">Q20</span>
+        <h3 class="q-title">OTHER NGO / GOVT AID — student also receiving scholarship from elsewhere</h3>
+        <p class="q-hint">Punjab Govt scholarship, another NGO, etc. Should this affect our award?</p>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q20_other_aid" value="A" required><span class="opt-text"><b>No penalty</b> — they may still need us</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q20_other_aid" value="B"><span class="opt-text"><b>-3 points</b> (small deduction)</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q20_other_aid" value="C"><span class="opt-text"><b>-10 points</b> (significant deduction)</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q20_other_aid" value="D"><span class="opt-text"><b>Disqualify</b> if combined aid > our award amount</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q20_other_aid" value="E"><span class="opt-text"><b>Disqualify</b> if any other aid received</span></label></li>
+        </ul>
+      </div>
+
+      <!-- Q21 -->
+      <div class="q">
+        <span class="q-num">Q21</span>
+        <h3 class="q-title">FRAUD / INCOME MISREPRESENTATION — student hid income or assets</h3>
+        <p class="q-hint">If we discover during verification that family wealth was concealed. Action?</p>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q21_fraud" value="A" required><span class="opt-text"><b>Reject</b> the application</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q21_fraud" value="B"><span class="opt-text"><b>Reject + 5-year ban</b> from re-applying</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q21_fraud" value="C"><span class="opt-text"><b>Heavy deduction</b> (-20 pts), allow committee appeal</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q21_fraud" value="D"><span class="opt-text"><b>Verbal warning</b>, accept revised truthful version</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q21_fraud" value="E"><span class="opt-text"><b>Committee decides</b> case by case — no fixed rule</span></label></li>
+        </ul>
+      </div>
+
+      <!-- Q22 -->
+      <div class="q">
+        <span class="q-num">Q22</span>
+        <h3 class="q-title">AWARD AMOUNT TIERS — should the amount differ by need?</h3>
+        <p class="q-hint">Should the highest-need student get more rupees than the moderate-need one?</p>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q22_amount" value="A" required><span class="opt-text"><b>Same amount</b> for all winners (e.g. ₹15K each)</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q22_amount" value="B"><span class="opt-text"><b>Two tiers</b>: high-need ₹20K, others ₹15K</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q22_amount" value="C"><span class="opt-text"><b>Three tiers</b>: ₹25K / ₹15K / ₹10K based on score</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q22_amount" value="D"><span class="opt-text"><b>Sliding scale</b> ₹10K-₹25K based on final score</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q22_amount" value="E"><span class="opt-text"><b>Committee decides</b> per case based on actual fee gap</span></label></li>
+        </ul>
+      </div>
+
+      <!-- Q23 -->
+      <div class="q">
+        <span class="q-num">Q23</span>
+        <h3 class="q-title">TOTAL SCORING SCALE — what scale should we use?</h3>
+        <p class="q-hint">Bigger scale = more granular, fewer ties. Smaller scale = easier to communicate.</p>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q23_scale" value="A" required><span class="opt-text"><b>10-point scale</b> — simple to communicate</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q23_scale" value="B"><span class="opt-text"><b>50-point scale</b> — moderate granularity</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q23_scale" value="C"><span class="opt-text"><b>100-point scale</b> — finest detail, fewer tied applicants</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q23_scale" value="D"><span class="opt-text"><b>Percentage-based</b> final score (0-100%)</span></label></li>
+        </ul>
+      </div>
+
+      <!-- Q24 -->
+      <div class="q">
+        <span class="q-num">Q24</span>
+        <h3 class="q-title">TIE-BREAKING — when two students score equal, who wins?</h3>
+        <p class="q-hint">Inevitable in any scoring system. Pick the primary tie-breaker.</p>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q24_tiebreak" value="A" required><span class="opt-text"><b>Lower family income</b> wins</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q24_tiebreak" value="B"><span class="opt-text"><b>Orphan / single-parent</b> wins</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q24_tiebreak" value="C"><span class="opt-text"><b>Girl child</b> wins</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q24_tiebreak" value="D"><span class="opt-text"><b>Higher academic marks</b> wins</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q24_tiebreak" value="E"><span class="opt-text"><b>Award to both</b> if budget allows</span></label></li>
+        </ul>
+      </div>
+
+      <!-- Q25 -->
+      <div class="q">
+        <span class="q-num">Q25</span>
+        <h3 class="q-title">NUMBER OF ANNUAL AWARDEES — how many students should we support each year?</h3>
+        <p class="q-hint">Trade-off between breadth (more students) and depth (bigger amounts per student).</p>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q25_awardees" value="A" required><span class="opt-text"><b>Fewer (5-10)</b>, larger amounts each</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q25_awardees" value="B"><span class="opt-text"><b>Moderate (15-25)</b>, balanced amounts</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q25_awardees" value="C"><span class="opt-text"><b>Many (30-50)</b>, smaller amounts each</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q25_awardees" value="D"><span class="opt-text"><b>As many as budget allows</b> above the threshold score</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q25_awardees" value="E"><span class="opt-text"><b>Whatever the committee decides</b> each year</span></label></li>
+        </ul>
+      </div>
+
+      <!-- Free-text -->
+      <div class="submit-area">
+        <label style="display:block; text-align:left; font-size:13px; font-weight:700; color:var(--navy); margin-bottom:6px;">
+          Any criterion we missed? Any additional thoughts? <span style="color:var(--muted); font-weight:400;">(optional)</span>
+        </label>
+        <textarea name="comments" placeholder="e.g. 'Add separate quota for students from Mansa/Bathinda districts', 'Consider students whose father is a farmer with debt', 'Add a sports merit category', etc."></textarea>
+        <button class="btn" type="button" id="submitBtn">📩 Submit My Vote</button>
+        <div class="security-note">
+          🔒 <b>Anonymous · one vote per device.</b> Your votes only update the live tally counters — no email, no personal data leaves your device. Browser fingerprint + multi-layer storage (localStorage, IndexedDB, sessionStorage, cookies) prevent duplicate votes from the same device.
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="foot">
+    1996 Batch GNDEC Alumni Scholarship · Need-first since 2016 · ₹1.14 Cr raised · 668 students supported<br>
+    <a href="/">← Back to portal</a> · <a href="poll_results.html">📊 View Live Results</a>
+  </div>
+
+</div>
+
+<script>
+const POLL_KEY = "gndec_scholarship_poll_v2";
+const COOKIE_NAME = "gndec_voted_v2";
+
+function getCanvasFingerprint() {
+  try {
+    const canvas = document.createElement('canvas');
+    canvas.width = 200;
+    canvas.height = 50;
+    const ctx = canvas.getContext('2d');
+    ctx.textBaseline = "top";
+    ctx.font = "14px Arial";
+    ctx.fillStyle = "#f60";
+    ctx.fillRect(0, 0, 200, 50);
+    ctx.fillStyle = "#069";
+    ctx.fillText("GNDEC1996🎓", 2, 15);
+    ctx.fillStyle = "rgba(102, 204, 0, 0.5)";
+    ctx.fillText("Scholarship✓", 4, 30);
+    return canvas.toDataURL();
+  } catch (e) { return "canvas_unavailable"; }
+}
+function getWebGLFingerprint() {
+  try {
+    const canvas = document.createElement('canvas');
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    if (!gl) return "no_webgl";
+    const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+    if (!debugInfo) return "no_debug_info";
+    return gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) + "|" + gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL);
+  } catch (e) { return "webgl_error"; }
+}
+async function generateFingerprint() {
+  const components = [
+    navigator.userAgent || "",
+    navigator.language || "",
+    navigator.platform || "",
+    screen.width + "x" + screen.height + "x" + screen.colorDepth,
+    new Date().getTimezoneOffset(),
+    navigator.hardwareConcurrency || 0,
+    navigator.deviceMemory || "unknown",
+    getCanvasFingerprint(),
+    getWebGLFingerprint(),
+    (navigator.languages || []).join(",")
+  ];
+  const raw = components.join("###");
+  try {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(raw);
+    const hashBuf = await crypto.subtle.digest('SHA-256', data);
+    return Array.from(new Uint8Array(hashBuf))
+      .map(b => b.toString(16).padStart(2, '0'))
+      .join('').slice(0, 32);
+  } catch (e) {
+    let h = 0;
+    for (let i = 0; i < raw.length; i++) {
+      h = ((h << 5) - h) + raw.charCodeAt(i); h |= 0;
+    }
+    return "fb" + Math.abs(h).toString(36) + Date.now().toString(36).slice(-6);
+  }
+}
+
+function setCookie(name, value, days) {
+  const d = new Date();
+  d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
+  document.cookie = name + "=" + encodeURIComponent(value) + ";expires=" + d.toUTCString() + ";path=/;SameSite=Lax";
+}
+function getCookie(name) {
+  const match = document.cookie.match(new RegExp('(^|; )' + name + '=([^;]+)'));
+  return match ? decodeURIComponent(match[2]) : null;
+}
+function setLocal(data) { try { localStorage.setItem(POLL_KEY, JSON.stringify(data)); } catch (e) {} }
+function getLocal() { try { return JSON.parse(localStorage.getItem(POLL_KEY) || "null"); } catch (e) { return null; } }
+function setSession(data) { try { sessionStorage.setItem(POLL_KEY, JSON.stringify(data)); } catch (e) {} }
+function getSession() { try { return JSON.parse(sessionStorage.getItem(POLL_KEY) || "null"); } catch (e) { return null; } }
+
+function idbOpen() {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open("gndec_poll_db_v2", 1);
+    req.onupgradeneeded = (e) => {
+      const db = e.target.result;
+      if (!db.objectStoreNames.contains("votes")) db.createObjectStore("votes", { keyPath: "id" });
+    };
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error);
+  });
+}
+async function idbGet(id) {
+  try {
+    const db = await idbOpen();
+    return new Promise(resolve => {
+      const tx = db.transaction("votes", "readonly");
+      const req = tx.objectStore("votes").get(id);
+      req.onsuccess = () => resolve(req.result || null);
+      req.onerror = () => resolve(null);
+    });
+  } catch (e) { return null; }
+}
+async function idbPut(record) {
+  try {
+    const db = await idbOpen();
+    return new Promise(resolve => {
+      const tx = db.transaction("votes", "readwrite");
+      const req = tx.objectStore("votes").put(record);
+      req.onsuccess = () => resolve(true);
+      req.onerror = () => resolve(false);
+    });
+  } catch (e) { return false; }
+}
+
+async function checkPreviousVote() {
+  const local = getLocal();
+  if (local && local.submitted) return local;
+  const session = getSession();
+  if (session && session.submitted) return session;
+  const cookie = getCookie(COOKIE_NAME);
+  if (cookie) { try { return JSON.parse(cookie); } catch (e) { return { submitted: true, fingerprint: cookie }; } }
+  const fp = await generateFingerprint();
+  const idbRec = await idbGet(fp);
+  if (idbRec && idbRec.submitted) return idbRec;
+  const idbAny = await idbGet("any_vote");
+  if (idbAny && idbAny.submitted) return idbAny;
+  return null;
+}
+
+async function markAsVoted(voteData) {
+  const fp = await generateFingerprint();
+  const record = {
+    id: fp, fingerprint: fp, submitted: true,
+    submittedAt: new Date().toISOString(),
+    answers: voteData
+  };
+  setLocal(record); setSession(record);
+  setCookie(COOKIE_NAME, JSON.stringify({ submitted: true, fp: fp, ts: Date.now() }), 365);
+  await idbPut(record);
+  await idbPut({ ...record, id: "any_vote" });
+  return record;
+}
+
+const QLABELS = {
+  q1_income_weight: "Income weight",
+  q2_income_method: "Income measurement",
+  q3_assets: "Asset check",
+  q4_dependents: "Dependents factor",
+  q5_parents: "Parents status",
+  q6_widow: "Single-parent / widow",
+  q7_disability: "Disability",
+  q8_firstgen: "First-gen college",
+  q9_girl: "Girl child",
+  q10_punjab: "Punjab domicile",
+  q11_rural: "Rural background",
+  q12_marks: "Academic marks weight",
+  q13_backlogs: "No backlogs / reappears",
+  q14_trend: "Academic trend",
+  q15_working: "Working while studying",
+  q16_awards: "Special awards",
+  q17_recommendation: "Teacher recommendation",
+  q18_leadership: "Leadership / NSS / NCC",
+  q19_previous: "Previous beneficiary",
+  q20_other_aid: "Other NGO aid",
+  q21_fraud: "Fraud handling",
+  q22_amount: "Award amount tiers",
+  q23_scale: "Scoring scale",
+  q24_tiebreak: "Tie-breaker",
+  q25_awardees: "Number of awardees"
+};
+
+function buildPrevSummary(record) {
+  const a = record.answers || {};
+  const items = [];
+  if (record.name) items.push(`<b>Voter:</b> ${record.name}`);
+  if (record.submittedAt) items.push(`<b>Submitted:</b> ${new Date(record.submittedAt).toLocaleString()}`);
+  items.push("<hr style='border:none;border-top:1px solid var(--line);margin:6px 0;'>");
+  Object.keys(QLABELS).forEach(k => {
+    if (a[k]) items.push(`<b>${QLABELS[k]}:</b> ${Array.isArray(a[k]) ? a[k].join(", ") : a[k]}`);
+  });
+  return items.join("<br>");
+}
+
+const SHARE_TEXT = encodeURIComponent(
+  "🎓 Help shape the 1996 Batch Scholarship Rules\n\n" +
+  "We are collecting batch input to finalize how we score scholarship applicants. " +
+  "25 quick questions covering need, girl-child, Punjab domicile, academics, achievements & more. ~5 minutes 🙏\n\n" +
+  "👉 " + window.location.origin + "/poll.html"
+);
+
+const TALLY_NS = "gndec1996scholarpoll26";
+async function bumpCounter(key) {
+  try {
+    return await fetch(`https://abacus.jasoncameron.dev/hit/${TALLY_NS}/${key}`, {
+      method: 'GET', keepalive: true, mode: 'cors', cache: 'no-store'
+    });
+  } catch (e) { return null; }
+}
+async function recordAllAnswers(answers) {
+  const tasks = [bumpCounter("total_submissions")];
+  Object.keys(answers).forEach(qKey => {
+    const val = answers[qKey];
+    if (Array.isArray(val)) val.forEach(v => tasks.push(bumpCounter(`${qKey}__${v}`)));
+    else if (val) tasks.push(bumpCounter(`${qKey}__${val}`));
+  });
+  return Promise.all(tasks);
+}
+
+function updateProgress() {
+  const radios = document.querySelectorAll('#pollForm input[type="radio"][required]');
+  const groups = {};
+  radios.forEach(r => { groups[r.name] = groups[r.name] || false; });
+  document.querySelectorAll('#pollForm input[type="radio"]:checked').forEach(r => {
+    groups[r.name] = true;
+  });
+  const total = Object.keys(groups).length;
+  const done = Object.values(groups).filter(Boolean).length;
+  const pct = total ? Math.round((done / total) * 100) : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+}
+
+function gatherAnswersFromForm() {
+  const form = document.getElementById('pollForm');
+  const data = new FormData(form);
+  const answers = {};
+  for (const [k, v] of data.entries()) {
+    if (['name', 'comments'].includes(k)) continue;
+    if (answers[k] !== undefined) {
+      if (!Array.isArray(answers[k])) answers[k] = [answers[k]];
+      answers[k].push(v);
+    } else {
+      answers[k] = v;
+    }
+  }
+  return { name: data.get('name') || '', answers };
+}
+
+function validateAllAnswered() {
+  // Find first unanswered required question
+  const form = document.getElementById('pollForm');
+  const requiredGroups = new Set();
+  form.querySelectorAll('input[type="radio"][required]').forEach(r => requiredGroups.add(r.name));
+  for (const groupName of requiredGroups) {
+    if (!form.querySelector(`input[name="${groupName}"]:checked`)) {
+      const target = form.querySelector(`input[name="${groupName}"]`);
+      if (target) target.closest('.q').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return groupName;
+    }
+  }
+  // Check name field
+  const nameInput = form.querySelector('input[name="name"]');
+  if (!nameInput.value.trim()) {
+    nameInput.focus();
+    return 'name';
+  }
+  return null;
+}
+
+async function handleSubmit() {
+  const missing = validateAllAnswered();
+  if (missing) {
+    alert(missing === 'name'
+      ? "Please enter your name."
+      : "Please answer all 25 questions before submitting.");
+    return;
+  }
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Submitting…';
+
+  const { name, answers } = gatherAnswersFromForm();
+
+  // Fire all counter increments in parallel (fully anonymous, only counts)
+  try {
+    await recordAllAnswers(answers);
+  } catch (e) {
+    // Even on network error, still mark the device as voted locally
+  }
+
+  // Mark device as voted across all storage layers
+  await markAsVoted({ ...answers, name });
+
+  // Show thank-you / lockout screen
+  document.getElementById('formContainer').style.display = 'none';
+  const lock = document.getElementById('lockoutScreen');
+  lock.style.display = 'block';
+  lock.querySelector('h2').textContent = '🙏 Vote submitted! Thank you.';
+  lock.querySelector('p').textContent = 'Your response is now part of the live results. Refresh the dashboard to see your contribution to the batch average.';
+  document.getElementById('prevVoteSummary').innerHTML = buildPrevSummary({
+    submittedAt: new Date().toISOString(), name, answers
+  });
+  document.getElementById('shareBtnLock').href = "https://wa.me/?text=" + SHARE_TEXT;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+(async function init() {
+  // Check for prior vote first
+  const prior = await checkPreviousVote();
+  if (prior) {
+    document.getElementById('loadingState').style.display = 'none';
+    document.getElementById('lockoutScreen').style.display = 'block';
+    document.getElementById('prevVoteSummary').innerHTML = buildPrevSummary(prior);
+    document.getElementById('shareBtnLock').href = "https://wa.me/?text=" + SHARE_TEXT;
+    return;
+  }
+
+  document.getElementById('loadingState').style.display = 'none';
+  document.getElementById('formContainer').style.display = 'block';
+
+  // Live progress bar
+  document.getElementById('pollForm').addEventListener('change', updateProgress);
+  updateProgress();
+
+  // Bind submit
+  document.getElementById('submitBtn').addEventListener('click', handleSubmit);
+})();
+</script>
+
+</body>
+</html>

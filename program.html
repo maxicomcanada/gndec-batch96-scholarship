@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Program Details — Alumni Scholarship</title>
+<style>
+  :root {
+    --indigo: #1e3a5f; --indigo-light: #3b5b7f;
+    --teal: #a16207; --rose: #9f1239;
+    --emerald: #15803d; --amber: #ea580c;
+    --violet: #6d28d9;
+    --bg: #fefcf6; --bg-soft: #f7f3e9;
+    --card: #ffffff;
+    --text: #0f172a; --text-soft: #334155; --muted: #64748b;
+    --border: #e2e8f0; --border-strong: #cbd5e1;
+    --shadow-sm: 0 1px 2px rgba(15,23,42,0.06), 0 1px 3px rgba(15,23,42,0.05);
+    --shadow-md: 0 4px 16px rgba(15,23,42,0.08);
+    --shadow-lg: 0 16px 48px rgba(15,23,42,0.14);
+    --radius: 14px;
+  }
+  [data-theme="dark"] {
+    --bg: #0a0f1f; --bg-soft: #1a1f3a; --card: #1a1f3a;
+    --text: #f7f3e9; --text-soft: #cbd5e1; --muted: #94a3b8;
+    --border: #334155; --border-strong: #475569;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.55; }
+
+  /* === SHARED PUBLIC NAV (matches index.html) === */
+  .topnav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+  [data-theme="dark"] .topnav { background: rgba(10,15,31,0.85); }
+  .topnav-inner { max-width: 1300px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; gap: 16px; }
+  .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); font-weight: 800; font-size: 16px; }
+  .nav-mark { width: 38px; height: 38px; background: conic-gradient(from 0deg, var(--indigo), var(--teal), var(--emerald), var(--amber), var(--rose), var(--indigo)); border-radius: 11px; display: grid; place-items: center; color: #fff; font-weight: 900; font-size: 16px; box-shadow: var(--shadow-md); position: relative; }
+  .nav-mark::after { content: "A"; position: absolute; inset: 3px; background: var(--card); color: var(--text); border-radius: 8px; display: grid; place-items: center; font-weight: 900; font-size: 17px; }
+  .nav-brand-text { line-height: 1.1; }
+  .nav-brand-text small { display: block; font-size: 11px; font-weight: 600; color: var(--muted); margin-top: 2px; }
+  .nav-spacer { flex: 1; }
+  .nav-links { display: flex; gap: 4px; align-items: center; }
+  .nav-link { padding: 8px 14px; text-decoration: none; color: var(--text-soft); font-size: 13.5px; font-weight: 600; border-radius: 8px; }
+  .nav-link:hover { background: var(--bg-soft); color: var(--text); }
+  .nav-link.active { color: var(--indigo); background: var(--bg-soft); }
+  .nav-cta { padding: 9px 18px; background: var(--indigo); color: #fff; text-decoration: none; border-radius: 9px; font-size: 13.5px; font-weight: 700; }
+  .nav-cta:hover { background: var(--indigo-light); }
+  .nav-cta.donate { background: var(--rose); margin-left: 6px; }
+  .theme-btn { width: 36px; height: 36px; border-radius: 9px; border: 1px solid var(--border); background: var(--card); cursor: pointer; display: grid; place-items: center; font-size: 14px; margin-left: 8px; }
+  .nav-mobile-menu { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .nav-mobile-menu { display: grid; place-items: center; }
+    .nav-mobile-menu svg { width: 22px; height: 22px; stroke: var(--text); }
+    .nav-links.show { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--card); padding: 16px; gap: 4px; border-bottom: 1px solid var(--border); box-shadow: var(--shadow-md); }
+    .nav-cta { width: 100%; text-align: center; }
+  }
+
+  /* === HERO === */
+  .page-hero {
+    padding: 80px 24px 60px;
+    background: radial-gradient(circle at 80% 20%, rgba(30,58,95,0.10), transparent 50%), radial-gradient(circle at 20% 80%, rgba(161,98,7,0.08), transparent 50%), var(--bg);
+    text-align: center;
+  }
+  .hero-eyebrow {
+    display: inline-block; padding: 5px 14px;
+    background: rgba(30,58,95,0.10); color: var(--indigo);
+    border-radius: 99px; font-size: 12px; font-weight: 800;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .page-hero h1 {
+    font-size: clamp(32px, 5vw, 48px); font-weight: 800;
+    letter-spacing: -0.025em; line-height: 1.1; margin: 0 0 16px;
+  }
+  .page-hero p { max-width: 640px; margin: 0 auto; font-size: 17px; color: var(--text-soft); line-height: 1.6; }
+
+  /* === CONTENT === */
+  section { padding: 60px 24px; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-eyebrow { text-align: center; font-size: 12px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--indigo); margin-bottom: 14px; }
+  .section-title { text-align: center; font-size: clamp(26px, 4vw, 36px); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 14px; line-height: 1.15; }
+  .section-subtitle { text-align: center; font-size: 15px; color: var(--muted); max-width: 640px; margin: 0 auto 40px; line-height: 1.6; }
+
+  /* Eligibility cards */
+  .elig-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  @media (max-width: 700px) { .elig-grid { grid-template-columns: 1fr; } }
+  .elig-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 24px;
+    box-shadow: var(--shadow-sm);
+    display: flex; gap: 16px;
+    align-items: flex-start;
+  }
+  .elig-icon {
+    width: 44px; height: 44px;
+    background: linear-gradient(135deg, var(--indigo), var(--teal));
+    color: #fff; border-radius: 11px;
+    display: grid; place-items: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .elig-card:nth-child(2) .elig-icon { background: linear-gradient(135deg, var(--teal), var(--emerald)); }
+  .elig-card:nth-child(3) .elig-icon { background: linear-gradient(135deg, var(--rose), var(--amber)); }
+  .elig-card:nth-child(4) .elig-icon { background: linear-gradient(135deg, var(--violet), var(--indigo)); }
+  .elig-card h3 { margin: 0 0 6px; font-size: 16px; }
+  .elig-card p { margin: 0; color: var(--muted); font-size: 13.5px; line-height: 1.6; }
+
+  /* Amounts table */
+  .amount-section { background: var(--bg-soft); }
+  .amount-table {
+    width: 100%; background: var(--card);
+    border: 1px solid var(--border); border-radius: 14px;
+    border-collapse: separate; border-spacing: 0;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+  .amount-table th, .amount-table td { padding: 16px 20px; text-align: left; border-bottom: 1px solid var(--border); }
+  .amount-table tbody tr:last-child td { border-bottom: none; }
+  .amount-table th { background: var(--bg-soft); font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); font-weight: 700; }
+  .amount-table td.amt { font-weight: 700; color: var(--amber); font-size: 15px; }
+  .amount-table .tier-badge { display: inline-block; padding: 3px 9px; border-radius: 99px; font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; color: #fff; }
+  .tier-need-high { background: var(--rose); }
+  .tier-need-mid { background: var(--amber); }
+  .tier-merit { background: var(--violet); }
+
+  /* Process timeline */
+  .timeline-list { max-width: 800px; margin: 0 auto; position: relative; padding-left: 30px; }
+  .timeline-list::before {
+    content: ""; position: absolute; left: 11px; top: 12px; bottom: 12px;
+    width: 2px; background: linear-gradient(180deg, var(--indigo), var(--teal), var(--emerald), var(--amber));
+  }
+  .timeline-item { position: relative; padding-bottom: 32px; }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .timeline-dot {
+    position: absolute; left: -30px; top: 4px;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--card); border: 3px solid var(--indigo);
+    display: grid; place-items: center;
+    font-weight: 800; font-size: 11px; color: var(--indigo);
+  }
+  .timeline-item:nth-child(2) .timeline-dot { border-color: var(--teal); color: var(--teal); }
+  .timeline-item:nth-child(3) .timeline-dot { border-color: var(--emerald); color: var(--emerald); }
+  .timeline-item:nth-child(4) .timeline-dot { border-color: var(--amber); color: var(--amber); }
+  .timeline-item h4 { margin: 0 0 6px; font-size: 16px; }
+  .timeline-item p { margin: 0; color: var(--text-soft); font-size: 13.5px; line-height: 1.6; }
+
+  /* What's covered */
+  .covered-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 800px) { .covered-grid { grid-template-columns: 1fr; } }
+  .covered-card {
+    text-align: center; padding: 24px 20px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px;
+  }
+  .covered-icon { font-size: 32px; margin-bottom: 12px; }
+  .covered-card h4 { margin: 0 0 6px; font-size: 15px; }
+  .covered-card p { margin: 0; color: var(--muted); font-size: 13px; }
+
+  /* CTA */
+  .cta-block {
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%);
+    color: #fff; padding: 60px 32px;
+    border-radius: 22px;
+    text-align: center;
+    box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .cta-block::before { content: ""; position: absolute; top: -50%; right: -10%; width: 60%; height: 200%; background: radial-gradient(circle, rgba(234,88,12,0.20), transparent 60%); }
+  .cta-block h2 { font-size: clamp(24px, 3vw, 32px); margin: 0 0 12px; position: relative; }
+  .cta-block p { font-size: 15px; opacity: 0.92; margin: 0 0 26px; position: relative; }
+  .btn-hero { padding: 14px 28px; border-radius: 11px; font-size: 14.5px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+  .btn-hero.primary { background: linear-gradient(135deg, var(--amber), #fb923c); color: #422006; box-shadow: 0 10px 24px rgba(234,88,12,0.30); margin: 0 6px; position: relative; }
+  .btn-hero.secondary { background: rgba(255,255,255,0.12); color: #fff; border: 1px solid rgba(255,255,255,0.25); margin: 0 6px; position: relative; }
+
+  /* Footer */
+  footer { background: #0a0f1f; color: #94a3b8; padding: 50px 24px 30px; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
+  @media (max-width: 800px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
+  .footer-brand { display: flex; align-items: center; gap: 12px; color: #fff; font-weight: 800; font-size: 18px; margin-bottom: 16px; text-decoration: none; }
+  .footer-tagline { font-size: 13px; line-height: 1.7; max-width: 320px; }
+  .footer-col h4 { color: #fff; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 12px; }
+  .footer-col a { display: block; color: #94a3b8; text-decoration: none; font-size: 13.5px; padding: 4px 0; }
+  .footer-col a:hover { color: #fb923c; }
+  .footer-bottom { max-width: 1200px; margin: 40px auto 0; padding-top: 24px; border-top: 1px solid rgba(148,163,184,0.15); text-align: center; font-size: 12.5px; }
+
+  button:focus, a:focus { outline: none; }
+  button:focus-visible, a:focus-visible { outline: 2px solid var(--indigo); outline-offset: 2px; }
+  button, a { -webkit-tap-highlight-color: transparent; }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <a class="nav-brand" href="index.html">
+      <div class="nav-mark"></div>
+      <div class="nav-brand-text">Alumni Scholarship<small>1996 Batch GNDEC · Est. 2024</small></div>
+    </a>
+    <div class="nav-spacer"></div>
+    <div class="nav-links" id="navLinks">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link active" href="program.html">Program</a>
+      <a class="nav-link" href="apply.html">Apply</a>
+      <a class="nav-link" href="recipients_archive.html">Recipients</a>
+      <a class="nav-link" href="faq.html">FAQ</a>
+      <a class="nav-link" href="status.html">Status</a>
+      <a class="nav-cta" href="apply.html">Apply Now</a>
+      <a class="nav-cta donate" href="donor_management.html">Donate</a>
+    </div>
+    <button class="theme-btn" id="themeBtn">🌙</button>
+    <button class="nav-mobile-menu" onclick="document.getElementById('navLinks').classList.toggle('show')">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <span class="hero-eyebrow">📋 Program Details</span>
+  <h1>Who we support and<br>how much we award.</h1>
+  <p>A transparent overview of who qualifies, what amounts you can receive, and what the journey from application to award looks like.</p>
+</header>
+
+<section>
+  <div class="section-inner">
+    <div class="section-eyebrow">Eligibility</div>
+    <h2 class="section-title">Who can apply</h2>
+    <p class="section-subtitle">The scholarship is open to students currently enrolled at Guru Nanak Dev Engineering College, Ludhiana, who meet the following criteria.</p>
+
+    <div class="elig-grid">
+      <div class="elig-card">
+        <div class="elig-icon">🎓</div>
+        <div>
+          <h3>Currently enrolled at GNDEC</h3>
+          <p>You must be an active student in any program — B.Tech (CSE, ECE, IT, Mechanical, Civil, Electrical), B.Arch, or B.Voc — across any semester.</p>
+        </div>
+      </div>
+      <div class="elig-card">
+        <div class="elig-icon">💔</div>
+        <div>
+          <h3>Genuine financial need</h3>
+          <p>The scholarship is need-heavy. Annual family income, parents' employment, dependents, and circumstances like loss of a parent are the primary considerations.</p>
+        </div>
+      </div>
+      <div class="elig-card">
+        <div class="elig-icon">📚</div>
+        <div>
+          <h3>Reasonable academic standing</h3>
+          <p>Strong academics help but aren't required. A deserving student with average grades and high need will often outrank a high-scorer with no need.</p>
+        </div>
+      </div>
+      <div class="elig-card">
+        <div class="elig-icon">📝</div>
+        <div>
+          <h3>Teacher recommendation</h3>
+          <p>One recommendation from a faculty member at GNDEC who knows your circumstances — not necessarily formal, a short note suffices.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="amount-section">
+  <div class="section-inner">
+    <div class="section-eyebrow">Scholarship amounts</div>
+    <h2 class="section-title">What you can receive</h2>
+    <p class="section-subtitle">Amounts vary by your assessed need, academic semester, and the program's cycle. Below are the typical ranges based on historical awards.</p>
+
+    <table class="amount-table">
+      <thead>
+        <tr><th>Need tier</th><th>Typical award</th><th>Semester coverage</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="tier-badge tier-need-high">Highest need</span></td>
+          <td class="amt">₹20,000 – ₹30,000</td>
+          <td>Full semester fee for most B.Tech / B.Voc programs</td>
+        </tr>
+        <tr>
+          <td><span class="tier-badge tier-need-mid">Moderate need</span></td>
+          <td class="amt">₹10,000 – ₹20,000</td>
+          <td>Substantial portion of semester fee</td>
+        </tr>
+        <tr>
+          <td><span class="tier-badge tier-merit">Special / Merit</span></td>
+          <td class="amt">₹15,000 – ₹25,000</td>
+          <td>Recognition awards for exceptional academic standing</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="text-align:center; margin-top:24px; font-size:13px; color:var(--muted);">
+      Funds are credited <b>directly to your GNDEC fee account</b>. If you've already paid the current semester, the amount is adjusted against your next semester.
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="section-inner">
+    <div class="section-eyebrow">Process</div>
+    <h2 class="section-title">From application to award</h2>
+    <p class="section-subtitle">Four steps, fully online, fully transparent. The whole journey takes about 3–4 weeks from application open to disbursement.</p>
+
+    <ol class="timeline-list" style="list-style:none; padding-left:30px; margin:0;">
+      <li class="timeline-item">
+        <div class="timeline-dot">1</div>
+        <h4>Application opens</h4>
+        <p>Watch this site or your GNDEC notice board for the next round announcement. Online form takes ~10 minutes; you can save mid-way and return.</p>
+      </li>
+      <li class="timeline-item">
+        <div class="timeline-dot">2</div>
+        <h4>Online interview</h4>
+        <p>Shortlisted applicants are invited for a 15-minute online interview with members of the 1996 Batch GNDEC Alumni Committee. Conducted via video call.</p>
+      </li>
+      <li class="timeline-item">
+        <div class="timeline-dot">3</div>
+        <h4>Scoring & decision</h4>
+        <p>The committee applies a transparent 10-point rubric (financial need, parents status, academics, gender, working alongside studies, achievements). Decisions are made collectively.</p>
+      </li>
+      <li class="timeline-item">
+        <div class="timeline-dot">4</div>
+        <h4>Disbursement</h4>
+        <p>Awarded amounts are credited directly to your GNDEC semester fee account. You receive a confirmation email with the amount and adjustment details.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="amount-section">
+  <div class="section-inner">
+    <div class="section-eyebrow">What's covered</div>
+    <h2 class="section-title">Where the money goes</h2>
+    <p class="section-subtitle">100% of every donated rupee lands in a student's tuition. We have zero overhead — the committee meets and operates entirely online, on their own time.</p>
+
+    <div class="covered-grid">
+      <div class="covered-card">
+        <div class="covered-icon">🎓</div>
+        <h4>Semester tuition</h4>
+        <p>The primary use of funds. Adjusted against your current or next semester fee at GNDEC.</p>
+      </div>
+      <div class="covered-card">
+        <div class="covered-icon">📚</div>
+        <h4>Lab fees & exam fees</h4>
+        <p>Included in semester fee coverage at GNDEC. No separate disbursement.</p>
+      </div>
+      <div class="covered-card">
+        <div class="covered-icon">🚫</div>
+        <h4>NOT covered</h4>
+        <p>Hostel, food, travel, books — these are personal expenses. Aim is to keep the academic path clear.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-inner">
+    <div class="cta-block">
+      <h2>Ready to apply?</h2>
+      <p>The application is online, takes about 10 minutes, and auto-saves as you go.</p>
+      <div>
+        <a class="btn-hero primary" href="apply.html">📝 Start Application</a>
+        <a class="btn-hero secondary" href="faq.html">❓ Read FAQ</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <a class="footer-brand" href="index.html"><div class="nav-mark" style="width:34px; height:34px;"></div>Alumni Scholarship</a>
+      <p class="footer-tagline">A scholarship by the 1992–1996 batch of GNDEC alumni, supporting students at Guru Nanak Dev Engineering College, Ludhiana since March 2024.</p>
+    </div>
+    <div class="footer-col">
+      <h4>For Students</h4>
+      <a href="program.html">Program Details</a>
+      <a href="apply.html">Apply Now</a>
+      <a href="status.html">Application Status</a>
+      <a href="faq.html">FAQ</a>
+    </div>
+    <div class="footer-col">
+      <h4>For Donors</h4>
+      <a href="donor_management.html">Donate</a>
+      <a href="recipients_archive.html">See Recipients</a>
+      <a href="index.html#impact">Live Impact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="mailto:gulvir75@gmail.com">gulvir75@gmail.com</a>
+      <a href="tel:+919592457515">+91 95924-57515</a>
+      <a href="admin.html" style="opacity:0.5; font-size:11px; margin-top:18px;">🔒 Committee Login</a>
+    </div>
+  </div>
+  <div class="footer-bottom">Built with love by the 1996 batch · For our juniors at GNDEC · © <span id="copyYear"></span></div>
+</footer>
+
+<script>
+const themeBtn = document.getElementById("themeBtn");
+function applyTheme(t) { document.documentElement.setAttribute("data-theme", t); themeBtn.textContent = t === "dark" ? "☀️" : "🌙"; }
+themeBtn.addEventListener("click", () => { const c = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark"; applyTheme(c); localStorage.setItem("scholarship_theme", c); });
+applyTheme(localStorage.getItem("scholarship_theme") || "light");
+document.getElementById("copyYear").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

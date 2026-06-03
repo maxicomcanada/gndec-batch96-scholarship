@@ -35,8 +35,8 @@ const QUESTIONS = [
   { id: "q28_seva_commitment",         opts: ["A","B","C"] }
 ];
 
-const BATCH_SIZE = 5;
-const BATCH_DELAY_MS = 200;
+const BATCH_SIZE = 10;
+const BATCH_DELAY_MS = 150;
 
 async function fetchOne(key, retries = 4) {
   for (let attempt = 0; attempt < retries; attempt++) {
@@ -95,7 +95,7 @@ export async function onRequest(context) {
   }), {
     headers: {
       "content-type": "application/json; charset=utf-8",
-      "cache-control": "public, max-age=30, s-maxage=30",
+      "cache-control": "public, max-age=90, s-maxage=90",
       "access-control-allow-origin": "*"
     }
   });

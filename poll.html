@@ -357,7 +357,7 @@ body {
         <input type="text" name="name" placeholder="e.g. Tejpreet Singh" required>
         <label style="margin-top:14px;">WhatsApp number <span class="opt">(required — used to verify one vote per person)</span></label>
         <input type="tel" name="phone" placeholder="e.g. 9876543210" required pattern="[0-9+\-\s]{7,15}" inputmode="numeric">
-        <p style="font-size:11px; color:var(--muted); margin: 4px 0 0;">📞 Same WhatsApp number can vote only once. Your votes themselves stay anonymous in the published results — only the voter list is captured for verification.</p>
+        <p style="font-size:11px; color:var(--muted); margin: 4px 0 0;">📞 Same WhatsApp number can vote only once. Public dashboard shows aggregate counts only — your individual answers are visible to the committee admins for review.</p>
       </div>
 
       <!-- ============== SECTION 1: NEED vs MERIT ============== -->
@@ -696,7 +696,7 @@ body {
         <textarea name="comments" placeholder="e.g. 'Consider students with mental health issues separately', 'Add a sports merit category', etc."></textarea>
         <button class="btn" type="button" id="submitBtn">📩 Submit My Vote</button>
         <div class="security-note">
-          🔒 <b>One vote per WhatsApp number.</b> Your name + phone are recorded against your submission so we know who has voted (for follow-up reminders). The published live results are aggregated and do not show which voter chose which answer.
+          🔒 <b>One vote per WhatsApp number.</b> Your name, phone, and your individual answers are recorded so the scholarship committee can review and audit decisions. The <b>public live dashboard</b> shows only aggregate counts; per-voter detail is visible to the batch committee admins only.
         </div>
       </div>
 
@@ -958,13 +958,13 @@ async function handleSubmit() {
 
   btn.textContent = '⏳ Submitting…';
 
-  // Step 2: Submit to voter log (records name+phone)
+  // Step 2: Submit to voter log (records name+phone+answers)
   let voterLogged = true;
   try {
     const r = await fetch('/api/vote', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ name, phone, fingerprint: fp })
+      body: JSON.stringify({ name, phone, fingerprint: fp, answers })
     });
     if (r.status === 409) {
       alert("📞 This WhatsApp number already voted.");

@@ -292,9 +292,9 @@ body {
   position: sticky;
   top: 0;
   z-index: 50;
-  height: 5px;
-  background: rgba(11, 34, 64, 0.1);
-  margin: -22px -16px 18px;
+  height: 6px;
+  background: rgba(11, 34, 64, 0.08);
+  margin: -22px -16px 0;
 }
 .progress-fill {
   height: 100%;
@@ -302,16 +302,60 @@ body {
   width: 0%;
   transition: width 0.3s ease;
 }
-
-@media (max-width: 480px) {
-  .banner { padding: 22px 16px 20px; }
-  .banner-title { font-size: 19px; }
-  .wrap { padding: 18px 12px 50px; }
-  .q { padding: 16px 14px 10px; }
-  .q-title { font-size: 15px; }
-  .opt-text { font-size: 14px; }
-  .section-header .ttl { font-size: 13px; }
+.mini-progress {
+  position: sticky;
+  top: 6px;
+  z-index: 49;
+  background: rgba(250, 246, 236, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  margin: 0 -16px 18px;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--navy);
 }
+.mini-progress .step { color: var(--kesari); font-weight: 800; }
+.mini-progress .resume-note { font-size: 10px; color: var(--punjab-green); font-weight: 600; }
+
+@media (max-width: 600px) {
+  .banner { padding: 18px 14px 16px; }
+  .banner-title { font-size: 18px; }
+  .banner-sub { font-size: 12px; }
+  .wrap { padding: 16px 12px 50px; }
+  .intro { padding: 16px 14px; }
+  .intro h2 { font-size: 16px; }
+  .intro p { font-size: 13px; }
+  .intro .why { font-size: 12px; padding: 10px; }
+  .intro .principles li { font-size: 12px; }
+  .identity { padding: 14px; }
+  .identity input { padding: 13px 14px; font-size: 16px; /* 16px prevents iOS zoom */ }
+  .q { padding: 16px 14px 12px; margin-bottom: 12px; }
+  .q-title { font-size: 15px; margin-bottom: 12px; }
+  .q-scenario { font-size: 13.5px; padding: 10px 12px; line-height: 1.55; }
+  .opt-label { padding: 14px 14px; min-height: 56px; gap: 8px; }
+  .opt-text { font-size: 14.5px; line-height: 1.45; }
+  .opt-letter { width: 26px; height: 26px; line-height: 26px; font-size: 13px; flex-shrink: 0; }
+  .opt-label input[type="radio"] { width: 20px; height: 20px; flex-shrink: 0; }
+  .section-header { padding: 8px 12px; margin: 22px 0 12px; }
+  .section-header .ttl { font-size: 12.5px; }
+  .section-header .num { width: 24px; height: 24px; font-size: 12px; }
+  .submit-area { padding: 14px; }
+  .btn { padding: 16px 24px; font-size: 16px; }
+  .security-note { font-size: 11px; padding: 10px; line-height: 1.5; }
+}
+
+/* Smooth animation when option gets selected */
+@keyframes opt-tick {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.03); background: #defce4; }
+  100% { transform: scale(1); }
+}
+.opt-label.just-picked { animation: opt-tick 0.5s ease-out; }
 </style>
 </head>
 <body>
@@ -339,6 +383,11 @@ body {
 
   <div id="formContainer" style="display:none;">
     <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="mini-progress" id="miniProgress" style="display:none;">
+      <span><span class="step" id="stepIndicator">Q1</span> of 28</span>
+      <span id="progressPct">0%</span>
+      <span class="resume-note" id="resumeNote" style="display:none;">✓ Auto-saved</span>
+    </div>
 
     <div class="intro">
       <h2>Sat Sri Akal batchmate 🙏</h2>
@@ -984,8 +1033,9 @@ async function handleSubmit() {
     fetch('/api/results?warm=' + Date.now(), { cache: 'no-store' }).catch(() => {});
   }, 1500);
 
-  // Step 4: Mark device + show thank-you
+  // Step 4: Mark device + clear autosave progress + show thank-you
   await markAsVoted({ ...answers, name, phone });
+  clearProgress();
 
   document.getElementById('formContainer').style.display = 'none';
   const lock = document.getElementById('lockoutScreen');
@@ -1008,7 +1058,104 @@ function updateProgress() {
   document.querySelectorAll('#pollForm input[type="radio"]:checked').forEach(r => { groups[r.name] = true; });
   const total = Object.keys(groups).length;
   const done = Object.values(groups).filter(Boolean).length;
-  document.getElementById('progressFill').style.width = (total ? Math.round((done/total)*100) : 0) + '%';
+  const pct = total ? Math.round((done/total)*100) : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+  const mp = document.getElementById('miniProgress');
+  if (mp) {
+    mp.style.display = 'flex';
+    document.getElementById('stepIndicator').textContent = `Q${Math.min(done + 1, total)}`;
+    document.getElementById('progressPct').textContent = pct + '%';
+  }
+}
+
+/* AUTOSAVE — persists answers/name/phone to localStorage on every change. */
+const PROGRESS_KEY = 'gndec_poll_progress_v3';
+let saveTimer = null;
+
+function saveProgress() {
+  try {
+    const form = document.getElementById('pollForm');
+    if (!form) return;
+    const data = {};
+    form.querySelectorAll('input[type="radio"]:checked').forEach(r => data[r.name] = r.value);
+    form.querySelectorAll('input[type="text"], input[type="tel"], textarea').forEach(el => {
+      if (el.value) data[el.name] = el.value;
+    });
+    data.__savedAt = Date.now();
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(data));
+    const note = document.getElementById('resumeNote');
+    if (note) {
+      note.style.display = 'inline';
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(() => { note.style.display = 'none'; }, 2200);
+    }
+  } catch (e) {}
+}
+
+function restoreProgress() {
+  try {
+    const raw = localStorage.getItem(PROGRESS_KEY);
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    if (!data || !data.__savedAt) return;
+    // Don't restore if older than 24h
+    if (Date.now() - data.__savedAt > 86400000) return;
+    const form = document.getElementById('pollForm');
+    let restoredCount = 0;
+    Object.entries(data).forEach(([name, value]) => {
+      if (name.startsWith('__')) return;
+      const radio = form.querySelector(`input[type="radio"][name="${name}"][value="${value}"]`);
+      if (radio) { radio.checked = true; restoredCount++; return; }
+      const text = form.querySelector(`input[name="${name}"], textarea[name="${name}"]`);
+      if (text) { text.value = value; }
+    });
+    if (restoredCount > 0) {
+      const note = document.getElementById('resumeNote');
+      if (note) {
+        note.style.display = 'inline';
+        note.textContent = `↻ Resumed (${restoredCount} answers)`;
+        setTimeout(() => { note.textContent = '✓ Auto-saved'; note.style.display = 'none'; }, 3500);
+      }
+    }
+  } catch (e) {}
+}
+
+function clearProgress() {
+  try { localStorage.removeItem(PROGRESS_KEY); } catch (e) {}
+}
+
+/* AUTO-SCROLL — after picking an answer, smoothly scroll to the next question */
+function setupAutoScrollAndSave() {
+  const form = document.getElementById('pollForm');
+  if (!form) return;
+  const allQs = Array.from(form.querySelectorAll('.q'));
+  form.querySelectorAll('input[type="radio"]').forEach(radio => {
+    radio.addEventListener('change', e => {
+      if (!radio.checked) return;
+      const label = radio.closest('.opt-label');
+      if (label) {
+        label.classList.add('just-picked');
+        setTimeout(() => label.classList.remove('just-picked'), 600);
+      }
+      saveProgress();
+      updateProgress();
+      // Auto-scroll to next unanswered question after a brief delay
+      const currentQ = radio.closest('.q');
+      const idx = allQs.indexOf(currentQ);
+      if (idx >= 0 && idx < allQs.length - 1) {
+        const nextQ = allQs[idx + 1];
+        setTimeout(() => {
+          const offset = window.innerWidth <= 600 ? 100 : 80; // account for sticky header
+          const y = nextQ.getBoundingClientRect().top + window.pageYOffset - offset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }, 350);
+      }
+    });
+  });
+  // Save name/phone on input too
+  form.querySelectorAll('input[type="text"], input[type="tel"], textarea').forEach(el => {
+    el.addEventListener('input', () => { saveProgress(); });
+  });
 }
 
 (async function init() {
@@ -1022,7 +1169,8 @@ function updateProgress() {
   }
   document.getElementById('loadingState').style.display = 'none';
   document.getElementById('formContainer').style.display = 'block';
-  document.getElementById('pollForm').addEventListener('change', updateProgress);
+  setupAutoScrollAndSave();
+  restoreProgress();
   updateProgress();
   document.getElementById('submitBtn').addEventListener('click', handleSubmit);
 })();

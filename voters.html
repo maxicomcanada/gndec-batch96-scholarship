@@ -194,12 +194,12 @@ async function loadVoters() {
   document.getElementById('loadingState').style.display = 'block';
   document.getElementById('listContainer').style.display = 'none';
   try {
-    const r = await fetch('https://jsonblob.com/api/jsonBlob/019e8fb0-bb69-76b0-9fb4-10fdcd1905b3', { cache: 'no-store' });
+    const r = await fetch('/api/voters?cb=' + Date.now(), { cache: 'no-store' });
     const d = await r.json();
     allVoters = Array.isArray(d.voters) ? d.voters : [];
     render();
   } catch (e) {
-    document.getElementById('loadingState').innerHTML = '⚠️ Could not load voters. Retry in a moment.';
+    document.getElementById('loadingState').innerHTML = '⚠️ Could not load voters: ' + (e.message || e);
   }
 }
 

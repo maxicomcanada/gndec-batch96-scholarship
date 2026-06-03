@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voters List — 1996 Batch Scholarship</title>
+<style>
+:root {
+  --navy: #0b2240;
+  --kesari: #ff7518;
+  --wheat: #e8c168;
+  --maroon: #6b1d2c;
+  --punjab-green: #1e6b3a;
+  --cream: #faf6ec;
+  --ink: #1a1a2e;
+  --muted: #6b6b80;
+  --line: #e5d6b8;
+  --card-bg: #ffffff;
+  --shadow: 0 4px 24px rgba(11, 34, 64, 0.08);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--cream); color: var(--ink); line-height: 1.55;
+}
+.banner {
+  background: linear-gradient(135deg, var(--navy), #143866);
+  color: var(--cream); padding: 26px 20px 22px; text-align: center;
+}
+.banner h1 { font-size: 22px; font-weight: 800; margin: 0 0 4px; }
+.banner p { font-size: 13px; opacity: 0.9; margin: 0; }
+.kesari-line { height: 4px; background: linear-gradient(90deg, var(--kesari), var(--wheat), var(--kesari)); }
+.wrap { max-width: 920px; margin: 0 auto; padding: 22px 16px 60px; }
+
+.toolbar {
+  display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+  background: var(--card-bg); border-radius: 12px; padding: 12px 16px;
+  margin-bottom: 18px; box-shadow: var(--shadow);
+}
+.toolbar button {
+  background: linear-gradient(135deg, var(--kesari), var(--maroon));
+  color: white; border: none; padding: 10px 18px;
+  border-radius: 8px; font-weight: 700; font-size: 14px; cursor: pointer;
+}
+.toolbar input[type="search"] {
+  flex: 1; min-width: 200px;
+  padding: 8px 12px; border: 1.5px solid var(--line);
+  border-radius: 8px; font-size: 14px;
+}
+.toolbar .spacer { flex: 1; }
+.toolbar .live { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: var(--punjab-green); }
+.toolbar .live::before { content: ""; width: 8px; height: 8px; background: var(--punjab-green); border-radius: 999px; animation: pulse 1.5s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+.hero {
+  background: linear-gradient(135deg, var(--maroon), #3d1019);
+  color: white; border-radius: 14px; padding: 22px 20px;
+  margin-bottom: 18px; text-align: center;
+}
+.hero .big { font-size: 52px; font-weight: 900; color: var(--wheat); line-height:1; margin: 4px 0; }
+.hero .lbl { font-size: 13px; opacity: 0.9; }
+
+table { width: 100%; border-collapse: collapse; background: var(--card-bg); border-radius: 14px; overflow: hidden; box-shadow: var(--shadow); }
+th { background: var(--navy); color: white; padding: 12px 14px; text-align: left; font-size: 13px; font-weight: 700; }
+td { padding: 12px 14px; border-top: 1px solid #f0e6cf; font-size: 14px; }
+tr:hover td { background: #fdfbf4; }
+.idx { color: var(--muted); font-size: 12px; }
+.phone { font-family: ui-monospace, "SF Mono", Menlo, monospace; color: var(--maroon); font-weight: 600; }
+.timestamp { color: var(--muted); font-size: 12px; }
+
+#loadingState { text-align: center; padding: 60px 20px; color: var(--muted); }
+.spinner { display: inline-block; width: 32px; height: 32px; border: 3px solid var(--line); border-top-color: var(--kesari); border-radius: 999px; animation: spin 0.8s linear infinite; margin-bottom: 12px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.empty { text-align: center; padding: 60px 20px; color: var(--muted); }
+
+.gate {
+  background: var(--card-bg); border-radius: 14px; padding: 30px;
+  text-align: center; box-shadow: var(--shadow); max-width: 380px; margin: 60px auto;
+}
+.gate input { width: 100%; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 8px; font-size: 15px; margin: 12px 0; }
+.gate button { background: var(--punjab-green); color: white; border: none; padding: 12px 22px; border-radius: 8px; font-weight: 700; cursor: pointer; width: 100%; font-size: 15px; }
+
+@media (max-width: 600px) {
+  th, td { padding: 8px 10px; font-size: 13px; }
+}
+</style>
+</head>
+<body>
+
+<div class="banner">
+  <h1>👥 Batch Voters List</h1>
+  <p>1996 Batch Scholarship Poll · Admin view</p>
+</div>
+<div class="kesari-line"></div>
+
+<div class="wrap">
+
+  <div id="gate" class="gate" style="display:none;">
+    <h2 style="margin:0 0 10px; color:var(--navy);">🔐 Admin access</h2>
+    <p style="font-size:13px; color:var(--muted); margin:0 0 12px;">Enter the admin code to view voter list.</p>
+    <input type="password" id="pw" placeholder="Admin code" autocomplete="off">
+    <button id="gateBtn">Unlock</button>
+  </div>
+
+  <div id="mainContent" style="display:none;">
+    <div class="toolbar">
+      <span class="live">LIVE · auto-refresh 30s</span>
+      <span class="spacer"></span>
+      <input type="search" id="search" placeholder="🔍 Search name or phone…">
+      <button id="refreshBtn">🔄 Refresh</button>
+      <button id="exportBtn" style="background:var(--punjab-green);">📥 Export CSV</button>
+    </div>
+
+    <div class="hero">
+      <div class="lbl">Total Voters</div>
+      <div class="big" id="totalCount">0</div>
+      <div class="lbl">Last refreshed: <span id="lastUpdated">—</span></div>
+    </div>
+
+    <div id="loadingState">
+      <div class="spinner"></div>
+      <div>Loading voter list…</div>
+    </div>
+
+    <div id="listContainer" style="display:none;">
+      <table id="votersTable">
+        <thead>
+          <tr>
+            <th style="width:40px;">#</th>
+            <th>Name</th>
+            <th style="width:140px;">WhatsApp</th>
+            <th style="width:160px;">Submitted</th>
+          </tr>
+        </thead>
+        <tbody id="votersBody"></tbody>
+      </table>
+      <div id="emptyMsg" class="empty" style="display:none;">No voters yet — share the poll!</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const ADMIN_CODE = "gndec1996";  // simple gate
+const STORAGE_KEY = "gndec_voters_admin_ok";
+
+let allVoters = [];
+let filterText = '';
+
+async function loadVoters() {
+  document.getElementById('loadingState').style.display = 'block';
+  document.getElementById('listContainer').style.display = 'none';
+  try {
+    const r = await fetch('https://jsonblob.com/api/jsonBlob/019e8fb0-bb69-76b0-9fb4-10fdcd1905b3', { cache: 'no-store' });
+    const d = await r.json();
+    allVoters = Array.isArray(d.voters) ? d.voters : [];
+    render();
+  } catch (e) {
+    document.getElementById('loadingState').innerHTML = '⚠️ Could not load. Retry in a moment.';
+  }
+}
+
+function render() {
+  document.getElementById('loadingState').style.display = 'none';
+  document.getElementById('listContainer').style.display = 'block';
+  const f = filterText.trim().toLowerCase();
+  const voters = allVoters
+    .filter(v => !f || (v.name||'').toLowerCase().includes(f) || (v.phone||'').includes(f))
+    .slice().reverse(); // most recent first
+  document.getElementById('totalCount').textContent = allVoters.length;
+  document.getElementById('lastUpdated').textContent = new Date().toLocaleTimeString();
+  const tbody = document.getElementById('votersBody');
+  if (voters.length === 0) {
+    tbody.innerHTML = '';
+    document.getElementById('emptyMsg').style.display = 'block';
+    return;
+  }
+  document.getElementById('emptyMsg').style.display = 'none';
+  tbody.innerHTML = voters.map((v, i) => `
+    <tr>
+      <td class="idx">${voters.length - i}</td>
+      <td><b>${escapeHtml(v.name || '')}</b></td>
+      <td class="phone">${escapeHtml(v.phone || '')}</td>
+      <td class="timestamp">${v.timestamp ? new Date(v.timestamp).toLocaleString() : '—'}</td>
+    </tr>
+  `).join('');
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function exportCSV() {
+  const rows = [['#','Name','WhatsApp','Submitted','Country','IP']];
+  allVoters.forEach((v,i) => rows.push([
+    i+1, v.name||'', v.phone||'', v.timestamp||'', v.country||'', v.ip||''
+  ]));
+  const csv = rows.map(r => r.map(cell => `"${String(cell).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'voters_' + new Date().toISOString().slice(0,10) + '.csv';
+  a.click();
+}
+
+function checkGate() {
+  if (sessionStorage.getItem(STORAGE_KEY) === 'ok') {
+    showMain();
+    return;
+  }
+  document.getElementById('gate').style.display = 'block';
+}
+
+function showMain() {
+  document.getElementById('gate').style.display = 'none';
+  document.getElementById('mainContent').style.display = 'block';
+  loadVoters();
+  setInterval(loadVoters, 30000);
+}
+
+document.getElementById('gateBtn').addEventListener('click', () => {
+  const v = document.getElementById('pw').value.trim();
+  if (v === ADMIN_CODE) {
+    sessionStorage.setItem(STORAGE_KEY, 'ok');
+    showMain();
+  } else {
+    alert('Wrong code.');
+  }
+});
+document.getElementById('pw').addEventListener('keydown', e => { if (e.key==='Enter') document.getElementById('gateBtn').click(); });
+
+document.getElementById('refreshBtn').addEventListener('click', loadVoters);
+document.getElementById('exportBtn').addEventListener('click', exportCSV);
+document.getElementById('search').addEventListener('input', e => { filterText = e.target.value; render(); });
+
+checkGate();
+</script>
+
+</body>
+</html>

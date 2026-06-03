@@ -345,6 +345,59 @@ const SECTIONS = [
         ]
       }
     ]
+  },
+  {
+    label: "6 · FAIRNESS TO STUDENTS",
+    questions: [
+      { id: "q19_emergency_support", title: "Q19. Mid-year emergency support",
+        scenario: "Current beneficiary's family faces sudden medical/accident emergency",
+        opts: [
+          { k:"A", l:"Yes — keep emergency reserve" },
+          { k:"B", l:"Yes only if budget allows" },
+          { k:"C", l:"No — one fixed award per year" }
+        ]
+      },
+      { id: "q20_drug_crisis", title: "Q20. 🪷 Punjab drug crisis affected family",
+        scenario: "Family member lost to overdose / addiction destroyed family earner",
+        opts: [
+          { k:"A", l:"Major auto-bonus — this is our cause" },
+          { k:"B", l:"Standard family hardship" },
+          { k:"C", l:"Not a separate factor" }
+        ]
+      },
+      { id: "q21_sibling_rule", title: "Q21. Two siblings both qualify",
+        scenario: "Both siblings from same family meet criteria",
+        opts: [
+          { k:"A", l:"Both get full awards" },
+          { k:"B", l:"Only one — help two different families" },
+          { k:"C", l:"Both but second at reduced amount" }
+        ]
+      },
+      { id: "q22_disowned_student", title: "Q22. Student estranged from family",
+        scenario: "Disowned (identity/religion/lifestyle/marriage) but academically eligible",
+        opts: [
+          { k:"A", l:"Orphan-equivalent — auto-priority" },
+          { k:"B", l:"Standard process, recognize hardship" },
+          { k:"C", l:"Decline — verification impossible" }
+        ]
+      },
+      { id: "q23_mental_health", title: "Q23. Mental health disclosure",
+        scenario: "Student discloses anxiety/depression while studying",
+        opts: [
+          { k:"A", l:"Additional hardship factor (bonus)" },
+          { k:"B", l:"Note sympathetically, don't score (privacy)" },
+          { k:"C", l:"Not a scholarship factor" }
+        ]
+      },
+      { id: "q24_digital_divide", title: "Q24. Digital divide — no internet/phone",
+        scenario: "Poorest students can't fill online application",
+        opts: [
+          { k:"A", l:"Accept WhatsApp + paper forms" },
+          { k:"B", l:"Provide help at GNDEC during enrollment week" },
+          { k:"C", l:"Online-only — they should find a way" }
+        ]
+      }
+    ]
   }
 ];
 

@@ -345,7 +345,7 @@ body {
       <p>We are finalizing the rubric for this year's scholarship awards. Each question below is a <b>real-world scenario</b> — pick the one that best matches your view.</p>
       <p>No abstract point values, no "committee decides" — just clear choices.</p>
       <div class="why">
-        <b>⏱ 24 questions · 3 options each · ~5 minutes</b><br>
+        <b>⏱ 28 questions · 3 options each · ~6 minutes</b><br>
         🔒 One vote per device · Anonymous · Live results visible
       </div>
       <span class="secure-badge">🔒 One Vote Per Device · Anonymous Ballot</span>
@@ -639,6 +639,53 @@ body {
         </ul>
       </div>
 
+      <!-- ============== SECTION 7: PROGRAM SOUL & LEGACY ============== -->
+      <div class="section-header"><div class="num">7</div><div class="ttl">PROGRAM SOUL — Punjab Roots & Pay-it-Forward</div></div>
+
+      <div class="q">
+        <span class="q-num">Q25</span>
+        <p class="q-scenario">Our scholarship was started by alumni who themselves came from modest Punjabi roots — many now donate to give back. Should we explicitly invite recipients to <b>become future donors</b> when they're earning?</p>
+        <h3 class="q-title">Policy:</h3>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q25_pay_it_forward" value="A" required><span class="opt-text"><span class="opt-letter">A</span><b>Yes</b> — formal written pledge: "I commit to donate when earning"</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q25_pay_it_forward" value="B"><span class="opt-text"><span class="opt-letter">B</span><b>Strongly encouraged</b> but no obligation — just plant the seed</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q25_pay_it_forward" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>No expectations</b> — give freely, no strings attached</span></label></li>
+        </ul>
+      </div>
+
+      <div class="q">
+        <span class="q-num">Q26</span>
+        <p class="q-scenario">🌾 A student's family lost their <b>farmland</b> or is drowning in <b>farmer-loan debt</b> due to Punjab's agrarian crisis (farmer suicides, MSP issues, debt traps).</p>
+        <h3 class="q-title">Policy:</h3>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q26_agrarian_crisis" value="A" required><span class="opt-text"><span class="opt-letter">A</span><b>Major auto-bonus</b> — Punjab's silent emergency, like the drug crisis</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q26_agrarian_crisis" value="B"><span class="opt-text"><span class="opt-letter">B</span>Treat as <b>standard family hardship</b></span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q26_agrarian_crisis" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>Not a separate factor</b></span></label></li>
+        </ul>
+      </div>
+
+      <div class="q">
+        <span class="q-num">Q27</span>
+        <p class="q-scenario">🪷 A student is from a <b>Punjab border district</b> — Tarn Taran, Ferozepur, Pathankot, Gurdaspur rural, Mansa — areas that have been historically neglected economically and educationally.</p>
+        <h3 class="q-title">Policy:</h3>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q27_border_district" value="A" required><span class="opt-text"><span class="opt-letter">A</span><b>Major bonus</b> — these districts deserve targeted support</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q27_border_district" value="B"><span class="opt-text"><span class="opt-letter">B</span><b>Small recognition</b> (general rural classification already partially covers it)</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q27_border_district" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>Not a separate factor</b></span></label></li>
+        </ul>
+      </div>
+
+      <div class="q">
+        <span class="q-num">Q28</span>
+        <p class="q-scenario">🙏 Sikh tradition values <b>seva</b> (selfless service). Should scholarship recipients be expected to <b>perform community service or mentor next year's recipients</b>?</p>
+        <h3 class="q-title">Policy:</h3>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q28_seva_commitment" value="A" required><span class="opt-text"><span class="opt-letter">A</span><b>Formal requirement</b> — minimum 50 hrs/year community seva or mentorship</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q28_seva_commitment" value="B"><span class="opt-text"><span class="opt-letter">B</span><b>Encouraged but not required</b> — plant the value, don't force it</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q28_seva_commitment" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>No obligations</b> — they're already studying, often working too</span></label></li>
+        </ul>
+      </div>
+
       <div class="submit-area">
         <label style="display:block; text-align:left; font-size:13px; font-weight:700; color:var(--navy); margin-bottom:6px;">
           Any additional thought? <span style="color:var(--muted); font-weight:400;">(optional)</span>
@@ -798,7 +845,11 @@ const QLABELS = {
   q21_sibling_rule: "Sibling rule",
   q22_disowned_student: "Disowned student",
   q23_mental_health: "Mental health disclosure",
-  q24_digital_divide: "Digital divide / paper applications"
+  q24_digital_divide: "Digital divide / paper applications",
+  q25_pay_it_forward: "Pay-it-forward pledge",
+  q26_agrarian_crisis: "🌾 Punjab agrarian crisis",
+  q27_border_district: "🪷 Border district priority",
+  q28_seva_commitment: "🙏 Seva / mentorship commitment"
 };
 
 function buildPrevSummary(record) {
@@ -867,7 +918,7 @@ function validateAllAnswered() {
 async function handleSubmit() {
   const missing = validateAllAnswered();
   if (missing) {
-    alert(missing === 'name' ? "Please enter your name." : "Please answer all 24 questions before submitting.");
+    alert(missing === 'name' ? "Please enter your name." : "Please answer all 28 questions before submitting.");
     return;
   }
   const btn = document.getElementById('submitBtn');

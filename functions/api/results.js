@@ -2,7 +2,7 @@
 // Aggregates all 18 question counters + total into a single response.
 // Fresh namespace = clean start.
 
-const TALLY_NS = "gndec1996rubric2026v3";
+const TALLY_NS = "gndec1996batchLIVE2026";
 
 const QUESTIONS = [
   { id: "q1_need_vs_merit",            opts: ["A","B","C"] },

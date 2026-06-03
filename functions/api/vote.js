@@ -3,6 +3,7 @@
 // GET ?phone=...: check if phone already voted (for client dedup)
 
 const VOTERS_BLOB = "https://jsonblob.com/api/jsonBlob/019e8fb0-bb69-76b0-9fb4-10fdcd1905b3";
+const MIRROR_BLOB = "https://jsonblob.com/api/jsonBlob/019e8fc4-2a17-762d-863e-70e3b3680b53";
 
 function normalizePhone(p) {
   if (!p) return "";
@@ -21,15 +22,32 @@ async function getVoters() {
 }
 
 async function saveVoters(voters) {
-  return await fetch(VOTERS_BLOB, {
+  const body = JSON.stringify({
+    voters,
+    updated: new Date().toISOString(),
+    poll: "gndec1996batchLIVE2026"
+  });
+  // Write to BOTH primary and mirror blob in parallel — redundancy
+  const primaryPromise = fetch(VOTERS_BLOB, {
+    method: 'PUT',
+    headers: { 'content-type': 'application/json' },
+    body
+  });
+  const mirrorPromise = fetch(MIRROR_BLOB, {
     method: 'PUT',
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({
       voters,
       updated: new Date().toISOString(),
-      poll: "gndec1996batchLIVE2026"
+      poll: "gndec1996batchLIVE2026",
+      mirror: true
     })
   });
+  const [primary, mirror] = await Promise.all([
+    primaryPromise.catch(() => ({ ok: false })),
+    mirrorPromise.catch(() => ({ ok: false }))
+  ]);
+  return primary; // primary status used for the caller's decision
 }
 
 export async function onRequest(context) {

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Application Status — Alumni Scholarship</title>
+<style>
+  :root {
+    --indigo: #1e3a5f; --indigo-light: #3b5b7f;
+    --teal: #a16207; --rose: #9f1239;
+    --emerald: #15803d; --amber: #ea580c;
+    --bg: #fefcf6; --bg-soft: #f7f3e9; --card: #ffffff;
+    --text: #0f172a; --text-soft: #334155; --muted: #64748b;
+    --border: #e2e8f0; --border-strong: #cbd5e1;
+    --good: #16a34a; --good-bg: #dcfce7;
+    --warn: #c2410c; --warn-bg: #ffedd5;
+    --bad: #dc2626; --bad-bg: #fee2e2;
+    --shadow-sm: 0 1px 2px rgba(15,23,42,0.06), 0 1px 3px rgba(15,23,42,0.05);
+    --shadow-md: 0 4px 16px rgba(15,23,42,0.08);
+    --radius: 14px;
+  }
+  [data-theme="dark"] { --bg: #0a0f1f; --bg-soft: #1a1f3a; --card: #1a1f3a; --text: #f7f3e9; --text-soft: #cbd5e1; --muted: #94a3b8; --border: #334155; --border-strong: #475569; --good-bg: rgba(34,197,94,0.18); --warn-bg: rgba(217,119,6,0.18); --bad-bg: rgba(220,38,38,0.18); }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.55; }
+
+  /* Shared nav */
+  .topnav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+  [data-theme="dark"] .topnav { background: rgba(10,15,31,0.85); }
+  .topnav-inner { max-width: 1300px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; gap: 16px; }
+  .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); font-weight: 800; font-size: 16px; }
+  .nav-mark { width: 38px; height: 38px; background: conic-gradient(from 0deg, var(--indigo), var(--teal), var(--emerald), var(--amber), var(--rose), var(--indigo)); border-radius: 11px; display: grid; place-items: center; color: #fff; font-weight: 900; font-size: 16px; box-shadow: var(--shadow-md); position: relative; }
+  .nav-mark::after { content: "A"; position: absolute; inset: 3px; background: var(--card); color: var(--text); border-radius: 8px; display: grid; place-items: center; font-weight: 900; font-size: 17px; }
+  .nav-brand-text { line-height: 1.1; }
+  .nav-brand-text small { display: block; font-size: 11px; font-weight: 600; color: var(--muted); margin-top: 2px; }
+  .nav-spacer { flex: 1; }
+  .nav-links { display: flex; gap: 4px; align-items: center; }
+  .nav-link { padding: 8px 14px; text-decoration: none; color: var(--text-soft); font-size: 13.5px; font-weight: 600; border-radius: 8px; }
+  .nav-link:hover { background: var(--bg-soft); color: var(--text); }
+  .nav-link.active { color: var(--indigo); background: var(--bg-soft); }
+  .nav-cta { padding: 9px 18px; background: var(--indigo); color: #fff; text-decoration: none; border-radius: 9px; font-size: 13.5px; font-weight: 700; }
+  .nav-cta.donate { background: var(--rose); margin-left: 6px; }
+  .theme-btn { width: 36px; height: 36px; border-radius: 9px; border: 1px solid var(--border); background: var(--card); cursor: pointer; display: grid; place-items: center; font-size: 14px; margin-left: 8px; }
+  .nav-mobile-menu { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+  @media (max-width: 900px) { .nav-links { display: none; } .nav-mobile-menu { display: grid; place-items: center; } .nav-mobile-menu svg { width: 22px; height: 22px; stroke: var(--text); } .nav-links.show { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--card); padding: 16px; gap: 4px; border-bottom: 1px solid var(--border); box-shadow: var(--shadow-md); } .nav-cta { width: 100%; text-align: center; } }
+
+  .page-hero { padding: 70px 24px 50px; text-align: center; background: radial-gradient(circle at 80% 20%, rgba(161,98,7,0.10), transparent 50%); }
+  .hero-eyebrow { display: inline-block; padding: 5px 14px; background: rgba(161,98,7,0.10); color: var(--teal); border-radius: 99px; font-size: 12px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 18px; }
+  .page-hero h1 { font-size: clamp(32px, 5vw, 46px); font-weight: 800; letter-spacing: -0.025em; line-height: 1.1; margin: 0 0 14px; }
+  .page-hero p { max-width: 600px; margin: 0 auto; font-size: 16px; color: var(--text-soft); }
+
+  .search-card {
+    max-width: 540px; margin: 0 auto 60px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 18px; padding: 32px;
+    box-shadow: var(--shadow-md);
+  }
+  .search-card label { display: block; font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 8px; }
+  .search-card input { width: 100%; padding: 14px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 15px; font-family: inherit; color: var(--text); background: var(--card); margin-bottom: 14px; }
+  .search-card input:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(161,98,7,0.12); }
+  .search-btn { width: 100%; padding: 14px; background: var(--teal); color: #fff; border: none; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.15s; }
+  .search-btn:hover { background: #7a4906; transform: translateY(-1px); }
+
+  .results { max-width: 760px; margin: 0 auto; padding: 0 24px 60px; }
+  .result-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 24px; margin-bottom: 14px; box-shadow: var(--shadow-sm); }
+  .result-card.match { border-color: var(--good); background: linear-gradient(180deg, var(--card), var(--good-bg)); }
+  .result-header { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .result-avatar { width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, var(--teal), var(--emerald)); color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 18px; flex-shrink: 0; }
+  .result-name { font-size: 18px; font-weight: 700; margin: 0 0 2px; }
+  .result-meta { font-size: 13px; color: var(--muted); }
+  .result-status { display: inline-block; padding: 3px 10px; border-radius: 99px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; }
+  .status-selected { background: var(--good); color: #fff; }
+  .status-pending { background: var(--warn); color: #fff; }
+  .status-not-found { background: var(--muted); color: #fff; }
+  .awards-list { margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--border); }
+  .award-row { display: flex; justify-content: space-between; padding: 8px 0; font-size: 13.5px; }
+  .award-row .round { font-weight: 600; color: var(--text-soft); }
+  .award-row .amt { font-weight: 700; color: var(--amber); }
+  .total-line { margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border); display: flex; justify-content: space-between; font-size: 14.5px; }
+  .total-line b { color: var(--text); }
+  .total-line .total-amt { color: var(--amber); font-weight: 800; font-size: 16px; }
+
+  .empty { text-align: center; padding: 36px 20px; color: var(--muted); background: var(--card); border: 1px dashed var(--border-strong); border-radius: 14px; }
+  .empty .icon-big { font-size: 42px; margin-bottom: 12px; }
+
+  .info-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; max-width: 760px; margin: 0 auto 40px; padding: 0 24px; }
+  @media (max-width: 700px) { .info-cards { grid-template-columns: 1fr; } }
+  .info-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 18px; text-align: center; }
+  .info-card .ic-num { font-size: 24px; font-weight: 800; color: var(--teal); line-height: 1; }
+  .info-card .ic-lbl { font-size: 12px; color: var(--muted); margin-top: 6px; font-weight: 600; }
+
+  /* Footer */
+  footer { background: #0a0f1f; color: #94a3b8; padding: 50px 24px 30px; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
+  @media (max-width: 800px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
+  .footer-brand { display: flex; align-items: center; gap: 12px; color: #fff; font-weight: 800; font-size: 18px; margin-bottom: 16px; text-decoration: none; }
+  .footer-tagline { font-size: 13px; line-height: 1.7; max-width: 320px; }
+  .footer-col h4 { color: #fff; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 12px; }
+  .footer-col a { display: block; color: #94a3b8; text-decoration: none; font-size: 13.5px; padding: 4px 0; }
+  .footer-col a:hover { color: #fb923c; }
+  .footer-bottom { max-width: 1200px; margin: 40px auto 0; padding-top: 24px; border-top: 1px solid rgba(148,163,184,0.15); text-align: center; font-size: 12.5px; }
+
+  button:focus, input:focus, a:focus { outline: none; }
+  button, input, a { -webkit-tap-highlight-color: transparent; }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <a class="nav-brand" href="index.html"><div class="nav-mark"></div><div class="nav-brand-text">Alumni Scholarship<small>1996 Batch GNDEC · Est. 2024</small></div></a>
+    <div class="nav-spacer"></div>
+    <div class="nav-links" id="navLinks">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="program.html">Program</a>
+      <a class="nav-link" href="apply.html">Apply</a>
+      <a class="nav-link" href="recipients_archive.html">Recipients</a>
+      <a class="nav-link" href="faq.html">FAQ</a>
+      <a class="nav-link active" href="status.html">Status</a>
+      <a class="nav-cta" href="apply.html">Apply Now</a>
+      <a class="nav-cta donate" href="donor_management.html">Donate</a>
+    </div>
+    <button class="theme-btn" id="themeBtn">🌙</button>
+    <button class="nav-mobile-menu" onclick="document.getElementById('navLinks').classList.toggle('show')"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <span class="hero-eyebrow">🔍 Check Application Status</span>
+  <h1>Have I received a scholarship?</h1>
+  <p>Search past award rounds by your University Roll Number (URN) or name. You'll see every round you've been awarded in, with the amount.</p>
+</header>
+
+<div class="info-cards">
+  <div class="info-card"><div class="ic-num">98</div><div class="ic-lbl">Unique recipients</div></div>
+  <div class="info-card"><div class="ic-num">131</div><div class="ic-lbl">Awards across rounds</div></div>
+  <div class="info-card"><div class="ic-num">3</div><div class="ic-lbl">Rounds completed</div></div>
+</div>
+
+<div class="search-card">
+  <label>Search by URN or Name</label>
+  <input type="text" id="searchInput" placeholder="e.g. 2303004 or Kanika Mittal" autocomplete="off" />
+  <button class="search-btn" onclick="search()">🔍 Check Status</button>
+</div>
+
+<div class="results" id="results"></div>
+
+<footer>
+  <div class="footer-inner">
+    <div><a class="footer-brand" href="index.html"><div class="nav-mark" style="width:34px; height:34px;"></div>Alumni Scholarship</a><p class="footer-tagline">A scholarship by the 1992–1996 batch of GNDEC alumni, supporting students at GNDEC Ludhiana since March 2024.</p></div>
+    <div class="footer-col"><h4>For Students</h4><a href="program.html">Program Details</a><a href="apply.html">Apply Now</a><a href="status.html">Application Status</a><a href="faq.html">FAQ</a></div>
+    <div class="footer-col"><h4>For Donors</h4><a href="donor_management.html">Donate</a><a href="recipients_archive.html">See Recipients</a><a href="index.html#impact">Live Impact</a></div>
+    <div class="footer-col"><h4>Contact</h4><a href="mailto:gulvir75@gmail.com">gulvir75@gmail.com</a><a href="tel:+919592457515">+91 95924-57515</a><a href="admin.html" style="opacity:0.5; font-size:11px; margin-top:18px;">🔒 Committee Login</a></div>
+  </div>
+  <div class="footer-bottom">Built with love by the 1996 batch · For our juniors at GNDEC · © <span id="copyYear"></span></div>
+</footer>
+
+<script>
+const themeBtn = document.getElementById("themeBtn");
+function applyTheme(t) { document.documentElement.setAttribute("data-theme", t); themeBtn.textContent = t === "dark" ? "☀️" : "🌙"; }
+themeBtn.addEventListener("click", () => { const c = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark"; applyTheme(c); localStorage.setItem("scholarship_theme", c); });
+applyTheme(localStorage.getItem("scholarship_theme") || "light");
+document.getElementById("copyYear").textContent = new Date().getFullYear();
+
+// Load recipients from localStorage (admin loaded them via admin.html → recipients_archive.html)
+function loadRecipients() {
+  try { return JSON.parse(localStorage.getItem("alumni_scholarship_recipients_v2") || "[]"); }
+  catch (e) { return []; }
+}
+
+function formatINR(n) {
+  const num = parseFloat(n);
+  if (isNaN(num) || num === 0) return "₹0";
+  if (num >= 100000) return "₹" + (num / 100000).toFixed(2) + " L";
+  if (num >= 1000) return "₹" + (num / 1000).toFixed(num >= 10000 ? 0 : 1) + "K";
+  return "₹" + Math.round(num);
+}
+function esc(v) { return String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c])); }
+function initials(name) { return (name || "?").split(/\s+/).map(w => w[0]).slice(0, 2).join("").toUpperCase(); }
+
+function search() {
+  const q = document.getElementById("searchInput").value.trim().toLowerCase();
+  const results = document.getElementById("results");
+  if (!q) { results.innerHTML = ""; return; }
+
+  const recipients = loadRecipients();
+  if (!recipients.length) {
+    results.innerHTML = `<div class="empty"><div class="icon-big">📋</div><h3>Recipient archive not loaded on this device</h3><p>Ask an admin to load past recipient data into this device's archive first.<br>Or check the public Recipients page directly.</p><p style="margin-top:14px;"><a href="recipients_archive.html" style="color:var(--teal); font-weight:700;">→ View Recipients Archive</a></p></div>`;
+    return;
+  }
+
+  // Search by URN (exact match) OR by name (partial match)
+  const matches = recipients.filter(r => {
+    if (r.urn && r.urn.toLowerCase() === q) return true;
+    if (r.name && r.name.toLowerCase().includes(q)) return true;
+    return false;
+  });
+
+  if (!matches.length) {
+    results.innerHTML = `<div class="empty"><div class="icon-big">🔍</div><h3>No match found</h3><p>We couldn't find any past awards matching "<b>${esc(q)}</b>".</p><p style="margin-top:14px; font-size:13px;">If you've applied but haven't yet been notified, your application is likely still under review. Decisions are usually sent by email 3-4 weeks after round close.<br><br>Want to apply? <a href="apply.html" style="color:var(--teal); font-weight:700;">Start an Application</a></p></div>`;
+    return;
+  }
+
+  // Group matches by URN if possible (one card per student showing all their rounds)
+  const groups = {};
+  matches.forEach(r => {
+    const key = r.urn || r.name;
+    if (!groups[key]) groups[key] = { name: r.name, urn: r.urn || "—", program: r.program, branch: r.branch, awards: [] };
+    groups[key].awards.push(r);
+  });
+
+  results.innerHTML = `<div style="text-align:center; margin-bottom:18px; font-size:13px; color:var(--muted);">Found <b style="color:var(--teal);">${Object.keys(groups).length}</b> student${Object.keys(groups).length===1?"":"s"} matching "<b>${esc(q)}</b>"</div>` +
+    Object.values(groups).map(g => {
+      const total = g.awards.reduce((s,a) => s + (a.amount||0), 0);
+      const sorted = g.awards.sort((a,b) => (a.date||"").localeCompare(b.date||""));
+      return `<div class="result-card match">
+        <div class="result-header">
+          <div class="result-avatar">${esc(initials(g.name))}</div>
+          <div style="flex:1;">
+            <h3 class="result-name">${esc(g.name)} <span class="result-status status-selected">✓ Awarded</span></h3>
+            <div class="result-meta">URN ${esc(g.urn)} · ${esc(g.program || "")} ${esc(g.branch || "")}</div>
+          </div>
+        </div>
+        <div class="awards-list">
+          <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.05em; color:var(--muted); font-weight:700; margin-bottom:6px;">Award history</div>
+          ${sorted.map(a => `<div class="award-row"><span class="round">📅 ${esc(a.round || "—")}${a.semester ? " · Sem " + esc(a.semester) : ""}</span><span class="amt">${formatINR(a.amount)}</span></div>`).join("")}
+          <div class="total-line"><b>Total awarded</b><span class="total-amt">${formatINR(total)} across ${g.awards.length} round${g.awards.length===1?"":"s"}</span></div>
+        </div>
+      </div>`;
+    }).join("");
+}
+
+// Enter to search
+document.getElementById("searchInput").addEventListener("keydown", e => { if (e.key === "Enter") search(); });
+</script>
+</body>
+</html>

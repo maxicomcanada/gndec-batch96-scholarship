@@ -345,7 +345,7 @@ body {
       <p>We are finalizing the rubric for this year's scholarship awards. Each question below is a <b>real-world scenario</b> — pick the one that best matches your view.</p>
       <p>No abstract point values, no "committee decides" — just clear choices.</p>
       <div class="why">
-        <b>⏱ 18 questions · 3 options each · ~4 minutes</b><br>
+        <b>⏱ 24 questions · 3 options each · ~5 minutes</b><br>
         🔒 One vote per device · Anonymous · Live results visible
       </div>
       <span class="secure-badge">🔒 One Vote Per Device · Anonymous Ballot</span>
@@ -570,6 +570,75 @@ body {
         </ul>
       </div>
 
+      <!-- ============== SECTION 6: FAIRNESS TO STUDENT ============== -->
+      <div class="section-header"><div class="num">6</div><div class="ttl">FAIRNESS TO STUDENTS — Process, Dignity, Edge Cases</div></div>
+
+      <div class="q">
+        <span class="q-num">Q19</span>
+        <p class="q-scenario">A <b>current beneficiary's family</b> faces a sudden medical emergency or accident mid-year.</p>
+        <h3 class="q-title">Can we provide additional support beyond the original award?</h3>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q19_emergency_support" value="A" required><span class="opt-text"><span class="opt-letter">A</span><b>Yes</b> — keep an emergency reserve in the budget for this</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q19_emergency_support" value="B"><span class="opt-text"><span class="opt-letter">B</span><b>Yes</b> but only if year-end budget allows</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q19_emergency_support" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>No</b> — one fixed award per year</span></label></li>
+        </ul>
+      </div>
+
+      <div class="q">
+        <span class="q-num">Q20</span>
+        <p class="q-scenario">🪷 A student's family is <b>directly affected by Punjab's drug crisis</b> — parent lost to overdose, or addiction destroyed the family earner.</p>
+        <h3 class="q-title">Policy:</h3>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q20_drug_crisis" value="A" required><span class="opt-text"><span class="opt-letter">A</span><b>Major auto-bonus</b> — this is exactly our cause</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q20_drug_crisis" value="B"><span class="opt-text"><span class="opt-letter">B</span>Treat as <b>standard family hardship</b></span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q20_drug_crisis" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>Not a separate factor</b></span></label></li>
+        </ul>
+      </div>
+
+      <div class="q">
+        <span class="q-num">Q21</span>
+        <p class="q-scenario"><b>Two siblings</b> from the same family both qualify on merit + need.</p>
+        <h3 class="q-title">Policy:</h3>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q21_sibling_rule" value="A" required><span class="opt-text"><span class="opt-letter">A</span><b>Both get full awards</b> — both deserve on merit</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q21_sibling_rule" value="B"><span class="opt-text"><span class="opt-letter">B</span><b>Only one</b> — help two different families instead</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q21_sibling_rule" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>Both</b> but second sibling at <b>reduced amount</b></span></label></li>
+        </ul>
+      </div>
+
+      <div class="q">
+        <span class="q-num">Q22</span>
+        <p class="q-scenario">A student is <b>estranged from family</b> (identity, religion, lifestyle, marriage choices) but academically eligible. Family income data not available.</p>
+        <h3 class="q-title">How should we treat their application?</h3>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q22_disowned_student" value="A" required><span class="opt-text"><span class="opt-letter">A</span>Treat as <b>orphan-equivalent</b> — auto-priority, evaluate on personal income</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q22_disowned_student" value="B"><span class="opt-text"><span class="opt-letter">B</span><b>Standard process</b>, recognize the hardship</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q22_disowned_student" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>Decline</b> — family situation makes verification impossible</span></label></li>
+        </ul>
+      </div>
+
+      <div class="q">
+        <span class="q-num">Q23</span>
+        <p class="q-scenario">A student <b>discloses</b> they're managing anxiety, depression, or similar mental health condition while studying.</p>
+        <h3 class="q-title">How should this affect selection?</h3>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q23_mental_health" value="A" required><span class="opt-text"><span class="opt-letter">A</span>Treat as an <b>additional hardship factor</b> (bonus points)</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q23_mental_health" value="B"><span class="opt-text"><span class="opt-letter">B</span>Note it sympathetically <b>but don't score</b> it (privacy)</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q23_mental_health" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>Not a scholarship factor</b> — keep mental health out of selection</span></label></li>
+        </ul>
+      </div>
+
+      <div class="q">
+        <span class="q-num">Q24</span>
+        <p class="q-scenario">Some of the poorest students <b>don't have stable internet or smartphones</b> to fill our online application.</p>
+        <h3 class="q-title">How should we handle this?</h3>
+        <ul class="opts">
+          <li><label class="opt-label"><input type="radio" name="q24_digital_divide" value="A" required><span class="opt-text"><span class="opt-letter">A</span>Accept <b>WhatsApp + paper forms</b> — extend access</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q24_digital_divide" value="B"><span class="opt-text"><span class="opt-letter">B</span>Provide <b>application help at GNDEC</b> during enrollment week</span></label></li>
+          <li><label class="opt-label"><input type="radio" name="q24_digital_divide" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>Online-only</b> — they should find a way</span></label></li>
+        </ul>
+      </div>
+
       <div class="submit-area">
         <label style="display:block; text-align:left; font-size:13px; font-weight:700; color:var(--navy); margin-bottom:6px;">
           Any additional thought? <span style="color:var(--muted); font-weight:400;">(optional)</span>
@@ -723,7 +792,13 @@ const QLABELS = {
   q15_declining_marks: "Marks dropped due to family crisis",
   q16_previous_beneficiary: "Previous beneficiary",
   q17_other_aid: "Other Govt scholarship received",
-  q18_budget_split: "₹3L budget split"
+  q18_budget_split: "₹3L budget split",
+  q19_emergency_support: "Mid-year emergency support",
+  q20_drug_crisis: "🪷 Drug-crisis affected family",
+  q21_sibling_rule: "Sibling rule",
+  q22_disowned_student: "Disowned student",
+  q23_mental_health: "Mental health disclosure",
+  q24_digital_divide: "Digital divide / paper applications"
 };
 
 function buildPrevSummary(record) {
@@ -792,7 +867,7 @@ function validateAllAnswered() {
 async function handleSubmit() {
   const missing = validateAllAnswered();
   if (missing) {
-    alert(missing === 'name' ? "Please enter your name." : "Please answer all 18 questions before submitting.");
+    alert(missing === 'name' ? "Please enter your name." : "Please answer all 24 questions before submitting.");
     return;
   }
   const btn = document.getElementById('submitBtn');

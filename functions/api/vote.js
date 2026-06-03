@@ -116,6 +116,14 @@ export async function onRequest(context) {
       });
     }
 
+    // Capture per-voter answers if provided
+    const answers = (payload.answers && typeof payload.answers === "object") ? payload.answers : {};
+    const cleanAnswers = {};
+    for (const k of Object.keys(answers).slice(0, 50)) {
+      const v = String(answers[k] || "").slice(0, 20);
+      cleanAnswers[k] = v;
+    }
+
     voters.push({
       name,
       phone,
@@ -123,7 +131,8 @@ export async function onRequest(context) {
       ip: request.headers.get("cf-connecting-ip") || "",
       country: request.headers.get("cf-ipcountry") || "",
       ua: (request.headers.get("user-agent") || "").slice(0, 200),
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
+      answers: cleanAnswers
     });
     await saveVoters(voters);
 

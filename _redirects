@@ -1,5 +1,5 @@
-# Cache-bust: 1780517900
-# Lock down: catch-all redirect to poll
+# Updated: 2026-06-03T20:21:52Z
+# Lock down catch-all redirect to /poll
 /admin* /poll 302
 /apply* /poll 302
 /donor_management* /poll 302

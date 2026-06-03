@@ -77,21 +77,57 @@ async function fetchAll() {
   return out;
 }
 
+// Module-level memoization — persists across requests on the same worker isolate.
+// CF Workers reuse isolates aggressively, so this dramatically reduces cold-call latency.
+let MEMO_DATA = null;
+let MEMO_TIME = 0;
+const MEMO_TTL_MS = 90000;  // 90 seconds — matches the cache-control header
+
 export async function onRequest(context) {
+  const url = new URL(context.request.url);
+  const bypass = url.searchParams.get('nocache') || url.searchParams.get('warm');
+
+  // Fast path 1: module memo (same isolate, within TTL, not bypassing)
+  if (!bypass && MEMO_DATA && (Date.now() - MEMO_TIME) < MEMO_TTL_MS) {
+    return new Response(JSON.stringify({
+      ok: true, timestamp: MEMO_TIME, counters: MEMO_DATA, source: "memo"
+    }), {
+      headers: {
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "public, max-age=90, s-maxage=90",
+        "access-control-allow-origin": "*"
+      }
+    });
+  }
+
+  // Fast path 2: CF edge cache
   const cacheUrl = new URL(context.request.url);
   cacheUrl.search = "";
   const cacheKey = new Request(cacheUrl.toString(), context.request);
   const cache = caches.default;
 
-  let resp = await cache.match(cacheKey);
-  if (resp) return resp;
+  if (!bypass) {
+    const cached = await cache.match(cacheKey);
+    if (cached) {
+      // Re-populate module memo from edge cache so next-same-isolate is instant
+      try {
+        const cachedJson = await cached.clone().json();
+        if (cachedJson?.counters) {
+          MEMO_DATA = cachedJson.counters;
+          MEMO_TIME = Date.now();
+        }
+      } catch (e) {}
+      return cached;
+    }
+  }
 
+  // Slow path: fetch everything from abacus
   const data = await fetchAll();
+  MEMO_DATA = data;
+  MEMO_TIME = Date.now();
 
-  resp = new Response(JSON.stringify({
-    ok: true,
-    timestamp: Date.now(),
-    counters: data
+  const resp = new Response(JSON.stringify({
+    ok: true, timestamp: Date.now(), counters: data, source: "fresh"
   }), {
     headers: {
       "content-type": "application/json; charset=utf-8",

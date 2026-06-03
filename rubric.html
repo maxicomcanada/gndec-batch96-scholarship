@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rubric Generator — 1996 Batch Scholarship</title>
+<style>
+:root {
+  --navy: #0b2240;
+  --kesari: #ff7518;
+  --wheat: #e8c168;
+  --maroon: #6b1d2c;
+  --punjab-green: #1e6b3a;
+  --cream: #faf6ec;
+  --ink: #1a1a2e;
+  --muted: #6b6b80;
+  --line: #e5d6b8;
+  --card-bg: #ffffff;
+  --good: #22c55e;
+  --warn: #f59e0b;
+  --bad: #dc2626;
+  --shadow: 0 4px 24px rgba(11, 34, 64, 0.08);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--cream); color: var(--ink); line-height: 1.55;
+}
+.banner {
+  background: linear-gradient(135deg, var(--navy), #143866);
+  color: var(--cream); padding: 26px 20px 22px; text-align: center;
+}
+.banner h1 { font-size: 22px; font-weight: 800; margin: 0 0 4px; }
+.banner p { font-size: 13px; opacity: 0.9; margin: 0; }
+.kesari-line { height: 4px; background: linear-gradient(90deg, var(--kesari), var(--wheat), var(--kesari)); }
+.wrap { max-width: 900px; margin: 0 auto; padding: 22px 16px 60px; }
+
+.toolbar {
+  display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+  background: var(--card-bg); border-radius: 12px; padding: 12px 16px;
+  margin-bottom: 18px; box-shadow: var(--shadow);
+}
+.toolbar button {
+  background: linear-gradient(135deg, var(--kesari), var(--maroon));
+  color: white; border: none; padding: 10px 18px;
+  border-radius: 8px; font-weight: 700; font-size: 14px; cursor: pointer;
+}
+.toolbar button.secondary {
+  background: var(--card-bg); color: var(--navy); border: 1.5px solid var(--line);
+}
+.toolbar .live {
+  display: inline-flex; align-items: center; gap: 6px; font-size: 13px;
+  font-weight: 700; color: var(--punjab-green);
+}
+.toolbar .live::before {
+  content: ""; width: 8px; height: 8px;
+  background: var(--punjab-green); border-radius: 999px;
+  animation: pulse 1.5s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+.toolbar .spacer { flex: 1; }
+
+#loadingState { text-align: center; padding: 60px 20px; color: var(--muted); }
+.spinner {
+  display: inline-block; width: 32px; height: 32px;
+  border: 3px solid var(--line); border-top-color: var(--kesari);
+  border-radius: 999px; animation: spin 0.8s linear infinite; margin-bottom: 12px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.hero {
+  background: linear-gradient(135deg, var(--maroon), #3d1019);
+  color: white; border-radius: 14px; padding: 22px 20px;
+  margin-bottom: 18px; text-align: center;
+}
+.hero .big { font-size: 42px; font-weight: 900; color: var(--wheat); margin: 4px 0; }
+.hero .lbl { font-size: 13px; opacity: 0.9; }
+
+.section {
+  background: var(--card-bg); border-radius: 14px;
+  margin-bottom: 18px; box-shadow: var(--shadow); overflow: hidden;
+}
+.section-head {
+  padding: 14px 18px; background: linear-gradient(135deg, var(--navy), var(--maroon));
+  color: white; font-weight: 700; font-size: 15px;
+  display: flex; align-items: center; gap: 12px;
+}
+.section-head .num {
+  background: var(--wheat); color: var(--maroon);
+  width: 30px; height: 30px; border-radius: 999px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 14px;
+}
+.section-body { padding: 16px 18px; }
+
+.rule {
+  padding: 12px 0; border-bottom: 1px solid #f0e6cf;
+}
+.rule:last-child { border-bottom: none; }
+.rule-q { font-size: 13px; color: var(--muted); margin: 0 0 4px; }
+.rule-text {
+  font-size: 15px; font-weight: 700; color: var(--navy); margin: 0;
+  display: flex; gap: 8px; align-items: flex-start;
+}
+.rule-text .check {
+  display: inline-block; flex-shrink: 0; margin-top: 2px;
+  width: 18px; height: 18px; border-radius: 999px;
+  text-align: center; font-size: 11px; font-weight: 900; color: white;
+  line-height: 18px;
+}
+.check.strong { background: var(--good); }
+.check.med    { background: var(--warn); }
+.check.weak   { background: var(--bad); }
+.rule-meta { font-size: 12px; color: var(--muted); margin-top: 4px; padding-left: 26px; }
+.rule-meta .pct { font-weight: 700; color: var(--maroon); }
+
+.summary-banner {
+  background: linear-gradient(135deg, var(--punjab-green), #15803d);
+  color: white; border-radius: 14px; padding: 18px 20px;
+  margin-bottom: 18px;
+}
+.summary-banner h3 { margin: 0 0 8px; font-size: 16px; }
+.summary-banner .grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 12px;
+}
+.summary-banner .stat {
+  background: rgba(255,255,255,0.15); border-radius: 8px;
+  padding: 10px 12px; text-align: center;
+}
+.summary-banner .stat .v { font-size: 24px; font-weight: 800; color: var(--wheat); }
+.summary-banner .stat .l { font-size: 11px; opacity: 0.95; }
+
+.legend {
+  background: #fff7e6; padding: 12px 16px; border-radius: 10px;
+  margin-bottom: 18px; font-size: 13px; color: var(--maroon);
+}
+.legend b { color: var(--navy); }
+.legend .check {
+  display: inline-block; width: 16px; height: 16px;
+  border-radius: 999px; vertical-align: middle; margin: 0 4px;
+}
+
+.footer-note {
+  background: #fff7e6; border-radius: 10px; padding: 14px 16px;
+  font-size: 13px; color: var(--ink); margin-top: 18px; line-height: 1.6;
+}
+
+@media print {
+  .toolbar, .banner { display: none; }
+  body { background: white; }
+  .section { box-shadow: none; border: 1px solid #ddd; }
+  .hero { background: #6b1d2c !important; -webkit-print-color-adjust: exact; }
+  .summary-banner { background: #1e6b3a !important; -webkit-print-color-adjust: exact; }
+  .section-head { background: #0b2240 !important; -webkit-print-color-adjust: exact; }
+}
+</style>
+</head>
+<body>
+
+<div class="banner">
+  <h1>📜 1996 Batch Scholarship Rubric</h1>
+  <p>Auto-generated from batch poll · 1996-batch GNDEC Alumni</p>
+</div>
+<div class="kesari-line"></div>
+
+<div class="wrap">
+
+  <div class="toolbar">
+    <span class="live">LIVE · reads latest poll data</span>
+    <span class="spacer"></span>
+    <button class="secondary" id="refreshBtn" type="button">🔄 Refresh</button>
+    <button id="printBtn" type="button" onclick="window.print()">🖨 Print / Save PDF</button>
+  </div>
+
+  <div id="loadingState">
+    <div class="spinner"></div>
+    <div>Generating rubric from poll results…</div>
+  </div>
+
+  <div id="rubricContent" style="display:none;"></div>
+
+</div>
+
+<script>
+const QUESTIONS = [
+  // SECTION 1: NEED vs MERIT
+  { sec:1, id:"q1_need_vs_merit", title:"Need vs Merit (when tied)",
+    rules:{ A:"When need and merit conflict — NEED takes precedence",
+            B:"When need and merit conflict — MERIT takes precedence",
+            C:"Equal weight to need and merit" }},
+  { sec:1, id:"q2_low_marks_low_income", title:"Lower marks but much poorer family",
+    rules:{ A:"A poorer family with lower marks is preferred over middle-class with higher marks",
+            B:"Higher marks preferred even if family is middle-class",
+            C:"Award both when budget allows" }},
+  { sec:1, id:"q3_above_threshold_no_assets", title:"Just above income cutoff, no assets",
+    rules:{ A:"Asset-poor families just above the income threshold (~₹60K/month) qualify if no house/land/vehicles",
+            B:"Income threshold is strict — assets don't override",
+            C:"Allow only after physical asset verification" }},
+  { sec:1, id:"q4_tiebreaker", title:"Tie-breaker on equal scores",
+    rules:{ A:"Tie-breaker: LOWER family income wins",
+            B:"Tie-breaker: orphan / single-parent wins",
+            C:"Tie-breaker: award both if budget allows" }},
+
+  // SECTION 2: IDENTITY & BACKGROUND
+  { sec:2, id:"q5_son_or_daughter", title:"Brother vs sister from same family",
+    rules:{ A:"Sister gets priority (girl-child preference)",
+            B:"Higher marks decides — gender neutral",
+            C:"Personal circumstances (illness, dependents) decide" }},
+  { sec:2, id:"q6_punjab_bonus", title:"🪷 Punjab domicile bonus",
+    rules:{ A:"No Punjab preference — all India students equal",
+            B:"+20% bonus to Punjab-domicile students' final score",
+            C:"Punjab-only — non-Punjab students not eligible" }},
+  { sec:2, id:"q7_rural_village", title:"Small village student",
+    rules:{ A:"Big bonus for village students (village <5K population)",
+            B:"Small recognition for rural students",
+            C:"Geography is not a factor" }},
+  { sec:2, id:"q8_first_gen", title:"First-generation college student",
+    rules:{ A:"Big bonus for first-generation college students",
+            B:"Small recognition",
+            C:"Not relevant to selection" }},
+
+  // SECTION 3: HARDSHIP
+  { sec:3, id:"q9_orphan_policy", title:"Orphan policy (both parents deceased)",
+    rules:{ A:"Orphans auto-qualify for scholarship",
+            B:"Big bonus for orphans, standard selection process",
+            C:"Standard process — judged like everyone else" }},
+  { sec:3, id:"q10_widow_mother", title:"Widow mother (sole earner)",
+    rules:{ A:"Big bonus for widow-mother households",
+            B:"Small recognition",
+            C:"No bonus — assess by income alone" }},
+  { sec:3, id:"q11_disability_policy", title:"Disability / chronic illness",
+    rules:{ A:"Auto-qualify or major bonus for certified disability",
+            B:"Small bonus",
+            C:"Not a separate factor" }},
+
+  // SECTION 4: EFFORT, CHARACTER & ACADEMICS
+  { sec:4, id:"q12_working_student", title:"Working student vs non-working",
+    rules:{ A:"Working students prioritized over non-working (despite lower marks)",
+            B:"Recognize working, but marks weigh more",
+            C:"Marks come first — working not a factor" }},
+  { sec:4, id:"q13_backlog_policy", title:"Backlog / reappear policy",
+    rules:{ A:"Any backlog = automatic disqualification",
+            B:"Minor deduction for backlogs (case-by-case)",
+            C:"Backlogs ignored if rest is strong" }},
+  { sec:4, id:"q14_achievement_vs_marks", title:"National champion vs top scorer",
+    rules:{ A:"Special achievements outweigh raw marks",
+            B:"Academic marks are the primary measure",
+            C:"Family need beats both — income decides" }},
+  { sec:4, id:"q15_declining_marks", title:"Marks dropped due to family crisis",
+    rules:{ A:"Support struggling students — that's our purpose",
+            B:"Support but with warning to improve next semester",
+            C:"Need stable performers — decline" }},
+
+  // SECTION 5: POLICY & AWARDS
+  { sec:5, id:"q16_previous_beneficiary", title:"Previous beneficiary applies again",
+    rules:{ A:"Priority — continuity matters, finish what we started",
+            B:"Standard process — evaluate fresh each year",
+            C:"Disqualify — give new students the chance" }},
+  { sec:5, id:"q17_other_aid", title:"Student already gets ₹5K Govt scholarship",
+    rules:{ A:"No penalty — they may still need more",
+            B:"Yes but deduct ₹5K from our award",
+            C:"Disqualify — leave room for fresh applicants" }},
+  { sec:5, id:"q18_budget_split", title:"₹3L budget split",
+    rules:{ A:"10 × ₹30K — focus on most deserving, larger help",
+            B:"20 × ₹15K — balanced reach",
+            C:"30 × ₹10K — help as many as possible" }},
+
+  // SECTION 6: FAIRNESS TO STUDENTS
+  { sec:6, id:"q19_emergency_support", title:"Mid-year emergency support",
+    rules:{ A:"Keep emergency reserve in annual budget for mid-year crises",
+            B:"Only if year-end budget allows",
+            C:"No emergency support — one fixed award per year" }},
+  { sec:6, id:"q20_drug_crisis", title:"🪷 Punjab drug-crisis affected family",
+    rules:{ A:"Major auto-bonus — Punjab's silent emergency, this is our cause",
+            B:"Treat as standard family hardship",
+            C:"Not a separate factor" }},
+  { sec:6, id:"q21_sibling_rule", title:"Two siblings both qualify",
+    rules:{ A:"Both siblings get full awards",
+            B:"Only one — help two different families instead",
+            C:"Both — second sibling at reduced amount" }},
+  { sec:6, id:"q22_disowned_student", title:"Disowned / estranged student",
+    rules:{ A:"Treat as orphan-equivalent — auto-priority",
+            B:"Standard process, recognize the hardship",
+            C:"Decline — verification impossible" }},
+  { sec:6, id:"q23_mental_health", title:"Mental health disclosure",
+    rules:{ A:"Additional hardship factor (bonus points)",
+            B:"Note sympathetically but don't score (privacy)",
+            C:"Not a scholarship factor" }},
+  { sec:6, id:"q24_digital_divide", title:"Digital divide (no internet/phone)",
+    rules:{ A:"Accept WhatsApp + paper forms — extend access",
+            B:"Provide help at GNDEC during enrollment week",
+            C:"Online-only — they should find a way" }},
+
+  // SECTION 7: PROGRAM SOUL & LEGACY
+  { sec:7, id:"q25_pay_it_forward", title:"Pay-it-forward pledge",
+    rules:{ A:"Formal written pledge — recipients commit to donate when earning",
+            B:"Strongly encouraged but no formal obligation",
+            C:"No expectations — give freely, no strings" }},
+  { sec:7, id:"q26_agrarian_crisis", title:"🌾 Punjab agrarian crisis affected family",
+    rules:{ A:"Major auto-bonus — Punjab's silent emergency",
+            B:"Treat as standard family hardship",
+            C:"Not a separate factor" }},
+  { sec:7, id:"q27_border_district", title:"🪷 Punjab border district student",
+    rules:{ A:"Major bonus for border-district students (Tarn Taran, Ferozepur, Pathankot, etc.)",
+            B:"Small recognition (rural classification covers part)",
+            C:"Not a separate factor" }},
+  { sec:7, id:"q28_seva_commitment", title:"🙏 Seva / mentorship from recipients",
+    rules:{ A:"Formal requirement (min 50 hrs/year community seva or mentorship)",
+            B:"Encouraged but not required",
+            C:"No obligations" }}
+];
+
+const SECTION_TITLES = {
+  1: "1 · NEED vs MERIT",
+  2: "2 · IDENTITY & BACKGROUND",
+  3: "3 · HARDSHIP",
+  4: "4 · EFFORT, CHARACTER & ACADEMICS",
+  5: "5 · POLICY & AWARDS",
+  6: "6 · FAIRNESS TO STUDENTS",
+  7: "7 · PROGRAM SOUL & LEGACY"
+};
+
+async function loadResults() {
+  document.getElementById('loadingState').style.display = 'block';
+  document.getElementById('rubricContent').style.display = 'none';
+  try {
+    const r = await fetch('/api/results?cb=' + Date.now(), { cache: 'no-store' });
+    const d = await r.json();
+    render(d.counters);
+  } catch (e) {
+    document.getElementById('loadingState').innerHTML = '⚠️ Failed to load poll results. Retry in a moment.';
+  }
+}
+
+function render(counters) {
+  document.getElementById('loadingState').style.display = 'none';
+  const out = document.getElementById('rubricContent');
+  out.style.display = 'block';
+
+  const total = counters.total_submissions || 0;
+  let strongCount = 0, medCount = 0, weakCount = 0;
+
+  QUESTIONS.forEach(q => {
+    const counts = { A: counters[q.id + '__A'] || 0, B: counters[q.id + '__B'] || 0, C: counters[q.id + '__C'] || 0 };
+    const sumQ = counts.A + counts.B + counts.C;
+    let winner = null, max = -1;
+    for (const k of ['A','B','C']) { if (counts[k] > max) { winner = k; max = counts[k]; } }
+    const pct = sumQ > 0 ? Math.round((max / sumQ) * 100) : 0;
+    q.winner = winner;
+    q.pct = pct;
+    q.totalQ = sumQ;
+    if (sumQ === 0) q.strength = 'none';
+    else if (pct >= 60) { q.strength = 'strong'; strongCount++; }
+    else if (pct >= 50) { q.strength = 'med'; medCount++; }
+    else { q.strength = 'weak'; weakCount++; }
+  });
+
+  // Hero stats
+  let html = `
+    <div class="hero">
+      <div class="lbl">Total Batch Votes</div>
+      <div class="big">${total}</div>
+      <div class="lbl">Rubric generated ${new Date().toLocaleString()}</div>
+    </div>
+    <div class="summary-banner">
+      <h3>📊 Consensus Summary</h3>
+      <p style="margin:0;font-size:13px;opacity:0.95;">Of ${QUESTIONS.length} questions, here's how the batch agreed:</p>
+      <div class="grid">
+        <div class="stat"><div class="v">${strongCount}</div><div class="l">🟢 STRONG (≥60%)<br>Lock in</div></div>
+        <div class="stat"><div class="v">${medCount}</div><div class="l">🟡 MEDIUM (50-59%)<br>Defensible</div></div>
+        <div class="stat"><div class="v">${weakCount}</div><div class="l">🔴 CONTESTED (&lt;50%)<br>Committee discuss</div></div>
+      </div>
+    </div>
+    <div class="legend">
+      <b>Legend:</b>
+      <span class="check" style="background:var(--good);"></span> Strong consensus (lock in)
+      <span class="check" style="background:var(--warn);"></span> Medium (proposed)
+      <span class="check" style="background:var(--bad);"></span> Contested (debate needed)
+    </div>
+  `;
+
+  // By section
+  const bySec = {};
+  QUESTIONS.forEach(q => { if (!bySec[q.sec]) bySec[q.sec] = []; bySec[q.sec].push(q); });
+
+  Object.keys(bySec).sort().forEach(secNum => {
+    html += `<div class="section">
+      <div class="section-head"><div class="num">${secNum}</div><div>${SECTION_TITLES[secNum].slice(4)}</div></div>
+      <div class="section-body">`;
+    bySec[secNum].forEach(q => {
+      const checkClass = q.strength === 'none' ? 'weak' : q.strength;
+      const checkSym = q.strength === 'strong' ? '✓' : (q.strength === 'med' ? '~' : '?');
+      const rule = q.winner ? q.rules[q.winner] : '(no votes yet)';
+      html += `<div class="rule">
+        <p class="rule-q">${q.title}</p>
+        <p class="rule-text"><span class="check ${checkClass}">${checkSym}</span><span>${rule}</span></p>
+        <div class="rule-meta">Option ${q.winner || '—'} · <span class="pct">${q.pct}%</span> of ${q.totalQ} votes · ${q.strength.toUpperCase()}</div>
+      </div>`;
+    });
+    html += `</div></div>`;
+  });
+
+  // Footer
+  html += `
+    <div class="footer-note">
+      <b>📝 How to use this rubric:</b><br>
+      1. The <span style="color:var(--good)">🟢 strong</span> rules can be locked into the formal rubric immediately.<br>
+      2. The <span style="color:var(--warn)">🟡 medium</span> rules are proposed defaults — committee can confirm.<br>
+      3. The <span style="color:var(--bad)">🔴 contested</span> rules need committee discussion before adopting.<br>
+      <br>
+      <b>Save this page:</b> Click "🖨 Print / Save PDF" to export the rubric for committee approval.<br>
+      <br>
+      <b>This rubric was generated from</b> ${total} batch member vote${total === 1 ? '' : 's'} on the 1996 Batch Scholarship Poll.
+    </div>
+  `;
+
+  out.innerHTML = html;
+}
+
+loadResults();
+document.getElementById('refreshBtn').addEventListener('click', loadResults);
+</script>
+
+</body>
+</html>

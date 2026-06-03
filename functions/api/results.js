@@ -22,7 +22,13 @@ const QUESTIONS = [
   { id: "q15_declining_marks",         opts: ["A","B","C"] },
   { id: "q16_previous_beneficiary",    opts: ["A","B","C"] },
   { id: "q17_other_aid",               opts: ["A","B","C"] },
-  { id: "q18_budget_split",            opts: ["A","B","C"] }
+  { id: "q18_budget_split",            opts: ["A","B","C"] },
+  { id: "q19_emergency_support",       opts: ["A","B","C"] },
+  { id: "q20_drug_crisis",             opts: ["A","B","C"] },
+  { id: "q21_sibling_rule",            opts: ["A","B","C"] },
+  { id: "q22_disowned_student",        opts: ["A","B","C"] },
+  { id: "q23_mental_health",           opts: ["A","B","C"] },
+  { id: "q24_digital_divide",          opts: ["A","B","C"] }
 ];
 
 const BATCH_SIZE = 5;

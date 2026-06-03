@@ -447,29 +447,46 @@ async function loadAllResults(forceFresh = false) {
     const loadingEl = document.getElementById('loadingState');
     const resultsEl = document.getElementById('resultsContainer');
     const isInitialLoad = resultsEl.style.display === 'none';
+    let progressInterval = null;
+
     if (isInitialLoad && loadingEl) {
       loadingEl.style.display = 'block';
-      loadingEl.querySelector('div:last-child').textContent = 'Fetching live results…';
+      // Animated reassuring loading message
+      const messages = [
+        '📊 Fetching live results from the edge…',
+        '⚡ First-time load can take 20-30s — pulling 85 counters',
+        '🔄 Crunching the data…',
+        '🎯 Almost there — assembling your view',
+        '✨ Final touches, hang on…'
+      ];
+      let mi = 0;
+      const lastDiv = loadingEl.querySelector('div:last-child');
+      lastDiv.textContent = messages[0];
+      progressInterval = setInterval(() => {
+        mi = (mi + 1) % messages.length;
+        lastDiv.textContent = messages[mi];
+      }, 4000);
     }
 
-    const url = forceFresh ? '/api/results?nocache=' + Date.now() : '/api/results';
-    const resp = await fetch(url, { cache: 'no-store' });
-    if (!resp.ok) {
-      console.error('Failed to load:', resp.status);
-      return;
+    try {
+      const url = forceFresh ? '/api/results?nocache=' + Date.now() : '/api/results';
+      const resp = await fetch(url, { cache: 'no-store' });
+      if (!resp.ok) { console.error('Failed:', resp.status); return; }
+      const payload = await resp.json();
+      const counters = payload.counters || {};
+
+      const data = { total: counters.total_submissions || 0, byQuestion: {} };
+      SECTIONS.forEach(sec => sec.questions.forEach(q => {
+        data.byQuestion[q.id] = {};
+        q.opts.forEach(opt => {
+          data.byQuestion[q.id][opt.k] = counters[`${q.id}__${opt.k}`] || 0;
+        });
+      }));
+
+      renderResults(data);
+    } finally {
+      if (progressInterval) clearInterval(progressInterval);
     }
-    const payload = await resp.json();
-    const counters = payload.counters || {};
-
-    const data = { total: counters.total_submissions || 0, byQuestion: {} };
-    SECTIONS.forEach(sec => sec.questions.forEach(q => {
-      data.byQuestion[q.id] = {};
-      q.opts.forEach(opt => {
-        data.byQuestion[q.id][opt.k] = counters[`${q.id}__${opt.k}`] || 0;
-      });
-    }));
-
-    renderResults(data);
   } finally {
     fetchInProgress = false;
   }

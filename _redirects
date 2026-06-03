@@ -1,0 +1,15 @@
+# Block direct access to any other path - redirect to poll
+/admin* /poll 302
+/apply* /poll 302
+/donor_management* /poll 302
+/donor* /poll 302
+/faq* /poll 302
+/program* /poll 302
+/recipients_archive* /poll 302
+/recipients* /poll 302
+/review* /poll 302
+/scholarship_application* /poll 302
+/scholarship_committee_dashboard* /poll 302
+/scholarship* /poll 302
+/status* /poll 302
+/index* /poll 302

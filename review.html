@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>🧪 Internal Review · Alumni Scholarship Portal</title>
+<style>
+  :root {
+    --indigo: #1e3a5f; --indigo-light: #3b5b7f;
+    --teal: #a16207; --rose: #9f1239;
+    --emerald: #15803d; --amber: #ea580c; --violet: #6d28d9;
+    --bg: #fefcf6; --bg-soft: #f7f3e9; --card: #ffffff;
+    --text: #0f172a; --text-soft: #334155; --muted: #64748b;
+    --border: #e2e8f0; --border-strong: #cbd5e1;
+    --good: #16a34a; --good-bg: #dcfce7;
+    --warn: #c2410c; --warn-bg: #ffedd5;
+    --shadow-sm: 0 1px 2px rgba(15,23,42,0.06), 0 1px 3px rgba(15,23,42,0.05);
+    --shadow-md: 0 4px 16px rgba(15,23,42,0.08);
+    --shadow-lg: 0 16px 48px rgba(15,23,42,0.14);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+  /* Preview banner */
+  .preview-bar {
+    background: linear-gradient(135deg, var(--amber), #fb923c);
+    color: #422006;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 13px; font-weight: 700;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 12px rgba(234,88,12,0.30);
+  }
+  .preview-bar a { color: #422006; text-decoration: underline; font-weight: 800; }
+
+  /* Hero */
+  .hero {
+    padding: 60px 24px 50px;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(234,88,12,0.20), transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(30,58,95,0.18), transparent 50%),
+      linear-gradient(135deg, #0a0f1f 0%, #1e1b4b 50%, #0a0f1f 100%);
+    color: #fff;
+    text-align: center;
+  }
+  .hero-inner { max-width: 760px; margin: 0 auto; position: relative; z-index: 1; }
+  .badge {
+    display: inline-block; padding: 5px 14px;
+    background: rgba(234,88,12,0.20); color: #fed7aa;
+    border-radius: 99px; font-size: 12px; font-weight: 800;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: 18px;
+    border: 1px solid rgba(234,88,12,0.30);
+  }
+  .hero h1 {
+    font-size: clamp(30px, 5vw, 44px); font-weight: 800;
+    letter-spacing: -0.02em; line-height: 1.1; margin: 0 0 14px;
+    background: linear-gradient(135deg, #fff, #fb923c);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero p { font-size: 15px; opacity: 0.92; max-width: 580px; margin: 0 auto; }
+  .hero-stats {
+    display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+    margin-top: 32px;
+  }
+  .hero-stat {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 12px; padding: 14px 22px;
+    text-align: center;
+  }
+  .hero-stat b { display: block; font-size: 22px; color: #fed7aa; }
+  .hero-stat small { font-size: 11px; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.06em; }
+
+  /* Content */
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 50px 24px 80px; }
+
+  .section-title {
+    font-size: 22px; margin: 0 0 6px;
+    letter-spacing: -0.01em; font-weight: 800;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-subtitle {
+    font-size: 14px; color: var(--muted);
+    margin: 0 0 22px;
+  }
+  .section-spacer { height: 50px; }
+
+  /* Tab pills */
+  .role-tabs {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    margin-bottom: 32px;
+    padding: 6px; background: var(--bg-soft);
+    border-radius: 12px; border: 1px solid var(--border);
+    max-width: fit-content;
+  }
+  .role-tab {
+    padding: 8px 16px; border: none;
+    background: transparent; color: var(--muted);
+    border-radius: 8px;
+    font-size: 13.5px; font-weight: 700; cursor: pointer;
+    transition: all 0.15s;
+  }
+  .role-tab.active { background: var(--card); color: var(--indigo); box-shadow: var(--shadow-sm); }
+
+  /* Page cards */
+  .pages-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  @media (max-width: 720px) { .pages-grid { grid-template-columns: 1fr; } }
+  .page-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 22px;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.2s;
+    display: flex; gap: 14px;
+    position: relative; overflow: hidden;
+  }
+  .page-card:hover { border-color: var(--card-color, var(--indigo)); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .page-card.committee { --card-color: var(--teal); }
+  .page-card.donor { --card-color: var(--rose); }
+  .page-card.recipients { --card-color: var(--emerald); }
+  .page-card.admin { --card-color: #1e3a5f; }
+  .page-card.public { --card-color: var(--indigo); }
+  .page-card::before {
+    content: ""; position: absolute; top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--card-color, var(--indigo));
+  }
+  .page-icon {
+    width: 44px; height: 44px;
+    background: linear-gradient(135deg, var(--card-color, var(--indigo)), rgba(255,255,255,0.10));
+    color: #fff;
+    border-radius: 11px;
+    display: grid; place-items: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .page-content { flex: 1; min-width: 0; }
+  .page-name {
+    font-size: 16px; font-weight: 700;
+    margin: 0 0 4px;
+    display: flex; align-items: center; gap: 8px;
+    flex-wrap: wrap;
+  }
+  .page-path {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 11px; color: var(--muted);
+    background: var(--bg-soft); padding: 2px 7px;
+    border-radius: 4px;
+  }
+  .page-desc {
+    font-size: 13.5px; color: var(--text-soft);
+    margin: 6px 0 12px; line-height: 1.55;
+  }
+  .page-features {
+    list-style: none; padding: 0; margin: 0 0 14px;
+    font-size: 12px; color: var(--muted);
+  }
+  .page-features li { padding: 2px 0; }
+  .page-features li::before {
+    content: "✓ "; color: var(--good); font-weight: 700;
+  }
+  .page-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+  .page-btn {
+    padding: 8px 14px; border-radius: 8px;
+    text-decoration: none;
+    font-size: 12.5px; font-weight: 700;
+    display: inline-flex; align-items: center; gap: 4px;
+    transition: all 0.15s;
+  }
+  .page-btn.primary {
+    background: var(--card-color, var(--indigo));
+    color: #fff;
+  }
+  .page-btn.secondary {
+    background: var(--bg-soft); color: var(--text-soft);
+    border: 1px solid var(--border);
+  }
+  .page-btn.secondary:hover { background: var(--card); border-color: var(--card-color); color: var(--card-color); }
+
+  /* Admin credentials box */
+  .admin-creds {
+    background: linear-gradient(135deg, rgba(30,58,95,0.08), rgba(159,18,57,0.08));
+    border: 1.5px solid var(--indigo);
+    border-radius: 14px;
+    padding: 22px 26px;
+    margin: 22px 0;
+  }
+  .admin-creds h3 {
+    margin: 0 0 8px; font-size: 15px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .admin-creds p { margin: 0 0 14px; font-size: 13.5px; color: var(--text-soft); }
+  .cred-row {
+    display: flex; gap: 14px; align-items: center;
+    background: var(--card); padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    font-size: 13.5px;
+    flex-wrap: wrap;
+  }
+  .cred-row b { color: var(--text); min-width: 110px; }
+  .cred-row code {
+    font-family: ui-monospace, Menlo, monospace;
+    background: var(--bg-soft); padding: 4px 10px;
+    border-radius: 6px; color: var(--rose);
+    font-weight: 700; font-size: 13px;
+    border: 1px solid var(--border);
+  }
+
+  /* Test scenarios */
+  .scenarios {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  @media (max-width: 720px) { .scenarios { grid-template-columns: 1fr; } }
+  .scenario {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 18px 20px;
+    position: relative;
+  }
+  .scenario-num {
+    position: absolute; top: -10px; left: 16px;
+    width: 26px; height: 26px;
+    background: var(--indigo); color: #fff;
+    border-radius: 50%; display: grid; place-items: center;
+    font-size: 12px; font-weight: 800;
+    box-shadow: var(--shadow-sm);
+  }
+  .scenario h4 { margin: 0 0 8px; font-size: 14.5px; padding-top: 4px; }
+  .scenario p { margin: 0 0 12px; font-size: 13px; color: var(--text-soft); line-height: 1.6; }
+  .scenario ol { margin: 0; padding-left: 22px; font-size: 12.5px; color: var(--text-soft); line-height: 1.7; }
+  .scenario .try-link {
+    display: inline-block; margin-top: 10px;
+    padding: 5px 12px; background: var(--indigo); color: #fff;
+    border-radius: 6px; font-size: 12px; font-weight: 700;
+    text-decoration: none;
+  }
+
+  /* Feedback */
+  .feedback-card {
+    background: linear-gradient(135deg, var(--indigo), var(--rose));
+    color: #fff;
+    border-radius: 18px; padding: 32px;
+    text-align: center;
+    margin-top: 40px;
+    box-shadow: var(--shadow-md);
+  }
+  .feedback-card h3 { margin: 0 0 8px; font-size: 22px; }
+  .feedback-card p { margin: 0 0 22px; opacity: 0.94; font-size: 14.5px; }
+  .feedback-btn {
+    display: inline-block; padding: 12px 26px;
+    background: rgba(255,255,255,0.18);
+    color: #fff; border: 1px solid rgba(255,255,255,0.30);
+    border-radius: 10px;
+    font-size: 14px; font-weight: 700;
+    text-decoration: none;
+    margin: 0 4px;
+  }
+  .feedback-btn:hover { background: rgba(255,255,255,0.28); }
+
+  /* Note box */
+  .note {
+    background: var(--warn-bg);
+    border: 1px solid var(--warn);
+    border-left: 4px solid var(--warn);
+    padding: 14px 18px;
+    border-radius: 10px;
+    margin: 24px 0;
+    font-size: 13px; color: var(--text-soft);
+  }
+  .note b { color: var(--warn); }
+
+  /* Footer */
+  footer { padding: 30px 24px; text-align: center; font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--border); margin-top: 40px; }
+
+  a { color: var(--indigo); }
+  button, a { -webkit-tap-highlight-color: transparent; }
+</style>
+</head>
+<body>
+
+<div class="preview-bar">
+  🧪 <b>INTERNAL REVIEW</b> · Share this URL only with reviewers — site is not yet announced publicly.
+  Main public URL: <a href="https://alumni-scholarship-portal.surge.sh/">alumni-scholarship-portal.surge.sh</a>
+</div>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="badge">🧭 Reviewer's Tour</span>
+    <h1>Tour the Alumni Scholarship Portal</h1>
+    <p>A complete walkthrough of every page in the portal. Click any tile below to open it in a new tab. Admin credentials are listed in the back-office section.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><b>10</b><small>Pages built</small></div>
+      <div class="hero-stat"><b>7</b><small>Public</small></div>
+      <div class="hero-stat"><b>3</b><small>Admin</small></div>
+      <div class="hero-stat"><b>4</b><small>Modules</small></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <div class="note">
+    <b>👋 Hi reviewer.</b> Below is every page in the portal, organized by who it's built for. Click any "Open page →" button to view it in a new tab. The admin section requires a password — see the credentials box below it. Please send any feedback to <a href="mailto:gulvir75@gmail.com?subject=Portal%20Review%20Feedback">gulvir75@gmail.com</a>.
+  </div>
+
+  <!-- PUBLIC PAGES -->
+  <h2 class="section-title">🌍 Public Pages <span style="font-size:12px; font-weight:600; color:var(--muted);">— what students, donors, and the world see</span></h2>
+  <p class="section-subtitle">Light, welcoming theme with consistent top navigation. These pages tell the story, explain the program, and guide students through applying.</p>
+
+  <div class="pages-grid">
+
+    <div class="page-card public">
+      <div class="page-icon">🏠</div>
+      <div class="page-content">
+        <h3 class="page-name">Home / Landing <span class="page-path">/</span></h3>
+        <p class="page-desc">The front door — story-driven hero with animated counters, live BI dashboard pulling cross-module data, the origin story ("It started over a WhatsApp group"), how it works, 4-module gateway, featured continuity recipients, honor wall of top donors.</p>
+        <ul class="page-features">
+          <li>Live impact dashboard with 4 charts (real numbers from data)</li>
+          <li>Animated count-up stats on load</li>
+          <li>Dark/light theme toggle (persists)</li>
+        </ul>
+        <div class="page-actions">
+          <a class="page-btn primary" href="https://alumni-scholarship-portal.surge.sh/" target="_blank">Open page →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-card public">
+      <div class="page-icon">📋</div>
+      <div class="page-content">
+        <h3 class="page-name">Program Details <span class="page-path">/program.html</span></h3>
+        <p class="page-desc">Transparent breakdown of who qualifies, scholarship amounts by need tier, the 4-step process timeline from application to award, and what's covered vs not.</p>
+        <ul class="page-features">
+          <li>Eligibility in 4 visual cards</li>
+          <li>Amount table by need tier</li>
+          <li>Process timeline with color-coded steps</li>
+        </ul>
+        <div class="page-actions">
+          <a class="page-btn primary" href="https://alumni-scholarship-portal.surge.sh/program.html" target="_blank">Open page →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-card public">
+      <div class="page-icon">📝</div>
+      <div class="page-content">
+        <h3 class="page-name">Apply Hub <span class="page-path">/apply.html</span></h3>
+        <p class="page-desc">Pre-application landing with eligibility self-check (5 interactive Y/N questions that compute eligibility), 4-step journey timeline, document checklist, key dates from past rounds, and the big "Start Application" CTA.</p>
+        <ul class="page-features">
+          <li>Interactive eligibility self-check</li>
+          <li>Pre-application document checklist with checkboxes</li>
+          <li>Past 3 rounds as date cards</li>
+        </ul>
+        <div class="page-actions">
+          <a class="page-btn primary" href="https://alumni-scholarship-portal.surge.sh/apply.html" target="_blank">Open page →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-card public">
+      <div class="page-icon">🎓</div>
+      <div class="page-content">
+        <h3 class="page-name">Student Application Form <span class="page-path">/scholarship_application.html</span></h3>
+        <p class="page-desc">The actual application — 7-step wizard with progress bar, animated transitions, side-panel completion status, photo upload, multi-semester subject grid with bulk paste from Excel, achievements quick-pick chips. Auto-saves every keystroke.</p>
+        <ul class="page-features">
+          <li>7 steps · ~10 minutes</li>
+          <li>Auto-save to browser (resumes on next visit)</li>
+          <li>Multi-semester subject-wise grade entry</li>
+          <li>Achievements quick-pick (College President, National Champion, etc.)</li>
+          <li>Submit auto-hands-off to committee dashboard (same device)</li>
+        </ul>
+        <div class="page-actions">
+          <a class="page-btn primary" href="https://alumni-scholarship-portal.surge.sh/scholarship_application.html" target="_blank">Open page →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-card recipients">
+      <div class="page-icon">🏆</div>
+      <div class="page-content">
+        <h3 class="page-name">Recipients Archive <span class="page-path">/recipients_archive.html</span></h3>
+        <p class="page-desc">Public celebration of every student supported. Currently shows <b>131 awards across 98 unique students</b> from 3 GNDEC scholarship rounds. View by round, gallery cards, or table. Smart URN-based multi-round detection.</p>
+        <ul class="page-features">
+          <li>Real data: Mar 2024 (65), Jan 2025 (25), Nov 2025 (41)</li>
+          <li>5 students appear in all 3 rounds (flagged with badge)</li>
+          <li>Filter by round, branch, program; sort multiple ways</li>
+          <li>Admin toggle (top right) shows upload/edit tools</li>
+        </ul>
+        <div class="page-actions">
+          <a class="page-btn primary" href="https://alumni-scholarship-portal.surge.sh/recipients_archive.html" target="_blank">Open page →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-card public">
+      <div class="page-icon">❓</div>
+      <div class="page-content">
+        <h3 class="page-name">FAQ <span class="page-path">/faq.html</span></h3>
+        <p class="page-desc">25+ questions across 6 categories (General, Eligibility, Application, Selection, After Selection, For Donors). Accordion style with category filter pills. Includes contact callout.</p>
+        <ul class="page-features">
+          <li>Click any category pill to filter</li>
+          <li>Smooth accordion +/− animations</li>
+        </ul>
+        <div class="page-actions">
+          <a class="page-btn primary" href="https://alumni-scholarship-portal.surge.sh/faq.html" target="_blank">Open page →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-card public">
+      <div class="page-icon">🔍</div>
+      <div class="page-content">
+        <h3 class="page-name">Application Status Tracker <span class="page-path">/status.html</span></h3>
+        <p class="page-desc">Students can check past awards by URN or name. Pulls from the locally-loaded recipients data. Shows full award history per student.</p>
+        <ul class="page-features">
+          <li>Try: search "Manveer Singh" or URN "2302453"</li>
+          <li>Shows all 3 rounds for multi-round students</li>
+        </ul>
+        <div class="page-actions">
+          <a class="page-btn primary" href="https://alumni-scholarship-portal.surge.sh/status.html" target="_blank">Open page →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-card donor">
+      <div class="page-icon">💝</div>
+      <div class="page-content">
+        <h3 class="page-name">Donor Management <span class="page-path">/donor_management.html</span></h3>
+        <p class="page-desc">Donor recognition + management. Currently loaded with <b>60 donors, ₹37.5L raised</b> across 2024-2026. Auto-tiers by giving (Founder/Patron/Friend/Supporter), public Honor Wall view, smart CSV import.</p>
+        <ul class="page-features">
+          <li>Real data: 2024, 2025, 2026 contributions</li>
+          <li>Three views: Cards, Table, Honor Wall</li>
+          <li>Quick-add: "Anjali Patel, anjali@email.com, 50000, Mumbai" auto-parsed</li>
+          <li>Smart deduplication by email</li>
+        </ul>
+        <div class="page-actions">
+          <a class="page-btn primary" href="https://alumni-scholarship-portal.surge.sh/donor_management.html" target="_blank">Open page →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-spacer"></div>
+
+  <!-- ADMIN PAGES -->
+  <h2 class="section-title">🔒 Admin Pages <span style="font-size:12px; font-weight:600; color:var(--muted);">— for the selection committee</span></h2>
+  <p class="section-subtitle">Dark theme, dense layout. These are behind a password gate at the Admin Hub. The other admin pages are accessible directly via URL but the Admin Hub is the proper entry point.</p>
+
+  <div class="admin-creds">
+    <h3>🔓 Admin Hub — open access (review mode)</h3>
+    <p>For this review period, the admin gate is <b>open</b> — no password needed. Just open the link below. Before going wide publicly, the password gate will be re-enabled (one line of code).</p>
+    <div class="cred-row">
+      <b>🌐 URL:</b>
+      <code>alumni-scholarship-portal.surge.sh/admin.html</code>
+      <a class="page-btn primary" style="margin-left:auto;" href="https://alumni-scholarship-portal.surge.sh/admin.html" target="_blank">Open Admin Hub →</a>
+    </div>
+  </div>
+
+  <div class="pages-grid">
+
+    <div class="page-card admin">
+      <div class="page-icon">🔒</div>
+      <div class="page-content">
+        <h3 class="page-name">Admin Hub <span class="page-path">/admin.html</span></h3>
+        <p class="page-desc">The back-office home. Login-gated. Sidebar navigation, BI dashboard with 8 KPIs cross-pulled from all modules, charts (Raised vs Disbursed, Tier Mix), tools grid, round-by-round report, recent activity feed, quick actions.</p>
+        <ul class="page-features">
+          <li>Cross-module BI: ₹37.5L raised, ₹19.32L disbursed, ₹18.2L reserve</li>
+          <li>Tools grid links to all 6 admin functions</li>
+          <li>Activity feed across donations + awards</li>
+          <li>One-click "Backup all data" exports complete JSON</li>
+        </ul>
+        <div class="page-actions">
+          <a class="page-btn primary" href="https://alumni-scholarship-portal.surge.sh/admin.html" target="_blank">Open Admin Hub →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-card committee">
+      <div class="page-icon">⚖️</div>
+      <div class="page-content">
+        <h3 class="page-name">Committee Dashboard <span class="page-path">/scholarship_committee_dashboard.html</span></h3>
+        <p class="page-desc">Application review &amp; ranking. Drop applicant JSON files (from the student form) and the system applies the 10-point need-heavy rubric, ranks with tie-breakers, lets you shortlist/reject.</p>
+        <ul class="page-features">
+          <li>Click "Load demo applicants" to see 8 sample profiles</li>
+          <li>Auto-shortlist top N · Export shortlist CSV</li>
+          <li>Click any row → detail modal with radar chart + score narrative</li>
+        </ul>
+        <div class="page-actions">
+          <a class="page-btn primary" href="https://alumni-scholarship-portal.surge.sh/scholarship_committee_dashboard.html" target="_blank">Open page →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-spacer"></div>
+
+  <!-- TEST SCENARIOS -->
+  <h2 class="section-title">🧪 Suggested Test Scenarios</h2>
+  <p class="section-subtitle">Specific things to try across the portal. Each takes 1-2 minutes.</p>
+
+  <div class="scenarios">
+    <div class="scenario">
+      <div class="scenario-num">1</div>
+      <h4>The Student Journey</h4>
+      <p>Walk through what an applicant experiences end-to-end.</p>
+      <ol>
+        <li>Open <b>Apply Hub</b>, do the eligibility self-check</li>
+        <li>Click "Start Application", fill at least 1-2 steps</li>
+        <li>Try Step 3 (academics) — add a semester, type marks</li>
+        <li>Notice the auto-save indicator</li>
+      </ol>
+      <a class="try-link" href="https://alumni-scholarship-portal.surge.sh/apply.html" target="_blank">Start journey →</a>
+    </div>
+
+    <div class="scenario">
+      <div class="scenario-num">2</div>
+      <h4>The Status Tracker</h4>
+      <p>Verify a past recipient's award history.</p>
+      <ol>
+        <li>Open <b>Status Tracker</b></li>
+        <li>Search URN: <code style="background:var(--bg-soft);padding:2px 6px;border-radius:4px;font-family:Menlo,monospace;font-size:11px;">2302473</code> (Ankur)</li>
+        <li>Should show 3 awards: Mar 2024, Jan 2025, Nov 2025</li>
+      </ol>
+      <a class="try-link" href="https://alumni-scholarship-portal.surge.sh/status.html" target="_blank">Test it →</a>
+    </div>
+
+    <div class="scenario">
+      <div class="scenario-num">3</div>
+      <h4>Recipients Archive — Public View</h4>
+      <p>Browse the celebration of past recipients.</p>
+      <ol>
+        <li>Open <b>Recipients</b></li>
+        <li>Default view: "By round" — see all 3 rounds grouped</li>
+        <li>Try filter: branch = "CSE"</li>
+        <li>Click any student name → detail modal</li>
+      </ol>
+      <a class="try-link" href="https://alumni-scholarship-portal.surge.sh/recipients_archive.html" target="_blank">Browse →</a>
+    </div>
+
+    <div class="scenario">
+      <div class="scenario-num">4</div>
+      <h4>Admin Hub (open during review)</h4>
+      <p>Experience the back-office.</p>
+      <ol>
+        <li>Open <b>Admin Hub</b> (no password needed for now)</li>
+        <li>Notice 8 KPIs, 2 charts, tools grid</li>
+        <li>Try "Backup all data" quick action</li>
+        <li>Click "View public site" to switch back</li>
+      </ol>
+      <a class="try-link" href="https://alumni-scholarship-portal.surge.sh/admin.html" target="_blank">Open Admin →</a>
+    </div>
+
+    <div class="scenario">
+      <div class="scenario-num">5</div>
+      <h4>Donor Honor Wall</h4>
+      <p>See the public-facing donor recognition.</p>
+      <ol>
+        <li>Open <b>Donors</b></li>
+        <li>Click the "🏛 Honor wall" view toggle</li>
+        <li>Notice grouping by tier (Founder, Patron, Friend, etc.)</li>
+        <li>Anonymous donors counted separately</li>
+      </ol>
+      <a class="try-link" href="https://alumni-scholarship-portal.surge.sh/donor_management.html" target="_blank">See it →</a>
+    </div>
+
+    <div class="scenario">
+      <div class="scenario-num">6</div>
+      <h4>Committee Review Flow</h4>
+      <p>Try the application-ranking dashboard.</p>
+      <ol>
+        <li>Open <b>Committee Dashboard</b></li>
+        <li>Click "Load demo applicants" (8 samples)</li>
+        <li>Click any row → see radar chart + score narrative</li>
+        <li>Mark a few as Shortlisted / Rejected</li>
+        <li>Export shortlist CSV</li>
+      </ol>
+      <a class="try-link" href="https://alumni-scholarship-portal.surge.sh/scholarship_committee_dashboard.html" target="_blank">Try review →</a>
+    </div>
+  </div>
+
+  <div class="section-spacer"></div>
+
+  <!-- WHAT TO LOOK AT -->
+  <h2 class="section-title">👀 Things Specifically Worth a Look</h2>
+  <p class="section-subtitle">Polish + intentional design choices worth noticing.</p>
+
+  <ul style="font-size:14px; color:var(--text-soft); line-height:1.9; padding-left:24px;">
+    <li><b>Mobile experience</b> — open any page on your phone; nav collapses to hamburger, hero stacks, all charts adapt</li>
+    <li><b>Dark mode toggle</b> in top-right of any public page (persists across pages and reloads)</li>
+    <li><b>Hover effects</b> — module cards lift, recipient cards reveal accent, donor tiles glow</li>
+    <li><b>Cross-module data flow</b> — the home page <b>impact dashboard</b> pulls from donor + recipient localStorage in real-time</li>
+    <li><b>Admin <i>vs</i> public</b> — notice the visual shift from light/welcoming to dark/operational when you cross the admin gate</li>
+    <li><b>The 5 "continuity recipients"</b> — students who received scholarships in all 3 rounds — highlighted on home + given a <code>+2</code> badge on recipients page</li>
+    <li><b>Story section on home</b> — "It started over a WhatsApp group" narrative with the 1996 visual</li>
+  </ul>
+
+  <!-- FEEDBACK -->
+  <div class="feedback-card">
+    <h3>💬 What did you think?</h3>
+    <p>Found something off, have an idea, or want a feature added? Reply to <b>Gulvir</b> with your feedback.</p>
+    <a class="feedback-btn" href="mailto:gulvir75@gmail.com?subject=Portal%20Review%20Feedback&body=Hi%20Gulvir%2C%0A%0AI%20reviewed%20the%20Alumni%20Scholarship%20Portal%20at%20alumni-scholarship-portal.surge.sh%20and%20here's%20my%20feedback%3A%0A%0A%5Byour%20notes%20here%5D%0A%0AThanks%21">📧 Email Feedback</a>
+    <a class="feedback-btn" href="tel:+919592457515">📞 Call Gulvir</a>
+  </div>
+
+  <div class="note" style="margin-top:30px;">
+    <b>📝 Note for Gulvir before going live:</b> Change the admin password (search for <code style="background:var(--bg-soft); padding:2px 6px; border-radius:4px;">ADMIN_PASSWORD</code> in <code>admin.html</code>) before sharing the URL widely. Also consider editing the <code>RECIPIENT_EMAIL</code> in <code>scholarship_application.html</code> if you want student submissions to go to a different inbox.
+  </div>
+
+</div>
+
+<footer>
+  Internal review build · Hosted on Surge.sh · For the 1996 Batch GNDEC Alumni Scholarship<br>
+  Share URL: <a href="https://alumni-scholarship-portal.surge.sh/review.html"><b>alumni-scholarship-portal.surge.sh/review.html</b></a>
+</footer>
+
+</body>
+</html>

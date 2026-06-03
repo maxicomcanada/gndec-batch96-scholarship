@@ -3,94 +3,77 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Voters List — 1996 Batch Scholarship</title>
+<title>Voters & Per-Voter Detail — 1996 Batch Scholarship</title>
 <style>
 :root {
-  --navy: #0b2240;
-  --kesari: #ff7518;
-  --wheat: #e8c168;
-  --maroon: #6b1d2c;
-  --punjab-green: #1e6b3a;
-  --cream: #faf6ec;
-  --ink: #1a1a2e;
-  --muted: #6b6b80;
-  --line: #e5d6b8;
-  --card-bg: #ffffff;
-  --shadow: 0 4px 24px rgba(11, 34, 64, 0.08);
+  --navy: #0b2240; --kesari: #ff7518; --wheat: #e8c168; --maroon: #6b1d2c;
+  --punjab-green: #1e6b3a; --cream: #faf6ec; --ink: #1a1a2e; --muted: #6b6b80;
+  --line: #e5d6b8; --card-bg: #ffffff; --shadow: 0 4px 24px rgba(11, 34, 64, 0.08);
 }
 *, *::before, *::after { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background: var(--cream); color: var(--ink); line-height: 1.55;
-}
-.banner {
-  background: linear-gradient(135deg, var(--navy), #143866);
-  color: var(--cream); padding: 26px 20px 22px; text-align: center;
-}
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--cream); color: var(--ink); line-height: 1.55; }
+.banner { background: linear-gradient(135deg, var(--navy), #143866); color: var(--cream); padding: 26px 20px 22px; text-align: center; }
 .banner h1 { font-size: 22px; font-weight: 800; margin: 0 0 4px; }
 .banner p { font-size: 13px; opacity: 0.9; margin: 0; }
 .kesari-line { height: 4px; background: linear-gradient(90deg, var(--kesari), var(--wheat), var(--kesari)); }
-.wrap { max-width: 920px; margin: 0 auto; padding: 22px 16px 60px; }
+.wrap { max-width: 1100px; margin: 0 auto; padding: 22px 16px 60px; }
 
-.toolbar {
-  display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
-  background: var(--card-bg); border-radius: 12px; padding: 12px 16px;
-  margin-bottom: 18px; box-shadow: var(--shadow);
-}
-.toolbar button {
-  background: linear-gradient(135deg, var(--kesari), var(--maroon));
-  color: white; border: none; padding: 10px 18px;
-  border-radius: 8px; font-weight: 700; font-size: 14px; cursor: pointer;
-}
-.toolbar input[type="search"] {
-  flex: 1; min-width: 200px;
-  padding: 8px 12px; border: 1.5px solid var(--line);
-  border-radius: 8px; font-size: 14px;
-}
+.toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; background: var(--card-bg); border-radius: 12px; padding: 12px 16px; margin-bottom: 12px; box-shadow: var(--shadow); }
+.toolbar button { background: linear-gradient(135deg, var(--kesari), var(--maroon)); color: white; border: none; padding: 10px 18px; border-radius: 8px; font-weight: 700; font-size: 14px; cursor: pointer; }
+.toolbar input[type="search"] { flex: 1; min-width: 200px; padding: 8px 12px; border: 1.5px solid var(--line); border-radius: 8px; font-size: 14px; }
 .toolbar .spacer { flex: 1; }
 .toolbar .live { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: var(--punjab-green); }
 .toolbar .live::before { content: ""; width: 8px; height: 8px; background: var(--punjab-green); border-radius: 999px; animation: pulse 1.5s infinite; }
 @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
 
-.hero {
-  background: linear-gradient(135deg, var(--maroon), #3d1019);
-  color: white; border-radius: 14px; padding: 22px 20px;
-  margin-bottom: 18px; text-align: center;
-}
+.hero { background: linear-gradient(135deg, var(--maroon), #3d1019); color: white; border-radius: 14px; padding: 22px 20px; margin-bottom: 18px; text-align: center; }
 .hero .big { font-size: 52px; font-weight: 900; color: var(--wheat); line-height:1; margin: 4px 0; }
 .hero .lbl { font-size: 13px; opacity: 0.9; }
 
-table { width: 100%; border-collapse: collapse; background: var(--card-bg); border-radius: 14px; overflow: hidden; box-shadow: var(--shadow); }
-th { background: var(--navy); color: white; padding: 12px 14px; text-align: left; font-size: 13px; font-weight: 700; }
-td { padding: 12px 14px; border-top: 1px solid #f0e6cf; font-size: 14px; }
-tr:hover td { background: #fdfbf4; }
-.idx { color: var(--muted); font-size: 12px; }
-.phone { font-family: ui-monospace, "SF Mono", Menlo, monospace; color: var(--maroon); font-weight: 600; }
-.timestamp { color: var(--muted); font-size: 12px; }
+.voter-card { background: var(--card-bg); border-radius: 12px; box-shadow: var(--shadow); margin-bottom: 12px; overflow: hidden; }
+.voter-head { display: flex; align-items: center; gap: 12px; padding: 14px 18px; cursor: pointer; transition: background 0.15s; }
+.voter-head:hover { background: #fdfbf4; }
+.voter-head .num { width: 30px; height: 30px; border-radius: 999px; background: var(--navy); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; flex-shrink: 0; }
+.voter-head .name { font-weight: 700; color: var(--navy); font-size: 15px; }
+.voter-head .phone { font-family: ui-monospace, "SF Mono", monospace; color: var(--maroon); font-weight: 600; font-size: 13px; }
+.voter-head .ts { color: var(--muted); font-size: 12px; }
+.voter-head .meta { flex: 1; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.voter-head .meta .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: baseline; }
+.voter-head .toggle { color: var(--kesari); font-weight: 800; font-size: 14px; transition: transform 0.2s; }
+.voter-card.open .toggle { transform: rotate(180deg); }
+
+.voter-detail { display: none; padding: 0 18px 16px; border-top: 1px solid #f0e6cf; }
+.voter-card.open .voter-detail { display: block; }
+.section-grp { margin-top: 14px; }
+.section-grp h4 { margin: 0 0 8px; padding: 6px 10px; background: linear-gradient(135deg, var(--navy), var(--maroon)); color: white; font-size: 12px; font-weight: 700; border-radius: 6px; }
+.answer-row { display: flex; gap: 10px; padding: 6px 4px; border-bottom: 1px solid #f5efe2; font-size: 13px; }
+.answer-row .qtitle { flex: 1; color: var(--ink); }
+.answer-row .ans { font-weight: 700; color: var(--punjab-green); font-family: ui-monospace, monospace; }
+.answer-row .ans .letter { display: inline-block; background: var(--punjab-green); color: white; padding: 1px 8px; border-radius: 999px; font-size: 11px; margin-right: 6px; }
+.answer-row .desc { color: var(--muted); font-size: 12px; flex-basis: 100%; padding-left: 20px; margin-top: 2px; font-style: italic; }
 
 #loadingState { text-align: center; padding: 60px 20px; color: var(--muted); }
 .spinner { display: inline-block; width: 32px; height: 32px; border: 3px solid var(--line); border-top-color: var(--kesari); border-radius: 999px; animation: spin 0.8s linear infinite; margin-bottom: 12px; }
 @keyframes spin { to { transform: rotate(360deg); } }
-
 .empty { text-align: center; padding: 60px 20px; color: var(--muted); }
 
-.gate {
-  background: var(--card-bg); border-radius: 14px; padding: 30px;
-  text-align: center; box-shadow: var(--shadow); max-width: 380px; margin: 60px auto;
-}
+.gate { background: var(--card-bg); border-radius: 14px; padding: 30px; text-align: center; box-shadow: var(--shadow); max-width: 380px; margin: 60px auto; }
 .gate input { width: 100%; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 8px; font-size: 15px; margin: 12px 0; }
 .gate button { background: var(--punjab-green); color: white; border: none; padding: 12px 22px; border-radius: 8px; font-weight: 700; cursor: pointer; width: 100%; font-size: 15px; }
 
+.backup-bar { background:#fff7e6; padding:10px 14px; border-radius:8px; font-size:12px; color:var(--maroon); margin-bottom:14px; }
+
 @media (max-width: 600px) {
-  th, td { padding: 8px 10px; font-size: 13px; }
+  .voter-head .meta .row { flex-direction: column; gap: 2px; }
+  .voter-head .name, .voter-head .phone, .voter-head .ts { font-size: 13px; }
 }
 </style>
 </head>
 <body>
 
 <div class="banner">
-  <h1>👥 Batch Voters List</h1>
+  <h1>👥 Voters & Per-Voter Detail</h1>
   <p>1996 Batch Scholarship Poll · Admin view</p>
 </div>
 <div class="kesari-line"></div>
@@ -99,7 +82,7 @@ tr:hover td { background: #fdfbf4; }
 
   <div id="gate" class="gate" style="display:none;">
     <h2 style="margin:0 0 10px; color:var(--navy);">🔐 Admin access</h2>
-    <p style="font-size:13px; color:var(--muted); margin:0 0 12px;">Enter the admin code to view voter list.</p>
+    <p style="font-size:13px; color:var(--muted); margin:0 0 12px;">Enter admin code.</p>
     <input type="password" id="pw" placeholder="Admin code" autocomplete="off">
     <button id="gateBtn">Unlock</button>
   </div>
@@ -108,16 +91,17 @@ tr:hover td { background: #fdfbf4; }
     <div class="toolbar">
       <span class="live">LIVE · auto-refresh 30s</span>
       <span class="spacer"></span>
-      <input type="search" id="search" placeholder="🔍 Search name or phone…">
+      <input type="search" id="search" placeholder="🔍 Search name, phone, or answer…">
       <button id="refreshBtn">🔄 Refresh</button>
-      <button id="exportBtn" style="background:var(--punjab-green);">📥 CSV (voters)</button>
+      <button id="exportBtn" style="background:var(--punjab-green);">📥 CSV (voters + answers)</button>
       <button id="backupBtn" style="background:var(--maroon);">💾 Full backup (JSON)</button>
     </div>
-    <div style="background:#fff7e6; padding:10px 14px; border-radius:8px; font-size:12px; color:var(--maroon); margin-bottom:14px;">
+    <div class="backup-bar">
       <b>🛡 Backup status:</b>
       Voters: Primary blob + Mirror blob (auto-mirrored on every vote) ·
       Counters: abacus.jasoncameron.dev ·
-      <b>Recommended:</b> click <b>💾 Full backup</b> once a day to save a snapshot to your computer.
+      Auto-backup: daily at 10:03 PM ·
+      <b>Recommended:</b> click <b>💾 Full backup</b> before any committee meeting.
       <br>
       <span id="backupSummary" style="color:var(--muted);">Loading backup status…</span>
     </div>
@@ -125,7 +109,7 @@ tr:hover td { background: #fdfbf4; }
     <div class="hero">
       <div class="lbl">Total Voters</div>
       <div class="big" id="totalCount">0</div>
-      <div class="lbl">Last refreshed: <span id="lastUpdated">—</span></div>
+      <div class="lbl">Last refreshed: <span id="lastUpdated">—</span> · Click any voter to expand their 28 answers</div>
     </div>
 
     <div id="loadingState">
@@ -133,27 +117,75 @@ tr:hover td { background: #fdfbf4; }
       <div>Loading voter list…</div>
     </div>
 
-    <div id="listContainer" style="display:none;">
-      <table id="votersTable">
-        <thead>
-          <tr>
-            <th style="width:40px;">#</th>
-            <th>Name</th>
-            <th style="width:140px;">WhatsApp</th>
-            <th style="width:160px;">Submitted</th>
-          </tr>
-        </thead>
-        <tbody id="votersBody"></tbody>
-      </table>
-      <div id="emptyMsg" class="empty" style="display:none;">No voters yet — share the poll!</div>
-    </div>
+    <div id="listContainer" style="display:none;"></div>
+    <div id="emptyMsg" class="empty" style="display:none;">No voters yet — share the poll!</div>
   </div>
 
 </div>
 
 <script>
-const ADMIN_CODE = "gndec1996";  // simple gate
+const ADMIN_CODE = "gndec1996";
 const STORAGE_KEY = "gndec_voters_admin_ok";
+
+// 28-question definition — must match poll.html exactly
+const QUESTIONS = [
+  { sec: "1 · Need vs Merit", id: "q1_need_vs_merit", title: "Q1. Two equally qualified — poorer vs better marks",
+    opts: { A: "Poorer family wins", B: "Higher marks wins", C: "Equal weight" } },
+  { sec: "1 · Need vs Merit", id: "q2_low_marks_low_income", title: "Q2. 85% middle-class vs 65% labourer's child",
+    opts: { A: "B wins (need first)", B: "A wins (merit first)", C: "Both if budget allows" } },
+  { sec: "1 · Need vs Merit", id: "q3_above_threshold_no_assets", title: "Q3. Above income but no assets",
+    opts: { A: "Yes — real situation", B: "No — rules", C: "Verify physically" } },
+  { sec: "1 · Need vs Merit", id: "q4_tiebreaker", title: "Q4. Tie-breaker",
+    opts: { A: "Lower income wins", B: "Orphan wins", C: "Both" } },
+  { sec: "2 · Identity & Background", id: "q5_son_or_daughter", title: "Q5. Brother vs sister",
+    opts: { A: "Sister — girl-child", B: "Brother if marks better", C: "Worse situation wins" } },
+  { sec: "2 · Identity & Background", id: "q6_punjab_bonus", title: "Q6. 🪷 Punjab domicile",
+    opts: { A: "No bonus", B: "+20% bonus", C: "Punjab-only" } },
+  { sec: "2 · Identity & Background", id: "q7_rural_village", title: "Q7. Small village (2K), 40km commute",
+    opts: { A: "Big bonus", B: "Small recognition", C: "Not a factor" } },
+  { sec: "2 · Identity & Background", id: "q8_first_gen", title: "Q8. First-gen college",
+    opts: { A: "Big bonus", B: "Small recognition", C: "Not relevant" } },
+  { sec: "3 · Hardship", id: "q9_orphan_policy", title: "Q9. Orphan policy",
+    opts: { A: "Auto-qualify", B: "Big bonus, standard process", C: "Standard process" } },
+  { sec: "3 · Hardship", id: "q10_widow_mother", title: "Q10. Widow mother",
+    opts: { A: "Big bonus", B: "Small recognition", C: "No bonus" } },
+  { sec: "3 · Hardship", id: "q11_disability_policy", title: "Q11. Disability / chronic illness",
+    opts: { A: "Auto-qualify or major bonus", B: "Small bonus", C: "Not a factor" } },
+  { sec: "4 · Effort, Character & Academics", id: "q12_working_student", title: "Q12. Working night-shift (60%) vs non-working (75%)",
+    opts: { A: "Working student wins", B: "Recognize but marks matter", C: "Marks come first" } },
+  { sec: "4 · Effort, Character & Academics", id: "q13_backlog_policy", title: "Q13. Backlog policy",
+    opts: { A: "Auto-disqualify", B: "Minor deduction", C: "No issue if rest strong" } },
+  { sec: "4 · Effort, Character & Academics", id: "q14_achievement_vs_marks", title: "Q14. National champion vs top scorer",
+    opts: { A: "Champion wins", B: "Top scorer wins", C: "Need beats both" } },
+  { sec: "4 · Effort, Character & Academics", id: "q15_declining_marks", title: "Q15. Marks dropped (family crisis)",
+    opts: { A: "Support them", B: "Support with warning", C: "Decline" } },
+  { sec: "5 · Policy & Awards", id: "q16_previous_beneficiary", title: "Q16. Previous beneficiary",
+    opts: { A: "Priority", B: "Standard process", C: "Disqualify" } },
+  { sec: "5 · Policy & Awards", id: "q17_other_aid", title: "Q17. Already gets ₹5K Govt scholarship",
+    opts: { A: "No issue", B: "Deduct ₹5K", C: "Disqualify" } },
+  { sec: "5 · Policy & Awards", id: "q18_budget_split", title: "Q18. ₹3L budget split",
+    opts: { A: "10 × ₹30K (focus)", B: "20 × ₹15K (balanced)", C: "30 × ₹10K (many)" } },
+  { sec: "6 · Fairness to Students", id: "q19_emergency_support", title: "Q19. Mid-year emergency",
+    opts: { A: "Reserve in budget", B: "If budget allows", C: "No — fixed award" } },
+  { sec: "6 · Fairness to Students", id: "q20_drug_crisis", title: "Q20. 🪷 Punjab drug crisis affected",
+    opts: { A: "Major auto-bonus", B: "Standard hardship", C: "Not a factor" } },
+  { sec: "6 · Fairness to Students", id: "q21_sibling_rule", title: "Q21. Two siblings both qualify",
+    opts: { A: "Both full awards", B: "Only one", C: "Both reduced" } },
+  { sec: "6 · Fairness to Students", id: "q22_disowned_student", title: "Q22. Estranged from family",
+    opts: { A: "Orphan-equivalent", B: "Standard, recognize hardship", C: "Decline" } },
+  { sec: "6 · Fairness to Students", id: "q23_mental_health", title: "Q23. Mental health disclosure",
+    opts: { A: "Additional hardship factor", B: "Note, don't score", C: "Not a factor" } },
+  { sec: "6 · Fairness to Students", id: "q24_digital_divide", title: "Q24. Digital divide",
+    opts: { A: "WhatsApp + paper", B: "GNDEC enrollment help", C: "Online only" } },
+  { sec: "7 · Program Soul & Legacy", id: "q25_pay_it_forward", title: "Q25. Pay-it-forward pledge",
+    opts: { A: "Formal pledge", B: "Encouraged not required", C: "No expectations" } },
+  { sec: "7 · Program Soul & Legacy", id: "q26_agrarian_crisis", title: "Q26. 🌾 Agrarian crisis affected",
+    opts: { A: "Major auto-bonus", B: "Standard hardship", C: "Not a factor" } },
+  { sec: "7 · Program Soul & Legacy", id: "q27_border_district", title: "Q27. 🪷 Border district student",
+    opts: { A: "Major bonus", B: "Small recognition", C: "Not a factor" } },
+  { sec: "7 · Program Soul & Legacy", id: "q28_seva_commitment", title: "Q28. 🙏 Seva / mentorship",
+    opts: { A: "Formal requirement", B: "Encouraged", C: "No obligations" } }
+];
 
 let allVoters = [];
 let filterText = '';
@@ -167,8 +199,12 @@ async function loadVoters() {
     allVoters = Array.isArray(d.voters) ? d.voters : [];
     render();
   } catch (e) {
-    document.getElementById('loadingState').innerHTML = '⚠️ Could not load. Retry in a moment.';
+    document.getElementById('loadingState').innerHTML = '⚠️ Could not load voters. Retry in a moment.';
   }
+}
+
+function escapeHtml(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 
 function render() {
@@ -176,70 +212,110 @@ function render() {
   document.getElementById('listContainer').style.display = 'block';
   const f = filterText.trim().toLowerCase();
   const voters = allVoters
-    .filter(v => !f || (v.name||'').toLowerCase().includes(f) || (v.phone||'').includes(f))
-    .slice().reverse(); // most recent first
+    .filter(v => {
+      if (!f) return true;
+      const text = `${v.name||''} ${v.phone||''} ${JSON.stringify(v.answers||{})}`.toLowerCase();
+      return text.includes(f);
+    })
+    .slice().reverse(); // newest first
   document.getElementById('totalCount').textContent = allVoters.length;
   document.getElementById('lastUpdated').textContent = new Date().toLocaleTimeString();
-  const tbody = document.getElementById('votersBody');
+  const container = document.getElementById('listContainer');
   if (voters.length === 0) {
-    tbody.innerHTML = '';
+    container.innerHTML = '';
     document.getElementById('emptyMsg').style.display = 'block';
     return;
   }
   document.getElementById('emptyMsg').style.display = 'none';
-  tbody.innerHTML = voters.map((v, i) => `
-    <tr>
-      <td class="idx">${voters.length - i}</td>
-      <td><b>${escapeHtml(v.name || '')}</b></td>
-      <td class="phone">${escapeHtml(v.phone || '')}</td>
-      <td class="timestamp">${v.timestamp ? new Date(v.timestamp).toLocaleString() : '—'}</td>
-    </tr>
-  `).join('');
-}
 
-function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  container.innerHTML = voters.map((v, idx) => {
+    const indexNum = voters.length - idx;
+    const phone = v.phone || '(not given)';
+    const ts = v.timestamp ? new Date(v.timestamp).toLocaleString() : '—';
+    const ans = v.answers || {};
+    const hasAnswers = Object.keys(ans).length > 0;
+
+    // Group answers by section
+    let detailHtml = '';
+    if (hasAnswers) {
+      const sections = {};
+      QUESTIONS.forEach(q => {
+        if (!sections[q.sec]) sections[q.sec] = [];
+        const chosen = ans[q.id] || '—';
+        const desc = q.opts[chosen] || '(no answer)';
+        sections[q.sec].push({ title: q.title, chosen, desc });
+      });
+      detailHtml = Object.entries(sections).map(([secName, qs]) => `
+        <div class="section-grp">
+          <h4>${escapeHtml(secName)}</h4>
+          ${qs.map(q => `
+            <div class="answer-row">
+              <div class="qtitle">${escapeHtml(q.title)}</div>
+              <div class="ans"><span class="letter">${escapeHtml(q.chosen)}</span></div>
+              <div class="desc">→ ${escapeHtml(q.desc)}</div>
+            </div>
+          `).join('')}
+        </div>
+      `).join('');
+    } else {
+      detailHtml = `<div style="padding:16px; text-align:center; color:var(--muted); font-style:italic;">
+        No per-answer detail recorded for this voter.<br><small>${v.note ? escapeHtml(v.note) : ''}</small>
+      </div>`;
+    }
+
+    return `<div class="voter-card" data-idx="${idx}">
+      <div class="voter-head" onclick="this.parentNode.classList.toggle('open');">
+        <div class="num">${indexNum}</div>
+        <div class="meta">
+          <div class="row">
+            <span class="name">${escapeHtml(v.name || '(no name)')}</span>
+            <span class="phone">📞 ${escapeHtml(phone)}</span>
+          </div>
+          <div class="ts">${escapeHtml(ts)}${v.country ? ' · ' + escapeHtml(v.country) : ''}${v.ip ? ' · ' + escapeHtml(v.ip) : ''}</div>
+        </div>
+        <div class="toggle">▼</div>
+      </div>
+      <div class="voter-detail">${detailHtml}</div>
+    </div>`;
+  }).join('');
 }
 
 function exportCSV() {
-  const rows = [['#','Name','WhatsApp','Submitted','Country','IP']];
-  allVoters.forEach((v,i) => rows.push([
-    i+1, v.name||'', v.phone||'', v.timestamp||'', v.country||'', v.ip||''
-  ]));
-  const csv = rows.map(r => r.map(cell => `"${String(cell).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const header = ['#','Name','Phone','Timestamp','Country','IP', ...QUESTIONS.map(q => q.id)];
+  const rows = [header];
+  allVoters.forEach((v, i) => {
+    const row = [i+1, v.name||'', v.phone||'', v.timestamp||'', v.country||'', v.ip||''];
+    QUESTIONS.forEach(q => {
+      const a = (v.answers||{})[q.id] || '';
+      row.push(a);
+    });
+    rows.push(row);
+  });
+  const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
   const blob = new Blob([csv], { type: 'text/csv' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = 'voters_' + new Date().toISOString().slice(0,10) + '.csv';
+  a.download = 'voters_with_answers_' + new Date().toISOString().slice(0,10) + '.csv';
   a.click();
 }
 
 function checkGate() {
-  if (sessionStorage.getItem(STORAGE_KEY) === 'ok') {
-    showMain();
-    return;
-  }
+  if (sessionStorage.getItem(STORAGE_KEY) === 'ok') { showMain(); return; }
   document.getElementById('gate').style.display = 'block';
 }
-
 function showMain() {
   document.getElementById('gate').style.display = 'none';
   document.getElementById('mainContent').style.display = 'block';
   loadVoters();
   setInterval(loadVoters, 30000);
+  showBackupStatus();
+  setInterval(showBackupStatus, 60000);
 }
-
 document.getElementById('gateBtn').addEventListener('click', () => {
   const v = document.getElementById('pw').value.trim();
-  if (v === ADMIN_CODE) {
-    sessionStorage.setItem(STORAGE_KEY, 'ok');
-    showMain();
-  } else {
-    alert('Wrong code.');
-  }
+  if (v === ADMIN_CODE) { sessionStorage.setItem(STORAGE_KEY, 'ok'); showMain(); } else { alert('Wrong code.'); }
 });
 document.getElementById('pw').addEventListener('keydown', e => { if (e.key==='Enter') document.getElementById('gateBtn').click(); });
-
 document.getElementById('refreshBtn').addEventListener('click', loadVoters);
 document.getElementById('exportBtn').addEventListener('click', exportCSV);
 document.getElementById('search').addEventListener('input', e => { filterText = e.target.value; render(); });
@@ -266,13 +342,9 @@ async function showBackupStatus() {
     const d = await r.json();
     const consistent = d.voters_consistent ? '✅ Primary & mirror in sync' : '⚠️ Primary & mirror differ';
     document.getElementById('backupSummary').innerHTML =
-      `Snapshot ready · ${d.totalVotes} votes · ${d.voters_primary?.voters?.length || 0} voters logged · ${consistent}`;
-  } catch (e) {
-    document.getElementById('backupSummary').textContent = 'Backup status unavailable';
-  }
+      `Snapshot ready · ${d.totalVotes} votes · ${d.voters_primary?.voters?.length || 0} voters · ${consistent}`;
+  } catch (e) { document.getElementById('backupSummary').textContent = 'Backup status unavailable'; }
 }
-showBackupStatus();
-setInterval(showBackupStatus, 60000);
 
 checkGate();
 </script>

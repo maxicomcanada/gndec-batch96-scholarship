@@ -19,83 +19,50 @@
   --shadow: 0 4px 24px rgba(11, 34, 64, 0.08);
 }
 *, *::before, *::after { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; }
+html, body { margin: 0; padding: 0; }
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background: var(--cream);
-  color: var(--ink);
-  line-height: 1.55;
-  font-size: 16px;
-  min-height: 100vh;
+  background: var(--cream); color: var(--ink); line-height: 1.55; font-size: 16px;
 }
 .banner {
-  background: linear-gradient(135deg, var(--navy) 0%, #143866 100%);
-  color: var(--cream);
-  padding: 26px 20px 22px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+  background: linear-gradient(135deg, var(--navy), #143866);
+  color: var(--cream); padding: 26px 20px 22px; text-align: center; position: relative; overflow: hidden;
 }
 .banner::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    radial-gradient(circle at 12% 30%, var(--kesari) 0.7px, transparent 1px),
-    radial-gradient(circle at 88% 70%, var(--wheat) 0.7px, transparent 1px);
-  background-size: 40px 40px, 32px 32px;
-  opacity: 0.18;
-  pointer-events: none;
+  content: ""; position: absolute; inset: 0;
+  background-image: radial-gradient(circle at 12% 30%, var(--kesari) 0.7px, transparent 1px),
+                    radial-gradient(circle at 88% 70%, var(--wheat) 0.7px, transparent 1px);
+  background-size: 40px 40px, 32px 32px; opacity: 0.18; pointer-events: none;
 }
 .banner-title { font-size: 22px; font-weight: 800; margin: 0 0 4px; position: relative; z-index: 1; }
 .banner-sub { font-size: 13px; opacity: 0.9; margin: 0; position: relative; z-index: 1; }
-.kesari-line { height: 4px; background: linear-gradient(90deg, var(--kesari) 0%, var(--wheat) 50%, var(--kesari) 100%); }
+.kesari-line { height: 4px; background: linear-gradient(90deg, var(--kesari), var(--wheat), var(--kesari)); }
 .wrap { max-width: 920px; margin: 0 auto; padding: 22px 16px 60px; }
 
 .toolbar {
   display: flex; align-items: center; flex-wrap: wrap; gap: 10px;
-  background: var(--card-bg); border-radius: 12px; padding: 12px 16px;
-  margin-bottom: 18px; box-shadow: var(--shadow);
+  background: var(--card-bg); border-radius: 12px; padding: 12px 16px; margin-bottom: 18px; box-shadow: var(--shadow);
 }
-.toolbar .live {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: 13px; font-weight: 700; color: var(--punjab-green);
-}
-.toolbar .live::before {
-  content: ""; width: 8px; height: 8px;
-  background: var(--punjab-green); border-radius: 999px;
-  animation: pulse 1.5s infinite;
-}
+.toolbar .live { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: var(--punjab-green); }
+.toolbar .live::before { content: ""; width: 8px; height: 8px; background: var(--punjab-green); border-radius: 999px; animation: pulse 1.5s infinite; }
 @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
 .toolbar .spacer { flex: 1; }
-.toolbar button {
-  background: linear-gradient(135deg, var(--kesari), var(--maroon));
-  color: white; border: none; padding: 8px 14px;
-  border-radius: 8px; font-weight: 700; font-size: 13px; cursor: pointer;
-}
-.toolbar button:active { transform: translateY(1px); }
+.toolbar button { background: linear-gradient(135deg, var(--kesari), var(--maroon)); color: white; border: none; padding: 8px 14px; border-radius: 8px; font-weight: 700; font-size: 13px; cursor: pointer; }
 .toolbar a { color: var(--navy); text-decoration: none; font-size: 13px; font-weight: 600; }
 
 .hero {
-  background: linear-gradient(135deg, var(--maroon) 0%, #3d1019 100%);
-  color: white; border-radius: 14px;
-  padding: 22px 20px; margin-bottom: 18px;
+  background: linear-gradient(135deg, var(--maroon), #3d1019);
+  color: white; border-radius: 14px; padding: 22px 20px; margin-bottom: 18px;
   text-align: center; position: relative; overflow: hidden;
 }
-.hero::before {
-  content: "🎓"; font-size: 80px; position: absolute;
-  right: 16px; top: 50%; transform: translateY(-50%); opacity: 0.15;
-}
-.hero .big {
-  font-size: 52px; font-weight: 900; line-height: 1;
-  margin: 4px 0; color: var(--wheat);
-}
+.hero::before { content: "🎓"; font-size: 80px; position: absolute; right: 16px; top: 50%; transform: translateY(-50%); opacity: 0.15; }
+.hero .big { font-size: 52px; font-weight: 900; line-height: 1; margin: 4px 0; color: var(--wheat); }
 .hero .lbl { font-size: 13px; opacity: 0.9; }
 
 .section-header {
   display: flex; align-items: center; gap: 10px;
   margin: 26px 4px 14px; padding: 10px 14px;
-  background: linear-gradient(135deg, var(--navy) 0%, var(--maroon) 100%);
+  background: linear-gradient(135deg, var(--navy), var(--maroon));
   border-radius: 10px; color: white;
 }
 .section-header .num {
@@ -111,66 +78,37 @@ body {
   padding: 18px 18px; margin-bottom: 14px;
   box-shadow: var(--shadow); border-top: 3px solid var(--punjab-green);
 }
-.q-result h3 {
-  margin: 0 0 4px; font-size: 15px; color: var(--navy); line-height: 1.35;
-}
+.q-result h3 { margin: 0 0 4px; font-size: 15px; color: var(--navy); line-height: 1.35; }
+.q-result .q-scenario { font-size: 12px; color: var(--maroon); margin: 6px 0 12px; font-style: italic; background: #fff7e6; padding: 8px 10px; border-radius: 6px; }
 .q-result .q-meta { font-size: 12px; color: var(--muted); margin-bottom: 14px; }
 .q-result .answers { display: flex; flex-direction: column; gap: 7px; }
 .bar-row { display: flex; align-items: center; gap: 10px; font-size: 13px; }
 .bar-label { flex: 0 0 55%; line-height: 1.3; }
 .bar-label .vletter {
-  display: inline-block; background: var(--navy);
-  color: white; width: 18px; height: 18px;
-  border-radius: 999px; text-align: center;
-  font-weight: 700; font-size: 11px; line-height: 18px;
-  margin-right: 6px;
+  display: inline-block; background: var(--navy); color: white;
+  width: 18px; height: 18px; border-radius: 999px;
+  text-align: center; font-weight: 700; font-size: 11px; line-height: 18px; margin-right: 6px;
 }
-.bar-vis {
-  flex: 1; height: 22px; background: #f5efe2;
-  border-radius: 6px; position: relative;
-  overflow: hidden; min-width: 60px;
-}
-.bar-fill {
-  height: 100%; background: linear-gradient(90deg, var(--kesari), var(--maroon));
-  border-radius: 6px; transition: width 0.7s ease;
-}
+.bar-vis { flex: 1; height: 22px; background: #f5efe2; border-radius: 6px; position: relative; overflow: hidden; min-width: 60px; }
+.bar-fill { height: 100%; background: linear-gradient(90deg, var(--kesari), var(--maroon)); border-radius: 6px; transition: width 0.7s ease; }
 .bar-fill.winner { background: linear-gradient(90deg, var(--punjab-green), #15803d); }
-.bar-count {
-  position: absolute; right: 8px; top: 50%;
-  transform: translateY(-50%); font-size: 11px;
-  font-weight: 700; color: var(--navy); text-shadow: 0 0 4px white;
-}
-.bar-pct {
-  flex: 0 0 50px; text-align: right;
-  font-weight: 700; color: var(--navy);
-}
+.bar-count { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-size: 11px; font-weight: 700; color: var(--navy); text-shadow: 0 0 4px white; }
+.bar-pct { flex: 0 0 50px; text-align: right; font-weight: 700; color: var(--navy); }
 
-#loadingState {
-  text-align: center; padding: 60px 20px;
-  font-size: 15px; color: var(--muted);
-}
+#loadingState { text-align: center; padding: 60px 20px; font-size: 15px; color: var(--muted); }
 .spinner {
   display: inline-block; width: 32px; height: 32px;
   border: 3px solid var(--line); border-top-color: var(--kesari);
-  border-radius: 999px; animation: spin 0.8s linear infinite;
-  margin-bottom: 12px;
+  border-radius: 999px; animation: spin 0.8s linear infinite; margin-bottom: 12px;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 .recommendation {
-  background: linear-gradient(135deg, var(--punjab-green) 0%, #15803d 100%);
-  color: white; border-radius: 14px;
-  padding: 20px 22px; margin: 20px 0 18px;
-  box-shadow: var(--shadow);
+  background: linear-gradient(135deg, var(--punjab-green), #15803d);
+  color: white; border-radius: 14px; padding: 20px 22px; margin: 20px 0 18px; box-shadow: var(--shadow);
 }
-.recommendation h3 {
-  margin: 0 0 12px; font-size: 17px;
-  display: flex; align-items: center; gap: 8px;
-}
-.recommendation .rec-grid {
-  display: grid; grid-template-columns: 1fr;
-  gap: 8px; margin-top: 12px;
-}
+.recommendation h3 { margin: 0 0 12px; font-size: 17px; display: flex; align-items: center; gap: 8px; }
+.recommendation .rec-grid { display: grid; grid-template-columns: 1fr; gap: 8px; margin-top: 12px; }
 .rec-row {
   background: rgba(255,255,255,0.15); border-radius: 8px;
   padding: 8px 12px; font-size: 13px;
@@ -195,22 +133,22 @@ body {
 
 <div class="banner">
   <h1 class="banner-title">📊 Live Poll Results</h1>
-  <p class="banner-sub">1996 Batch Scholarship Rubric Vote · Auto-refreshing</p>
+  <p class="banner-sub">1996 Batch Scholarship Rubric · Auto-refreshing</p>
 </div>
 <div class="kesari-line"></div>
 
 <div class="wrap">
 
   <div class="toolbar">
-    <span class="live">LIVE · auto-refresh 20s</span>
+    <span class="live">LIVE · auto-refresh 60s</span>
     <span class="spacer"></span>
     <button id="refreshBtn" type="button">🔄 Refresh now</button>
-    <a href="poll.html">← Take poll</a>
+    <a href="poll">← Take poll</a>
   </div>
 
   <div id="loadingState">
     <div class="spinner"></div>
-    <div>Fetching live results...</div>
+    <div>Fetching live results…</div>
   </div>
 
   <div id="resultsContainer" style="display:none;">
@@ -232,276 +170,184 @@ body {
 
   <div class="foot">
     1996 Batch GNDEC Alumni Scholarship · Need-first since 2016<br>
-    <a href="/">← Back to portal</a> ·
-    <a href="poll.html">Cast your vote</a>
+    <a href="poll">Cast your vote</a>
   </div>
 
 </div>
 
 <script>
-const TALLY_NS = "gndec1996scholarpoll26";
-
 const SECTIONS = [
   {
-    label: "A · FINANCIAL NEED",
+    label: "1 · NEED vs MERIT",
     questions: [
-      { id: "q1_income_weight", title: "Q1. Family Income — scoring weight",
+      { id: "q1_need_vs_merit", title: "Q1. Two equally qualified — poorer vs better marks",
+        scenario: "Equal qualifications, one much poorer, other has much better marks",
         opts: [
-          { k:"A", l:"10 pts (small slice)" },
-          { k:"B", l:"20 pts (moderate)" },
-          { k:"C", l:"30 pts (significant)" },
-          { k:"D", l:"40 pts (dominant)" },
-          { k:"E", l:"50+ pts (deciding)" }
+          { k:"A", l:"Poorer family wins" },
+          { k:"B", l:"Higher marks wins" },
+          { k:"C", l:"Equal weight" }
         ]
       },
-      { id: "q2_income_method", title: "Q2. How to calculate income need",
+      { id: "q2_low_marks_low_income", title: "Q2. 85% middle-class vs 65% labourer's child",
+        scenario: "Student A: 85% middle-class. Student B: 65%, father is daily-wage labourer",
         opts: [
-          { k:"A", l:"Total family income only" },
-          { k:"B", l:"Per-person (per-capita)" },
-          { k:"C", l:"Both total + per-capita" },
-          { k:"D", l:"Income + asset check" }
+          { k:"A", l:"B wins (65%, poor) — need first" },
+          { k:"B", l:"A wins (85%) — merit first" },
+          { k:"C", l:"Both if budget allows" }
         ]
       },
-      { id: "q3_assets", title: "Q3. Family assets check",
+      { id: "q3_above_threshold_no_assets", title: "Q3. Above income but no assets",
+        scenario: "Family income ₹1,000 above cutoff, but no house/land/vehicles",
         opts: [
-          { k:"A", l:"Don't check assets" },
-          { k:"B", l:"Soft signal only" },
-          { k:"C", l:"Score it (+5 / -5)" },
-          { k:"D", l:"Mandatory verification" },
-          { k:"E", l:"Disqualify if car/multiple properties" }
+          { k:"A", l:"Yes — real situation is poor" },
+          { k:"B", l:"No — rules are rules" },
+          { k:"C", l:"Only if verified physically" }
         ]
       },
-      { id: "q4_dependents", title: "Q4. Number of dependents",
+      { id: "q4_tiebreaker", title: "Q4. Tie-breaker",
+        scenario: "Two students score identically. Who wins?",
         opts: [
-          { k:"A", l:"Don't consider family size" },
-          { k:"B", l:"3 pts for 5+ dependents" },
-          { k:"C", l:"Tiered 0-5 by dependent count" },
-          { k:"D", l:"Use only in per-capita" }
-        ]
-      }
-    ]
-  },
-  {
-    label: "B · FAMILY CIRCUMSTANCES",
-    questions: [
-      { id: "q5_parents", title: "Q5. Parents status / loss of parents",
-        opts: [
-          { k:"A", l:"No special weight" },
-          { k:"B", l:"5 pts for orphan / single-parent" },
-          { k:"C", l:"10/15 pts (one/both deceased)" },
-          { k:"D", l:"15/25 pts (one/both deceased)" },
-          { k:"E", l:"Auto-shortlist orphans" }
-        ]
-      },
-      { id: "q6_widow", title: "Q6. Single-parent / widow household",
-        opts: [
-          { k:"A", l:"0 pts" },
-          { k:"B", l:"3 pts" },
-          { k:"C", l:"5 pts" },
-          { k:"D", l:"10 pts" },
-          { k:"E", l:"Auto-shortlist" }
-        ]
-      },
-      { id: "q7_disability", title: "Q7. Disability / chronic illness",
-        opts: [
-          { k:"A", l:"0 pts" },
-          { k:"B", l:"3 pts" },
-          { k:"C", l:"5 pts" },
-          { k:"D", l:"10 pts" },
-          { k:"E", l:"Auto-shortlist certified cases" }
-        ]
-      },
-      { id: "q8_firstgen", title: "Q8. First-generation college student",
-        opts: [
-          { k:"A", l:"0 pts" },
-          { k:"B", l:"3 pts" },
-          { k:"C", l:"5 pts" },
-          { k:"D", l:"8 pts" },
-          { k:"E", l:"10 pts" }
-        ]
-      }
-    ]
-  },
-  {
-    label: "C · PRIORITY GROUPS — Gender, Geography, Domicile",
-    questions: [
-      { id: "q9_girl", title: "Q9. Girl-child priority",
-        opts: [
-          { k:"A", l:"0 pts (gender-neutral)" },
-          { k:"B", l:"3 pts" },
-          { k:"C", l:"5 pts" },
-          { k:"D", l:"10 pts" },
-          { k:"E", l:"Reserve 50% for girls" }
-        ]
-      },
-      { id: "q10_punjab", title: "Q10. 🪷 Punjab domicile bonus",
-        opts: [
-          { k:"A", l:"No preference" },
-          { k:"B", l:"+5%" },
-          { k:"C", l:"+10%" },
-          { k:"D", l:"+20%" },
-          { k:"E", l:"+30%" },
-          { k:"F", l:"Punjab-only" }
-        ]
-      },
-      { id: "q11_rural", title: "Q11. Rural background classification",
-        opts: [
-          { k:"A", l:"Don't consider geography" },
-          { k:"B", l:"Simple rural flag (+3)" },
-          { k:"C", l:"Tiered village/town/city" },
-          { k:"D", l:"Tiered + no-college bonus" },
-          { k:"E", l:"Border villages max bonus" }
-        ]
-      }
-    ]
-  },
-  {
-    label: "D · ACADEMIC PERFORMANCE",
-    questions: [
-      { id: "q12_marks", title: "Q12. Academic marks weight",
-        opts: [
-          { k:"A", l:"5 pts (need-focused)" },
-          { k:"B", l:"10 pts (basic merit)" },
-          { k:"C", l:"15 pts (balanced)" },
-          { k:"D", l:"20 pts (strong merit)" },
-          { k:"E", l:"25 pts (merit = need)" }
-        ]
-      },
-      { id: "q13_backlogs", title: "Q13. No backlogs / no reappears",
-        opts: [
-          { k:"A", l:"0 pts" },
-          { k:"B", l:"3 pts" },
-          { k:"C", l:"5 pts" },
-          { k:"D", l:"10 pts" },
-          { k:"E", l:"Mandatory — reappear = disqualified" }
-        ]
-      },
-      { id: "q14_trend", title: "Q14. Academic improvement trend",
-        opts: [
-          { k:"A", l:"0 pts (final average only)" },
-          { k:"B", l:"3 pts for improving" },
-          { k:"C", l:"5 pts for improving" },
-          { k:"D", l:"+5 / -2 (improve / decline)" }
-        ]
-      }
-    ]
-  },
-  {
-    label: "E · CHARACTER & EFFORT",
-    questions: [
-      { id: "q15_working", title: "Q15. Working alongside studies",
-        opts: [
-          { k:"A", l:"0 pts" },
-          { k:"B", l:"3 pts" },
-          { k:"C", l:"5 pts" },
-          { k:"D", l:"10 pts" },
-          { k:"E", l:"Required — must be working" }
-        ]
-      },
-      { id: "q16_awards", title: "Q16. Special awards & achievements",
-        opts: [
-          { k:"A", l:"No achievement bonus" },
-          { k:"B", l:"Flat 3 pts for any" },
-          { k:"C", l:"Tiered max 5 pts" },
-          { k:"D", l:"Tiered max 10 pts" },
-          { k:"E", l:"Big tiered max 15 pts" }
-        ]
-      },
-      { id: "q17_recommendation", title: "Q17. Teacher / HOD recommendation",
-        opts: [
-          { k:"A", l:"Not required" },
-          { k:"B", l:"Required, no score" },
-          { k:"C", l:"5 pts (rated 1-5)" },
-          { k:"D", l:"10 pts (calibrated)" },
-          { k:"E", l:"15 pts (critical signal)" }
-        ]
-      },
-      { id: "q18_leadership", title: "Q18. Leadership / NSS / NCC / volunteering",
-        opts: [
-          { k:"A", l:"0 pts" },
-          { k:"B", l:"3 pts" },
-          { k:"C", l:"5 pts" },
-          { k:"D", l:"10 pts" }
-        ]
-      }
-    ]
-  },
-  {
-    label: "F · POLICY DECISIONS",
-    questions: [
-      { id: "q19_previous", title: "Q19. Previous beneficiary policy",
-        opts: [
-          { k:"A", l:"Disqualify — fresh students" },
-          { k:"B", l:"Eligible, no bonus" },
-          { k:"C", l:"+5 pts continuity" },
-          { k:"D", l:"+10 pts continuity" },
-          { k:"E", l:"Auto-renew if 70%+ marks" },
-          { k:"F", l:"Auto-renew if simply passing" }
-        ]
-      },
-      { id: "q20_other_aid", title: "Q20. Other NGO / Govt aid received",
-        opts: [
-          { k:"A", l:"No penalty" },
-          { k:"B", l:"-3 pts" },
-          { k:"C", l:"-10 pts" },
-          { k:"D", l:"Disqualify if aid > our amount" },
-          { k:"E", l:"Disqualify if any aid" }
-        ]
-      },
-      { id: "q21_fraud", title: "Q21. Income misrepresentation",
-        opts: [
-          { k:"A", l:"Reject application" },
-          { k:"B", l:"Reject + 5-yr ban" },
-          { k:"C", l:"-20 pts + appeal allowed" },
-          { k:"D", l:"Verbal warning, accept revised" },
-          { k:"E", l:"Committee case-by-case" }
-        ]
-      },
-      { id: "q22_amount", title: "Q22. Award amount tiers",
-        opts: [
-          { k:"A", l:"Same amount for all" },
-          { k:"B", l:"Two tiers (20K/15K)" },
-          { k:"C", l:"Three tiers (25K/15K/10K)" },
-          { k:"D", l:"Sliding scale 10K-25K" },
-          { k:"E", l:"Committee decides per case" }
-        ]
-      },
-      { id: "q23_scale", title: "Q23. Total scoring scale",
-        opts: [
-          { k:"A", l:"10-point scale" },
-          { k:"B", l:"50-point scale" },
-          { k:"C", l:"100-point scale" },
-          { k:"D", l:"Percentage-based (0-100%)" }
-        ]
-      },
-      { id: "q24_tiebreak", title: "Q24. Tie-breaker (primary)",
-        opts: [
-          { k:"A", l:"Lower income wins" },
+          { k:"A", l:"Lower family income wins" },
           { k:"B", l:"Orphan / single-parent wins" },
-          { k:"C", l:"Girl child wins" },
-          { k:"D", l:"Higher academic marks wins" },
-          { k:"E", l:"Award both if budget allows" }
+          { k:"C", l:"Both get awards — find budget" }
+        ]
+      }
+    ]
+  },
+  {
+    label: "2 · IDENTITY & BACKGROUND",
+    questions: [
+      { id: "q5_son_or_daughter", title: "Q5. Brother vs sister from same family",
+        scenario: "Both apply with very similar profile",
+        opts: [
+          { k:"A", l:"Sister — girl-child priority" },
+          { k:"B", l:"Brother if marks slightly better" },
+          { k:"C", l:"Whoever has worse situation" }
         ]
       },
-      { id: "q25_awardees", title: "Q25. Number of annual awardees",
+      { id: "q6_punjab_bonus", title: "Q6. 🪷 Punjab domicile",
+        scenario: "Final answer on Punjab bonus",
         opts: [
-          { k:"A", l:"Fewer (5-10), larger amounts" },
-          { k:"B", l:"Moderate (15-25), balanced" },
-          { k:"C", l:"Many (30-50), smaller amounts" },
-          { k:"D", l:"All above threshold (budget-bound)" },
-          { k:"E", l:"Committee decides annually" }
+          { k:"A", l:"No bonus — all India equal" },
+          { k:"B", l:"+20% bonus to Punjab students" },
+          { k:"C", l:"Punjab-only — non-Punjab not eligible" }
+        ]
+      },
+      { id: "q7_rural_village", title: "Q7. Small village (2,000 ppl), 40km commute",
+        scenario: "No nearby college, daily commute",
+        opts: [
+          { k:"A", l:"Big bonus — rural disadvantage is real" },
+          { k:"B", l:"Small recognition" },
+          { k:"C", l:"Not a factor — income alone" }
+        ]
+      },
+      { id: "q8_first_gen", title: "Q8. First in family to attend college",
+        scenario: "Neither parent finished a degree",
+        opts: [
+          { k:"A", l:"Big bonus — breaks generational poverty" },
+          { k:"B", l:"Small recognition" },
+          { k:"C", l:"Not relevant" }
+        ]
+      }
+    ]
+  },
+  {
+    label: "3 · HARDSHIP",
+    questions: [
+      { id: "q9_orphan_policy", title: "Q9. Orphan policy (both parents deceased)",
+        scenario: "Both parents deceased",
+        opts: [
+          { k:"A", l:"Auto-qualify" },
+          { k:"B", l:"Big bonus, standard process" },
+          { k:"C", l:"Standard process — same as others" }
+        ]
+      },
+      { id: "q10_widow_mother", title: "Q10. Widow mother sole earner",
+        scenario: "Mother is sole earner (father absent/deceased)",
+        opts: [
+          { k:"A", l:"Big bonus" },
+          { k:"B", l:"Small recognition" },
+          { k:"C", l:"No bonus — income alone" }
+        ]
+      },
+      { id: "q11_disability_policy", title: "Q11. Certified disability / chronic illness",
+        scenario: "Student or parent has disability certificate",
+        opts: [
+          { k:"A", l:"Auto-qualify or major bonus" },
+          { k:"B", l:"Small bonus" },
+          { k:"C", l:"Not a separate factor" }
+        ]
+      }
+    ]
+  },
+  {
+    label: "4 · EFFORT, CHARACTER & ACADEMICS",
+    questions: [
+      { id: "q12_working_student", title: "Q12. Working night-shift (60%) vs non-working (75%)",
+        scenario: "Student A works delivery night-shift 60%. B doesn't work, 75%",
+        opts: [
+          { k:"A", l:"Working student — earned every percent" },
+          { k:"B", l:"Recognize but marks matter more" },
+          { k:"C", l:"Marks come first" }
+        ]
+      },
+      { id: "q13_backlog_policy", title: "Q13. One backlog due to illness, otherwise excellent",
+        scenario: "One re-exam in 3 years due to illness",
+        opts: [
+          { k:"A", l:"Automatic disqualification" },
+          { k:"B", l:"Minor deduction, allow" },
+          { k:"C", l:"No issue if rest is strong" }
+        ]
+      },
+      { id: "q14_achievement_vs_marks", title: "Q14. National champion (60%) vs top scorer (85%)",
+        scenario: "Chess national champion 60% vs 85% no extracurriculars",
+        opts: [
+          { k:"A", l:"National champion — talent + character" },
+          { k:"B", l:"Top scorer — marks are the measure" },
+          { k:"C", l:"Need beats both — look at income" }
+        ]
+      },
+      { id: "q15_declining_marks", title: "Q15. Marks dropped 80%→65% due to father's accident",
+        scenario: "Family crisis caused decline",
+        opts: [
+          { k:"A", l:"Support them — that's our purpose" },
+          { k:"B", l:"Support with warning to improve" },
+          { k:"C", l:"Decline — need stable performers" }
+        ]
+      }
+    ]
+  },
+  {
+    label: "5 · POLICY & AWARDS",
+    questions: [
+      { id: "q16_previous_beneficiary", title: "Q16. Previous beneficiary applies with 75%+",
+        scenario: "Last year's recipient applies again",
+        opts: [
+          { k:"A", l:"Priority — finish what we start" },
+          { k:"B", l:"Standard process — fresh each year" },
+          { k:"C", l:"Disqualify — give new students chance" }
+        ]
+      },
+      { id: "q17_other_aid", title: "Q17. Already receives ₹5K Punjab Govt scholarship",
+        scenario: "Other Govt aid already received",
+        opts: [
+          { k:"A", l:"Yes, no issue — may still need more" },
+          { k:"B", l:"Yes, but deduct ₹5K from our award" },
+          { k:"C", l:"No — leave room for fresh applicants" }
+        ]
+      },
+      { id: "q18_budget_split", title: "Q18. ₹3L budget — best split",
+        scenario: "₹3,00,000 to allocate",
+        opts: [
+          { k:"A", l:"10 × ₹30K — most deserving, larger help" },
+          { k:"B", l:"20 × ₹15K — balanced reach" },
+          { k:"C", l:"30 × ₹10K — help as many as possible" }
         ]
       }
     ]
   }
 ];
 
-/* ============================================================
-   Single-shot aggregated fetch via Cloudflare Pages Function
-   at /api/results. The function batches & edge-caches all 99
-   counters server-side, so the dashboard makes ONE request
-   instead of 99, avoiding the abacus.jasoncameron.dev 429s.
-============================================================ */
 let fetchInProgress = false;
 
 async function loadAllResults(forceFresh = false) {
@@ -516,21 +362,15 @@ async function loadAllResults(forceFresh = false) {
       loadingEl.querySelector('div:last-child').textContent = 'Fetching live results…';
     }
 
-    // One request to /api/results — function aggregates everything
     const url = forceFresh ? '/api/results?nocache=' + Date.now() : '/api/results';
     const resp = await fetch(url, { cache: 'no-store' });
     if (!resp.ok) {
-      console.error('Failed to load results:', resp.status);
-      if (isInitialLoad && loadingEl) {
-        loadingEl.querySelector('div:last-child').textContent =
-          'Could not load results. Retrying in 30s…';
-      }
+      console.error('Failed to load:', resp.status);
       return;
     }
     const payload = await resp.json();
     const counters = payload.counters || {};
 
-    // Aggregate into question structure
     const data = { total: counters.total_submissions || 0, byQuestion: {} };
     SECTIONS.forEach(sec => sec.questions.forEach(q => {
       data.byQuestion[q.id] = {};
@@ -548,11 +388,9 @@ async function loadAllResults(forceFresh = false) {
 function renderResults(data) {
   document.getElementById('loadingState').style.display = 'none';
   document.getElementById('resultsContainer').style.display = 'block';
-
   document.getElementById('totalCount').textContent = data.total;
   document.getElementById('lastUpdated').textContent = new Date().toLocaleTimeString();
 
-  // Leading choices recommendation
   const recGrid = document.getElementById('recGrid');
   recGrid.innerHTML = '';
   let anyVotes = false;
@@ -569,54 +407,41 @@ function renderResults(data) {
     const pct = totalQ ? Math.round((topCount / totalQ) * 100) : 0;
     const row = document.createElement('div');
     row.className = 'rec-row';
-    const shortTitle = q.title.replace(/^Q\d+\.\s*/, '').slice(0, 50);
-    row.innerHTML = `
-      <span class="lbl">${shortTitle}</span>
-      <span class="val">${topOpt.l.slice(0, 35)}${topOpt.l.length > 35 ? '…' : ''} · ${pct}%</span>
-    `;
+    const shortTitle = q.title.replace(/^Q\d+\.\s*/, '').slice(0, 55);
+    row.innerHTML = `<span class="lbl">${shortTitle}</span><span class="val">${topOpt.l.slice(0,30)}${topOpt.l.length>30?'…':''} · ${pct}%</span>`;
     recGrid.appendChild(row);
   }));
   if (!anyVotes) {
     recGrid.innerHTML = '<div class="rec-row" style="justify-content:center;"><span class="lbl">No votes yet — be the first!</span></div>';
   }
 
-  // Sectioned detailed cards
   const out = document.getElementById('questionsOutput');
   out.innerHTML = '';
-
   SECTIONS.forEach(sec => {
-    const sectionDiv = document.createElement('div');
-    sectionDiv.innerHTML = `<div class="section-header"><div class="num">${sec.label[0]}</div><div class="ttl">${sec.label.slice(4)}</div></div>`;
-    out.appendChild(sectionDiv);
-
+    const sd = document.createElement('div');
+    sd.innerHTML = `<div class="section-header"><div class="num">${sec.label[0]}</div><div class="ttl">${sec.label.slice(4)}</div></div>`;
+    out.appendChild(sd);
     sec.questions.forEach(q => {
       const counts = data.byQuestion[q.id] || {};
       const totalQ = Object.values(counts).reduce((a, b) => a + b, 0);
       let topCount = -1;
-      q.opts.forEach(opt => {
-        const c = counts[opt.k] || 0;
-        if (c > topCount) topCount = c;
-      });
+      q.opts.forEach(opt => { const c = counts[opt.k] || 0; if (c > topCount) topCount = c; });
 
       const card = document.createElement('div');
       card.className = 'q-result';
       let html = `<h3>${q.title}</h3>`;
+      if (q.scenario) html += `<div class="q-scenario">${q.scenario}</div>`;
       html += `<div class="q-meta">${totalQ} vote${totalQ === 1 ? '' : 's'}</div>`;
       html += '<div class="answers">';
       q.opts.forEach(opt => {
         const c = counts[opt.k] || 0;
         const pct = totalQ > 0 ? Math.round((c / totalQ) * 100) : 0;
         const isWinner = totalQ > 0 && c === topCount && c > 0;
-        html += `
-          <div class="bar-row">
-            <div class="bar-label"><span class="vletter">${opt.k}</span>${opt.l}</div>
-            <div class="bar-vis">
-              <div class="bar-fill ${isWinner ? 'winner' : ''}" style="width:${pct}%;"></div>
-              <span class="bar-count">${c}</span>
-            </div>
-            <div class="bar-pct">${pct}%</div>
-          </div>
-        `;
+        html += `<div class="bar-row">
+          <div class="bar-label"><span class="vletter">${opt.k}</span>${opt.l}</div>
+          <div class="bar-vis"><div class="bar-fill ${isWinner ? 'winner' : ''}" style="width:${pct}%;"></div><span class="bar-count">${c}</span></div>
+          <div class="bar-pct">${pct}%</div>
+        </div>`;
       });
       html += '</div>';
       card.innerHTML = html;
@@ -627,7 +452,6 @@ function renderResults(data) {
 
 loadAllResults();
 document.getElementById('refreshBtn').addEventListener('click', () => loadAllResults(true));
-// Auto-refresh every 60s — most fetches hit the cache, only stale keys refetch
 setInterval(() => loadAllResults(false), 60000);
 </script>
 

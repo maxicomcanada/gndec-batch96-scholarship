@@ -346,15 +346,18 @@ body {
       <p>No abstract point values, no "committee decides" — just clear choices.</p>
       <div class="why">
         <b>⏱ 28 questions · 3 options each · ~6 minutes</b><br>
-        🔒 One vote per device · Anonymous · Live results visible
+        🔒 One vote per phone number · Votes anonymized in results · Live results visible
       </div>
-      <span class="secure-badge">🔒 One Vote Per Device · Anonymous Ballot</span>
+      <span class="secure-badge">🔒 One Vote Per Phone · Results Anonymized</span>
     </div>
 
     <form id="pollForm" onsubmit="return false;">
       <div class="identity">
-        <label>Your name <span class="opt">(shown back to you only, not stored remotely)</span></label>
+        <label>Your name <span class="opt">(required — recorded against your vote)</span></label>
         <input type="text" name="name" placeholder="e.g. Tejpreet Singh" required>
+        <label style="margin-top:14px;">WhatsApp number <span class="opt">(required — used to verify one vote per person)</span></label>
+        <input type="tel" name="phone" placeholder="e.g. 9876543210" required pattern="[0-9+\-\s]{7,15}" inputmode="numeric">
+        <p style="font-size:11px; color:var(--muted); margin: 4px 0 0;">📞 Same WhatsApp number can vote only once. Your votes themselves stay anonymous in the published results — only the voter list is captured for verification.</p>
       </div>
 
       <!-- ============== SECTION 1: NEED vs MERIT ============== -->
@@ -693,7 +696,7 @@ body {
         <textarea name="comments" placeholder="e.g. 'Consider students with mental health issues separately', 'Add a sports merit category', etc."></textarea>
         <button class="btn" type="button" id="submitBtn">📩 Submit My Vote</button>
         <div class="security-note">
-          🔒 <b>Anonymous · one vote per device.</b> Your votes only update the live tally counters — no email, no personal data leaves your device. Browser fingerprint + multi-layer storage prevent duplicates.
+          🔒 <b>One vote per WhatsApp number.</b> Your name + phone are recorded against your submission so we know who has voted (for follow-up reminders). The published live results are aggregated and do not show which voter chose which answer.
         </div>
       </div>
 
@@ -856,6 +859,7 @@ function buildPrevSummary(record) {
   const a = record.answers || {};
   const items = [];
   if (record.name) items.push(`<b>Voter:</b> ${record.name}`);
+  if (record.phone) items.push(`<b>WhatsApp:</b> ${record.phone}`);
   if (record.submittedAt) items.push(`<b>Submitted:</b> ${new Date(record.submittedAt).toLocaleString()}`);
   items.push("<hr style='border:none;border-top:1px solid var(--line);margin:6px 0;'>");
   Object.keys(QLABELS).forEach(k => {
@@ -893,10 +897,14 @@ function gatherAnswersFromForm() {
   const data = new FormData(form);
   const answers = {};
   for (const [k, v] of data.entries()) {
-    if (['name', 'comments'].includes(k)) continue;
+    if (['name', 'phone', 'comments'].includes(k)) continue;
     answers[k] = v;
   }
-  return { name: data.get('name') || '', answers };
+  return {
+    name: data.get('name') || '',
+    phone: (data.get('phone') || '').replace(/[^0-9]/g, '').slice(-10),
+    answers
+  };
 }
 
 function validateAllAnswered() {
@@ -912,30 +920,76 @@ function validateAllAnswered() {
   }
   const nameInput = form.querySelector('input[name="name"]');
   if (!nameInput.value.trim()) { nameInput.focus(); return 'name'; }
+  const phoneInput = form.querySelector('input[name="phone"]');
+  const phoneClean = (phoneInput.value || '').replace(/[^0-9]/g, '');
+  if (phoneClean.length < 7) { phoneInput.focus(); return 'phone'; }
   return null;
 }
 
 async function handleSubmit() {
   const missing = validateAllAnswered();
   if (missing) {
-    alert(missing === 'name' ? "Please enter your name." : "Please answer all 28 questions before submitting.");
+    let msg = "Please answer all 28 questions before submitting.";
+    if (missing === 'name') msg = "Please enter your name.";
+    if (missing === 'phone') msg = "Please enter a valid WhatsApp number.";
+    alert(msg);
     return;
   }
   const btn = document.getElementById('submitBtn');
   btn.disabled = true;
+  btn.textContent = '⏳ Checking…';
+
+  const { name, phone, answers } = gatherAnswersFromForm();
+  const fp = await generateFingerprint();
+
+  // Step 1: Server-side phone dedup check
+  try {
+    const r = await fetch(`/api/vote?phone=${encodeURIComponent(phone)}`, { cache: 'no-store' });
+    const data = await r.json();
+    if (data.voted) {
+      alert(`📞 This WhatsApp number has already voted on ${new Date(data.when).toLocaleString()}.\n\nIf this is wrong, contact maxicomcanada@gmail.com.`);
+      btn.disabled = false;
+      btn.textContent = '📩 Submit My Vote';
+      return;
+    }
+  } catch (e) {
+    // network failure — let them through (server still dedupes on POST)
+  }
+
   btn.textContent = '⏳ Submitting…';
 
-  const { name, answers } = gatherAnswersFromForm();
+  // Step 2: Submit to voter log (records name+phone)
+  let voterLogged = true;
+  try {
+    const r = await fetch('/api/vote', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ name, phone, fingerprint: fp })
+    });
+    if (r.status === 409) {
+      alert("📞 This WhatsApp number already voted.");
+      btn.disabled = false;
+      btn.textContent = '📩 Submit My Vote';
+      return;
+    }
+    voterLogged = r.ok;
+  } catch (e) { voterLogged = false; }
+
+  // Step 3: Bump counters
   try { await recordAllAnswers(answers); } catch (e) {}
-  await markAsVoted({ ...answers, name });
+
+  // Step 4: Mark device + show thank-you
+  await markAsVoted({ ...answers, name, phone });
 
   document.getElementById('formContainer').style.display = 'none';
   const lock = document.getElementById('lockoutScreen');
   lock.style.display = 'block';
   lock.querySelector('h2').textContent = '🙏 Vote submitted! Thank you.';
-  lock.querySelector('p').textContent = 'Your response is now part of the live results.';
+  lock.querySelector('p').textContent = voterLogged
+    ? 'Your vote has been recorded against your name. Live results updating now.'
+    : 'Your vote has been recorded. Live results updating now.';
   document.getElementById('prevVoteSummary').innerHTML = buildPrevSummary({
-    submittedAt: new Date().toISOString(), name, answers
+    submittedAt: new Date().toISOString(), name, phone, answers
   });
   document.getElementById('shareBtnLock').href = "https://wa.me/?text=" + SHARE_TEXT;
   window.scrollTo({ top: 0, behavior: 'smooth' });

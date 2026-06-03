@@ -1,4 +1,5 @@
-# Block direct access to any other path - redirect to poll
+# Cache-bust: 1780517900
+# Lock down: catch-all redirect to poll
 /admin* /poll 302
 /apply* /poll 302
 /donor_management* /poll 302

@@ -1,39 +1,32 @@
 // Cloudflare Pages Function: /api/results
-// Aggregates all poll counters in a single response.
-// Caches at the edge (cache-control) so 100 batchmates = ~5 hits to abacus per minute.
+// Aggregates all 18 question counters + total into a single response.
+// Fresh namespace = clean start.
 
-const TALLY_NS = "gndec1996scholarpoll26";
+const TALLY_NS = "gndec1996rubric2026v3";
 
 const QUESTIONS = [
-  { id: "q1_income_weight",   opts: ["A","B","C","D","E"] },
-  { id: "q2_income_method",   opts: ["A","B","C","D"] },
-  { id: "q3_assets",          opts: ["A","B","C","D","E"] },
-  { id: "q4_dependents",      opts: ["A","B","C","D"] },
-  { id: "q5_parents",         opts: ["A","B","C","D","E"] },
-  { id: "q6_widow",           opts: ["A","B","C","D","E"] },
-  { id: "q7_disability",      opts: ["A","B","C","D","E"] },
-  { id: "q8_firstgen",        opts: ["A","B","C","D","E"] },
-  { id: "q9_girl",            opts: ["A","B","C","D","E"] },
-  { id: "q10_punjab",         opts: ["A","B","C","D","E","F"] },
-  { id: "q11_rural",          opts: ["A","B","C","D","E"] },
-  { id: "q12_marks",          opts: ["A","B","C","D","E"] },
-  { id: "q13_backlogs",       opts: ["A","B","C","D","E"] },
-  { id: "q14_trend",          opts: ["A","B","C","D"] },
-  { id: "q15_working",        opts: ["A","B","C","D","E"] },
-  { id: "q16_awards",         opts: ["A","B","C","D","E"] },
-  { id: "q17_recommendation", opts: ["A","B","C","D","E"] },
-  { id: "q18_leadership",     opts: ["A","B","C","D"] },
-  { id: "q19_previous",       opts: ["A","B","C","D","E","F"] },
-  { id: "q20_other_aid",      opts: ["A","B","C","D","E"] },
-  { id: "q21_fraud",          opts: ["A","B","C","D","E"] },
-  { id: "q22_amount",         opts: ["A","B","C","D","E"] },
-  { id: "q23_scale",          opts: ["A","B","C","D"] },
-  { id: "q24_tiebreak",       opts: ["A","B","C","D","E"] },
-  { id: "q25_awardees",       opts: ["A","B","C","D","E"] }
+  { id: "q1_need_vs_merit",            opts: ["A","B","C"] },
+  { id: "q2_low_marks_low_income",     opts: ["A","B","C"] },
+  { id: "q3_above_threshold_no_assets",opts: ["A","B","C"] },
+  { id: "q4_tiebreaker",               opts: ["A","B","C"] },
+  { id: "q5_son_or_daughter",          opts: ["A","B","C"] },
+  { id: "q6_punjab_bonus",             opts: ["A","B","C"] },
+  { id: "q7_rural_village",            opts: ["A","B","C"] },
+  { id: "q8_first_gen",                opts: ["A","B","C"] },
+  { id: "q9_orphan_policy",            opts: ["A","B","C"] },
+  { id: "q10_widow_mother",            opts: ["A","B","C"] },
+  { id: "q11_disability_policy",       opts: ["A","B","C"] },
+  { id: "q12_working_student",         opts: ["A","B","C"] },
+  { id: "q13_backlog_policy",          opts: ["A","B","C"] },
+  { id: "q14_achievement_vs_marks",    opts: ["A","B","C"] },
+  { id: "q15_declining_marks",         opts: ["A","B","C"] },
+  { id: "q16_previous_beneficiary",    opts: ["A","B","C"] },
+  { id: "q17_other_aid",               opts: ["A","B","C"] },
+  { id: "q18_budget_split",            opts: ["A","B","C"] }
 ];
 
-const BATCH_SIZE = 4;
-const BATCH_DELAY_MS = 250;
+const BATCH_SIZE = 5;
+const BATCH_DELAY_MS = 200;
 
 async function fetchOne(key, retries = 4) {
   for (let attempt = 0; attempt < retries; attempt++) {
@@ -46,11 +39,10 @@ async function fetchOne(key, retries = 4) {
         return d.value || 0;
       }
       if (r.status === 429) {
-        // Exponential backoff
         await new Promise(res => setTimeout(res, 500 * Math.pow(2, attempt)));
         continue;
       }
-      if (r.status === 404) return 0; // Counter not yet created
+      if (r.status === 404) return 0;
     } catch (e) {
       await new Promise(res => setTimeout(res, 200));
     }
@@ -59,6 +51,7 @@ async function fetchOne(key, retries = 4) {
 }
 
 async function fetchAll() {
+  // Only 55 counters total (1 + 18*3) — should fit comfortably in rate limits
   const keys = ["total_submissions"];
   QUESTIONS.forEach(q => q.opts.forEach(opt => keys.push(`${q.id}__${opt}`)));
 
@@ -76,17 +69,13 @@ async function fetchAll() {
 
 export async function onRequest(context) {
   const cacheUrl = new URL(context.request.url);
-  cacheUrl.search = ""; // canonical cache key
+  cacheUrl.search = "";
   const cacheKey = new Request(cacheUrl.toString(), context.request);
   const cache = caches.default;
 
-  // Try edge cache first
   let resp = await cache.match(cacheKey);
-  if (resp) {
-    return resp;
-  }
+  if (resp) return resp;
 
-  // Fresh aggregation
   const data = await fetchAll();
 
   resp = new Response(JSON.stringify({
@@ -96,12 +85,11 @@ export async function onRequest(context) {
   }), {
     headers: {
       "content-type": "application/json; charset=utf-8",
-      "cache-control": "public, max-age=20, s-maxage=20",
+      "cache-control": "public, max-age=30, s-maxage=30",
       "access-control-allow-origin": "*"
     }
   });
 
-  // Store in edge cache (async, doesn't delay response)
   context.waitUntil(cache.put(cacheKey, resp.clone()));
   return resp;
 }

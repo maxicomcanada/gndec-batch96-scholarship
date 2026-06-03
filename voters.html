@@ -110,7 +110,16 @@ tr:hover td { background: #fdfbf4; }
       <span class="spacer"></span>
       <input type="search" id="search" placeholder="🔍 Search name or phone…">
       <button id="refreshBtn">🔄 Refresh</button>
-      <button id="exportBtn" style="background:var(--punjab-green);">📥 Export CSV</button>
+      <button id="exportBtn" style="background:var(--punjab-green);">📥 CSV (voters)</button>
+      <button id="backupBtn" style="background:var(--maroon);">💾 Full backup (JSON)</button>
+    </div>
+    <div style="background:#fff7e6; padding:10px 14px; border-radius:8px; font-size:12px; color:var(--maroon); margin-bottom:14px;">
+      <b>🛡 Backup status:</b>
+      Voters: Primary blob + Mirror blob (auto-mirrored on every vote) ·
+      Counters: abacus.jasoncameron.dev ·
+      <b>Recommended:</b> click <b>💾 Full backup</b> once a day to save a snapshot to your computer.
+      <br>
+      <span id="backupSummary" style="color:var(--muted);">Loading backup status…</span>
     </div>
 
     <div class="hero">
@@ -234,6 +243,36 @@ document.getElementById('pw').addEventListener('keydown', e => { if (e.key==='En
 document.getElementById('refreshBtn').addEventListener('click', loadVoters);
 document.getElementById('exportBtn').addEventListener('click', exportCSV);
 document.getElementById('search').addEventListener('input', e => { filterText = e.target.value; render(); });
+
+document.getElementById('backupBtn').addEventListener('click', async () => {
+  const btn = document.getElementById('backupBtn');
+  btn.disabled = true; btn.textContent = '⏳ Generating…';
+  try {
+    const r = await fetch('/api/backup?download=1', { cache: 'no-store' });
+    const blob = await r.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'poll_backup_' + new Date().toISOString().slice(0,19).replace(/[:T]/g,'-') + '.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  } catch (e) { alert('Backup failed: ' + e.message); }
+  finally { btn.disabled = false; btn.textContent = '💾 Full backup (JSON)'; }
+});
+
+async function showBackupStatus() {
+  try {
+    const r = await fetch('/api/backup', { cache: 'no-store' });
+    const d = await r.json();
+    const consistent = d.voters_consistent ? '✅ Primary & mirror in sync' : '⚠️ Primary & mirror differ';
+    document.getElementById('backupSummary').innerHTML =
+      `Snapshot ready · ${d.totalVotes} votes · ${d.voters_primary?.voters?.length || 0} voters logged · ${consistent}`;
+  } catch (e) {
+    document.getElementById('backupSummary').textContent = 'Backup status unavailable';
+  }
+}
+showBackupStatus();
+setInterval(showBackupStatus, 60000);
 
 checkGate();
 </script>

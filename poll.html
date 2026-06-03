@@ -978,6 +978,12 @@ async function handleSubmit() {
   // Step 3: Bump counters
   try { await recordAllAnswers(answers); } catch (e) {}
 
+  // Step 3b: Pre-warm the live-results edge cache so the dashboard loads instantly
+  // for this user when they click "View Live Results"
+  setTimeout(() => {
+    fetch('/api/results?warm=' + Date.now(), { cache: 'no-store' }).catch(() => {});
+  }, 1500);
+
   // Step 4: Mark device + show thank-you
   await markAsVoted({ ...answers, name, phone });
 

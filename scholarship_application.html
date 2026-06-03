@@ -1,0 +1,2442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Alumni Scholarship Application</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --primary: #1e3a5f;
+    --primary-dark: #15263c;
+    --primary-light: #3b5b7f;
+    --accent: #ea580c;
+    --accent-light: #fb923c;
+    --teal: #a16207;
+    --bg: #f7f3e9;
+    --bg-soft: #fdfaf2;
+    --card: #ffffff;
+    --text: #0f172a;
+    --text-soft: #334155;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --good: #16a34a;
+    --good-bg: #dcfce7;
+    --warn: #c2410c;
+    --warn-bg: #ffedd5;
+    --bad: #dc2626;
+    --bad-bg: #fee2e2;
+    --shadow-sm: 0 1px 2px rgba(15,23,42,0.06), 0 1px 3px rgba(15,23,42,0.05);
+    --shadow-md: 0 4px 12px rgba(15,23,42,0.08), 0 2px 4px rgba(15,23,42,0.04);
+    --shadow-lg: 0 12px 32px rgba(15,23,42,0.12), 0 4px 8px rgba(15,23,42,0.06);
+    --radius: 14px;
+  }
+  [data-theme="dark"] {
+    --primary: #7a96c2;
+    --primary-dark: #3b5b7f;
+    --primary-light: #9bb3d4;
+    --bg: #0f172a;
+    --bg-soft: #1e293b;
+    --card: #1e293b;
+    --text: #f7f3e9;
+    --text-soft: #e2e8f0;
+    --muted: #94a3b8;
+    --border: #334155;
+    --border-strong: #475569;
+    --good-bg: rgba(34,197,94,0.15);
+    --warn-bg: rgba(217,119,6,0.18);
+    --bad-bg: rgba(220,38,38,0.18);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Topbar */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  [data-theme="dark"] .topbar { background: rgba(15,23,42,0.85); }
+  .topbar-inner {
+    max-width: 1100px; margin: 0 auto;
+    padding: 12px 18px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 800; font-size: 16px; color: var(--text);
+  }
+  .brand-mark {
+    width: 32px; height: 32px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    border-radius: 9px;
+    display: grid; place-items: center;
+    color: #fff; font-weight: 900;
+    box-shadow: var(--shadow-md);
+  }
+  .topbar-spacer { flex: 1; }
+  .progress-wrap {
+    flex: 1; max-width: 360px;
+    height: 8px; background: var(--border); border-radius: 99px; overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%; width: 0;
+    background: linear-gradient(90deg, var(--primary), var(--teal));
+    border-radius: 99px;
+    transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .progress-pct { font-size: 12px; font-weight: 700; color: var(--muted); min-width: 38px; text-align: right; }
+  .icon-btn {
+    width: 36px; height: 36px;
+    border: 1px solid var(--border); border-radius: 9px;
+    background: var(--card); cursor: pointer;
+    display: grid; place-items: center;
+    font-size: 16px; color: var(--text);
+    transition: all 0.15s;
+  }
+  .icon-btn:hover { background: var(--bg-soft); border-color: var(--primary); color: var(--primary); }
+
+  /* Layout */
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 24px 18px 100px; }
+  .hero {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 50%, var(--teal) 100%);
+    color: #fff;
+    padding: 32px 28px;
+    border-radius: 18px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ""; position: absolute; top: -60px; right: -60px;
+    width: 240px; height: 240px;
+    background: radial-gradient(circle, rgba(234,88,12,0.35), transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: ""; position: absolute; bottom: -80px; left: -80px;
+    width: 280px; height: 280px;
+    background: radial-gradient(circle, rgba(255,255,255,0.12), transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-inner { position: relative; z-index: 1; max-width: 720px; }
+  .hero h1 { margin: 0 0 8px; font-size: 30px; line-height: 1.15; letter-spacing: -0.02em; }
+  .hero p { margin: 0; opacity: 0.95; font-size: 15px; max-width: 560px; }
+  .hero-stats {
+    display: flex; gap: 16px; margin-top: 20px; flex-wrap: wrap;
+  }
+  .hero-stat {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(8px);
+    padding: 10px 14px; border-radius: 10px;
+    font-size: 12px;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .hero-stat b { display: block; font-size: 16px; margin-bottom: 2px; }
+
+  /* Stepper */
+  .stepper {
+    display: flex; gap: 6px; margin-bottom: 20px;
+    overflow-x: auto; padding-bottom: 4px;
+    scrollbar-width: thin;
+  }
+  .step-pill {
+    flex-shrink: 0;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 99px; padding: 8px 14px;
+    font-size: 13px; font-weight: 600;
+    color: var(--muted); cursor: pointer;
+    transition: all 0.2s;
+    display: flex; align-items: center; gap: 8px;
+    white-space: nowrap;
+  }
+  .step-pill .step-num {
+    width: 22px; height: 22px;
+    background: var(--border); color: var(--text-soft);
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: 11px; font-weight: 700;
+  }
+  .step-pill:hover { border-color: var(--primary-light); color: var(--text); }
+  .step-pill.active {
+    background: var(--primary); color: #fff; border-color: var(--primary);
+    box-shadow: 0 4px 12px rgba(30,58,95,0.3);
+  }
+  .step-pill.active .step-num { background: rgba(255,255,255,0.25); color: #fff; }
+  .step-pill.done { color: var(--good); border-color: var(--good); }
+  .step-pill.done .step-num { background: var(--good); color: #fff; }
+
+  /* Cards */
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 22px;
+    align-items: start;
+  }
+  @media (max-width: 920px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { order: -1; }
+  }
+  .card {
+    background: var(--card); border-radius: var(--radius);
+    padding: 24px 26px; box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+  }
+  .card.elevated { box-shadow: var(--shadow-md); }
+  .card-title { font-size: 19px; margin: 0 0 4px; letter-spacing: -0.01em; }
+  .card-subtitle { font-size: 13px; color: var(--muted); margin: 0 0 18px; }
+  .card-section { margin-bottom: 18px; }
+  .card-section:last-child { margin-bottom: 0; }
+  .card-section h3 {
+    font-size: 14px; margin: 0 0 12px;
+    color: var(--text-soft); text-transform: uppercase; letter-spacing: 0.05em;
+    font-weight: 700;
+  }
+
+  /* Fields */
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .row-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .row-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  @media (max-width: 720px) { .row, .row-3, .row-4 { grid-template-columns: 1fr; } }
+  .field { margin-bottom: 14px; }
+  .field:last-child { margin-bottom: 0; }
+  label {
+    display: block; font-size: 13px; font-weight: 600;
+    margin-bottom: 6px; color: var(--text-soft);
+  }
+  label .req { color: var(--bad); }
+  .hint { font-size: 12px; color: var(--muted); font-weight: 400; display: block; margin-top: 4px; }
+  input[type="text"], input[type="number"], input[type="email"], input[type="tel"], input[type="url"], input[type="date"],
+  select, textarea {
+    width: 100%; padding: 10px 13px;
+    border: 1.5px solid var(--border); border-radius: 9px;
+    font-size: 14px; font-family: inherit; color: var(--text);
+    background: var(--card);
+    transition: all 0.15s;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(30,58,95,0.12);
+  }
+  input.invalid, select.invalid, textarea.invalid {
+    border-color: var(--bad);
+    box-shadow: 0 0 0 4px rgba(220,38,38,0.12);
+  }
+  textarea { resize: vertical; min-height: 80px; }
+
+  /* Choice cards */
+  .choice-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+  .choice {
+    position: relative;
+    padding: 14px 14px 14px 42px;
+    border: 1.5px solid var(--border); border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.15s;
+    background: var(--card);
+    font-size: 13px;
+    user-select: none;
+  }
+  .choice .choice-title { font-weight: 600; font-size: 14px; color: var(--text); }
+  .choice .choice-sub { color: var(--muted); margin-top: 2px; font-size: 12px; }
+  .choice input { position: absolute; left: 14px; top: 16px; }
+  .choice:hover { border-color: var(--primary-light); background: var(--bg-soft); }
+  .choice.selected {
+    border-color: var(--primary); background: rgba(30,58,95,0.06);
+    box-shadow: 0 0 0 3px rgba(30,58,95,0.08);
+  }
+  [data-theme="dark"] .choice.selected { background: rgba(122,150,194,0.12); }
+
+  /* Buttons */
+  .btn {
+    padding: 10px 18px;
+    border: 1.5px solid var(--border); background: var(--card);
+    border-radius: 9px; font-size: 14px; font-weight: 600;
+    cursor: pointer; color: var(--text);
+    transition: all 0.15s;
+    font-family: inherit;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .btn:hover { background: var(--bg-soft); border-color: var(--border-strong); }
+  .btn-primary { background: var(--primary); color: #fff; border-color: var(--primary); }
+  .btn-primary:hover { background: var(--primary-dark); border-color: var(--primary-dark); }
+  .btn-accent { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn-accent:hover { filter: brightness(0.92); }
+  .btn-ghost { background: transparent; border-color: transparent; }
+  .btn-ghost:hover { background: var(--bg-soft); }
+  .btn-danger { color: var(--bad); border-color: var(--bad-bg); }
+  .btn-danger:hover { background: var(--bad-bg); }
+  .btn-sm { padding: 6px 12px; font-size: 12.5px; }
+  .btn-block { width: 100%; justify-content: center; }
+
+  /* Semester cards */
+  .sem-card {
+    background: var(--bg-soft); border: 1.5px solid var(--border);
+    border-radius: 12px; padding: 18px; margin-bottom: 14px;
+    transition: border-color 0.15s;
+  }
+  .sem-card:hover { border-color: var(--border-strong); }
+  .sem-head {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 14px; flex-wrap: wrap;
+  }
+  .sem-title-grp { flex: 1; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .sem-title { font-weight: 700; font-size: 16px; color: var(--primary); }
+  .sem-year-input { width: 110px; padding: 6px 10px !important; font-size: 13px !important; }
+  .sem-stats {
+    display: flex; gap: 6px; flex-wrap: wrap;
+  }
+  .sem-mini-stat {
+    background: var(--card); padding: 5px 11px; border-radius: 8px;
+    font-size: 12px; color: var(--text-soft); border: 1px solid var(--border);
+    font-weight: 600;
+  }
+  .sem-mini-stat b { color: var(--primary); }
+  .sem-mini-stat.warn b { color: var(--warn); }
+  .sem-mini-stat.good b { color: var(--good); }
+  .sem-mini-stat.bad b { color: var(--bad); }
+
+  .subj-table-wrap { overflow-x: auto; }
+  .subj-table { width: 100%; border-collapse: separate; border-spacing: 0; min-width: 540px; }
+  .subj-table th {
+    text-align: left; padding: 6px 8px;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em;
+    color: var(--muted); font-weight: 700;
+    white-space: nowrap;
+  }
+  .subj-table td { padding: 4px 4px 4px 0; }
+  .subj-table th.col-pct, .subj-table td.col-pct { text-align: center; }
+  .subj-table input { padding: 8px 10px; font-size: 13px; }
+  .col-name { width: 32%; }
+  .col-num { width: 14%; }
+  .col-pct { width: 18%; }
+  .col-x { width: 36px; }
+  .pct-pill {
+    display: inline-block; padding: 3px 10px;
+    font-size: 12px; font-weight: 700; border-radius: 99px;
+    min-width: 64px; text-align: center;
+  }
+  .pct-pill.good { background: var(--good-bg); color: var(--good); }
+  .pct-pill.mid { background: var(--warn-bg); color: var(--warn); }
+  .pct-pill.bad { background: var(--bad-bg); color: var(--bad); }
+  .pct-pill.empty { background: transparent; color: var(--muted); }
+  .remove-x {
+    width: 26px; height: 26px;
+    border: none; background: transparent;
+    color: var(--muted); cursor: pointer;
+    border-radius: 6px; font-size: 18px;
+    display: grid; place-items: center;
+    transition: all 0.15s;
+  }
+  .remove-x:hover { background: var(--bad-bg); color: var(--bad); }
+
+  .sem-footer {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border);
+  }
+  .sem-footer-inline {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; color: var(--muted); font-weight: 600;
+  }
+  .sem-footer-inline input {
+    width: 64px; padding: 5px 8px !important; font-size: 12px !important;
+  }
+
+  /* Achievements */
+  .ach-chips { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+  .ach-chip {
+    padding: 6px 12px;
+    background: var(--card); border: 1.5px solid var(--border);
+    border-radius: 99px; font-size: 12px; font-weight: 600;
+    color: var(--text-soft); cursor: pointer;
+    transition: all 0.15s;
+  }
+  .ach-chip:hover {
+    background: var(--primary); color: #fff;
+    border-color: var(--primary);
+    transform: translateY(-1px);
+  }
+  .ach-card {
+    background: var(--bg-soft); border: 1.5px solid var(--border);
+    border-radius: 10px; padding: 14px;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .ach-card-head {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 10px;
+  }
+  .ach-card-icon {
+    width: 32px; height: 32px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    border-radius: 8px; display: grid; place-items: center;
+    color: #fff; font-size: 16px; flex-shrink: 0;
+  }
+  .ach-card-num { font-size: 13px; font-weight: 700; color: var(--primary); flex: 1; }
+  .level-badge {
+    display: inline-block; padding: 2px 9px;
+    border-radius: 99px; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  .level-college { background: #dde6f3; color: #15263c; }
+  .level-state { background: #d9f99d; color: #065f46; }
+  .level-national { background: #ffedd5; color: #92400e; }
+  .level-international { background: #fce7d3; color: #9d174d; }
+  [data-theme="dark"] .level-college { background: rgba(59,91,127,0.18); color: #bdcce8; }
+  [data-theme="dark"] .level-state { background: rgba(21,128,61,0.18); color: #a7f3d0; }
+  [data-theme="dark"] .level-national { background: rgba(234,88,12,0.18); color: #fdba74; }
+  [data-theme="dark"] .level-international { background: rgba(236,72,153,0.18); color: #fbcfe8; }
+
+  /* ===== Sidebar (Application Status) ===== */
+  .sidebar { position: sticky; top: 86px; }
+  .status-card {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+  }
+  .status-card-head { text-align: center; margin-bottom: 12px; }
+  .status-card-head .label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--muted); font-weight: 700;
+  }
+  .completion-ring-wrap {
+    position: relative;
+    width: 180px; height: 180px;
+    margin: 0 auto 12px;
+  }
+  .completion-ring-wrap svg { transform: rotate(-90deg); }
+  .completion-ring-bg { fill: none; stroke: var(--border); stroke-width: 12; }
+  .completion-ring-fg {
+    fill: none; stroke: url(#completionGradient); stroke-width: 12;
+    stroke-linecap: round;
+    transition: stroke-dasharray 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .completion-ring-text {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+  }
+  .completion-big {
+    font-size: 40px; font-weight: 800; color: var(--text);
+    line-height: 1; letter-spacing: -0.03em;
+  }
+  .completion-big small { font-size: 18px; color: var(--muted); font-weight: 600; }
+  .completion-label {
+    margin-top: 4px;
+    font-size: 11px; padding: 3px 10px; border-radius: 99px;
+    font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+    background: var(--bg-soft); color: var(--text-soft);
+    border: 1px solid var(--border);
+  }
+  .completion-label.start { background: var(--bg-soft); color: var(--text-soft); }
+  .completion-label.progress { background: var(--warn-bg); color: var(--warn); border-color: transparent; }
+  .completion-label.almost { background: rgba(59,91,127,0.15); color: var(--primary); border-color: transparent; }
+  .completion-label.ready { background: var(--good-bg); color: var(--good); border-color: transparent; }
+
+  .checklist {
+    margin-top: 6px;
+    border-top: 1px dashed var(--border);
+    padding-top: 14px;
+  }
+  .check-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 7px 8px;
+    border-radius: 8px;
+    font-size: 13px; color: var(--text-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+    margin-bottom: 2px;
+  }
+  .check-item:hover { background: var(--bg-soft); }
+  .check-item.current { background: rgba(30,58,95,0.06); color: var(--primary); font-weight: 600; }
+  [data-theme="dark"] .check-item.current { background: rgba(122,150,194,0.12); }
+  .check-item.done { color: var(--good); }
+  .check-item .check-icon {
+    width: 22px; height: 22px;
+    border: 1.5px solid var(--border-strong);
+    border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--card);
+    flex-shrink: 0;
+    font-size: 11px;
+    transition: all 0.2s;
+  }
+  .check-item.done .check-icon {
+    background: var(--good); border-color: var(--good); color: #fff;
+  }
+  .check-item.current .check-icon {
+    background: var(--primary); border-color: var(--primary); color: #fff;
+    box-shadow: 0 0 0 3px rgba(30,58,95,0.18);
+    animation: pulseRing 1.6s ease-in-out infinite;
+  }
+  @keyframes pulseRing {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(30,58,95,0.18); }
+    50% { box-shadow: 0 0 0 6px rgba(30,58,95,0.06); }
+  }
+  .check-item .check-label { flex: 1; }
+  .check-item .check-meta { font-size: 11px; color: var(--muted); font-weight: 500; }
+
+  .tip-box {
+    margin-top: 14px;
+    padding: 12px 14px;
+    background: linear-gradient(135deg, rgba(30,58,95,0.08), rgba(161,98,7,0.06));
+    border-left: 3px solid var(--primary); border-radius: 8px;
+    font-size: 12.5px; line-height: 1.5;
+  }
+  [data-theme="dark"] .tip-box { background: rgba(122,150,194,0.1); }
+  .tip-box .tip-label {
+    font-size: 10px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--primary); margin-bottom: 4px;
+  }
+  .tip-box .tip-text { color: var(--text-soft); }
+  .tip-box .tip-text b { color: var(--text); }
+
+  .saved-row {
+    margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--border);
+    font-size: 11px; color: var(--muted);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .saved-dot {
+    display: inline-block; width: 7px; height: 7px;
+    background: var(--good); border-radius: 50%;
+    margin-right: 5px;
+    box-shadow: 0 0 0 3px rgba(22,163,74,0.18);
+  }
+
+  .draft-banner {
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    color: #422006;
+    padding: 10px 14px; border-radius: 10px;
+    font-size: 12.5px; font-weight: 600;
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+    cursor: pointer;
+  }
+  .draft-banner:hover { filter: brightness(1.05); }
+
+  /* Step navigation */
+  .step { display: none; animation: fadeIn 0.3s ease-out; }
+  .step.active { display: block; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .nav-row {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    margin-top: 18px; padding-top: 18px;
+    border-top: 1px dashed var(--border);
+  }
+  .nav-row .grow { flex: 1; }
+
+  /* Avatar */
+  .avatar-upload {
+    display: flex; align-items: center; gap: 16px;
+    padding: 16px; background: var(--bg-soft);
+    border: 1.5px dashed var(--border-strong); border-radius: 10px;
+    cursor: pointer;
+  }
+  .avatar-preview {
+    width: 80px; height: 80px;
+    border-radius: 50%; background: var(--bg);
+    border: 2px solid var(--border);
+    background-size: cover; background-position: center;
+    display: grid; place-items: center;
+    color: var(--muted); font-size: 24px;
+    flex-shrink: 0;
+  }
+  .avatar-upload-info { flex: 1; }
+  .avatar-upload-info b { display: block; font-size: 14px; }
+  .avatar-upload-info span { font-size: 12px; color: var(--muted); }
+  .file-input { display: none; }
+
+  /* Charts */
+  .chart-mini-wrap {
+    background: var(--bg-soft); border: 1px solid var(--border);
+    border-radius: 10px; padding: 12px;
+    height: 200px;
+    position: relative;
+  }
+  .empty-chart {
+    position: absolute; inset: 0;
+    display: grid; place-items: center;
+    color: var(--muted); font-size: 13px; text-align: center;
+    padding: 12px; pointer-events: none;
+  }
+  /* When a chart hasn't been built, hide the canvas so its default 150px box
+     doesn't push other content. */
+  .chart-mini-wrap canvas { display: block; max-width: 100%; max-height: 100%; }
+  .insight-box {
+    margin-top: 12px; padding: 10px 14px;
+    background: linear-gradient(135deg, rgba(30,58,95,0.08), rgba(161,98,7,0.06));
+    border-left: 3px solid var(--primary); border-radius: 6px;
+    font-size: 13px;
+  }
+  [data-theme="dark"] .insight-box { background: rgba(122,150,194,0.1); }
+  .insight-box b { color: var(--primary); }
+
+  /* Review */
+  .review-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+  }
+  @media (max-width: 700px) { .review-grid { grid-template-columns: 1fr; } }
+  .review-block { padding: 14px; background: var(--bg-soft); border-radius: 10px; border: 1px solid var(--border); }
+  .review-block h4 {
+    margin: 0 0 8px; font-size: 12px; text-transform: uppercase;
+    letter-spacing: 0.06em; color: var(--muted);
+  }
+  .review-block dl { margin: 0; font-size: 13px; }
+  .review-block dt { color: var(--muted); float: left; clear: left; width: 130px; padding: 3px 0; }
+  .review-block dd { margin-left: 130px; padding: 3px 0; color: var(--text); font-weight: 500; }
+
+  /* Toast */
+  .toast {
+    position: fixed; bottom: 24px; left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--text); color: var(--card);
+    padding: 12px 22px; border-radius: 10px;
+    font-size: 14px; font-weight: 600;
+    box-shadow: var(--shadow-lg);
+    opacity: 0; transition: all 0.25s;
+    pointer-events: none; z-index: 100;
+    max-width: 90vw;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .toast.error { background: var(--bad); color: #fff; }
+  .toast.success { background: var(--good); color: #fff; }
+
+  /* Confetti */
+  .confetti-piece {
+    position: fixed; top: -10px;
+    width: 10px; height: 14px;
+    pointer-events: none;
+    z-index: 200;
+    animation: confettiFall 3s linear forwards;
+  }
+  @keyframes confettiFall {
+    to { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* Submitted overlay */
+  .submitted-overlay {
+    text-align: center; padding: 30px 20px;
+    background: linear-gradient(135deg, rgba(22,163,74,0.10), rgba(161,98,7,0.08));
+    border: 1.5px solid var(--good);
+    border-radius: 14px;
+    margin-top: 18px;
+  }
+  .submitted-overlay .icon-big {
+    width: 70px; height: 70px;
+    background: var(--good); color: #fff;
+    border-radius: 50%; margin: 0 auto 14px;
+    display: grid; place-items: center;
+    font-size: 36px;
+    box-shadow: 0 8px 24px rgba(22,163,74,0.3);
+    animation: pop 0.4s ease-out;
+  }
+  @keyframes pop {
+    from { transform: scale(0); }
+    50% { transform: scale(1.15); }
+    to { transform: scale(1); }
+  }
+  .submitted-overlay h3 {
+    margin: 0 0 6px; color: var(--good);
+    font-size: 22px;
+  }
+  .submitted-overlay p {
+    color: var(--text-soft); margin: 0 0 16px;
+    font-size: 14px;
+  }
+
+  /* === Mobile (≤640px) — keep the form usable on phones === */
+  @media (max-width: 640px) {
+    .topbar-inner {
+      padding: 9px 12px; gap: 8px;
+      flex-wrap: nowrap; overflow: hidden;
+    }
+    .brand span { display: none; }            /* keep just the gradient "A" mark */
+    .progress-pct { display: none; }           /* progress bar alone is enough */
+    .progress-wrap { max-width: none; flex: 1; min-width: 80px; }
+    .icon-btn { width: 32px; height: 32px; font-size: 14px; }
+
+    .wrap { padding: 14px 12px 60px; }
+
+    .hero { padding: 22px 18px 24px; border-radius: 14px; margin-bottom: 16px; }
+    .hero h1 { font-size: 22px; line-height: 1.2; }
+    .hero p { font-size: 13px; }
+    .hero-stats { gap: 8px; margin-top: 14px; }
+    .hero-stat { font-size: 11px; padding: 8px 10px; flex: 1 1 calc(33% - 6px); }
+    .hero-stat b { font-size: 13px; }
+
+    .stepper { gap: 5px; margin-bottom: 14px; padding-bottom: 6px; }
+    .step-pill { padding: 6px 11px; font-size: 12px; gap: 6px; }
+    .step-pill .step-num { width: 19px; height: 19px; font-size: 10px; }
+
+    .layout { gap: 14px; }
+    .card { padding: 18px 16px; border-radius: 12px; }
+    .card-title { font-size: 17px; }
+    .card-section h3 { font-size: 12px; }
+    .row, .row-3, .row-4 { gap: 10px; }
+
+    /* Compact sidebar — appears AFTER the form on mobile (no longer order: -1).
+       Strip the big 180px ring to a slim horizontal status strip. */
+    .sidebar { position: static; order: 0; }
+    .status-card { padding: 16px; }
+    .completion-ring-wrap { width: 110px; height: 110px; margin: 0 auto 8px; }
+    .completion-ring-wrap svg { width: 110px; height: 110px; }
+    .completion-big { font-size: 28px; }
+    .completion-big small { font-size: 13px; }
+    .check-item { padding: 6px 8px; font-size: 12.5px; }
+
+    .sem-card { padding: 14px; }
+    .sem-head { gap: 8px; }
+    .sem-title { font-size: 14px; }
+    .sem-year-input { width: 88px; }
+    .sem-mini-stat { font-size: 11px; padding: 4px 9px; }
+    .subj-table { min-width: 460px; }       /* still scrolls horizontally but tighter */
+    .col-num input, .col-name input { font-size: 14px; }   /* prevent iOS zoom-in */
+    input, select, textarea { font-size: 16px; }            /* iOS won't auto-zoom at ≥16 */
+
+    .choice-grid { grid-template-columns: 1fr 1fr; }
+    .ach-chip { font-size: 11px; padding: 6px 10px; }
+
+    .nav-row { gap: 8px; padding-top: 14px; margin-top: 14px; }
+    .nav-row .btn { padding: 10px 14px; font-size: 13px; }
+    .nav-row .grow { flex: 1 0 100%; height: 0; }   /* force buttons to wrap if needed */
+
+    /* Review screen — drop chart side-by-side, stack instead */
+    .review-grid { gap: 12px; }
+
+    .modal-bg { padding: 12px; }
+  }
+
+  /* Even-narrower (≤380px) tweaks */
+  @media (max-width: 380px) {
+    .hero h1 { font-size: 19px; }
+    .hero-stat { flex-basis: 100%; }
+    .step-pill { padding: 5px 9px; font-size: 11.5px; }
+    .stat-card .stat-value { font-size: 24px; }
+  }
+
+  /* Sidebar should appear AFTER the form on phones, not above it. Override
+     the existing 920px override that uses order: -1. */
+  @media (max-width: 640px) {
+    .sidebar { order: 0; }
+  }
+
+  /* Prevent :hover from sticking on touch devices (after tap) and remove the
+     persistent focus ring some browsers leave after a button click. */
+  @media (hover: none) {
+    .btn:hover { background: var(--card); border-color: var(--border); }
+    .btn-primary:hover { background: var(--primary); border-color: var(--primary); }
+    .btn-accent:hover { filter: none; }
+    .btn-ghost:hover { background: transparent; border-color: transparent; }
+    .btn-danger:hover { background: transparent; }
+    .icon-btn:hover { background: var(--card); border-color: var(--border); color: var(--text); }
+    .step-pill:not(.active):not(.done):hover { border-color: var(--border); color: var(--muted); }
+    .choice:not(.selected):hover { border-color: var(--border); background: var(--card); box-shadow: none; }
+    .sem-card:hover { border-color: var(--border); }
+    .remove-x:hover { background: transparent; color: var(--muted); }
+    .ach-chip:hover { background: var(--card); color: var(--text-soft); border-color: var(--border); transform: none; }
+    .check-item:not(.current):not(.done):hover { background: transparent; }
+    .draft-banner:hover { filter: none; }
+  }
+  /* Show focus ring only for keyboard navigation, not after mouse click. */
+  button:focus { outline: none; }
+  button:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+  /* Suppress iOS tap highlight on buttons / interactive cards. */
+  button, .choice, .step-pill, .ach-chip, .check-item, .draft-banner, .avatar-upload {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  @media print {
+    .topbar, .sidebar, .nav-row, .stepper, .hero::before, .hero::after { display: none !important; }
+    .step { display: block !important; page-break-inside: avoid; }
+    .layout { grid-template-columns: 1fr; }
+    body { background: #fff; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="brand-mark">A</div>
+      <span>Alumni Scholarship Portal</span>
+    </div>
+    <div class="topbar-spacer"></div>
+    <div class="progress-wrap"><div class="progress-bar" id="topProgress"></div></div>
+    <div class="progress-pct" id="topProgressPct">0%</div>
+    <button class="icon-btn" id="themeToggle" title="Toggle theme">🌙</button>
+    <button class="icon-btn" id="resetBtn" title="Clear all and start over">🗑</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>Alumni Scholarship Application</h1>
+      <p>A simple, transparent application designed by the Alumni Committee. Take your time — your draft saves automatically and you can come back to finish later.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><b>~10 minutes</b>To complete the form</div>
+        <div class="hero-stat"><b>Auto-saved</b>Pick up where you left off</div>
+        <div class="hero-stat"><b>Confidential</b>Reviewed only by the committee</div>
+      </div>
+    </div>
+  </section>
+
+  <nav class="stepper" id="stepper">
+    <button class="step-pill active" data-step="1"><span class="step-num">1</span>Personal</button>
+    <button class="step-pill" data-step="2"><span class="step-num">2</span>Family</button>
+    <button class="step-pill" data-step="3"><span class="step-num">3</span>Academics</button>
+    <button class="step-pill" data-step="4"><span class="step-num">4</span>Work & Aid</button>
+    <button class="step-pill" data-step="5"><span class="step-num">5</span>Achievements</button>
+    <button class="step-pill" data-step="6"><span class="step-num">6</span>Recommendation</button>
+    <button class="step-pill" data-step="7"><span class="step-num">7</span>Review & Submit</button>
+  </nav>
+
+  <div class="layout">
+
+    <!-- ============== MAIN FORM ============== -->
+    <main>
+      <form id="appForm" autocomplete="off" onsubmit="return false;">
+
+        <!-- STEP 1 -->
+        <section class="step active" data-step="1">
+          <div class="card elevated">
+            <h2 class="card-title">Personal Information</h2>
+            <p class="card-subtitle">Let's start with the basics. Fields marked <span class="req">*</span> are required.</p>
+
+            <div class="card-section">
+              <h3>Photo (optional)</h3>
+              <label class="avatar-upload" for="avatarFile">
+                <div class="avatar-preview" id="avatarPreview">📷</div>
+                <div class="avatar-upload-info">
+                  <b>Upload a passport-style photo</b>
+                  <span>JPG/PNG, under 2 MB. Stored locally on your device.</span>
+                </div>
+                <input type="file" id="avatarFile" class="file-input" accept="image/*" />
+              </label>
+            </div>
+
+            <div class="card-section">
+              <h3>Identity</h3>
+              <div class="row">
+                <div class="field">
+                  <label>Full Name <span class="req">*</span></label>
+                  <input type="text" id="name" required />
+                </div>
+                <div class="field">
+                  <label>University Roll Number <span class="req">*</span></label>
+                  <input type="text" id="roll" required />
+                </div>
+              </div>
+              <div class="row-3">
+                <div class="field">
+                  <label>Gender <span class="req">*</span></label>
+                  <select id="gender" required>
+                    <option value="">Select…</option>
+                    <option value="female">Female</option>
+                    <option value="male">Male</option>
+                    <option value="other">Other / Prefer not to say</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label>Date of Birth</label>
+                  <input type="date" id="dob" />
+                </div>
+                <div class="field">
+                  <label>Birth Place <span class="req">*</span></label>
+                  <input type="text" id="birthPlace" placeholder="City, State" required />
+                </div>
+              </div>
+              <div class="row">
+                <div class="field">
+                  <label>Category</label>
+                  <select id="category">
+                    <option value="">Select…</option>
+                    <option value="general">General</option>
+                    <option value="obc">OBC</option>
+                    <option value="sc">SC</option>
+                    <option value="st">ST</option>
+                    <option value="ews">EWS</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label>Nationality</label>
+                  <input type="text" id="nationality" placeholder="e.g. Indian" />
+                </div>
+              </div>
+            </div>
+
+            <div class="card-section">
+              <h3>Contact</h3>
+              <div class="row">
+                <div class="field">
+                  <label>Email</label>
+                  <input type="email" id="email" />
+                </div>
+                <div class="field">
+                  <label>Phone</label>
+                  <input type="tel" id="phone" />
+                </div>
+              </div>
+              <div class="field">
+                <label>Permanent Address</label>
+                <textarea id="address" rows="2"></textarea>
+              </div>
+            </div>
+
+            <div class="card-section">
+              <h3>Course Details</h3>
+              <div class="row-3">
+                <div class="field">
+                  <label>University / College <span class="req">*</span></label>
+                  <input type="text" id="university" required />
+                </div>
+                <div class="field">
+                  <label>Course / Program <span class="req">*</span></label>
+                  <input type="text" id="course" placeholder="e.g. B.Tech CSE" required />
+                </div>
+                <div class="field">
+                  <label>Current Semester / Year <span class="req">*</span></label>
+                  <input type="text" id="currentSem" placeholder="e.g. 4th semester" required />
+                </div>
+              </div>
+            </div>
+
+            <div class="nav-row">
+              <div class="grow"></div>
+              <button class="btn btn-primary" type="button" onclick="goStep(2)">Next: Family →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- STEP 2 -->
+        <section class="step" data-step="2">
+          <div class="card elevated">
+            <h2 class="card-title">Family Background</h2>
+            <p class="card-subtitle">Please share information about your family situation. All declarations are kept confidential.</p>
+
+            <div class="card-section">
+              <h3>Income</h3>
+              <div class="row">
+                <div class="field">
+                  <label>Annual Family Income <span class="req">*</span></label>
+                  <input type="number" id="income" min="0" placeholder="e.g. 250000" required />
+                  <span class="hint">Combined annual income from all sources, in your local currency.</span>
+                </div>
+                <div class="field">
+                  <label>Family Living Standard <span class="req">*</span></label>
+                  <select id="incomeBand" required>
+                    <option value="rural">Rural (village / small town)</option>
+                    <option value="urban">Urban (city / metro)</option>
+                  </select>
+                  <span class="hint">Pick whichever fits your family's location & cost of living.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-section">
+              <h3>Parents Status <span class="req" style="font-size:12px;">*</span></h3>
+              <div class="choice-grid" id="parentsChoices">
+                <label class="choice"><input type="radio" name="parents" value="both" /><div class="choice-title">Both alive</div></label>
+                <label class="choice"><input type="radio" name="parents" value="one" /><div class="choice-title">One alive</div><div class="choice-sub">Single parent household</div></label>
+                <label class="choice"><input type="radio" name="parents" value="none" /><div class="choice-title">Both deceased</div><div class="choice-sub">Orphan</div></label>
+              </div>
+            </div>
+
+            <div class="card-section">
+              <h3>Occupations</h3>
+              <div class="row">
+                <div class="field">
+                  <label>Father's Occupation</label>
+                  <input type="text" id="fatherOcc" />
+                </div>
+                <div class="field">
+                  <label>Mother's Occupation</label>
+                  <input type="text" id="motherOcc" />
+                </div>
+              </div>
+              <div class="row">
+                <div class="field">
+                  <label>Number of Dependents</label>
+                  <input type="number" id="dependents" min="0" />
+                  <span class="hint">Family members financially dependent on the household.</span>
+                </div>
+                <div class="field">
+                  <label>Siblings in Education</label>
+                  <input type="number" id="siblingsEdu" min="0" />
+                  <span class="hint">Brothers/sisters currently studying.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="nav-row">
+              <button class="btn" type="button" onclick="goStep(1)">← Back</button>
+              <div class="grow"></div>
+              <button class="btn btn-primary" type="button" onclick="goStep(3)">Next: Academics →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- STEP 3 -->
+        <section class="step" data-step="3">
+          <div class="card elevated">
+            <h2 class="card-title">Academic Record</h2>
+            <p class="card-subtitle">Add every completed semester with subject-wise marks, max marks, and credits. Your trend, average and CGPA-equivalent are calculated automatically for your reference.</p>
+
+            <div class="card-section">
+              <h3>Grading System</h3>
+              <div class="row-3">
+                <div class="field">
+                  <label>How are marks reported?</label>
+                  <select id="gradingSystem">
+                    <option value="percentage">Percentage / Marks (out of max)</option>
+                    <option value="cgpa10">CGPA / GPA (out of 10)</option>
+                    <option value="cgpa4">GPA (out of 4)</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label>Total semesters in your program</label>
+                  <input type="number" id="totalSems" min="1" max="14" placeholder="e.g. 8" />
+                </div>
+                <div class="field">
+                  <label>Pass-mark threshold (%)</label>
+                  <input type="number" id="passMark" min="0" max="100" value="40" />
+                  <span class="hint">Used to flag failed subjects in your view.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-section">
+              <h3>Semesters Completed</h3>
+              <div id="semesters"></div>
+              <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;">
+                <button class="btn btn-primary" type="button" onclick="addSemester()">+ Add Semester</button>
+                <button class="btn" type="button" onclick="bulkPasteOpen()">📋 Paste from Excel</button>
+                <button class="btn btn-ghost" type="button" onclick="clearSemesters()">Clear all</button>
+              </div>
+            </div>
+
+            <div class="card-section">
+              <h3>Your Academic Summary</h3>
+              <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:12px;">
+                <div class="sem-mini-stat">Semesters: <b id="overallSemCount">0</b></div>
+                <div class="sem-mini-stat">Subjects: <b id="overallSubjCount">0</b></div>
+                <div class="sem-mini-stat">Total credits: <b id="overallCredits">0</b></div>
+                <div class="sem-mini-stat">Overall avg: <b id="overallAvg">—</b></div>
+                <div class="sem-mini-stat">CGPA-equiv: <b id="overallCgpa">—</b></div>
+                <div class="sem-mini-stat warn">Active backlogs: <b id="overallBacklogs">0</b></div>
+              </div>
+              <div class="row">
+                <div>
+                  <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:var(--muted); margin-bottom:6px; font-weight:700;">Trend across semesters</div>
+                  <div class="chart-mini-wrap">
+                    <canvas id="trendChart"></canvas>
+                    <div class="empty-chart" id="trendEmpty">Add semesters to see your trend</div>
+                  </div>
+                </div>
+                <div>
+                  <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:var(--muted); margin-bottom:6px; font-weight:700;">Subject distribution</div>
+                  <div class="chart-mini-wrap">
+                    <canvas id="subjectChart"></canvas>
+                    <div class="empty-chart" id="subjectEmpty">Add subject marks to see distribution</div>
+                  </div>
+                </div>
+              </div>
+              <div class="insight-box" id="academicInsight" style="display:none;"></div>
+            </div>
+
+            <div class="nav-row">
+              <button class="btn" type="button" onclick="goStep(2)">← Back</button>
+              <div class="grow"></div>
+              <button class="btn btn-primary" type="button" onclick="goStep(4)">Next: Work & Aid →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- STEP 4 -->
+        <section class="step" data-step="4">
+          <div class="card elevated">
+            <h2 class="card-title">Work & Other Financial Aid</h2>
+            <p class="card-subtitle">Be honest about your work and any other aid you receive — accurate disclosure helps the committee understand your situation fully.</p>
+
+            <div class="card-section">
+              <h3>Are you working alongside your studies? <span class="req" style="font-size:12px;">*</span></h3>
+              <div class="choice-grid">
+                <label class="choice"><input type="radio" name="working" value="yes" /><div class="choice-title">Yes, I work</div></label>
+                <label class="choice"><input type="radio" name="working" value="no" /><div class="choice-title">No</div></label>
+              </div>
+              <div class="field" id="workDetailWrap" style="display:none; margin-top:12px;">
+                <label>Briefly describe your work</label>
+                <textarea id="workDetail" placeholder="Hours/week, role, why you work — e.g., 'tutor 15 hrs/wk, supports family'"></textarea>
+              </div>
+            </div>
+
+            <div class="card-section">
+              <h3>Are you receiving any other NGO / government scholarship? <span class="req" style="font-size:12px;">*</span></h3>
+              <div class="choice-grid">
+                <label class="choice"><input type="radio" name="otherAid" value="yes" /><div class="choice-title">Yes</div></label>
+                <label class="choice"><input type="radio" name="otherAid" value="no" /><div class="choice-title">No</div></label>
+              </div>
+              <div class="field" id="otherAidWrap" style="display:none; margin-top:12px;">
+                <label>Source & amount</label>
+                <input type="text" id="otherAidDetail" placeholder="e.g. State Govt Merit Scholarship, ₹15,000/yr" />
+              </div>
+            </div>
+
+            <div class="card-section">
+              <h3>Have you received this Alumni Scholarship before? <span class="req" style="font-size:12px;">*</span></h3>
+              <div class="choice-grid">
+                <label class="choice"><input type="radio" name="prevRecipient" value="yes" /><div class="choice-title">Yes</div></label>
+                <label class="choice"><input type="radio" name="prevRecipient" value="no" /><div class="choice-title">First-time applicant</div></label>
+              </div>
+              <div class="field" id="prevYearsWrap" style="display:none; margin-top:12px;">
+                <label>Year(s) previously received</label>
+                <input type="text" id="prevYears" placeholder="e.g. 2024, 2025" />
+              </div>
+            </div>
+
+            <div class="card-section">
+              <h3>Bank Account (for direct transfer if selected)</h3>
+              <div class="row-3">
+                <div class="field">
+                  <label>Account Holder Name</label>
+                  <input type="text" id="bankName" />
+                </div>
+                <div class="field">
+                  <label>Account Number</label>
+                  <input type="text" id="bankAcct" />
+                </div>
+                <div class="field">
+                  <label>IFSC / SWIFT</label>
+                  <input type="text" id="bankIfsc" />
+                </div>
+              </div>
+              <span class="hint">Optional now; only required if your application is shortlisted.</span>
+            </div>
+
+            <div class="nav-row">
+              <button class="btn" type="button" onclick="goStep(3)">← Back</button>
+              <div class="grow"></div>
+              <button class="btn btn-primary" type="button" onclick="goStep(5)">Next: Achievements →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- STEP 5 -->
+        <section class="step" data-step="5">
+          <div class="card elevated">
+            <h2 class="card-title">Special Mentions & Achievements</h2>
+            <p class="card-subtitle">Tell us about your leadership roles, competitions, awards, sports, cultural & academic distinctions. The more complete this picture, the better the committee understands who you are.</p>
+
+            <div class="card-section">
+              <h3>Quick add</h3>
+              <div class="ach-chips">
+                <button type="button" class="ach-chip" data-title="College President" data-level="college">🏛 College President</button>
+                <button type="button" class="ach-chip" data-title="Class Representative" data-level="college">🎓 Class Representative</button>
+                <button type="button" class="ach-chip" data-title="Sports Captain" data-level="college">⚽ Sports Captain</button>
+                <button type="button" class="ach-chip" data-title="Cultural Secretary" data-level="college">🎭 Cultural Secretary</button>
+                <button type="button" class="ach-chip" data-title="University Rank Holder" data-level="state">🥇 University Rank Holder</button>
+                <button type="button" class="ach-chip" data-title="State-Level Sports" data-level="state">🏅 State-Level Sports</button>
+                <button type="button" class="ach-chip" data-title="National Champion" data-level="national">🏆 National Champion</button>
+                <button type="button" class="ach-chip" data-title="Olympiad Medalist" data-level="national">📐 Olympiad Medalist</button>
+                <button type="button" class="ach-chip" data-title="NCC / NSS Award" data-level="national">🎖 NCC / NSS Award</button>
+                <button type="button" class="ach-chip" data-title="International Competition" data-level="international">🌍 International Competition</button>
+                <button type="button" class="ach-chip" data-title="Published Research" data-level="national">📄 Published Research</button>
+                <button type="button" class="ach-chip" data-title="Hackathon / Innovation Prize" data-level="national">💻 Hackathon Prize</button>
+              </div>
+              <span class="hint" style="margin-top:0;">Click a chip to add it instantly, then edit details. Or use "+ Add Achievement" below for a custom entry.</span>
+            </div>
+
+            <div class="card-section">
+              <h3>Your Achievements</h3>
+              <div id="achievements"></div>
+              <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;">
+                <button class="btn btn-primary" type="button" onclick="addAchievement()">+ Add Achievement</button>
+                <button class="btn btn-ghost" type="button" onclick="clearAchievements()">Clear all</button>
+              </div>
+              <p class="hint" style="margin-top:14px;">No achievements yet? That's perfectly fine — this section is optional. Many strong candidates apply without listing any.</p>
+            </div>
+
+            <div class="nav-row">
+              <button class="btn" type="button" onclick="goStep(4)">← Back</button>
+              <div class="grow"></div>
+              <button class="btn btn-primary" type="button" onclick="goStep(6)">Next: Recommendation →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- STEP 6 -->
+        <section class="step" data-step="6">
+          <div class="card elevated">
+            <h2 class="card-title">Recommendation & Statement</h2>
+            <p class="card-subtitle">A teacher's note significantly strengthens your application. Pair it with a personal statement that tells the committee why this support matters to you.</p>
+
+            <div class="card-section">
+              <h3>Recommending Teacher</h3>
+              <div class="row">
+                <div class="field">
+                  <label>Teacher's Name <span class="req">*</span></label>
+                  <input type="text" id="teacherName" required />
+                </div>
+                <div class="field">
+                  <label>Designation / Department <span class="req">*</span></label>
+                  <input type="text" id="teacherDept" required />
+                </div>
+              </div>
+              <div class="row">
+                <div class="field">
+                  <label>Teacher's Email</label>
+                  <input type="email" id="teacherEmail" />
+                </div>
+                <div class="field">
+                  <label>Teacher's Phone</label>
+                  <input type="tel" id="teacherPhone" />
+                </div>
+              </div>
+              <div class="field">
+                <label>Recommendation Note</label>
+                <textarea id="teacherNote" rows="4" placeholder="Why does this teacher recommend you? (Can be filled in by the teacher themselves.)"></textarea>
+              </div>
+            </div>
+
+            <div class="card-section">
+              <h3>Personal Statement</h3>
+              <div class="field">
+                <label>Why do you need this scholarship? <span style="color:var(--muted); font-weight:400;">(max ~250 words)</span></label>
+                <textarea id="statement" rows="6" placeholder="Tell the committee about your circumstances, goals, and why this support matters."></textarea>
+                <span class="hint" id="statementCount">0 words</span>
+              </div>
+            </div>
+
+            <div class="nav-row">
+              <button class="btn" type="button" onclick="goStep(5)">← Back</button>
+              <div class="grow"></div>
+              <button class="btn btn-primary" type="button" onclick="goStep(7)">Next: Review →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- STEP 7 -->
+        <section class="step" data-step="7">
+          <div class="card elevated">
+            <h2 class="card-title">Review & Submit</h2>
+            <p class="card-subtitle">Take a moment to verify everything below. Once you submit, the committee will review your application.</p>
+
+            <div class="card-section">
+              <h3>Application Summary</h3>
+              <div class="review-grid" id="reviewGrid"></div>
+            </div>
+
+            <div class="card-section">
+              <h3>Declaration</h3>
+              <label style="display:flex; gap:10px; align-items:flex-start; font-weight:500; font-size:13px; cursor:pointer;">
+                <input type="checkbox" id="declare" required style="margin-top: 4px; width: 18px; height: 18px;" />
+                <span>I declare that the information above is true and complete to the best of my knowledge. I understand that providing false information will lead to immediate disqualification and forfeiture of any awarded scholarship.</span>
+              </label>
+            </div>
+
+            <div class="nav-row" style="gap:10px;">
+              <button class="btn" type="button" onclick="goStep(6)">← Back</button>
+              <div class="grow"></div>
+              <button class="btn" type="button" onclick="downloadJSON()">⬇ Download my application</button>
+              <button class="btn" type="button" onclick="window.print()">🖨 Print / Save as PDF</button>
+              <button class="btn btn-accent" type="button" onclick="emailApplication()">✉ Email to Committee</button>
+              <button class="btn btn-primary" type="button" onclick="finalSubmit()">🎓 Submit Application</button>
+            </div>
+
+            <div id="submittedBlock" class="submitted-overlay" style="display:none;">
+              <div class="icon-big">✓</div>
+              <h3>Application Submitted</h3>
+              <p>Thank you for applying. The Alumni Committee will review your application and contact you with the outcome.</p>
+              <p style="font-size:13px;">A copy is being downloaded automatically. You can also <a href="scholarship_committee_dashboard.html" target="_blank" style="color:var(--primary); font-weight:600;">open the committee dashboard</a> to confirm your application was received.</p>
+            </div>
+          </div>
+        </section>
+
+      </form>
+    </main>
+
+    <!-- ============== SIDEBAR (student-friendly) ============== -->
+    <aside class="sidebar">
+      <div id="draftBanner" class="draft-banner" style="display:none;" onclick="dismissDraft()">
+        💾 We restored your saved draft. Pick up where you left off.
+      </div>
+
+      <div class="status-card">
+        <div class="status-card-head">
+          <div class="label">Application Status</div>
+        </div>
+        <div class="completion-ring-wrap">
+          <svg width="180" height="180" viewBox="0 0 180 180">
+            <defs>
+              <linearGradient id="completionGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#1e3a5f" />
+                <stop offset="100%" stop-color="#a16207" />
+              </linearGradient>
+            </defs>
+            <circle class="completion-ring-bg" cx="90" cy="90" r="74"></circle>
+            <circle class="completion-ring-fg" id="completionRing" cx="90" cy="90" r="74"
+              stroke-dasharray="0 465"></circle>
+          </svg>
+          <div class="completion-ring-text">
+            <div class="completion-big"><span id="completionValue">0</span><small>%</small></div>
+            <div class="completion-label start" id="completionLabel">just started</div>
+          </div>
+        </div>
+
+        <div class="checklist" id="checklist">
+          <div class="check-item current" data-step="1" onclick="goStep(1)">
+            <div class="check-icon">1</div>
+            <div class="check-label">Personal Info</div>
+            <div class="check-meta"></div>
+          </div>
+          <div class="check-item" data-step="2" onclick="goStep(2)">
+            <div class="check-icon">2</div>
+            <div class="check-label">Family Background</div>
+            <div class="check-meta"></div>
+          </div>
+          <div class="check-item" data-step="3" onclick="goStep(3)">
+            <div class="check-icon">3</div>
+            <div class="check-label">Academics</div>
+            <div class="check-meta"></div>
+          </div>
+          <div class="check-item" data-step="4" onclick="goStep(4)">
+            <div class="check-icon">4</div>
+            <div class="check-label">Work & Aid</div>
+            <div class="check-meta"></div>
+          </div>
+          <div class="check-item" data-step="5" onclick="goStep(5)">
+            <div class="check-icon">5</div>
+            <div class="check-label">Achievements</div>
+            <div class="check-meta">optional</div>
+          </div>
+          <div class="check-item" data-step="6" onclick="goStep(6)">
+            <div class="check-icon">6</div>
+            <div class="check-label">Recommendation</div>
+            <div class="check-meta"></div>
+          </div>
+          <div class="check-item" data-step="7" onclick="goStep(7)">
+            <div class="check-icon">7</div>
+            <div class="check-label">Review & Submit</div>
+            <div class="check-meta"></div>
+          </div>
+        </div>
+
+        <div class="tip-box">
+          <div class="tip-label">💡 Tip</div>
+          <div class="tip-text" id="tipText">Have your <b>university roll number</b> and a passport-size photo ready. You can save and return any time — your progress is preserved automatically.</div>
+        </div>
+
+        <div class="saved-row">
+          <div><span class="saved-dot"></span>Auto-saved on this device</div>
+          <div id="lastSaved"></div>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+</div>
+
+<!-- Bulk paste modal -->
+<div id="bulkModal" style="display:none; position:fixed; inset:0; background:rgba(15,23,42,0.6); z-index:200; align-items:center; justify-content:center; padding:20px;">
+  <div style="background:var(--card); border-radius:14px; padding:24px; max-width:560px; width:100%; box-shadow:var(--shadow-lg);">
+    <h3 style="margin:0 0 8px;">Paste subjects, marks, max & credits</h3>
+    <p style="font-size:13px; color:var(--muted); margin:0 0 12px;">Copy from Excel/Sheets. Columns (tab or comma separated): <b>Subject</b>, <b>Obtained</b>, [<b>Max</b> default 100], [<b>Credits</b> default 4]. Goes into a new semester.</p>
+    <textarea id="bulkPasteArea" rows="8" style="width:100%; font-family:monospace; font-size:13px;" placeholder="Mathematics&#9;87&#9;100&#9;4&#10;Physics&#9;92&#9;100&#9;4&#10;Chemistry&#9;78&#9;100&#9;3"></textarea>
+    <div style="display:flex; gap:8px; margin-top:12px; justify-content:flex-end;">
+      <button class="btn" type="button" onclick="bulkPasteCancel()">Cancel</button>
+      <button class="btn btn-primary" type="button" onclick="bulkPasteApply()">Add as Semester</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// =========================================================
+// CONFIG
+// =========================================================
+const RECIPIENT_EMAIL = "scholarship@alumni.org";
+const STORAGE_KEY = "alumni_scholarship_draft_v4";
+
+// Internal scoring data — stays hidden from the student-facing UI but
+// is included in the JSON export so the alumni committee can rank applicants.
+const INCOME_BANDS = {
+  rural: [
+    { max: 100000, pts: 4 },
+    { max: 300000, pts: 3 },
+    { max: 600000, pts: 1.5 },
+    { max: Infinity, pts: 0 },
+  ],
+  urban: [
+    { max: 200000, pts: 4 },
+    { max: 500000, pts: 3 },
+    { max: 1000000, pts: 1.5 },
+    { max: Infinity, pts: 0 },
+  ],
+};
+const ACH_LEVEL_PTS = {
+  college: 0.1, interCollege: 0.15, district: 0.2,
+  state: 0.25, national: 0.35, international: 0.5,
+};
+const ACH_BONUS_CAP = 0.5;
+
+// Per-step contextual tips shown in the sidebar
+const STEP_TIPS = {
+  1: "Have your <b>university roll number</b> and a passport-size photo ready. You can save and return any time — your progress is preserved automatically.",
+  2: "Use <b>combined annual income</b> from all family sources. Honest declaration matters — the committee may verify.",
+  3: "Add every completed semester. Use <b>“Paste from Excel”</b> if you have your marks in a sheet — it's the fastest way.",
+  4: "Disclose <b>all aid</b> honestly. The committee values transparency more than a perfect application.",
+  5: "Include leadership roles, sports, cultural events, olympiads, internships — anything that shows your <b>character & dedication</b>.",
+  6: "A short, sincere personal statement matters more than a long polished one. Speak from the heart.",
+  7: "Review carefully. Once submitted, you can still <b>download or email a copy</b> for your records.",
+};
+
+// Section labels for completion checklist
+const SECTION_LABELS = ["Personal Info","Family Background","Academics","Work & Aid","Achievements","Recommendation","Review & Submit"];
+
+// =========================================================
+// STATE
+// =========================================================
+let semCount = 0;
+let achCount = 0;
+let trendChart = null;
+let subjectChart = null;
+let saveTimer = null;
+let recalcTimer = null;
+const TOTAL_STEPS = 7;
+let isSubmitted = false;
+
+// Debounced recalc — coalesces rapid keystrokes into a single heavy update so the
+// academics step stays responsive even with many semesters/subjects.
+function scheduleRecalc(delay) {
+  if (recalcTimer) clearTimeout(recalcTimer);
+  recalcTimer = setTimeout(() => { recalcTimer = null; recalc(); }, delay == null ? 90 : delay);
+}
+
+// =========================================================
+// THEME
+// =========================================================
+const themeBtn = document.getElementById("themeToggle");
+function applyTheme(t) {
+  document.documentElement.setAttribute("data-theme", t);
+  themeBtn.textContent = t === "dark" ? "☀️" : "🌙";
+  if (trendChart) buildTrendChart();
+  if (subjectChart) buildSubjectChart();
+}
+themeBtn.addEventListener("click", () => {
+  const cur = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  applyTheme(cur);
+  localStorage.setItem("scholarship_theme", cur);
+});
+applyTheme(localStorage.getItem("scholarship_theme") || "light");
+
+// =========================================================
+// STEP NAVIGATION
+// =========================================================
+let currentStep = 1;
+function goStep(n) {
+  currentStep = n;
+  document.querySelectorAll(".step").forEach(s => s.classList.remove("active"));
+  document.querySelector(`.step[data-step="${n}"]`).classList.add("active");
+  document.querySelectorAll(".step-pill").forEach(p => {
+    p.classList.remove("active");
+    if (parseInt(p.dataset.step) === n) p.classList.add("active");
+  });
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  recalc();
+  document.getElementById("tipText").innerHTML = STEP_TIPS[n] || STEP_TIPS[1];
+  if (n === 3) { setTimeout(() => { buildTrendChart(); buildSubjectChart(); }, 60); }
+  if (n === 7) { setTimeout(() => renderReview(), 60); }
+}
+document.querySelectorAll(".step-pill").forEach(p => {
+  p.addEventListener("click", () => goStep(parseInt(p.dataset.step)));
+});
+
+// =========================================================
+// COMPLETION & CHECKLIST
+// =========================================================
+function isStepComplete(step) {
+  switch (step) {
+    case 1: return ["name","roll","gender","birthPlace","university","course","currentSem"]
+      .every(id => document.getElementById(id)?.value?.trim());
+    case 2: return ["income","incomeBand"].every(id => document.getElementById(id)?.value?.trim())
+      && getRadio("parents") !== null;
+    case 3: return [...document.querySelectorAll(".grade-cell")].some(g => g.value?.trim());
+    case 4: return getRadio("working") !== null
+      && getRadio("otherAid") !== null
+      && getRadio("prevRecipient") !== null;
+    case 5: return true; // optional
+    case 6: return ["teacherName","teacherDept"].every(id => document.getElementById(id)?.value?.trim());
+    case 7: return document.getElementById("declare")?.checked;
+  }
+  return false;
+}
+function computeCompletionPct() {
+  let done = 0;
+  for (let i = 1; i <= TOTAL_STEPS; i++) if (isStepComplete(i)) done++;
+  return (done / TOTAL_STEPS) * 100;
+}
+function updateChecklist() {
+  document.querySelectorAll(".check-item").forEach(it => {
+    const step = parseInt(it.dataset.step);
+    it.classList.remove("done", "current");
+    if (isStepComplete(step) && step !== currentStep) {
+      it.classList.add("done");
+      it.querySelector(".check-icon").textContent = "✓";
+    } else if (step === currentStep) {
+      it.classList.add("current");
+      it.querySelector(".check-icon").textContent = step;
+    } else {
+      it.querySelector(".check-icon").textContent = step;
+    }
+    // also mark step-pills that are complete
+    const pill = document.querySelector(`.step-pill[data-step="${step}"]`);
+    if (pill) pill.classList.toggle("done", isStepComplete(step) && step !== currentStep);
+  });
+}
+function updateCompletionRing() {
+  const pct = computeCompletionPct();
+  document.getElementById("topProgress").style.width = pct + "%";
+  document.getElementById("topProgressPct").textContent = Math.round(pct) + "%";
+  document.getElementById("completionValue").textContent = Math.round(pct);
+
+  const circ = 2 * Math.PI * 74;
+  const dash = (pct / 100) * circ;
+  document.getElementById("completionRing").setAttribute("stroke-dasharray", `${dash} ${circ}`);
+
+  const lbl = document.getElementById("completionLabel");
+  lbl.classList.remove("start", "progress", "almost", "ready");
+  if (pct === 0) { lbl.textContent = "just started"; lbl.classList.add("start"); }
+  else if (pct < 60) { lbl.textContent = "in progress"; lbl.classList.add("progress"); }
+  else if (pct < 100) { lbl.textContent = "almost there"; lbl.classList.add("almost"); }
+  else { lbl.textContent = "ready to submit"; lbl.classList.add("ready"); }
+}
+
+// =========================================================
+// AVATAR
+// =========================================================
+let avatarDataUrl = "";
+document.getElementById("avatarFile").addEventListener("change", (e) => {
+  const f = e.target.files[0];
+  if (!f) return;
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    avatarDataUrl = ev.target.result;
+    const p = document.getElementById("avatarPreview");
+    p.style.backgroundImage = `url(${avatarDataUrl})`;
+    p.textContent = "";
+    saveDraft();
+  };
+  reader.readAsDataURL(f);
+});
+
+// =========================================================
+// SEMESTER MANAGEMENT
+// =========================================================
+function addSemester(prefill = null, year = "", backlogs = "") {
+  semCount++;
+  const wrap = document.createElement("div");
+  wrap.className = "sem-card";
+  wrap.dataset.sem = semCount;
+  wrap.innerHTML = `
+    <div class="sem-head">
+      <div class="sem-title-grp">
+        <div class="sem-title">Semester ${semCount}</div>
+        <input type="text" class="sem-year-input" placeholder="Year (e.g. 2024)" value="${escapeAttr(year)}" />
+      </div>
+      <div class="sem-stats">
+        <div class="sem-mini-stat">Subjects: <b class="sub-count">0</b></div>
+        <div class="sem-mini-stat">Credits: <b class="sub-credits">0</b></div>
+        <div class="sem-mini-stat good">Avg: <b class="sem-avg">—</b></div>
+        <div class="sem-mini-stat">SGPA: <b class="sem-sgpa">—</b></div>
+      </div>
+      <button type="button" class="btn btn-sm btn-danger" onclick="this.closest('.sem-card').remove(); recalc();">Remove</button>
+    </div>
+    <div class="subj-table-wrap">
+      <table class="subj-table">
+        <thead>
+          <tr>
+            <th class="col-name">Subject</th>
+            <th class="col-num">Obtained</th>
+            <th class="col-num">Max</th>
+            <th class="col-num">Credits</th>
+            <th class="col-pct">%</th>
+            <th class="col-x"></th>
+          </tr>
+        </thead>
+        <tbody class="subject-rows"></tbody>
+      </table>
+    </div>
+    <div class="sem-footer">
+      <button type="button" class="btn btn-sm" onclick="addSubject(this)">+ Subject</button>
+      <button type="button" class="btn btn-sm btn-ghost" onclick="duplicateLastSubjects(this)">Duplicate row</button>
+      <div class="sem-footer-inline" style="margin-left:auto;">
+        Backlogs in this semester:
+        <input type="number" class="sem-backlogs" min="0" value="${escapeAttr(backlogs)}" oninput="scheduleRecalc()" />
+      </div>
+    </div>
+  `;
+  document.getElementById("semesters").appendChild(wrap);
+  const tbody = wrap.querySelector(".subject-rows");
+  if (prefill && prefill.length) {
+    prefill.forEach(s => addSubjectToTbody(tbody, s.subject, s.obtained, s.max, s.credits));
+  } else {
+    for (let i = 0; i < 5; i++) addSubjectToTbody(tbody);
+  }
+  recalc();
+}
+function clearSemesters() {
+  if (!confirm("Remove all semesters?")) return;
+  document.getElementById("semesters").innerHTML = "";
+  semCount = 0; recalc();
+}
+function addSubject(btn) {
+  const tbody = btn.closest(".sem-card").querySelector(".subject-rows");
+  addSubjectToTbody(tbody);
+}
+function duplicateLastSubjects(btn) {
+  const tbody = btn.closest(".sem-card").querySelector(".subject-rows");
+  const last = tbody.lastElementChild;
+  if (!last) { addSubjectToTbody(tbody); return; }
+  const subj = last.querySelector(".subj-name").value;
+  const max = last.querySelector(".grade-max").value;
+  const credits = last.querySelector(".grade-credits").value;
+  addSubjectToTbody(tbody, subj, "", max, credits);
+}
+function addSubjectToTbody(tbody, subject = "", obtained = "", max = "100", credits = "4") {
+  const tr = document.createElement("tr");
+  tr.innerHTML = `
+    <td class="col-name"><input type="text" class="subj-name" placeholder="Subject name" value="${escapeAttr(subject)}" /></td>
+    <td class="col-num"><input type="number" class="grade-cell" min="0" step="0.01" placeholder="0" value="${escapeAttr(obtained)}" oninput="scheduleRecalc()" /></td>
+    <td class="col-num"><input type="number" class="grade-max" min="1" step="0.01" placeholder="100" value="${escapeAttr(max)}" oninput="scheduleRecalc()" /></td>
+    <td class="col-num"><input type="number" class="grade-credits" min="0" step="0.5" placeholder="4" value="${escapeAttr(credits)}" oninput="scheduleRecalc()" /></td>
+    <td class="col-pct"><span class="pct-pill empty">—</span></td>
+    <td class="col-x"><button type="button" class="remove-x" onclick="this.closest('tr').remove(); recalc();" title="Remove">×</button></td>
+  `;
+  tbody.appendChild(tr);
+}
+function escapeAttr(v) { return String(v ?? "").replace(/"/g, "&quot;"); }
+
+// =========================================================
+// BULK PASTE
+// =========================================================
+function bulkPasteOpen() {
+  document.getElementById("bulkModal").style.display = "flex";
+  document.getElementById("bulkPasteArea").value = "";
+  setTimeout(() => document.getElementById("bulkPasteArea").focus(), 50);
+}
+function bulkPasteCancel() { document.getElementById("bulkModal").style.display = "none"; }
+function bulkPasteApply() {
+  const raw = document.getElementById("bulkPasteArea").value.trim();
+  if (!raw) { bulkPasteCancel(); return; }
+  const lines = raw.split(/\r?\n/).filter(l => l.trim());
+  const subjects = lines.map(l => {
+    const parts = l.split(/[\t,;]/).map(p => p.trim());
+    return {
+      subject: parts[0] || "",
+      obtained: parts[1] || "",
+      max: parts[2] || "100",
+      credits: parts[3] || "4"
+    };
+  }).filter(s => s.subject || s.obtained);
+  if (!subjects.length) { toast("Couldn't parse — use Tab between columns.", true); return; }
+  addSemester(subjects);
+  bulkPasteCancel();
+  toast(`Added ${subjects.length} subjects to a new semester.`, false, 2500);
+}
+
+// =========================================================
+// ACHIEVEMENTS
+// =========================================================
+function levelLabel(level) {
+  return ({
+    college: "College", interCollege: "Inter-College", district: "District",
+    state: "State", national: "National", international: "International"
+  })[level] || level;
+}
+function levelClass(level) {
+  if (level === "international") return "level-international";
+  if (level === "national") return "level-national";
+  if (level === "state" || level === "district") return "level-state";
+  return "level-college";
+}
+function addAchievement(prefill = {}) {
+  achCount++;
+  const wrap = document.createElement("div");
+  wrap.className = "ach-card";
+  wrap.dataset.ach = achCount;
+  wrap.innerHTML = `
+    <div class="ach-card-head">
+      <div class="ach-card-icon">🏆</div>
+      <div class="ach-card-num">Achievement #${achCount}</div>
+      <button type="button" class="btn btn-sm btn-danger" onclick="this.closest('.ach-card').remove(); recalc();">Remove</button>
+    </div>
+    <div class="row">
+      <div class="field">
+        <label>Title <span class="req">*</span></label>
+        <input type="text" class="ach-title" placeholder="e.g. National Mathematics Olympiad — Silver Medal" value="${escapeAttr(prefill.title || "")}" />
+      </div>
+      <div class="field">
+        <label>Level</label>
+        <select class="ach-level">
+          <option value="college" ${prefill.level === "college" ? "selected" : ""}>College / Institute</option>
+          <option value="interCollege" ${prefill.level === "interCollege" ? "selected" : ""}>Inter-College</option>
+          <option value="district" ${prefill.level === "district" ? "selected" : ""}>District</option>
+          <option value="state" ${prefill.level === "state" ? "selected" : ""}>State</option>
+          <option value="national" ${prefill.level === "national" ? "selected" : ""}>National</option>
+          <option value="international" ${prefill.level === "international" ? "selected" : ""}>International</option>
+        </select>
+      </div>
+    </div>
+    <div class="row-3">
+      <div class="field">
+        <label>Year</label>
+        <input type="number" class="ach-year" min="1990" max="2099" placeholder="e.g. 2024" value="${escapeAttr(prefill.year || "")}" />
+      </div>
+      <div class="field" style="grid-column: span 2;">
+        <label>Issuing organization / event</label>
+        <input type="text" class="ach-org" placeholder="e.g. NIMO, IIT Bombay, NCC" value="${escapeAttr(prefill.org || "")}" />
+      </div>
+    </div>
+    <div class="field">
+      <label>Brief description (optional)</label>
+      <textarea class="ach-desc" rows="2" placeholder="What was your role / what did you achieve?">${escapeAttr(prefill.description || "")}</textarea>
+    </div>
+  `;
+  document.getElementById("achievements").appendChild(wrap);
+  recalc();
+  setTimeout(() => wrap.querySelector(".ach-title")?.focus(), 50);
+}
+function clearAchievements() {
+  if (!confirm("Remove all achievements?")) return;
+  document.getElementById("achievements").innerHTML = "";
+  achCount = 0; recalc();
+}
+document.querySelectorAll(".ach-chip").forEach(chip => {
+  chip.addEventListener("click", () => {
+    addAchievement({ title: chip.dataset.title, level: chip.dataset.level });
+    toast(`Added: ${chip.dataset.title}`, false, 1800);
+  });
+});
+
+// =========================================================
+// CONDITIONAL REVEALS + listeners
+// =========================================================
+document.addEventListener("change", (e) => {
+  if (e.target.name === "working") {
+    document.getElementById("workDetailWrap").style.display = e.target.value === "yes" ? "block" : "none";
+  }
+  if (e.target.name === "otherAid") {
+    document.getElementById("otherAidWrap").style.display = e.target.value === "yes" ? "block" : "none";
+  }
+  if (e.target.name === "prevRecipient") {
+    document.getElementById("prevYearsWrap").style.display = e.target.value === "yes" ? "block" : "none";
+  }
+  if (e.target.matches('input[type="radio"]')) {
+    const groupName = e.target.name;
+    document.querySelectorAll(`input[name="${groupName}"]`).forEach(r => {
+      r.closest(".choice")?.classList.toggle("selected", r.checked);
+    });
+  }
+  recalc(); scheduleSave();
+});
+document.addEventListener("input", (e) => {
+  scheduleRecalc(); scheduleSave();
+  if (e.target.id === "statement") updateWordCount();
+});
+function updateWordCount() {
+  const txt = document.getElementById("statement").value.trim();
+  const words = txt ? txt.split(/\s+/).length : 0;
+  const el = document.getElementById("statementCount");
+  el.textContent = `${words} words`;
+  el.style.color = words > 250 ? "var(--bad)" : "var(--muted)";
+}
+
+// =========================================================
+// SCORE CALCULATION (internal — never displayed)
+// =========================================================
+function getRadio(name) {
+  return document.querySelector(`input[name="${name}"]:checked`)?.value || null;
+}
+function normalizeMark(m, max, system) {
+  if (isNaN(m)) return NaN;
+  if (system === "cgpa10") return m * 9.5;
+  if (system === "cgpa4") return m * 25;
+  if (max && max > 0) return (m / max) * 100;
+  return m;
+}
+function getSystem() { return document.getElementById("gradingSystem")?.value || "percentage"; }
+function getPassMark() { return parseFloat(document.getElementById("passMark")?.value) || 40; }
+
+function pctPillClass(p, passMark) {
+  if (isNaN(p)) return "empty";
+  if (p < passMark) return "bad";
+  if (p < 75) return "mid";
+  return "good";
+}
+
+function computeAllSubjects() {
+  const sys = getSystem();
+  const passMark = getPassMark();
+  const out = [];
+  document.querySelectorAll(".sem-card").forEach(blk => {
+    const sem = blk.dataset.sem;
+    blk.querySelectorAll("tbody tr").forEach(tr => {
+      const subject = tr.querySelector(".subj-name")?.value?.trim() || "";
+      const obtained = parseFloat(tr.querySelector(".grade-cell")?.value);
+      const max = parseFloat(tr.querySelector(".grade-max")?.value) || 100;
+      const credits = parseFloat(tr.querySelector(".grade-credits")?.value) || 0;
+      const pct = normalizeMark(obtained, max, sys);
+      const valid = !isNaN(obtained) && !isNaN(pct);
+      const pill = tr.querySelector(".pct-pill");
+      if (pill) {
+        if (!valid) { pill.className = "pct-pill empty"; pill.textContent = "—"; }
+        else { pill.className = "pct-pill " + pctPillClass(pct, passMark); pill.textContent = pct.toFixed(1) + "%"; }
+      }
+      if (valid || subject) {
+        out.push({ sem, subject, obtained, max, credits, pct: valid ? pct : null,
+                    pass: valid ? pct >= passMark : null });
+      }
+    });
+  });
+  return out;
+}
+
+function computeAcademicAvg() {
+  const all = computeAllSubjects().filter(s => s.pct !== null);
+  if (!all.length) return null;
+  const totalCredits = all.reduce((s, x) => s + (x.credits || 0), 0);
+  if (totalCredits > 0) {
+    const sum = all.reduce((s, x) => s + (x.pct * (x.credits || 0)), 0);
+    return sum / totalCredits;
+  }
+  return all.reduce((s, x) => s + x.pct, 0) / all.length;
+}
+function academicPts(avg) {
+  if (avg === null) return 0;
+  if (avg >= 90) return 2;
+  if (avg >= 75) return 1.5;
+  if (avg >= 60) return 1;
+  return 0.5;
+}
+function computeSemesterStats() {
+  const stats = [];
+  document.querySelectorAll(".sem-card").forEach(blk => {
+    const subjects = [...blk.querySelectorAll("tbody tr")].map(tr => {
+      const sys = getSystem();
+      const obtained = parseFloat(tr.querySelector(".grade-cell")?.value);
+      const max = parseFloat(tr.querySelector(".grade-max")?.value) || 100;
+      const credits = parseFloat(tr.querySelector(".grade-credits")?.value) || 0;
+      const pct = normalizeMark(obtained, max, sys);
+      return { obtained, max, credits, pct: isNaN(pct) ? null : pct };
+    });
+    const valid = subjects.filter(s => s.pct !== null);
+    const totalCred = valid.reduce((s,x) => s + (x.credits || 0), 0);
+    let avg = null, sgpa = null;
+    if (valid.length) {
+      avg = totalCred > 0
+        ? valid.reduce((s,x) => s + x.pct * (x.credits || 0), 0) / totalCred
+        : valid.reduce((s,x) => s + x.pct, 0) / valid.length;
+      sgpa = avg / 9.5;
+    }
+    blk.querySelector(".sub-count").textContent = subjects.filter(s => !isNaN(s.obtained)).length;
+    blk.querySelector(".sub-credits").textContent = totalCred.toFixed(totalCred % 1 === 0 ? 0 : 1);
+    blk.querySelector(".sem-avg").textContent = avg === null ? "—" : avg.toFixed(1);
+    blk.querySelector(".sem-sgpa").textContent = sgpa === null ? "—" : sgpa.toFixed(2);
+    const semBacklogs = parseInt(blk.querySelector(".sem-backlogs")?.value) || 0;
+    stats.push({
+      sem: blk.dataset.sem,
+      year: blk.querySelector(".sem-year-input")?.value || "",
+      avg, sgpa, totalCredits: totalCred,
+      backlogs: semBacklogs, subjectCount: valid.length
+    });
+  });
+  return stats;
+}
+
+function computeAchievementBonus() {
+  let total = 0;
+  document.querySelectorAll(".ach-card").forEach(card => {
+    const title = card.querySelector(".ach-title")?.value?.trim();
+    const level = card.querySelector(".ach-level")?.value;
+    if (title && level && ACH_LEVEL_PTS[level]) total += ACH_LEVEL_PTS[level];
+  });
+  return Math.min(total, ACH_BONUS_CAP);
+}
+
+function recalc() {
+  const income = parseFloat(document.getElementById("income").value);
+  const band = document.getElementById("incomeBand").value;
+  let needPts = 0;
+  if (!isNaN(income) && income >= 0) {
+    const bracket = INCOME_BANDS[band].find(b => income < b.max);
+    needPts = bracket ? bracket.pts : 0;
+  }
+  const parents = getRadio("parents");
+  const parentsPts = parents === "none" ? 2 : parents === "one" ? 1 : 0;
+  const avg = computeAcademicAvg();
+  const acadPts = academicPts(avg);
+
+  const semStats = computeSemesterStats();
+  const allSubj = computeAllSubjects();
+  const totalCredits = allSubj.reduce((s,x) => s + (x.credits || 0), 0);
+  const totalBacklogs = semStats.reduce((s,x) => s + x.backlogs, 0)
+                      + allSubj.filter(s => s.pct !== null && s.pct < getPassMark()).length;
+  document.getElementById("overallSemCount").textContent = semStats.length;
+  document.getElementById("overallSubjCount").textContent = allSubj.filter(s => s.pct !== null).length;
+  document.getElementById("overallCredits").textContent = totalCredits.toFixed(totalCredits % 1 === 0 ? 0 : 1);
+  document.getElementById("overallAvg").textContent = avg === null ? "—" : avg.toFixed(1) + "%";
+  document.getElementById("overallCgpa").textContent = avg === null ? "—" : (avg / 9.5).toFixed(2);
+  document.getElementById("overallBacklogs").textContent = totalBacklogs;
+
+  const gender = document.getElementById("gender").value;
+  const genderPts = gender === "female" ? 1 : 0;
+  const workingPts = getRadio("working") === "yes" ? 1 : 0;
+  const achievementBonus = computeAchievementBonus();
+  let adj = 0;
+  if (getRadio("prevRecipient") === "yes") adj += 0.5;
+  if (getRadio("otherAid") === "yes") adj -= 0.5;
+
+  const total = Math.max(0, Math.min(10,
+    needPts + parentsPts + acadPts + genderPts + workingPts + adj + achievementBonus));
+
+  // Update completion ring + checklist (no scoring shown to student)
+  updateCompletionRing();
+  updateChecklist();
+
+  if (currentStep === 3) { buildTrendChart(); buildSubjectChart(); buildAcademicInsight(avg); }
+
+  return { needPts, parentsPts, acadPts, genderPts, workingPts, adj,
+           achievementBonus, total, avg, semStats, totalCredits, totalBacklogs };
+}
+
+// =========================================================
+// CHARTS (student-facing — show student their own data)
+// =========================================================
+function chartColors() {
+  const dark = document.documentElement.getAttribute("data-theme") === "dark";
+  return {
+    primary: dark ? "#9bb3d4" : "#1e3a5f",
+    accent: "#ea580c",
+    teal: "#a16207",
+    grid: dark ? "rgba(148,163,184,0.18)" : "rgba(148,163,184,0.25)",
+    text: dark ? "#cbd5e1" : "#475569",
+  };
+}
+function buildTrendChart() {
+  const sems = computeSemesterStats().filter(s => s.avg !== null);
+  const trendEmpty = document.getElementById("trendEmpty");
+  if (sems.length < 1) {
+    if (trendChart) { trendChart.destroy(); trendChart = null; }
+    trendEmpty.style.display = "grid"; return;
+  }
+  trendEmpty.style.display = "none";
+  const c = chartColors();
+  const ctx = document.getElementById("trendChart").getContext("2d");
+  if (trendChart) trendChart.destroy();
+  trendChart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: sems.map(s => "Sem " + s.sem),
+      datasets: [{
+        label: "Average",
+        data: sems.map(s => s.avg),
+        fill: true,
+        backgroundColor: "rgba(30,58,95,0.12)",
+        borderColor: c.primary,
+        borderWidth: 2.5,
+        tension: 0.35,
+        pointRadius: 5,
+        pointBackgroundColor: c.accent,
+        pointBorderColor: "#fff",
+        pointBorderWidth: 2,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { min: 0, max: 100, ticks: { color: c.text, stepSize: 20 }, grid: { color: c.grid } },
+        x: { ticks: { color: c.text }, grid: { display: false } }
+      }
+    }
+  });
+}
+function buildSubjectChart() {
+  const subjMap = {};
+  computeAllSubjects().forEach(s => {
+    if (!s.subject || s.pct === null) return;
+    if (!subjMap[s.subject]) subjMap[s.subject] = [];
+    subjMap[s.subject].push(s.pct);
+  });
+  const subjects = Object.keys(subjMap).slice(0, 12);
+  const empty = document.getElementById("subjectEmpty");
+  if (!subjects.length) {
+    if (subjectChart) { subjectChart.destroy(); subjectChart = null; }
+    empty.style.display = "grid"; return;
+  }
+  empty.style.display = "none";
+  const avgs = subjects.map(s => subjMap[s].reduce((a,b) => a+b, 0) / subjMap[s].length);
+  const c = chartColors();
+  const ctx = document.getElementById("subjectChart").getContext("2d");
+  if (subjectChart) subjectChart.destroy();
+  subjectChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: subjects,
+      datasets: [{
+        label: "Avg",
+        data: avgs,
+        backgroundColor: avgs.map(a => a >= 75 ? "#16a34a" : a >= 60 ? c.accent : "#dc2626"),
+        borderRadius: 6,
+      }]
+    },
+    options: {
+      indexAxis: "y", responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { min: 0, max: 100, ticks: { color: c.text, stepSize: 25 }, grid: { color: c.grid } },
+        y: { ticks: { color: c.text }, grid: { display: false } }
+      }
+    }
+  });
+}
+function buildAcademicInsight(avg) {
+  const box = document.getElementById("academicInsight");
+  const sems = computeSemesterStats().filter(s => s.avg !== null);
+  if (sems.length < 1 || avg === null) { box.style.display = "none"; return; }
+  let trend = "stable";
+  if (sems.length >= 2) {
+    const first = sems[0].avg, last = sems[sems.length - 1].avg;
+    if (last - first > 5) trend = "improving";
+    else if (first - last > 5) trend = "declining";
+  }
+  const subjMap = {};
+  computeAllSubjects().forEach(s => {
+    if (!s.subject || s.pct === null) return;
+    if (!subjMap[s.subject]) subjMap[s.subject] = [];
+    subjMap[s.subject].push(s.pct);
+  });
+  let bestSub = null, worstSub = null;
+  Object.entries(subjMap).forEach(([s, arr]) => {
+    const a = arr.reduce((x,y) => x+y, 0) / arr.length;
+    if (!bestSub || a > bestSub.avg) bestSub = { sub: s, avg: a };
+    if (!worstSub || a < worstSub.avg) worstSub = { sub: s, avg: a };
+  });
+  let html = `Your overall average: <b>${avg.toFixed(1)}%</b> across <b>${sems.length}</b> semester(s) and <b>${Object.keys(subjMap).length}</b> distinct subject(s). `;
+  html += `Trend: <b>${trend}</b>. `;
+  if (bestSub && worstSub && bestSub.sub !== worstSub.sub) {
+    html += `Strongest: <b>${bestSub.sub}</b> (${bestSub.avg.toFixed(1)}%). Weakest: <b>${worstSub.sub}</b> (${worstSub.avg.toFixed(1)}%).`;
+  }
+  box.innerHTML = html; box.style.display = "block";
+}
+
+// =========================================================
+// REVIEW (no score shown)
+// =========================================================
+function renderReview() {
+  const d = collectData();
+  const grid = document.getElementById("reviewGrid");
+  const achHtml = d.achievements.length
+    ? d.achievements.map(a => `<div style="margin-bottom:6px;"><span class="level-badge ${levelClass(a.level)}">${levelLabel(a.level)}</span> <b>${esc(a.title)}</b>${a.year ? " · " + esc(a.year) : ""}</div>`).join("")
+    : "<i style='color:var(--muted);'>None listed (optional)</i>";
+  grid.innerHTML = `
+    <div class="review-block">
+      <h4>Personal</h4>
+      <dl>
+        <dt>Name</dt><dd>${esc(d.personal.name)}</dd>
+        <dt>Roll #</dt><dd>${esc(d.personal.roll_number)}</dd>
+        <dt>Gender</dt><dd>${esc(d.personal.gender)}</dd>
+        <dt>Birth Place</dt><dd>${esc(d.personal.birth_place)}</dd>
+        <dt>Course</dt><dd>${esc(d.personal.course)}</dd>
+        <dt>Current Sem</dt><dd>${esc(d.personal.current_semester)}</dd>
+      </dl>
+    </div>
+    <div class="review-block">
+      <h4>Family</h4>
+      <dl>
+        <dt>Income</dt><dd>${esc(d.family.annual_income)} (${esc(d.family.income_band_reference)})</dd>
+        <dt>Parents</dt><dd>${esc(d.family.parents_status)}</dd>
+        <dt>Dependents</dt><dd>${esc(d.family.dependents)}</dd>
+      </dl>
+    </div>
+    <div class="review-block">
+      <h4>Academics</h4>
+      <dl>
+        <dt>Avg / CGPA-eq</dt><dd>${d.academics.average_marks ?? "—"}% / ${d.academics.cgpa_equiv ?? "—"}</dd>
+        <dt>Semesters</dt><dd>${d.academics.semesters.length}</dd>
+        <dt>Subjects</dt><dd>${d.academics.semesters.reduce((s,x) => s + x.subjects.length, 0)}</dd>
+        <dt>Total Credits</dt><dd>${d.academics.total_credits}</dd>
+        <dt>Backlogs</dt><dd>${d.academics.total_backlogs}</dd>
+      </dl>
+    </div>
+    <div class="review-block">
+      <h4>Work & Aid</h4>
+      <dl>
+        <dt>Working</dt><dd>${esc(d.work_and_aid.working_alongside_studies)}</dd>
+        <dt>Other NGO</dt><dd>${esc(d.work_and_aid.other_ngo_aid)}</dd>
+        <dt>Prev recipient</dt><dd>${esc(d.work_and_aid.previous_alumni_recipient)}</dd>
+      </dl>
+    </div>
+    <div class="review-block" style="grid-column: span 2;">
+      <h4>Achievements (${d.achievements.length})</h4>
+      ${achHtml}
+    </div>
+  `;
+}
+
+function esc(v) {
+  return String(v ?? "—").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+}
+
+// =========================================================
+// DATA COLLECTION (includes hidden score for committee)
+// =========================================================
+function collectData() {
+  const semesters = [...document.querySelectorAll(".sem-card")].map(blk => {
+    const subjects = [...blk.querySelectorAll("tbody tr")].map(tr => {
+      const subject = tr.querySelector(".subj-name")?.value?.trim() || "";
+      const obtained = tr.querySelector(".grade-cell")?.value || "";
+      const max = tr.querySelector(".grade-max")?.value || "";
+      const credits = tr.querySelector(".grade-credits")?.value || "";
+      const pctEl = tr.querySelector(".pct-pill");
+      const pct = pctEl?.textContent?.replace("%", "").trim();
+      return { subject, obtained, max, credits, percentage: pct === "—" ? null : pct };
+    }).filter(s => s.subject || s.obtained);
+    const year = blk.querySelector(".sem-year-input")?.value || "";
+    const backlogs = parseInt(blk.querySelector(".sem-backlogs")?.value) || 0;
+    const stat = computeSemesterStats().find(x => x.sem === blk.dataset.sem);
+    return {
+      semester: blk.dataset.sem, year, subjects,
+      backlogs,
+      avg: stat?.avg === null ? null : Number(stat?.avg?.toFixed(2)),
+      sgpa: stat?.sgpa === null ? null : Number(stat?.sgpa?.toFixed(2)),
+      total_credits: stat?.totalCredits || 0,
+    };
+  });
+  const achievements = [...document.querySelectorAll(".ach-card")].map(card => ({
+    title: card.querySelector(".ach-title")?.value?.trim() || "",
+    level: card.querySelector(".ach-level")?.value || "",
+    year: card.querySelector(".ach-year")?.value || "",
+    organization: card.querySelector(".ach-org")?.value?.trim() || "",
+    description: card.querySelector(".ach-desc")?.value?.trim() || "",
+  })).filter(a => a.title);
+
+  const score = recalc();
+  const totalCredits = semesters.reduce((s,x) => s + (x.total_credits || 0), 0);
+  return {
+    submitted_at: new Date().toISOString(),
+    personal: {
+      name: val("name"), roll_number: val("roll"), gender: val("gender"),
+      dob: val("dob"), birth_place: val("birthPlace"),
+      category: val("category"), nationality: val("nationality"),
+      email: val("email"), phone: val("phone"), address: val("address"),
+      university: val("university"), course: val("course"), current_semester: val("currentSem"),
+      photo: avatarDataUrl ? "[base64 attached]" : "",
+    },
+    family: {
+      annual_income: val("income"), income_band_reference: val("incomeBand"),
+      parents_status: getRadio("parents"),
+      father_occupation: val("fatherOcc"), mother_occupation: val("motherOcc"),
+      dependents: val("dependents"), siblings_in_education: val("siblingsEdu"),
+    },
+    work_and_aid: {
+      working_alongside_studies: getRadio("working"),
+      work_detail: val("workDetail"),
+      other_ngo_aid: getRadio("otherAid"),
+      other_aid_detail: val("otherAidDetail"),
+      previous_alumni_recipient: getRadio("prevRecipient"),
+      previous_years: val("prevYears"),
+      bank_account_holder: val("bankName"),
+      bank_account_number: val("bankAcct"),
+      bank_ifsc: val("bankIfsc"),
+    },
+    academics: {
+      grading_system: val("gradingSystem"),
+      total_semesters_in_program: val("totalSems"),
+      pass_mark: val("passMark"),
+      average_marks: score.avg === null ? null : Number(score.avg.toFixed(2)),
+      cgpa_equiv: score.avg === null ? null : Number((score.avg / 9.5).toFixed(2)),
+      total_credits: totalCredits,
+      total_backlogs: score.totalBacklogs,
+      semesters,
+    },
+    achievements,
+    recommendation: {
+      teacher_name: val("teacherName"), teacher_dept: val("teacherDept"),
+      teacher_email: val("teacherEmail"), teacher_phone: val("teacherPhone"),
+      teacher_note: val("teacherNote"),
+    },
+    statement: val("statement"),
+    declaration_accepted: document.getElementById("declare").checked,
+    // _committee_only — internal scoring data, hidden from form UI but available to alumni committee.
+    _committee_only: {
+      score_breakdown: {
+        need: score.needPts,
+        parents: score.parentsPts,
+        academics: score.acadPts,
+        gender: score.genderPts,
+        working: score.workingPts,
+        achievement_bonus: Number(score.achievementBonus.toFixed(2)),
+        adjustments: score.adj,
+      },
+      score_total: Number(score.total.toFixed(2)),
+    }
+  };
+}
+function val(id) { return document.getElementById(id)?.value?.trim() || ""; }
+
+function validate() {
+  const required = ["name","roll","gender","birthPlace","university","course","currentSem","income","incomeBand","teacherName","teacherDept"];
+  for (const id of required) {
+    const el = document.getElementById(id);
+    if (!el.value || el.value.trim() === "") {
+      el.classList.add("invalid"); el.focus();
+      toast("Please fill all required fields (highlighted in red).", true);
+      setTimeout(() => el.classList.remove("invalid"), 3000);
+      return false;
+    }
+  }
+  for (const radio of ["parents","working","otherAid","prevRecipient"]) {
+    if (!getRadio(radio)) { toast("Please answer all required questions.", true); return false; }
+  }
+  if (!document.getElementById("declare").checked) { toast("Please accept the declaration.", true); return false; }
+  return true;
+}
+
+// =========================================================
+// EXPORTS — student-friendly (no score in email/print preview)
+// =========================================================
+function safeName() {
+  const n = (val("name") || "applicant").replace(/[^a-z0-9]+/gi, "_");
+  const r = (val("roll") || "noroll").replace(/[^a-z0-9]+/gi, "_");
+  return `${n}_${r}`;
+}
+function downloadJSON() {
+  if (!validate()) return;
+  const data = collectData();
+  if (avatarDataUrl) data.personal.photo_base64 = avatarDataUrl;
+  triggerDownload(new Blob([JSON.stringify(data, null, 2)], { type: "application/json" }), `${safeName()}_application.json`);
+  toast("Application file downloaded.", false, 2500);
+}
+function triggerDownload(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 200);
+}
+function emailApplication() {
+  if (!validate()) return;
+  const d = collectData();
+  const subject = `Scholarship Application — ${d.personal.name} (${d.personal.roll_number})`;
+  const achLine = d.achievements.length
+    ? d.achievements.map(a => `  • [${a.level}] ${a.title}${a.year ? " (" + a.year + ")" : ""}`).join("\n")
+    : "  (none)";
+  const body =
+`Applicant: ${d.personal.name}
+Roll: ${d.personal.roll_number}
+Birth place: ${d.personal.birth_place}
+Course: ${d.personal.course} | Current sem: ${d.personal.current_semester}
+Gender: ${d.personal.gender}
+
+Annual income: ${d.family.annual_income} (${d.family.income_band_reference})
+Parents status: ${d.family.parents_status}
+Working: ${d.work_and_aid.working_alongside_studies}
+Other NGO aid: ${d.work_and_aid.other_ngo_aid}
+Previous alumni recipient: ${d.work_and_aid.previous_alumni_recipient}
+
+Avg marks: ${d.academics.average_marks}% (CGPA-eq ${d.academics.cgpa_equiv})
+Credits earned: ${d.academics.total_credits} | Backlogs: ${d.academics.total_backlogs}
+Teacher: ${d.recommendation.teacher_name} (${d.recommendation.teacher_dept})
+
+Achievements:
+${achLine}
+
+— Statement —
+${d.statement}
+
+(Full structured application data is attached as JSON — download via the form's "Download my application" button and attach to this email.)`;
+  window.location.href = `mailto:${RECIPIENT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+function finalSubmit() {
+  if (!validate()) return;
+  isSubmitted = true;
+  document.getElementById("submittedBlock").style.display = "block";
+  document.getElementById("submittedBlock").scrollIntoView({ behavior: "smooth", block: "center" });
+  fireConfetti();
+  // Hand-off to the committee dashboard via shared localStorage (same domain).
+  // The dashboard picks up any pending submissions next time it opens.
+  try {
+    const data = collectData();
+    if (avatarDataUrl) data.personal.photo_base64 = avatarDataUrl;
+    const inbox = JSON.parse(localStorage.getItem("alumni_pending_submissions") || "[]");
+    inbox.push(data);
+    localStorage.setItem("alumni_pending_submissions", JSON.stringify(inbox));
+  } catch (e) { console.warn("hand-off failed", e); }
+  // Auto-trigger download so the student has a copy
+  setTimeout(() => downloadJSON(), 700);
+}
+
+// =========================================================
+// CONFETTI
+// =========================================================
+function fireConfetti() {
+  const colors = ["#1e3a5f", "#ea580c", "#a16207", "#16a34a", "#ec4899"];
+  for (let i = 0; i < 80; i++) {
+    const p = document.createElement("div");
+    p.className = "confetti-piece";
+    p.style.left = Math.random() * 100 + "vw";
+    p.style.background = colors[Math.floor(Math.random() * colors.length)];
+    p.style.animationDelay = Math.random() * 0.4 + "s";
+    p.style.animationDuration = 2 + Math.random() * 2 + "s";
+    p.style.transform = `rotate(${Math.random() * 360}deg)`;
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 4000);
+  }
+}
+
+// =========================================================
+// AUTOSAVE / RESTORE
+// =========================================================
+function scheduleSave() {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(saveDraft, 600);
+}
+function saveDraft() {
+  try {
+    const data = collectData();
+    if (avatarDataUrl) data.__avatar = avatarDataUrl;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    document.getElementById("lastSaved").textContent = "saved " + new Date().toLocaleTimeString();
+  } catch (e) {}
+}
+function restoreDraft() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    const d = JSON.parse(raw);
+    if (!d.personal?.name && !d.family?.annual_income) return;
+    document.getElementById("draftBanner").style.display = "flex";
+    setVal("name", d.personal.name); setVal("roll", d.personal.roll_number);
+    setVal("gender", d.personal.gender); setVal("dob", d.personal.dob);
+    setVal("birthPlace", d.personal.birth_place);
+    setVal("category", d.personal.category); setVal("nationality", d.personal.nationality);
+    setVal("email", d.personal.email); setVal("phone", d.personal.phone);
+    setVal("address", d.personal.address);
+    setVal("university", d.personal.university); setVal("course", d.personal.course);
+    setVal("currentSem", d.personal.current_semester);
+    setVal("income", d.family.annual_income); setVal("incomeBand", d.family.income_band_reference);
+    setVal("fatherOcc", d.family.father_occupation); setVal("motherOcc", d.family.mother_occupation);
+    setVal("dependents", d.family.dependents); setVal("siblingsEdu", d.family.siblings_in_education);
+    setRadio("parents", d.family.parents_status);
+    setRadio("working", d.work_and_aid.working_alongside_studies);
+    setVal("workDetail", d.work_and_aid.work_detail);
+    setRadio("otherAid", d.work_and_aid.other_ngo_aid);
+    setVal("otherAidDetail", d.work_and_aid.other_aid_detail);
+    setRadio("prevRecipient", d.work_and_aid.previous_alumni_recipient);
+    setVal("prevYears", d.work_and_aid.previous_years);
+    setVal("bankName", d.work_and_aid.bank_account_holder);
+    setVal("bankAcct", d.work_and_aid.bank_account_number);
+    setVal("bankIfsc", d.work_and_aid.bank_ifsc);
+    setVal("gradingSystem", d.academics.grading_system);
+    setVal("totalSems", d.academics.total_semesters_in_program);
+    setVal("passMark", d.academics.pass_mark);
+    setVal("teacherName", d.recommendation.teacher_name);
+    setVal("teacherDept", d.recommendation.teacher_dept);
+    setVal("teacherEmail", d.recommendation.teacher_email);
+    setVal("teacherPhone", d.recommendation.teacher_phone);
+    setVal("teacherNote", d.recommendation.teacher_note);
+    setVal("statement", d.statement);
+    if (d.__avatar) {
+      avatarDataUrl = d.__avatar;
+      const p = document.getElementById("avatarPreview");
+      p.style.backgroundImage = `url(${avatarDataUrl})`;
+      p.textContent = "";
+    }
+    if (d.academics?.semesters?.length) {
+      document.getElementById("semesters").innerHTML = "";
+      semCount = 0;
+      d.academics.semesters.forEach(s => addSemester(s.subjects, s.year, s.backlogs));
+    }
+    if (d.achievements?.length) {
+      document.getElementById("achievements").innerHTML = "";
+      achCount = 0;
+      d.achievements.forEach(a => addAchievement(a));
+    }
+    ["parents","working","otherAid","prevRecipient"].forEach(name => {
+      document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
+        r.closest(".choice")?.classList.toggle("selected", r.checked);
+      });
+    });
+    if (d.work_and_aid.working_alongside_studies === "yes") document.getElementById("workDetailWrap").style.display = "block";
+    if (d.work_and_aid.other_ngo_aid === "yes") document.getElementById("otherAidWrap").style.display = "block";
+    if (d.work_and_aid.previous_alumni_recipient === "yes") document.getElementById("prevYearsWrap").style.display = "block";
+    updateWordCount();
+    recalc();
+  } catch (e) { console.warn("restore failed", e); }
+}
+function setVal(id, v) { if (v === undefined || v === null) return; const el = document.getElementById(id); if (el) el.value = v; }
+function setRadio(name, v) {
+  if (!v) return;
+  const el = document.querySelector(`input[name="${name}"][value="${v}"]`);
+  if (el) el.checked = true;
+}
+function dismissDraft() { document.getElementById("draftBanner").style.display = "none"; }
+
+document.getElementById("resetBtn").addEventListener("click", () => {
+  if (!confirm("Clear all data and start over?")) return;
+  localStorage.removeItem(STORAGE_KEY);
+  location.reload();
+});
+
+// =========================================================
+// TOAST
+// =========================================================
+function toast(msg, isError = false, ms = 3000) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.remove("error", "success");
+  t.classList.add(isError ? "error" : "success");
+  t.classList.add("show");
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove("show"), ms);
+}
+
+// =========================================================
+// INIT
+// =========================================================
+// Mouse-click on a button shouldn't leave it focused (which can look "sticky"
+// on desktop). Keyboard / Tab focus is preserved so accessibility stays intact.
+document.addEventListener("mouseup", (e) => {
+  const btn = e.target.closest("button");
+  if (btn) setTimeout(() => btn.blur(), 0);
+});
+addSemester();
+restoreDraft();
+recalc();
+goStep(1);
+</script>
+</body>
+</html>

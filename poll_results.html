@@ -505,10 +505,11 @@ const SECTIONS = [
    3. On 429, retry with exponential backoff
    This keeps the dashboard responsive AND avoids rate limits.
 ============================================================ */
-const CACHE_TTL_MS = 25000;
+const CACHE_TTL_MS = 60000;     // 60s cache so most fetches hit cache
 const BATCH_SIZE = 4;
 const BATCH_DELAY_MS = 350;
 const CACHE_KEY_PREFIX = "gndec_counter_";
+let fetchInProgress = false;    // Lock to prevent stacked auto-refresh runs
 
 function getCached(key) {
   try {
@@ -547,66 +548,75 @@ async function fetchCounterFresh(key, retries = 3) {
 }
 
 async function loadAllResults(forceFresh = false) {
-  // Build the full list of keys to fetch
-  const keys = [{ key: "total_submissions", isTotal: true }];
-  SECTIONS.forEach(sec => sec.questions.forEach(q => {
-    q.opts.forEach(opt => keys.push({ key: `${q.id}__${opt.k}`, qId: q.id, optKey: opt.k }));
-  }));
+  // Lock so concurrent auto-refreshes don't stack
+  if (fetchInProgress) return;
+  fetchInProgress = true;
+  try {
+    // Build the full list of keys to fetch
+    const keys = [{ key: "total_submissions", isTotal: true }];
+    SECTIONS.forEach(sec => sec.questions.forEach(q => {
+      q.opts.forEach(opt => keys.push({ key: `${q.id}__${opt.k}`, qId: q.id, optKey: opt.k }));
+    }));
 
-  // First pass: pull from cache; collect keys that need fresh fetching
-  const fresh = [];
-  const results = [];
-  keys.forEach(k => {
-    if (!forceFresh) {
-      const cached = getCached(k.key);
-      if (cached !== null) {
-        results.push({ ...k, value: cached });
-        return;
+    // Pull from cache; collect keys still needing fresh fetching
+    const fresh = [];
+    const results = [];
+    keys.forEach(k => {
+      if (!forceFresh) {
+        const cached = getCached(k.key);
+        if (cached !== null) {
+          results.push({ ...k, value: cached });
+          return;
+        }
+      }
+      fresh.push(k);
+    });
+
+    // Show loading state ONLY if results area is empty (initial load)
+    // Auto-refresh updates silently in background
+    const loadingEl = document.getElementById('loadingState');
+    const resultsEl = document.getElementById('resultsContainer');
+    const isInitialLoad = resultsEl.style.display === 'none';
+    if (loadingEl && fresh.length > 0 && isInitialLoad) {
+      loadingEl.style.display = 'block';
+    }
+
+    // Fetch remaining keys in throttled batches
+    let done = 0;
+    for (let i = 0; i < fresh.length; i += BATCH_SIZE) {
+      const batch = fresh.slice(i, i + BATCH_SIZE);
+      const batchResults = await Promise.all(
+        batch.map(async k => {
+          const value = await fetchCounterFresh(k.key);
+          if (value !== null) setCached(k.key, value);
+          return { ...k, value: value === null ? (getCached(k.key) || 0) : value };
+        })
+      );
+      results.push(...batchResults);
+      done += batch.length;
+      if (loadingEl && fresh.length > 0 && isInitialLoad) {
+        loadingEl.querySelector('div:last-child').textContent =
+          `Fetching live results… ${done}/${fresh.length}`;
+      }
+      if (i + BATCH_SIZE < fresh.length) {
+        await new Promise(res => setTimeout(res, BATCH_DELAY_MS));
       }
     }
-    fresh.push(k);
-  });
 
-  // Show progress while fetching
-  const loadingEl = document.getElementById('loadingState');
-  if (loadingEl && fresh.length > 0) {
-    loadingEl.style.display = 'block';
-    document.getElementById('resultsContainer').style.display = 'none';
+    // Aggregate into question structure
+    const data = { total: 0, byQuestion: {} };
+    results.forEach(r => {
+      if (r.isTotal) data.total = r.value;
+      else {
+        if (!data.byQuestion[r.qId]) data.byQuestion[r.qId] = {};
+        data.byQuestion[r.qId][r.optKey] = r.value;
+      }
+    });
+
+    renderResults(data);
+  } finally {
+    fetchInProgress = false;
   }
-
-  // Fetch remaining keys in throttled batches
-  let done = 0;
-  for (let i = 0; i < fresh.length; i += BATCH_SIZE) {
-    const batch = fresh.slice(i, i + BATCH_SIZE);
-    const batchResults = await Promise.all(
-      batch.map(async k => {
-        const value = await fetchCounterFresh(k.key);
-        if (value !== null) setCached(k.key, value);
-        return { ...k, value: value === null ? (getCached(k.key) || 0) : value };
-      })
-    );
-    results.push(...batchResults);
-    done += batch.length;
-    if (loadingEl && fresh.length > 0) {
-      loadingEl.querySelector('div:last-child').textContent =
-        `Fetching live results… ${done}/${fresh.length}`;
-    }
-    if (i + BATCH_SIZE < fresh.length) {
-      await new Promise(res => setTimeout(res, BATCH_DELAY_MS));
-    }
-  }
-
-  // Aggregate into question structure
-  const data = { total: 0, byQuestion: {} };
-  results.forEach(r => {
-    if (r.isTotal) data.total = r.value;
-    else {
-      if (!data.byQuestion[r.qId]) data.byQuestion[r.qId] = {};
-      data.byQuestion[r.qId][r.optKey] = r.value;
-    }
-  });
-
-  renderResults(data);
 }
 
 function renderResults(data) {
@@ -691,8 +701,8 @@ function renderResults(data) {
 
 loadAllResults();
 document.getElementById('refreshBtn').addEventListener('click', () => loadAllResults(true));
-// Auto-refresh every 30s — most fetches come from cache after first load
-setInterval(() => loadAllResults(false), 30000);
+// Auto-refresh every 60s — most fetches hit the cache, only stale keys refetch
+setInterval(() => loadAllResults(false), 60000);
 </script>
 
 </body>

@@ -28,7 +28,11 @@ const QUESTIONS = [
   { id: "q21_sibling_rule",            opts: ["A","B","C"] },
   { id: "q22_disowned_student",        opts: ["A","B","C"] },
   { id: "q23_mental_health",           opts: ["A","B","C"] },
-  { id: "q24_digital_divide",          opts: ["A","B","C"] }
+  { id: "q24_digital_divide",          opts: ["A","B","C"] },
+  { id: "q25_pay_it_forward",          opts: ["A","B","C"] },
+  { id: "q26_agrarian_crisis",         opts: ["A","B","C"] },
+  { id: "q27_border_district",         opts: ["A","B","C"] },
+  { id: "q28_seva_commitment",         opts: ["A","B","C"] }
 ];
 
 const BATCH_SIZE = 5;

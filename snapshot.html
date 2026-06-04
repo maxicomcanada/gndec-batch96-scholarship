@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>GNDEC 1996 batch scholarship — live snapshot</title>
+<meta name="description" content="Live snapshot of the GNDEC 1996 batch scholarship rubric poll.">
+<meta property="og:title" content="GNDEC 1996 batch scholarship — live snapshot">
+<meta property="og:description" content="What our batch thinks should drive scholarship selection. Updates live.">
+<style>
+  :root {
+    --navy:#0B2340;
+    --kesari:#FF6B1A;
+    --kesari-soft:#FFE6D6;
+    --wheat:#E8B741;
+    --wheat-soft:#FBEFD2;
+    --maroon:#7E1B2E;
+    --green:#2E7D32;
+    --green-soft:#E5F1E6;
+    --coral-soft:#FAECE7;
+    --ink:#1A1D24;
+    --muted:#5C6473;
+    --paper:#FFFDF8;
+    --border:#E6DECB;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;font-size:16px;line-height:1.5}
+  a{color:inherit}
+  .wrap{max-width:760px;margin:0 auto;padding:20px 18px 60px}
+  .topband{height:6px;background:linear-gradient(90deg,var(--navy) 0 25%,var(--kesari) 25% 50%,var(--wheat) 50% 75%,var(--green) 75% 100%);
+    border-radius:3px;margin-bottom:18px}
+  header{display:flex;align-items:center;gap:14px;padding:16px;background:#fff;border:1px solid var(--border);
+    border-radius:14px;margin-bottom:18px}
+  .seal{width:60px;height:60px;border-radius:12px;background:var(--navy);color:var(--wheat);display:flex;
+    align-items:center;justify-content:center;flex-direction:column;flex-shrink:0;border:2px solid var(--wheat)}
+  .seal b{font-size:18px;line-height:1;letter-spacing:0.5px}
+  .seal span{font-size:10px;letter-spacing:1px;margin-top:2px;color:#fff;opacity:0.85}
+  .htitle{font-size:17px;font-weight:600;color:var(--navy);line-height:1.25}
+  .hsub{font-size:13px;color:var(--muted);margin-top:3px}
+  .pill{display:inline-flex;align-items:center;gap:6px;background:var(--green-soft);color:var(--green);
+    border-radius:99px;padding:3px 10px;font-size:11px;font-weight:600;margin-top:6px}
+  .pill .dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+
+  .hero{background:#fff;border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:14px;
+    display:flex;align-items:center;gap:18px}
+  .bignum{font-size:54px;font-weight:700;color:var(--navy);line-height:1;font-variant-numeric:tabular-nums}
+  .herolabel{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px}
+  .herotitle{font-size:16px;color:var(--ink);font-weight:500;margin-top:6px}
+
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:22px}
+  .stat{padding:14px;border-radius:12px;border:1px solid var(--border)}
+  .stat.strong{background:var(--green-soft);border-color:#C7DDC9}
+  .stat.medium{background:var(--wheat-soft);border-color:#F0DCA0}
+  .stat.contested{background:var(--coral-soft);border-color:#F0CFC2}
+  .stat .lbl{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+  .stat.strong .lbl{color:#27500A}
+  .stat.medium .lbl{color:#7A4A0A}
+  .stat.contested .lbl{color:#7A2912}
+  .stat .num{font-size:28px;font-weight:700;line-height:1.1;margin-top:4px;font-variant-numeric:tabular-nums}
+  .stat.strong .num{color:#1F3B07}
+  .stat.medium .num{color:#5C3804}
+  .stat.contested .num{color:#5C1F0E}
+  .stat .sub{font-size:11px;margin-top:3px;opacity:0.8}
+
+  h2.section{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;
+    margin:24px 0 10px;font-weight:600;display:flex;align-items:center;gap:10px}
+  h2.section .bar{flex:1;height:1px;background:var(--border)}
+
+  .list{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden}
+  .row{display:flex;align-items:center;padding:14px 16px;gap:12px;border-top:1px solid #F1EBDB}
+  .row:first-child{border-top:none}
+  .row .qlabel{flex:1;min-width:0}
+  .row .qtitle{font-size:14px;font-weight:600;color:var(--navy);line-height:1.3}
+  .row .qans{font-size:12.5px;color:var(--muted);margin-top:3px;line-height:1.35}
+  .badge{font-size:12px;font-weight:700;padding:5px 11px;border-radius:8px;font-variant-numeric:tabular-nums;flex-shrink:0}
+  .badge.s{background:var(--green-soft);color:#1F3B07}
+  .badge.c{background:var(--coral-soft);color:#5C1F0E}
+  .badge.m{background:var(--wheat-soft);color:#5C3804}
+
+  .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
+  .btn{background:var(--navy);color:#fff;text-decoration:none;padding:10px 16px;border-radius:10px;
+    font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:6px;border:none;cursor:pointer}
+  .btn.alt{background:#fff;color:var(--navy);border:1.5px solid var(--navy)}
+  .btn.kes{background:var(--kesari);color:#fff}
+
+  footer{text-align:center;margin-top:28px;font-size:11px;color:var(--muted);line-height:1.6}
+  footer .heart{color:var(--kesari)}
+
+  .loading{text-align:center;padding:60px 20px;color:var(--muted)}
+  .loading .spinner{width:32px;height:32px;border:3px solid #EEE;border-top-color:var(--kesari);
+    border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 14px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .err{background:#FFF4E5;border:1px solid #F2D38F;color:#7A4A0A;padding:14px;border-radius:10px;margin:14px 0;font-size:13px}
+
+  .meta{font-size:11px;color:var(--muted);margin-top:8px;text-align:right}
+
+  @media (max-width:480px){
+    .wrap{padding:14px 12px 50px}
+    .bignum{font-size:44px}
+    .stats{gap:8px}
+    .stat{padding:10px}
+    .stat .num{font-size:22px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topband"></div>
+
+  <header>
+    <div class="seal"><b>96</b><span>GNDEC</span></div>
+    <div style="flex:1">
+      <div class="htitle">1996 batch scholarship — live snapshot</div>
+      <div class="hsub">Our batch's voice on how the rubric should work</div>
+      <div class="pill"><span class="dot"></span> Live · auto-refreshes</div>
+    </div>
+  </header>
+
+  <div id="content">
+    <div class="loading">
+      <div class="spinner"></div>
+      Loading the latest snapshot…
+    </div>
+  </div>
+
+  <div class="actions">
+    <a class="btn kes" href="https://gndec-batch96-scholarship.pages.dev/poll" target="_blank">Cast your vote</a>
+    <a class="btn alt" href="https://gndec-batch96-scholarship.pages.dev/poll_results" target="_blank">Full dashboard</a>
+    <a class="btn alt" href="https://gndec-batch96-scholarship.pages.dev/rubric" target="_blank">Auto rubric</a>
+  </div>
+
+  <footer>
+    GNDEC 1996 batch · scholarship program<br>
+    Built with <span class="heart">♥</span> for our batchmates · sat sri akaal
+  </footer>
+</div>
+
+<script>
+const ANSWER_LABELS = {
+  q1_need_vs_merit:{A:"Poorer family wins",B:"Higher marks wins",C:"Equal weight to both"},
+  q2_low_marks_low_income:{A:"B wins (65%, labourer)",B:"A wins (85%, middle class)",C:"Award both if budget allows"},
+  q3_above_threshold_no_assets:{A:"Yes — recognise real situation",B:"No — rules are rules",C:"Verify physically first"},
+  q4_tiebreaker:{A:"Lower income wins",B:"Orphan wins",C:"Award both"},
+  q5_son_or_daughter:{A:"Sister — girl child priority",B:"Brother if his marks better",C:"Whoever's situation is worse"},
+  q6_punjab_bonus:{A:"No bonus — equal treatment",B:"+20% bonus for Punjab domicile",C:"Punjab-only program"},
+  q7_rural_village:{A:"Big bonus for small village",B:"Small recognition",C:"Not a factor"},
+  q8_first_gen:{A:"Big bonus for first-gen",B:"Small recognition",C:"Not relevant"},
+  q9_orphan_policy:{A:"Auto-qualify",B:"Big bonus, standard scoring",C:"Standard process"},
+  q10_widow_mother:{A:"Big bonus",B:"Small recognition",C:"No bonus"},
+  q11_disability_policy:{A:"Auto-qualify / major bonus",B:"Small bonus",C:"Not a factor"},
+  q12_working_student:{A:"Working student wins",B:"Recognize, marks still matter",C:"Marks come first"},
+  q13_backlog_policy:{A:"Auto-disqualify",B:"Minor deduction",C:"No issue — marks are marks"},
+  q14_achievement_vs_marks:{A:"State champion wins",B:"Top scorer wins",C:"Need beats both"},
+  q15_declining_marks:{A:"Support them",B:"Support with warning",C:"Decline — risk too high"},
+  q16_previous_beneficiary:{A:"Priority — continuity",B:"Standard process each year",C:"Disqualify — give others a chance"},
+  q17_other_aid:{A:"No issue",B:"Deduct that amount",C:"Disqualify"},
+  q18_budget_split:{A:"10 students × ₹30K each",B:"20 students × ₹15K each",C:"30 students × ₹10K each"},
+  q19_emergency_support:{A:"Reserve emergency fund in budget",B:"Help if budget allows",C:"No — fixed scope only"},
+  q20_drug_crisis:{A:"Major auto-bonus",B:"Standard hardship factor",C:"Not a factor"},
+  q21_sibling_rule:{A:"Both get full amount",B:"Only one of two siblings",C:"Both, but reduced amount"},
+  q22_disowned_student:{A:"Orphan-equivalent treatment",B:"Standard, recognise hardship",C:"Decline — family is family"},
+  q23_mental_health:{A:"Recognise as hardship factor",B:"Don't score it — privacy",C:"Not a factor"},
+  q24_digital_divide:{A:"WhatsApp + paper form fallback",B:"GNDEC office enrollment help",C:"Online-only is fine"},
+  q25_pay_it_forward:{A:"Formal pledge requirement",B:"Encouraged, not required",C:"No expectations after award"},
+  q26_agrarian_crisis:{A:"Major auto-bonus",B:"Standard hardship factor",C:"Not a factor"},
+  q27_border_district:{A:"Major bonus",B:"Small recognition",C:"Not a factor"},
+  q28_seva_commitment:{A:"Formal seva requirement",B:"Encouraged, not required",C:"No obligations after award"}
+};
+
+const SHORT_LABELS = {
+  q1_need_vs_merit:"Need vs merit",
+  q2_low_marks_low_income:"85% mid-class vs 65% labourer",
+  q3_above_threshold_no_assets:"Above income, no assets",
+  q4_tiebreaker:"Tie-breaker rule",
+  q5_son_or_daughter:"Brother vs sister",
+  q6_punjab_bonus:"Punjab domicile",
+  q7_rural_village:"Small village (<5K)",
+  q8_first_gen:"First-gen college",
+  q9_orphan_policy:"Orphan policy",
+  q10_widow_mother:"Widow mother",
+  q11_disability_policy:"Disability / chronic illness",
+  q12_working_student:"Working student",
+  q13_backlog_policy:"Backlog policy",
+  q14_achievement_vs_marks:"Champion vs scorer",
+  q15_declining_marks:"Declining marks",
+  q16_previous_beneficiary:"Previous beneficiary",
+  q17_other_aid:"Other govt aid",
+  q18_budget_split:"₹3L budget split",
+  q19_emergency_support:"Mid-year emergency",
+  q20_drug_crisis:"Drug crisis affected",
+  q21_sibling_rule:"Two siblings qualify",
+  q22_disowned_student:"Disowned student",
+  q23_mental_health:"Mental health",
+  q24_digital_divide:"Digital divide",
+  q25_pay_it_forward:"Pay-it-forward",
+  q26_agrarian_crisis:"Agrarian crisis",
+  q27_border_district:"Border district",
+  q28_seva_commitment:"Seva commitment"
+};
+
+const QIDS = Object.keys(SHORT_LABELS);
+
+function classify(p){ if(p>=60)return "s"; if(p>=50)return "m"; return "c"; }
+
+async function load(){
+  const root = document.getElementById('content');
+  try{
+    const r = await fetch('/api/results?_=' + Date.now(), {cache:'no-store'});
+    const d = await r.json();
+    if(!d.ok) throw new Error('api');
+    const c = d.counters || {};
+    const total = c.total_submissions || 0;
+
+    const rows = QIDS.map(q=>{
+      const a=c[q+'__A']||0, b=c[q+'__B']||0, cc=c[q+'__C']||0;
+      const s=a+b+cc;
+      if(!s) return null;
+      const wins=[['A',a],['B',b],['C',cc]];
+      const w=wins.reduce((m,x)=>x[1]>m[1]?x:m);
+      const pct=Math.round(w[1]/s*100);
+      return {qid:q,label:SHORT_LABELS[q],winner:w[0],pct,ans:ANSWER_LABELS[q][w[0]]||'',kind:classify(pct)};
+    }).filter(Boolean);
+
+    const strong = rows.filter(r=>r.kind==='s').sort((a,b)=>b.pct-a.pct);
+    const medium = rows.filter(r=>r.kind==='m').sort((a,b)=>b.pct-a.pct);
+    const contested = rows.filter(r=>r.kind==='c').sort((a,b)=>b.pct-a.pct);
+
+    const rowHTML = r => `
+      <div class="row">
+        <div class="qlabel">
+          <div class="qtitle">${r.label}</div>
+          <div class="qans">→ ${r.ans} · ${r.pct}%</div>
+        </div>
+        <div class="badge ${r.kind}">${r.pct}%</div>
+      </div>`;
+
+    const stamp = new Date().toLocaleString('en-IN',{hour:'2-digit',minute:'2-digit',day:'2-digit',month:'short'});
+
+    root.innerHTML = `
+      <div class="hero">
+        <div>
+          <div class="herolabel">Votes received</div>
+          <div class="bignum">${total}</div>
+          <div class="herotitle">batchmates have weighed in</div>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat strong">
+          <div class="lbl">Strong</div>
+          <div class="num">${strong.length}</div>
+          <div class="sub">≥ 60% agreement</div>
+        </div>
+        <div class="stat medium">
+          <div class="lbl">Medium</div>
+          <div class="num">${medium.length}</div>
+          <div class="sub">50–59% agreement</div>
+        </div>
+        <div class="stat contested">
+          <div class="lbl">Contested</div>
+          <div class="num">${contested.length}</div>
+          <div class="sub">below 50%</div>
+        </div>
+      </div>
+
+      <h2 class="section">Strong consensus <span class="bar"></span></h2>
+      <div class="list">${strong.map(rowHTML).join('') || '<div class="row"><div class="qlabel"><div class="qans">No strong consensus yet — keep voting.</div></div></div>'}</div>
+
+      ${medium.length ? `<h2 class="section">Leaning (defensible) <span class="bar"></span></h2>
+      <div class="list">${medium.map(rowHTML).join('')}</div>` : ''}
+
+      ${contested.length ? `<h2 class="section">Still contested — committee call <span class="bar"></span></h2>
+      <div class="list">${contested.map(rowHTML).join('')}</div>` : ''}
+
+      <div class="meta">Updated ${stamp} · refreshes every 60 seconds</div>
+    `;
+  } catch(e){
+    root.innerHTML = `<div class="err">Couldn't load the snapshot just now. Trying again shortly.</div>`;
+  }
+}
+
+load();
+setInterval(load, 60000);
+</script>
+</body>
+</html>

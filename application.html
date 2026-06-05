@@ -3,36 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Scholarship application · GNDEC 1996 batch</title>
-<meta name="description" content="Apply for the 1996 batch alumni scholarship. Detailed application with live rubric scoring.">
+<meta name="robots" content="noindex,nofollow">
+<title>Applications opening soon · GNDEC 1996 batch scholarship</title>
 <style>
-  :root {
-    --navy:#0B2340;
-    --navy-soft:#E8ECF2;
-    --kesari:#FF6B1A;
-    --kesari-soft:#FFE6D6;
-    --wheat:#E8B741;
-    --wheat-soft:#FBEFD2;
-    --maroon:#7E1B2E;
-    --green:#2E7D32;
-    --green-soft:#E5F1E6;
-    --coral:#C04A2A;
-    --coral-soft:#FAECE7;
-    --ink:#1A1D24;
-    --muted:#5C6473;
-    --paper:#FFFDF8;
-    --border:#E6DECB;
-    --rule:#F1EBDB;
-  }
+  :root{--navy:#0B2340;--kesari:#FF6B1A;--wheat:#E8B741;--green:#2E7D32;--maroon:#7E1B2E;
+    --ink:#1A1D24;--muted:#5C6473;--paper:#FFFDF8;--border:#E6DECB}
   *{box-sizing:border-box}
   html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    -webkit-font-smoothing:antialiased;font-size:16px;line-height:1.55}
-  .wrap{max-width:820px;margin:0 auto;padding:16px 16px 80px}
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.6}
+  .wrap{max-width:660px;margin:0 auto;padding:24px 22px 60px}
   .topband{height:6px;background:linear-gradient(90deg,var(--navy) 0 25%,var(--kesari) 25% 50%,var(--wheat) 50% 75%,var(--green) 75% 100%);
-    border-radius:3px;margin-bottom:14px}
+    border-radius:3px;margin-bottom:20px}
 
-  header.main{background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:14px;display:flex;align-items:center;gap:14px}
+  /* ===== POLL NAV ===== */
+  .pn-wrap{display:flex;gap:4px;background:#fff;border:1px solid var(--border);border-radius:12px;
+    padding:4px;margin:0 0 20px;overflow-x:auto;scrollbar-width:none;box-shadow:0 2px 8px rgba(11,34,64,0.04)}
+  .pn-wrap::-webkit-scrollbar{display:none}
+  .pn-tab{flex:1;text-align:center;padding:9px 10px;border-radius:8px;text-decoration:none;
+    color:var(--muted);font-size:12.5px;font-weight:600;white-space:nowrap;min-width:max-content;
+    transition:background 0.15s,color 0.15s}
+  .pn-tab:hover{background:#E8ECF2;color:var(--navy)}
+  .pn-tab.pn-active{background:var(--navy);color:#fff}
+
+  header.main{background:#fff;border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:18px;display:flex;align-items:center;gap:14px}
   .seal{width:62px;height:62px;border-radius:12px;background:var(--navy);color:var(--wheat);display:flex;
     align-items:center;justify-content:center;flex-direction:column;flex-shrink:0;border:2px solid var(--wheat)}
   .seal b{font-size:19px;line-height:1}
@@ -40,875 +33,89 @@
   .htitle{font-size:18px;font-weight:700;color:var(--navy);line-height:1.2}
   .hsub{font-size:13px;color:var(--muted);margin-top:4px}
 
-  /* Sticky score panel */
-  .score-panel{position:sticky;top:0;z-index:50;background:#fff;border:2px solid var(--navy);
-    border-radius:14px;padding:14px 16px;margin-bottom:18px;box-shadow:0 4px 16px rgba(11,35,64,0.08)}
-  .score-panel-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-  .score-num{font-size:36px;font-weight:700;color:var(--navy);line-height:1;font-variant-numeric:tabular-nums;min-width:54px}
-  .score-tag{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
-    padding:3px 8px;border-radius:5px;color:#fff;background:var(--navy)}
-  .score-tag.high{background:var(--green)}
-  .score-tag.mid{background:#A37514}
-  .score-tag.low{background:var(--coral)}
-  .score-tag.ineligible{background:var(--maroon)}
-  .score-meta{flex:1;font-size:12px;color:var(--muted);line-height:1.4}
-  .score-bar{height:8px;background:#F0E9D6;border-radius:4px;overflow:hidden;margin-top:10px}
-  .score-bar-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--wheat),var(--kesari));border-radius:4px;transition:width 0.3s}
+  .hero{background:#fff;border:1px solid var(--border);border-radius:14px;padding:36px 28px;margin-bottom:18px;text-align:center}
+  .tag{display:inline-block;background:var(--wheat);color:var(--navy);font-size:10px;font-weight:800;
+    letter-spacing:2px;text-transform:uppercase;padding:4px 12px;border-radius:5px;margin-bottom:18px}
+  .hero h1{font-size:26px;font-weight:700;color:var(--navy);margin:0 0 12px;line-height:1.2}
+  .hero p{font-size:15px;color:#2C313A;margin:0 auto;max-width:480px;line-height:1.6}
 
-  /* Section blocks */
-  section.app-section{background:#fff;border:1px solid var(--border);border-radius:14px;padding:20px 22px;margin-bottom:14px}
-  .sec-head{display:flex;align-items:baseline;gap:10px;margin-bottom:8px;padding-bottom:10px;border-bottom:1px solid var(--rule)}
-  .sec-num{background:var(--navy);color:var(--wheat);padding:3px 9px;border-radius:6px;font-size:11px;font-weight:700;flex-shrink:0}
-  .sec-title{font-size:16px;font-weight:700;color:var(--navy);flex:1}
-  .sec-points{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:1px}
-  .sec-intro{font-size:13px;color:var(--muted);margin:8px 0 16px;line-height:1.55;font-style:italic}
+  .info-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:14px}
+  .info-card h3{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin:0 0 10px;font-weight:700}
+  .info-card p{margin:0 0 10px;font-size:14px;line-height:1.6}
+  .info-card p:last-child{margin:0}
+  .info-card b{color:var(--navy)}
 
-  .field{margin-bottom:16px}
-  .field-label{font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:6px;display:block;line-height:1.4}
-  .field-hint{font-size:11.5px;color:var(--muted);margin:-2px 0 7px;line-height:1.4}
-  .field-pts{font-size:10px;color:var(--green);font-weight:700;margin-left:6px;padding:1px 6px;background:var(--green-soft);border-radius:4px;text-transform:uppercase;letter-spacing:0.5px}
-
-  input[type="text"],input[type="number"],input[type="tel"],input[type="date"],input[type="email"],select,textarea{
-    width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:8px;
-    font-size:15px;font-family:inherit;background:#fff;color:var(--ink);
-    -webkit-appearance:none;appearance:none}
-  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--kesari);box-shadow:0 0 0 3px var(--kesari-soft)}
-  textarea{min-height:80px;resize:vertical}
-  select{background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath d='M4 6l4 4 4-4' stroke='%235C6473' stroke-width='1.5' fill='none' stroke-linecap='round'/%3e%3c/svg%3e");background-repeat:no-repeat;background-position:right 10px center;padding-right:30px}
-
-  .radio-group,.checkbox-group{display:flex;flex-direction:column;gap:6px}
-  .radio-opt,.check-opt{display:flex;align-items:center;gap:9px;padding:9px 11px;background:#FAF8F1;
-    border:1px solid var(--rule);border-radius:8px;cursor:pointer;transition:all 0.15s;font-size:14px}
-  .radio-opt:hover,.check-opt:hover{border-color:var(--kesari);background:#FFF8EE}
-  .radio-opt input,.check-opt input{margin:0;width:18px;height:18px;flex-shrink:0;accent-color:var(--kesari)}
-  .radio-opt.selected,.check-opt.selected{background:var(--kesari-soft);border-color:var(--kesari)}
-  .opt-label{flex:1;line-height:1.35}
-  .opt-pts{font-size:11px;font-weight:700;color:var(--green);background:#fff;padding:2px 7px;border-radius:4px;flex-shrink:0}
-  .opt-pts.neg{color:var(--coral)}
-
-  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  @media(max-width:560px){.two-col{grid-template-columns:1fr}}
-
-  .sec-subtotal{margin-top:14px;padding:10px 14px;background:var(--navy-soft);border-radius:8px;
-    display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:600;color:var(--navy)}
-  .sec-subtotal .v{font-size:18px;font-weight:700;font-variant-numeric:tabular-nums}
-
-  .note-box{background:var(--wheat-soft);border:1px solid #F0DCA0;border-radius:8px;padding:12px 14px;
-    margin:10px 0;font-size:13px;line-height:1.5;color:#5C3804}
-  .note-box b{color:#3A2300}
-
-  .danger-box{background:var(--coral-soft);border:1px solid #F0CFC2;border-radius:8px;padding:12px 14px;
-    margin:10px 0;font-size:13px;line-height:1.5;color:var(--coral-deep)}
-
-  /* Need calculator */
-  .calc-table{width:100%;border-collapse:collapse;margin:8px 0}
-  .calc-table td{padding:8px 4px;border-bottom:1px solid var(--rule);font-size:14px}
-  .calc-table tr.total td{font-weight:700;color:var(--navy);border-top:2px solid var(--navy);border-bottom:none;background:#FBEFD2;padding:10px 4px}
-  .calc-table .amt{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
-
-  /* Summary final block */
-  .final-summary{background:linear-gradient(135deg,var(--navy) 0%,#163A66 100%);color:#fff;border-radius:14px;padding:24px;margin:18px 0;display:none}
-  .final-summary.show{display:block}
-  .final-summary h2{color:var(--wheat);font-size:14px;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 14px;font-weight:700}
-  .final-score-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.12);font-size:14px}
-  .final-score-row:last-child{border-bottom:none}
-  .final-score-row .v{font-weight:700;font-variant-numeric:tabular-nums;color:var(--wheat)}
-  .final-total{margin-top:14px;padding-top:14px;border-top:2px solid var(--wheat);font-size:18px;font-weight:700;display:flex;justify-content:space-between}
-  .final-total .v{color:var(--wheat);font-size:32px;line-height:1}
-
-  .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
-  .btn{background:var(--navy);color:#fff;text-decoration:none;padding:11px 18px;border-radius:10px;
-    font-size:14px;font-weight:600;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-family:inherit}
-  .btn:hover{background:#163A66}
-  .btn.alt{background:#fff;color:var(--navy);border:1.5px solid var(--navy)}
-  .btn.kes{background:var(--kesari);color:#fff}
-  .btn.kes:hover{background:#E55E15}
-  .btn.full{width:100%;justify-content:center;padding:14px;font-size:15px}
-  .btn[disabled]{opacity:0.5;cursor:not-allowed}
+  .cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+  @media(max-width:480px){.cta-grid{grid-template-columns:1fr}}
+  .cta{display:block;background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px;
+    text-decoration:none;color:inherit;transition:border-color 0.15s,transform 0.15s}
+  .cta:hover{border-color:var(--kesari);transform:translateY(-1px)}
+  .cta .ct{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:3px}
+  .cta .cd{font-size:12px;color:var(--muted);line-height:1.4}
 
   footer{text-align:center;margin-top:28px;font-size:11px;color:var(--muted);line-height:1.7}
   footer .heart{color:var(--kesari)}
-
-  .save-indicator{position:fixed;bottom:18px;right:18px;background:var(--green);color:#fff;
-    padding:8px 14px;border-radius:99px;font-size:11px;font-weight:600;opacity:0;
-    transition:opacity 0.3s;z-index:60;letter-spacing:0.5px;text-transform:uppercase;box-shadow:0 4px 12px rgba(0,0,0,0.15)}
-  .save-indicator.show{opacity:1}
-
-  @media print {
-    .pn-wrap,.actions,.save-indicator,.score-panel{display:none}
-    body{background:#fff;font-size:11pt}
-    .wrap{padding:0;max-width:none}
-    section.app-section{page-break-inside:avoid;box-shadow:none;border:1px solid #999}
-    .final-summary{display:block!important;color:#000;background:#fff;border:2px solid #000}
-    .final-summary h2,.final-summary .v{color:#000}
-  }
-  @media(max-width:520px){
-    .wrap{padding:12px 10px 60px}
-    section.app-section{padding:16px 14px}
-    .htitle{font-size:16px}
-  }
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="topband"></div>
 
-  <!-- ===== POLL NAV ===== -->
-  <style>
-  .pn-wrap{display:flex;gap:4px;background:#fff;border:1px solid #E6DECB;border-radius:12px;
-    padding:4px;margin:0 0 16px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;
-    box-shadow:0 2px 8px rgba(11,34,64,0.04)}
-  .pn-wrap::-webkit-scrollbar{display:none}
-  .pn-tab{flex:1;text-align:center;padding:9px 10px;border-radius:8px;text-decoration:none;
-    color:#5C6473;font-size:12.5px;font-weight:600;white-space:nowrap;min-width:max-content;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-    transition:background 0.15s,color 0.15s;letter-spacing:0.2px}
-  .pn-tab:hover{background:#E8ECF2;color:#0B2340}
-  .pn-tab.pn-active{background:#0B2340;color:#fff}
-  .pn-tab.pn-apply{background:#FF6B1A;color:#fff}
-  .pn-tab.pn-apply.pn-active{background:#0B2340}
-  @media (max-width:480px){.pn-tab{font-size:11.5px;padding:8px 8px}}
-  </style>
-  <div class="pn-wrap" role="navigation" aria-label="Poll sections">
-    <a class="pn-tab pn-apply" href="/application">Apply now</a>
+  <div class="pn-wrap" role="navigation" aria-label="Sections">
     <a class="pn-tab" href="/snapshot">Snapshot</a>
     <a class="pn-tab" href="/charts">Charts</a>
     <a class="pn-tab" href="/interpretation">Verdicts</a>
     <a class="pn-tab" href="/rubric">Rubric</a>
-    <a class="pn-tab" href="/poll">Voting closed</a>
+    <a class="pn-tab" href="/poll_results">Dashboard</a>
   </div>
-  <script>(function(){
-    var p = location.pathname.replace(/\/$/,'').toLowerCase();
-    document.querySelectorAll('.pn-tab').forEach(function(a){
-      var h = a.getAttribute('href').toLowerCase().replace(/\/$/,'');
-      if(h === p) a.classList.add('pn-active');
-    });
-  })();</script>
-  <!-- ===== /POLL NAV ===== -->
 
   <header class="main">
     <div class="seal"><b>96</b><span>GNDEC</span></div>
     <div style="flex:1">
-      <div class="htitle">Scholarship application · 2026 cohort</div>
-      <div class="hsub">Built from the rubric our 1996 batch shaped together · sat sri akaal</div>
+      <div class="htitle">Scholarship application portal</div>
+      <div class="hsub">Opening soon for the 2026 cohort</div>
     </div>
   </header>
 
-  <!-- Sticky live score panel -->
-  <div class="score-panel">
-    <div class="score-panel-row">
-      <div class="score-num" id="liveScore">0</div>
-      <div>
-        <div class="score-tag" id="scoreTag">Start filling</div>
-        <div class="score-meta" id="scoreMeta">Live score builds as you complete each section</div>
-      </div>
-    </div>
-    <div class="score-bar"><div class="score-bar-fill" id="scoreBar" style="width:0%"></div></div>
+  <div class="hero">
+    <div class="tag">Coming soon</div>
+    <h1>Applications open after rubric finalisation</h1>
+    <p>The 1996 batch rubric is finalised. The committee is preparing the formal application process — verification workflow, documentation requirements, and selection timeline. Applications will open shortly thereafter. Watch this space.</p>
   </div>
 
-  <div class="note-box">
-    <b>Before you start.</b> This application asks honest questions about your family situation. Every answer is verified during selection. Be truthful — exaggeration in your favour will hurt your case if discovered, and underplaying genuine hardship costs you the score you deserve. Your data autosaves locally on this device every few seconds.
-  </div>
-
-  <!-- ============================================================
-       SECTION 1 — PERSONAL & ACADEMIC IDENTIFICATION
-       ============================================================ -->
-  <section class="app-section" id="sec1">
-    <div class="sec-head"><span class="sec-num">1</span><span class="sec-title">Personal &amp; academic identification</span><span class="sec-points">not scored</span></div>
-
-    <div class="two-col">
-      <div class="field">
-        <label class="field-label" for="f_name">Full name (as on records)</label>
-        <input type="text" id="f_name" data-key="name" required>
-      </div>
-      <div class="field">
-        <label class="field-label" for="f_dob">Date of birth</label>
-        <input type="date" id="f_dob" data-key="dob" required>
-      </div>
-    </div>
-
-    <div class="two-col">
-      <div class="field">
-        <label class="field-label" for="f_phone">Phone (10-digit)</label>
-        <input type="tel" id="f_phone" data-key="phone" pattern="[0-9]{10}" maxlength="10">
-      </div>
-      <div class="field">
-        <label class="field-label" for="f_email">Email</label>
-        <input type="email" id="f_email" data-key="email">
-      </div>
-    </div>
-
-    <div class="two-col">
-      <div class="field">
-        <label class="field-label" for="f_branch">Branch &amp; year</label>
-        <select id="f_branch" data-key="branch">
-          <option value="">Select…</option>
-          <option>1st year ECE</option><option>1st year CSE</option><option>1st year ME</option><option>1st year EE</option><option>1st year Civil</option>
-          <option>2nd year ECE</option><option>2nd year CSE</option><option>2nd year ME</option><option>2nd year EE</option><option>2nd year Civil</option>
-          <option>3rd year ECE</option><option>3rd year CSE</option><option>3rd year ME</option><option>3rd year EE</option><option>3rd year Civil</option>
-          <option>4th year ECE</option><option>4th year CSE</option><option>4th year ME</option><option>4th year EE</option><option>4th year Civil</option>
-          <option>Other</option>
-        </select>
-      </div>
-      <div class="field">
-        <label class="field-label" for="f_rollno">Roll number</label>
-        <input type="text" id="f_rollno" data-key="rollno">
-      </div>
-    </div>
-
-    <div class="field">
-      <label class="field-label" for="f_addr">Current postal address</label>
-      <textarea id="f_addr" data-key="address" rows="2"></textarea>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       SECTION 2 — FAMILY FINANCIALS (40 pts)
-       ============================================================ -->
-  <section class="app-section" id="sec2">
-    <div class="sec-head"><span class="sec-num">2</span><span class="sec-title">Family financials</span><span class="sec-points">max 40 pts</span></div>
-    <p class="sec-intro">The batch voted: <b>need beats merit (67%)</b>. This section carries the most weight in your score. All amounts in Indian Rupees.</p>
-
-    <div class="field">
-      <label class="field-label">Monthly family income from all sources <span class="field-pts">25 pts max</span></label>
-      <p class="field-hint">Combined gross income of all earning members in the household.</p>
-      <div class="radio-group" data-q="income">
-        <label class="radio-opt"><input type="radio" name="income" value="25" data-detail="≤ ₹10,000/month"><span class="opt-label">Up to ₹10,000 / month</span><span class="opt-pts">+25</span></label>
-        <label class="radio-opt"><input type="radio" name="income" value="22" data-detail="₹10,001-20,000/month"><span class="opt-label">₹10,001 – ₹20,000</span><span class="opt-pts">+22</span></label>
-        <label class="radio-opt"><input type="radio" name="income" value="18" data-detail="₹20,001-30,000/month"><span class="opt-label">₹20,001 – ₹30,000</span><span class="opt-pts">+18</span></label>
-        <label class="radio-opt"><input type="radio" name="income" value="13" data-detail="₹30,001-45,000/month"><span class="opt-label">₹30,001 – ₹45,000</span><span class="opt-pts">+13</span></label>
-        <label class="radio-opt"><input type="radio" name="income" value="8" data-detail="₹45,001-60,000/month"><span class="opt-label">₹45,001 – ₹60,000</span><span class="opt-pts">+8</span></label>
-        <label class="radio-opt"><input type="radio" name="income" value="3" data-detail="₹60,001-75,000/month + hardship override"><span class="opt-label">₹60,001 – ₹75,000 <em style="color:var(--muted);font-size:11px">(requires verified hardship — see Section 4)</em></span><span class="opt-pts">+3</span></label>
-        <label class="radio-opt"><input type="radio" name="income" value="0" data-detail="Above ₹75,000/month"><span class="opt-label">Above ₹75,000 <em style="color:var(--muted);font-size:11px">(no bonus unless extraordinary case)</em></span><span class="opt-pts">0</span></label>
-      </div>
-    </div>
-
-    <div class="field">
-      <label class="field-label" for="f_income_exact">Exact monthly income (₹) <em style="font-weight:400;color:var(--muted);font-size:11px">— for verification</em></label>
-      <input type="number" id="f_income_exact" data-key="income_exact" min="0" placeholder="e.g., 18000">
-    </div>
-
-    <div class="field">
-      <label class="field-label">Housing situation <span class="field-pts">5 pts max</span></label>
-      <div class="radio-group" data-q="housing">
-        <label class="radio-opt"><input type="radio" name="housing" value="5"><span class="opt-label">Renting / informal housing — no owned home</span><span class="opt-pts">+5</span></label>
-        <label class="radio-opt"><input type="radio" name="housing" value="2"><span class="opt-label">Owned house in village (single floor / small)</span><span class="opt-pts">+2</span></label>
-        <label class="radio-opt"><input type="radio" name="housing" value="0"><span class="opt-label">Owned house in town/city (mid-sized)</span><span class="opt-pts">0</span></label>
-        <label class="radio-opt"><input type="radio" name="housing" value="-3"><span class="opt-label">Owned larger property / multiple properties</span><span class="opt-pts neg">−3</span></label>
-      </div>
-    </div>
-
-    <div class="field">
-      <label class="field-label">Agricultural land owned <span class="field-pts">3 pts max</span></label>
-      <div class="radio-group" data-q="land">
-        <label class="radio-opt"><input type="radio" name="land" value="3"><span class="opt-label">None</span><span class="opt-pts">+3</span></label>
-        <label class="radio-opt"><input type="radio" name="land" value="2"><span class="opt-label">Less than 2 acres</span><span class="opt-pts">+2</span></label>
-        <label class="radio-opt"><input type="radio" name="land" value="0"><span class="opt-label">2 – 5 acres</span><span class="opt-pts">0</span></label>
-        <label class="radio-opt"><input type="radio" name="land" value="-3"><span class="opt-label">More than 5 acres</span><span class="opt-pts neg">−3</span></label>
-      </div>
-    </div>
-
-    <div class="field">
-      <label class="field-label">Vehicles owned by family <span class="field-pts">2 pts max</span></label>
-      <div class="radio-group" data-q="vehicle">
-        <label class="radio-opt"><input type="radio" name="vehicle" value="2"><span class="opt-label">None, or two-wheeler / bicycle only</span><span class="opt-pts">+2</span></label>
-        <label class="radio-opt"><input type="radio" name="vehicle" value="0"><span class="opt-label">One small car / tractor used for farming</span><span class="opt-pts">0</span></label>
-        <label class="radio-opt"><input type="radio" name="vehicle" value="-3"><span class="opt-label">Multiple vehicles, or large car, or commercial vehicle</span><span class="opt-pts neg">−3</span></label>
-      </div>
-    </div>
-
-    <div class="field">
-      <label class="field-label">Dependents in household <span class="field-pts">5 pts max</span></label>
-      <p class="field-hint">Count: non-working parents, school/college-going siblings, dependent grandparents. Don't count earning members.</p>
-      <div class="radio-group" data-q="dependents">
-        <label class="radio-opt"><input type="radio" name="dependents" value="5"><span class="opt-label">5 or more</span><span class="opt-pts">+5</span></label>
-        <label class="radio-opt"><input type="radio" name="dependents" value="4"><span class="opt-label">4</span><span class="opt-pts">+4</span></label>
-        <label class="radio-opt"><input type="radio" name="dependents" value="3"><span class="opt-label">3</span><span class="opt-pts">+3</span></label>
-        <label class="radio-opt"><input type="radio" name="dependents" value="2"><span class="opt-label">2</span><span class="opt-pts">+2</span></label>
-        <label class="radio-opt"><input type="radio" name="dependents" value="0"><span class="opt-label">1 or none</span><span class="opt-pts">0</span></label>
-      </div>
-    </div>
-
-    <div class="field">
-      <label class="field-label">Primary earner's occupation <span class="field-pts">5 pts max</span></label>
-      <div class="radio-group" data-q="occupation">
-        <label class="radio-opt"><input type="radio" name="occupation" value="5"><span class="opt-label">Daily wage labourer / domestic help</span><span class="opt-pts">+5</span></label>
-        <label class="radio-opt"><input type="radio" name="occupation" value="4"><span class="opt-label">Small farmer (&lt;3 acres) / auto-rickshaw / driver</span><span class="opt-pts">+4</span></label>
-        <label class="radio-opt"><input type="radio" name="occupation" value="2"><span class="opt-label">Skilled labour (carpenter, electrician, plumber) / small shop owner</span><span class="opt-pts">+2</span></label>
-        <label class="radio-opt"><input type="radio" name="occupation" value="2"><span class="opt-label">Private employee, salary under ₹30,000</span><span class="opt-pts">+2</span></label>
-        <label class="radio-opt"><input type="radio" name="occupation" value="1"><span class="opt-label">Government Class IV / driver / peon</span><span class="opt-pts">+1</span></label>
-        <label class="radio-opt"><input type="radio" name="occupation" value="0"><span class="opt-label">Private salary ₹30,000 – ₹50,000 / Govt Class III</span><span class="opt-pts">0</span></label>
-        <label class="radio-opt"><input type="radio" name="occupation" value="-3"><span class="opt-label">Private salary above ₹50,000 / Govt Class II or I</span><span class="opt-pts neg">−3</span></label>
-        <label class="radio-opt"><input type="radio" name="occupation" value="-5"><span class="opt-label">Business owner (substantial scale) / NRI family</span><span class="opt-pts neg">−5</span></label>
-      </div>
-    </div>
-
-    <div class="field">
-      <label class="field-label" for="f_occupation_detail">Primary earner — name &amp; specific role <em style="font-weight:400;color:var(--muted);font-size:11px">— for verification</em></label>
-      <input type="text" id="f_occupation_detail" data-key="occupation_detail" placeholder="e.g., Mother — domestic help in 3 households">
-    </div>
-
-    <div class="sec-subtotal">
-      <span>Section 2 — Financial Need subtotal</span>
-      <span class="v" id="sec2_total">0 / 40</span>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       SECTION 3 — PUNJAB CONNECTION (20 pts via 9-field formula)
-       ============================================================ -->
-  <section class="app-section" id="sec3">
-    <div class="sec-head"><span class="sec-num">3</span><span class="sec-title">Punjab connection</span><span class="sec-points">max 20 pts</span></div>
-    <p class="sec-intro">The batch voted 78% in favour of a Punjab preference. This section captures Punjab connection across 9 dimensions — birth, residence, schooling, lineage, language. Each yes builds your Punjab raw score; the total maps to a tier.</p>
-
-    <div class="field">
-      <label class="field-label">1. Was your <b>father</b> born in Punjab?</label>
-      <div class="radio-group" data-q="p_father"><label class="radio-opt"><input type="radio" name="p_father" value="10"><span class="opt-label">Yes</span><span class="opt-pts">+10</span></label><label class="radio-opt"><input type="radio" name="p_father" value="0"><span class="opt-label">No</span><span class="opt-pts">0</span></label></div>
-    </div>
-
-    <div class="field">
-      <label class="field-label">2. Was your <b>mother</b> born in Punjab?</label>
-      <div class="radio-group" data-q="p_mother"><label class="radio-opt"><input type="radio" name="p_mother" value="10"><span class="opt-label">Yes</span><span class="opt-pts">+10</span></label><label class="radio-opt"><input type="radio" name="p_mother" value="0"><span class="opt-label">No</span><span class="opt-pts">0</span></label></div>
-    </div>
-
-    <div class="field">
-      <label class="field-label">3. Were <b>you</b> born in Punjab?</label>
-      <div class="radio-group" data-q="p_self"><label class="radio-opt"><input type="radio" name="p_self" value="15"><span class="opt-label">Yes</span><span class="opt-pts">+15</span></label><label class="radio-opt"><input type="radio" name="p_self" value="0"><span class="opt-label">No</span><span class="opt-pts">0</span></label></div>
-    </div>
-
-    <div class="field">
-      <label class="field-label">4. Have you lived in Punjab for the last 12+ months continuously?</label>
-      <div class="radio-group" data-q="p_resident"><label class="radio-opt"><input type="radio" name="p_resident" value="15"><span class="opt-label">Yes — proof of residence (ration card / utility bill / Aadhaar)</span><span class="opt-pts">+15</span></label><label class="radio-opt"><input type="radio" name="p_resident" value="0"><span class="opt-label">No</span><span class="opt-pts">0</span></label></div>
-    </div>
-
-    <div class="field">
-      <label class="field-label">5. Years of schooling completed in Punjab schools (Class 1 to 12 combined)</label>
-      <div class="radio-group" data-q="p_school">
-        <label class="radio-opt"><input type="radio" name="p_school" value="20"><span class="opt-label">9 – 12 years (full schooling in Punjab)</span><span class="opt-pts">+20</span></label>
-        <label class="radio-opt"><input type="radio" name="p_school" value="12"><span class="opt-label">5 – 8 years</span><span class="opt-pts">+12</span></label>
-        <label class="radio-opt"><input type="radio" name="p_school" value="5"><span class="opt-label">1 – 4 years</span><span class="opt-pts">+5</span></label>
-        <label class="radio-opt"><input type="radio" name="p_school" value="0"><span class="opt-label">None</span><span class="opt-pts">0</span></label>
-      </div>
-    </div>
-
-    <div class="field">
-      <label class="field-label">6. Family has an ancestral village or town in Punjab where relatives still live or family owns property?</label>
-      <div class="radio-group" data-q="p_village"><label class="radio-opt"><input type="radio" name="p_village" value="10"><span class="opt-label">Yes</span><span class="opt-pts">+10</span></label><label class="radio-opt"><input type="radio" name="p_village" value="0"><span class="opt-label">No</span><span class="opt-pts">0</span></label></div>
-      <input type="text" data-key="p_village_name" placeholder="If yes — village/town name and district" style="margin-top:8px">
-    </div>
-
-    <div class="field">
-      <label class="field-label">7. Pre-1947 ancestral roots in undivided Punjab (Partition refugee family)?</label>
-      <div class="radio-group" data-q="p_prepart"><label class="radio-opt"><input type="radio" name="p_prepart" value="5"><span class="opt-label">Yes</span><span class="opt-pts">+5</span></label><label class="radio-opt"><input type="radio" name="p_prepart" value="0"><span class="opt-label">No</span><span class="opt-pts">0</span></label></div>
-    </div>
-
-    <div class="field">
-      <label class="field-label">8. Is Punjabi the primary language spoken at home?</label>
-      <div class="radio-group" data-q="p_lang"><label class="radio-opt"><input type="radio" name="p_lang" value="8"><span class="opt-label">Yes — primary</span><span class="opt-pts">+8</span></label><label class="radio-opt"><input type="radio" name="p_lang" value="4"><span class="opt-label">Sometimes — multilingual home</span><span class="opt-pts">+4</span></label><label class="radio-opt"><input type="radio" name="p_lang" value="0"><span class="opt-label">No</span><span class="opt-pts">0</span></label></div>
-    </div>
-
-    <div class="field">
-      <label class="field-label">9. Do you hold a <b>Punjab Government Domicile Certificate</b>?</label>
-      <div class="radio-group" data-q="p_domicile"><label class="radio-opt"><input type="radio" name="p_domicile" value="5"><span class="opt-label">Yes — certificate held</span><span class="opt-pts">+5</span></label><label class="radio-opt"><input type="radio" name="p_domicile" value="0"><span class="opt-label">No</span><span class="opt-pts">0</span></label></div>
-    </div>
-
-    <div class="sec-subtotal">
-      <div>
-        <span>Punjab raw points</span>
-        <div style="font-size:11px;color:var(--muted);margin-top:2px"><span id="p_raw">0</span> / 98 raw → <span id="p_tier">No connection</span></div>
-      </div>
-      <span class="v" id="sec3_total">0 / 20</span>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       SECTION 4 — HARDSHIP MARKERS (no cap, soft 35)
-       ============================================================ -->
-  <section class="app-section" id="sec4">
-    <div class="sec-head"><span class="sec-num">4</span><span class="sec-title">Hardship markers</span><span class="sec-points">stacks — typical 0-35 pts</span></div>
-    <p class="sec-intro">Tick all that apply. The batch voted heavy weights on orphan status (59%), widow mother (80%), disability (70%), working students (78%). Every documented hardship counts; nothing is ignored.</p>
-
-    <div class="checkbox-group">
-      <label class="check-opt"><input type="checkbox" name="h_orphan" value="12"><span class="opt-label"><b>Both parents deceased</b> (orphan) — document required: death certificates</span><span class="opt-pts">+12</span></label>
-      <label class="check-opt"><input type="checkbox" name="h_widow" value="10"><span class="opt-label"><b>Father deceased, mother is sole earner</b> in low-wage role — document: death certificate, mother's employment proof</span><span class="opt-pts">+10</span></label>
-      <label class="check-opt"><input type="checkbox" name="h_disab_self" value="12"><span class="opt-label"><b>I have a documented disability or chronic illness</b> affecting daily life/study — disability certificate / medical record</span><span class="opt-pts">+12</span></label>
-      <label class="check-opt"><input type="checkbox" name="h_disab_parent" value="6"><span class="opt-label"><b>A primary earner in family has disability or chronic illness</b> affecting household income — medical record</span><span class="opt-pts">+6</span></label>
-      <label class="check-opt"><input type="checkbox" name="h_agrarian" value="6"><span class="opt-label"><b>Family lost farmland</b> to debt, litigation, or commission-agent default — court papers / land records</span><span class="opt-pts">+6</span></label>
-      <label class="check-opt"><input type="checkbox" name="h_drug" value="5"><span class="opt-label"><b>A parent struggles with addiction</b> (drug crisis affected) — discreet documentation; committee-verified</span><span class="opt-pts">+5</span></label>
-      <label class="check-opt"><input type="checkbox" name="h_disowned" value="6"><span class="opt-label"><b>Disowned by family</b> / living independently — affidavit or independent housing proof</span><span class="opt-pts">+6</span></label>
-      <label class="check-opt"><input type="checkbox" name="h_firstgen" value="6"><span class="opt-label"><b>First-generation college student</b> — neither parent attended college</span><span class="opt-pts">+6</span></label>
-      <label class="check-opt"><input type="checkbox" name="h_village" value="3"><span class="opt-label"><b>Home village population under 5,000</b> — Census records / sarpanch letter</span><span class="opt-pts">+3</span></label>
-      <label class="check-opt"><input type="checkbox" name="h_border" value="3"><span class="opt-label"><b>Domicile in border district</b> (Tarn Taran, Amritsar rural, Gurdaspur, Ferozepur, Fazilka) — domicile certificate</span><span class="opt-pts">+3</span></label>
-      <label class="check-opt"><input type="checkbox" name="h_working" value="8"><span class="opt-label"><b>Working student</b> — currently holding a paid job ≥10 hours/week to support studies/family — employment letter or affidavit</span><span class="opt-pts">+8</span></label>
-    </div>
-
-    <div class="field" style="margin-top:14px">
-      <label class="field-label" for="f_hardship_narrative">Any other documented hardship the committee should know about?</label>
-      <p class="field-hint">Free text. Committee may add up to +5 manually after review.</p>
-      <textarea id="f_hardship_narrative" data-key="hardship_narrative" rows="3" placeholder="e.g., Mother's medical condition requires monthly ₹8,000 spend; sister's college fees; recent house damage from floods..."></textarea>
-    </div>
-
-    <div class="note-box">
-      <b>Mental health note.</b> The batch voted not to formally score mental health (50%), out of respect for privacy. If your application has been affected by mental health challenges, you may mention it confidentially in your hardship narrative. The committee will consider it informally and will not record it in your scored rubric.
-    </div>
-
-    <div class="sec-subtotal">
-      <span>Section 4 — Hardship markers subtotal</span>
-      <span class="v" id="sec4_total">0</span>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       SECTION 5 — EFFORT & ACADEMICS (10 pts)
-       ============================================================ -->
-  <section class="app-section" id="sec5">
-    <div class="sec-head"><span class="sec-num">5</span><span class="sec-title">Effort &amp; academics</span><span class="sec-points">max 10 pts</span></div>
-    <p class="sec-intro">Floor: you must be passing (60% / 6.0 CGPA). Above that, more marks help a little — but the batch was clear: <b>need beats marks (Q1: 67%, Q14: 54%)</b>. Cleared backlogs do NOT penalise you (Q13 verdict). Declining marks do NOT penalise you (Q15 verdict).</p>
-
-    <div class="field">
-      <label class="field-label">Current aggregate marks or CGPA <span class="field-pts">6 pts max</span></label>
-      <div class="radio-group" data-q="marks">
-        <label class="radio-opt"><input type="radio" name="marks" value="6"><span class="opt-label">90% or 9.0+ CGPA</span><span class="opt-pts">+6</span></label>
-        <label class="radio-opt"><input type="radio" name="marks" value="5"><span class="opt-label">80 – 90% / 8.0 – 9.0</span><span class="opt-pts">+5</span></label>
-        <label class="radio-opt"><input type="radio" name="marks" value="4"><span class="opt-label">70 – 80% / 7.0 – 8.0</span><span class="opt-pts">+4</span></label>
-        <label class="radio-opt"><input type="radio" name="marks" value="3"><span class="opt-label">60 – 70% / 6.0 – 7.0</span><span class="opt-pts">+3</span></label>
-        <label class="radio-opt"><input type="radio" name="marks" value="-99"><span class="opt-label">Below 60% / Below 6.0 CGPA — <em>not eligible this year, please reapply once standing improves</em></span><span class="opt-pts neg">N/E</span></label>
-      </div>
-    </div>
-
-    <div class="field">
-      <label class="field-label" for="f_marks_exact">Exact aggregate or CGPA</label>
-      <input type="text" id="f_marks_exact" data-key="marks_exact" placeholder="e.g., 72% / 7.4 CGPA">
-    </div>
-
-    <div class="field">
-      <label class="field-label">Highest achievement (any field) <span class="field-pts">4 pts max</span></label>
-      <p class="field-hint">Sports, academic competition, cultural, social work — any documented achievement.</p>
-      <div class="radio-group" data-q="achievement">
-        <label class="radio-opt"><input type="radio" name="achievement" value="4"><span class="opt-label">National or international (rank / medal / selection)</span><span class="opt-pts">+4</span></label>
-        <label class="radio-opt"><input type="radio" name="achievement" value="3"><span class="opt-label">State level</span><span class="opt-pts">+3</span></label>
-        <label class="radio-opt"><input type="radio" name="achievement" value="2"><span class="opt-label">District level</span><span class="opt-pts">+2</span></label>
-        <label class="radio-opt"><input type="radio" name="achievement" value="1"><span class="opt-label">College / inter-college</span><span class="opt-pts">+1</span></label>
-        <label class="radio-opt"><input type="radio" name="achievement" value="0"><span class="opt-label">None to declare</span><span class="opt-pts">0</span></label>
-      </div>
-      <textarea data-key="achievement_detail" rows="2" placeholder="Brief description (event, year, level)" style="margin-top:8px"></textarea>
-    </div>
-
-    <div class="sec-subtotal">
-      <span>Section 5 — Effort &amp; academics subtotal</span>
-      <span class="v" id="sec5_total">0 / 10</span>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       SECTION 6 — GNDEC LEGACY (6 pts)
-       ============================================================ -->
-  <section class="app-section" id="sec6">
-    <div class="sec-head"><span class="sec-num">6</span><span class="sec-title">GNDEC legacy connection</span><span class="sec-points">max 6 pts</span></div>
-    <p class="sec-intro">If a parent or close family member studied at GNDEC, you carry a direct connection to the institution this scholarship comes from. Special weight for the founding 1996 batch — this is their scholarship reaching forward.</p>
-
-    <div class="checkbox-group">
-      <label class="check-opt"><input type="checkbox" name="g_father" value="2"><span class="opt-label"><b>Father studied at GNDEC</b></span><span class="opt-pts">+2</span></label>
-      <label class="check-opt"><input type="checkbox" name="g_mother" value="2"><span class="opt-label"><b>Mother studied at GNDEC</b></span><span class="opt-pts">+2</span></label>
-      <label class="check-opt"><input type="checkbox" name="g_sibling" value="1"><span class="opt-label"><b>Sibling currently at GNDEC</b></span><span class="opt-pts">+1</span></label>
-      <label class="check-opt"><input type="checkbox" name="g_other" value="1"><span class="opt-label"><b>Other family member at GNDEC</b> (uncle, aunt, cousin, grandparent)</span><span class="opt-pts">+1</span></label>
-      <label class="check-opt" style="border-color:var(--wheat);background:var(--wheat-soft)"><input type="checkbox" name="g_96batch" value="6"><span class="opt-label"><b>Parent / family member from the 1996 batch specifically</b> <em style="display:block;font-size:11.5px;color:var(--muted);margin-top:2px">If selected, this is the cap — overrides other GNDEC bonuses</em></span><span class="opt-pts">+6</span></label>
-    </div>
-
-    <div class="field" style="margin-top:12px">
-      <label class="field-label" for="f_gndec_detail">Name, branch &amp; year of GNDEC alumnus relative</label>
-      <input type="text" id="f_gndec_detail" data-key="gndec_detail" placeholder="e.g., Father — Mech '93 / Mother — ECE '98">
-    </div>
-
-    <div class="sec-subtotal">
-      <span>Section 6 — GNDEC legacy subtotal</span>
-      <span class="v" id="sec6_total">0 / 6</span>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       SECTION 7 — FINANCIAL NEED CALCULATION
-       ============================================================ -->
-  <section class="app-section" id="sec7">
-    <div class="sec-head"><span class="sec-num">7</span><span class="sec-title">Annual financial need</span><span class="sec-points">not scored — drives award amount</span></div>
-    <p class="sec-intro">This calculates your actual annual cost vs. what your family can contribute. The committee uses this alongside your rubric score to determine the award amount.</p>
-
-    <div class="field">
-      <label class="field-label">Do you require hostel accommodation?</label>
-      <div class="radio-group" data-q="hostel">
-        <label class="radio-opt"><input type="radio" name="hostel" value="50000"><span class="opt-label">Yes — outstation student, hostel required</span><span class="opt-pts">+₹50,000/yr</span></label>
-        <label class="radio-opt"><input type="radio" name="hostel" value="0"><span class="opt-label">No — local / day scholar</span><span class="opt-pts">₹0</span></label>
-      </div>
-    </div>
-
-    <div class="two-col">
-      <div class="field">
-        <label class="field-label" for="f_books">Books &amp; supplies estimate (₹/year)</label>
-        <input type="number" id="f_books" data-key="books" value="10000" min="0" step="500">
-      </div>
-      <div class="field">
-        <label class="field-label" for="f_transport">Transport (₹/year)</label>
-        <p class="field-hint">Day scholars: bus/auto. Hostelers: usually ₹0.</p>
-        <input type="number" id="f_transport" data-key="transport" value="15000" min="0" step="500">
-      </div>
-    </div>
-
-    <div class="two-col">
-      <div class="field">
-        <label class="field-label" for="f_family_contrib">Family's annual contribution capacity (₹)</label>
-        <p class="field-hint">Be honest. What can your family actually pay toward college costs in a year?</p>
-        <input type="number" id="f_family_contrib" data-key="family_contrib" value="0" min="0" step="1000">
-      </div>
-      <div class="field">
-        <label class="field-label" for="f_other_aid">Other scholarship/aid received this year (₹)</label>
-        <p class="field-hint">Government aid, other scholarships. The batch voted to deduct this from our award (Q17, 63%).</p>
-        <input type="number" id="f_other_aid" data-key="other_aid" value="0" min="0" step="500">
-      </div>
-    </div>
-
-    <table class="calc-table">
-      <tr><td>Tuition fees</td><td class="amt">₹100,000</td></tr>
-      <tr><td>Hostel (if applicable)</td><td class="amt" id="calc_hostel">₹0</td></tr>
-      <tr><td>Books &amp; supplies</td><td class="amt" id="calc_books">₹10,000</td></tr>
-      <tr><td>Transport</td><td class="amt" id="calc_transport">₹15,000</td></tr>
-      <tr><td><b>Total annual cost</b></td><td class="amt" id="calc_total"><b>₹125,000</b></td></tr>
-      <tr><td>Less: family contribution</td><td class="amt" id="calc_family">−₹0</td></tr>
-      <tr><td>Less: other aid received</td><td class="amt" id="calc_other">−₹0</td></tr>
-      <tr class="total"><td>Net annual need</td><td class="amt" id="calc_net">₹125,000</td></tr>
-    </table>
-
-    <div class="field" style="margin-top:14px">
-      <label class="field-label" for="f_request">Amount you're requesting from this scholarship (₹)</label>
-      <p class="field-hint">Be reasonable. The current budget supports ~20 awards averaging ₹15,000 each. State your true need; the committee balances need against available budget.</p>
-      <input type="number" id="f_request" data-key="request" min="0" step="1000" placeholder="e.g., 15000">
-    </div>
-  </section>
-
-  <!-- ============================================================
-       SECTION 8 — PLEDGES (no score)
-       ============================================================ -->
-  <section class="app-section" id="sec8">
-    <div class="sec-head"><span class="sec-num">8</span><span class="sec-title">Pledges &amp; declarations</span><span class="sec-points">not scored — moral commitments</span></div>
-    <p class="sec-intro">The batch voted these as <b>encouraged not required</b> (Q25 48%, Q28 76%). No legal weight; they reflect the spirit of the scholarship.</p>
-
-    <div class="checkbox-group">
-      <label class="check-opt"><input type="checkbox" name="pledge_payforward"><span class="opt-label"><b>Pay-it-forward:</b> When I am able to earn, I will contribute back to this scholarship fund to help future students. <em style="font-size:11.5px;color:var(--muted);display:block;margin-top:2px">Moral commitment, not legally binding.</em></span></label>
-      <label class="check-opt"><input type="checkbox" name="pledge_seva"><span class="opt-label"><b>Seva commitment:</b> I will be available to mentor future GNDEC students or contribute time to the scholarship program when I am able. <em style="font-size:11.5px;color:var(--muted);display:block;margin-top:2px">Moral commitment, not legally binding.</em></span></label>
-      <label class="check-opt"><input type="checkbox" name="pledge_truth" required><span class="opt-label" style="font-weight:600"><b>Declaration of accuracy:</b> Everything I have entered above is true to the best of my knowledge. I understand committee will verify all material claims. Misrepresentation will lead to rejection. <em style="font-size:11.5px;color:var(--coral-deep);display:block;margin-top:2px">Required.</em></span></label>
-    </div>
-
-    <div class="field" style="margin-top:14px">
-      <label class="field-label" for="f_anything_else">Anything else the committee should know?</label>
-      <textarea id="f_anything_else" data-key="anything_else" rows="3" placeholder="Optional — anything not captured by the form above."></textarea>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       SECTION 9 — DOCUMENTS CHECKLIST
-       ============================================================ -->
-  <section class="app-section" id="sec9">
-    <div class="sec-head"><span class="sec-num">9</span><span class="sec-title">Documents you'll need to submit</span><span class="sec-points">reference list</span></div>
-    <p class="sec-intro">This is what the committee will need to verify your application. Have these ready when invited for verification — physical or scanned copies both work.</p>
-
-    <div style="font-size:14px;line-height:1.7;color:#2C313A">
-      <p style="margin:0 0 8px"><b style="color:var(--navy)">Always required:</b></p>
-      <ul style="margin:0 0 14px;padding-left:22px">
-        <li>Government-issued photo ID (Aadhaar / passport)</li>
-        <li>GNDEC enrollment/registration card</li>
-        <li>Most recent semester marks transcript</li>
-        <li>Father's and mother's photo ID + most recent year's income proof (salary slips, ITR, or affidavit if informal income)</li>
-        <li>Bank account passbook (for award disbursal)</li>
-      </ul>
-      <p style="margin:0 0 8px"><b style="color:var(--navy)">For each claim you made:</b></p>
-      <ul style="margin:0 0 14px;padding-left:22px">
-        <li>Hardship claims (orphan, widow, disability, agrarian, etc.) → relevant certificates listed in Section 4</li>
-        <li>Punjab connection claims → birth certificate, school transcripts, ration card, domicile certificate</li>
-        <li>GNDEC legacy claims → alumnus relative's degree certificate</li>
-        <li>Achievement claims → certificates / merit lists</li>
-        <li>Existing aid → award letter</li>
-      </ul>
-      <p style="margin:0;font-size:13px;color:var(--muted)"><b>Note:</b> No applicant is excluded for being unable to access online forms. If you need help submitting in person, contact the GNDEC office or any committee member.</p>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       FINAL SUMMARY (computed)
-       ============================================================ -->
-  <div class="final-summary" id="finalSummary">
-    <h2>Your provisional application summary</h2>
-    <div class="final-score-row"><span>Section 2 — Financial need</span><span class="v" id="fs_sec2">0 / 40</span></div>
-    <div class="final-score-row"><span>Section 3 — Punjab connection</span><span class="v" id="fs_sec3">0 / 20</span></div>
-    <div class="final-score-row"><span>Section 4 — Hardship markers</span><span class="v" id="fs_sec4">0</span></div>
-    <div class="final-score-row"><span>Section 5 — Effort &amp; academics</span><span class="v" id="fs_sec5">0 / 10</span></div>
-    <div class="final-score-row"><span>Section 6 — GNDEC legacy</span><span class="v" id="fs_sec6">0 / 6</span></div>
-    <div class="final-total"><span>Total rubric score</span><span class="v" id="fs_total">0</span></div>
-    <div style="margin-top:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.15);font-size:13.5px;line-height:1.6;color:#F2EDDC">
-      <b style="color:var(--wheat)">Stated annual need:</b> <span id="fs_need">₹0</span><br>
-      <b style="color:var(--wheat)">Amount requested:</b> <span id="fs_request">—</span><br>
-      <b style="color:var(--wheat)">Eligibility:</b> <span id="fs_eligibility">—</span>
-    </div>
-    <div style="margin-top:16px;font-size:12px;color:#CFC7B0;line-height:1.6;font-style:italic">
-      This is a provisional score for your reference. Final selection is the committee's decision, weighing rubric score, available budget, verified documents, and any factors not fully captured by the rubric. The score alone does not guarantee selection.
+  <div class="info-card">
+    <h3>In the meantime</h3>
+    <p>Read what the batch decided. The rubric that will be used to evaluate your application is shaped by 46 batchmates' votes across 28 detailed questions.</p>
+    <div class="cta-grid">
+      <a class="cta" href="/rubric">
+        <div class="ct">The rubric</div>
+        <div class="cd">The scoring rubric to be applied</div>
+      </a>
+      <a class="cta" href="/interpretation">
+        <div class="ct">Verdicts</div>
+        <div class="cd">Per-question batch verdicts &amp; interpretation</div>
+      </a>
     </div>
   </div>
 
-  <div class="actions">
-    <button class="btn kes full" id="btnCompute" type="button">Compute &amp; preview my application</button>
-  </div>
-
-  <div class="actions" id="postCompute" style="display:none">
-    <button class="btn alt" type="button" onclick="window.print()">Print / save as PDF</button>
-    <button class="btn alt" type="button" id="btnDownload">Download as JSON</button>
-    <button class="btn" type="button" id="btnClear">Clear &amp; start over</button>
+  <div class="info-card">
+    <h3>Questions before applications open?</h3>
+    <p>If you're a current GNDEC student preparing in advance, gather these documents so you're ready when applications open: government photo ID, parents' income proof, your latest semester marks transcript, and any documents supporting hardship claims (orphan/widow/disability/agrarian certificates).</p>
+    <p>For Punjab connection: birth certificate(s), school transcripts, ration card, domicile certificate.</p>
+    <p>For GNDEC legacy: relative's degree certificate.</p>
   </div>
 
   <footer>
     GNDEC 1996 batch · scholarship program · 2026 cohort<br>
-    Built with <span class="heart">♥</span> for our batchmates' children · sat sri akaal<br>
-    <span style="opacity:0.7">Your data is autosaved to this device only · nothing is sent anywhere until you print/download/submit</span>
+    Built with <span class="heart">♥</span> for our batchmates' children · sat sri akaal
   </footer>
 </div>
-
-<div class="save-indicator" id="saveIndicator">Saved</div>
-
-<script>
-// ============================================
-//  Scoring engine + autosave
-// ============================================
-const STORAGE_KEY = 'gndec96_application_v1';
-
-function $(s){return document.querySelector(s)}
-function $$(s){return document.querySelectorAll(s)}
-
-// Selected styling for radio/check
-document.addEventListener('change', function(e){
-  if(e.target.matches('input[type="radio"]')){
-    e.target.closest('.radio-group').querySelectorAll('.radio-opt').forEach(o => o.classList.remove('selected'));
-    e.target.closest('.radio-opt').classList.add('selected');
-  } else if(e.target.matches('input[type="checkbox"]')){
-    e.target.closest('.check-opt')?.classList.toggle('selected', e.target.checked);
-  }
-  compute();
-  saveProgress();
-});
-
-document.addEventListener('input', function(e){
-  if(e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA'){
-    compute();
-    saveProgress();
-  }
-});
-
-function getRadio(name){
-  const r = document.querySelector(`input[name="${name}"]:checked`);
-  return r ? parseFloat(r.value) : 0;
-}
-function sumChecks(names){
-  let s = 0;
-  names.forEach(n => {
-    const c = document.querySelector(`input[name="${n}"]:checked`);
-    if(c) s += parseFloat(c.value);
+<script>(function(){
+  var p = location.pathname.replace(/\/$/,'').toLowerCase();
+  document.querySelectorAll('.pn-tab').forEach(function(a){
+    var h = a.getAttribute('href').toLowerCase().replace(/\/$/,'');
+    if(h === p) a.classList.add('pn-active');
   });
-  return s;
-}
-
-function compute(){
-  // Section 2 — Financial Need (cap 40)
-  const inc = getRadio('income');
-  const hou = getRadio('housing');
-  const lnd = getRadio('land');
-  const veh = getRadio('vehicle');
-  const dep = getRadio('dependents');
-  const occ = getRadio('occupation');
-  let s2 = inc + hou + lnd + veh + dep + occ;
-  if(s2 > 40) s2 = 40;
-  if(s2 < 0) s2 = 0;
-  $('#sec2_total').textContent = `${s2} / 40`;
-
-  // Section 3 — Punjab (raw / 98 → tier 0/6/12/20)
-  const pRaw = getRadio('p_father') + getRadio('p_mother') + getRadio('p_self') + getRadio('p_resident') + getRadio('p_school') + getRadio('p_village') + getRadio('p_prepart') + getRadio('p_lang') + getRadio('p_domicile');
-  $('#p_raw').textContent = pRaw;
-  let s3 = 0; let tier = 'No connection';
-  if(pRaw >= 70){ s3 = 20; tier = 'Full Punjab connection'; }
-  else if(pRaw >= 40){ s3 = 12; tier = 'Substantial connection'; }
-  else if(pRaw >= 20){ s3 = 6; tier = 'Recognised connection'; }
-  $('#p_tier').textContent = tier;
-  $('#sec3_total').textContent = `${s3} / 20`;
-
-  // Section 4 — Hardship (uncapped)
-  const s4 = sumChecks(['h_orphan','h_widow','h_disab_self','h_disab_parent','h_agrarian','h_drug','h_disowned','h_firstgen','h_village','h_border','h_working']);
-  $('#sec4_total').textContent = `${s4}`;
-
-  // Section 5 — Effort & academics
-  const mk = getRadio('marks');
-  let s5 = 0;
-  let ineligible = false;
-  if(mk === -99){ ineligible = true; }
-  else { s5 = mk + getRadio('achievement'); }
-  $('#sec5_total').textContent = ineligible ? 'Not eligible' : `${s5} / 10`;
-
-  // Section 6 — GNDEC legacy
-  const g96 = document.querySelector('input[name="g_96batch"]:checked');
-  let s6;
-  if(g96){ s6 = 6; }
-  else { s6 = sumChecks(['g_father','g_mother','g_sibling','g_other']); if(s6 > 6) s6 = 6; }
-  $('#sec6_total').textContent = `${s6} / 6`;
-
-  // Total
-  const total = ineligible ? 0 : (s2 + s3 + s4 + s5 + s6);
-
-  $('#liveScore').textContent = total;
-  const maxRealistic = 95;
-  const pct = Math.min(100, Math.round(total / maxRealistic * 100));
-  $('#scoreBar').style.width = pct + '%';
-
-  let tag = 'Start filling';
-  let tagCls = '';
-  let meta = 'Live score builds as you complete each section';
-  if(ineligible){
-    tag = 'Not eligible'; tagCls = 'ineligible';
-    meta = 'Marks below 60% / 6.0 — reapply once standing improves';
-  } else if(total === 0){
-    tag = 'Start filling';
-    meta = 'Begin with Section 2 — financial need carries the most weight';
-  } else if(total < 25){
-    tag = 'Building'; tagCls = 'low';
-    meta = 'Keep going — many fields below add up';
-  } else if(total < 50){
-    tag = 'Moderate'; tagCls = 'mid';
-    meta = 'Decent rubric standing — committee will weigh against other applicants';
-  } else if(total < 75){
-    tag = 'Strong'; tagCls = 'high';
-    meta = 'Strong rubric standing — competitive against most applicants';
-  } else {
-    tag = 'Very strong'; tagCls = 'high';
-    meta = 'Top-tier rubric standing — heavy hardship + good fit';
-  }
-  $('#scoreTag').textContent = tag;
-  $('#scoreTag').className = 'score-tag ' + tagCls;
-  $('#scoreMeta').textContent = meta;
-
-  // Section 7 — Need calculation
-  const hostel = getRadio('hostel');
-  const books = parseFloat($('#f_books').value) || 0;
-  const transport = parseFloat($('#f_transport').value) || 0;
-  const family = parseFloat($('#f_family_contrib').value) || 0;
-  const otherAid = parseFloat($('#f_other_aid').value) || 0;
-  const totalCost = 100000 + hostel + books + transport;
-  const netNeed = Math.max(0, totalCost - family - otherAid);
-
-  $('#calc_hostel').textContent = '₹' + hostel.toLocaleString('en-IN');
-  $('#calc_books').textContent = '₹' + books.toLocaleString('en-IN');
-  $('#calc_transport').textContent = '₹' + transport.toLocaleString('en-IN');
-  $('#calc_total').innerHTML = '<b>₹' + totalCost.toLocaleString('en-IN') + '</b>';
-  $('#calc_family').textContent = '−₹' + family.toLocaleString('en-IN');
-  $('#calc_other').textContent = '−₹' + otherAid.toLocaleString('en-IN');
-  $('#calc_net').textContent = '₹' + netNeed.toLocaleString('en-IN');
-
-  // Final summary
-  $('#fs_sec2').textContent = `${s2} / 40`;
-  $('#fs_sec3').textContent = `${s3} / 20`;
-  $('#fs_sec4').textContent = `${s4}`;
-  $('#fs_sec5').textContent = ineligible ? 'Not eligible' : `${s5} / 10`;
-  $('#fs_sec6').textContent = `${s6} / 6`;
-  $('#fs_total').textContent = ineligible ? 'Not eligible' : total;
-  $('#fs_need').textContent = '₹' + netNeed.toLocaleString('en-IN');
-  const req = parseFloat($('#f_request').value);
-  $('#fs_request').textContent = req ? '₹' + req.toLocaleString('en-IN') : '—';
-  $('#fs_eligibility').textContent = ineligible ? 'NOT ELIGIBLE this year (marks below floor)' : (total >= 25 ? 'Eligible for committee review' : 'Eligible but low rubric standing');
-}
-
-// ============================================
-// Autosave to localStorage
-// ============================================
-function saveProgress(){
-  const data = {};
-  $$('[data-key]').forEach(el => { data[el.dataset.key] = el.value; });
-  $$('input[type="radio"]:checked').forEach(r => { data['radio_' + r.name] = r.value; });
-  $$('input[type="checkbox"]:checked').forEach(c => { data['check_' + c.name] = c.value; });
-  data._timestamp = new Date().toISOString();
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e){}
-  const ind = $('#saveIndicator');
-  ind.classList.add('show');
-  clearTimeout(window._saveTimer);
-  window._saveTimer = setTimeout(() => ind.classList.remove('show'), 1200);
-}
-
-function loadProgress(){
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if(!raw) return;
-    const data = JSON.parse(raw);
-    $$('[data-key]').forEach(el => { if(data[el.dataset.key] !== undefined) el.value = data[el.dataset.key]; });
-    Object.keys(data).forEach(k => {
-      if(k.startsWith('radio_')){
-        const name = k.replace('radio_','');
-        const el = document.querySelector(`input[name="${name}"][value="${data[k]}"]`);
-        if(el){ el.checked = true; el.closest('.radio-opt').classList.add('selected'); }
-      }
-      if(k.startsWith('check_')){
-        const name = k.replace('check_','');
-        const el = document.querySelector(`input[name="${name}"]`);
-        if(el){ el.checked = true; el.closest('.check-opt')?.classList.add('selected'); }
-      }
-    });
-    compute();
-  } catch(e){}
-}
-
-// ============================================
-// Compute & download
-// ============================================
-$('#btnCompute').addEventListener('click', () => {
-  compute();
-  $('#finalSummary').classList.add('show');
-  $('#postCompute').style.display = 'flex';
-  $('#finalSummary').scrollIntoView({behavior:'smooth', block:'start'});
-});
-
-$('#btnDownload').addEventListener('click', () => {
-  const data = {};
-  $$('[data-key]').forEach(el => { data[el.dataset.key] = el.value; });
-  $$('input[type="radio"]:checked').forEach(r => { data['choice_' + r.name] = { value: r.value, detail: r.dataset.detail || r.closest('.radio-opt').querySelector('.opt-label')?.textContent.trim() }; });
-  $$('input[type="checkbox"]:checked').forEach(c => { data['choice_' + c.name] = { value: c.value, detail: c.closest('.check-opt')?.querySelector('.opt-label')?.textContent.trim() }; });
-  data._score = {
-    sec2: $('#sec2_total').textContent,
-    sec3: $('#sec3_total').textContent,
-    sec3_punjab_raw: $('#p_raw').textContent,
-    sec3_tier: $('#p_tier').textContent,
-    sec4: $('#sec4_total').textContent,
-    sec5: $('#sec5_total').textContent,
-    sec6: $('#sec6_total').textContent,
-    total: $('#liveScore').textContent
-  };
-  data._need = {
-    total_cost: $('#calc_total').textContent.replace(/[^0-9]/g,''),
-    net_need: $('#calc_net').textContent.replace(/[^0-9]/g,''),
-    requested: $('#f_request').value
-  };
-  data._timestamp = new Date().toISOString();
-  data._applicant_name = $('#f_name').value || 'unknown';
-
-  const json = JSON.stringify(data, null, 2);
-  const blob = new Blob([json], {type:'application/json'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `application_${(data._applicant_name||'unknown').replace(/[^a-zA-Z0-9]/g,'_')}_${new Date().toISOString().slice(0,10)}.json`;
-  a.click();
-  URL.revokeObjectURL(url);
-});
-
-$('#btnClear').addEventListener('click', () => {
-  if(confirm('Clear all fields and start over? This cannot be undone.')){
-    localStorage.removeItem(STORAGE_KEY);
-    location.reload();
-  }
-});
-
-// Boot
-loadProgress();
-compute();
-</script>
+})();</script>
 </body>
 </html>

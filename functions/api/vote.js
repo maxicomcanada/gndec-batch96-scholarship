@@ -1,6 +1,10 @@
 // Cloudflare Pages Function: /api/vote
-// POST: append voter {name, phone, fingerprint, timestamp} to jsonblob voters list
-// GET ?phone=...: check if phone already voted (for client dedup)
+// VOTING IS CLOSED — server-side block (belt + suspenders alongside removed UI form)
+// POST returns 403 voting closed
+// GET still works to check dedup (kept functional for legacy clients)
+
+const VOTING_CLOSED = true;
+const CLOSED_AT = "2026-06-05T20:50:00Z";
 
 const VOTERS_BLOB = "https://jsonblob.com/api/jsonBlob/019e8fb0-bb69-76b0-9fb4-10fdcd1905b3";
 const MIRROR_BLOB = "https://jsonblob.com/api/jsonBlob/019e8fc4-2a17-762d-863e-70e3b3680b53";
@@ -88,7 +92,25 @@ export async function onRequest(context) {
     });
   }
 
-  // POST: append voter
+  // POST: voting closed — reject all new submissions
+  if (request.method === "POST" && VOTING_CLOSED) {
+    return new Response(JSON.stringify({
+      ok: false,
+      error: "voting_closed",
+      message: "Voting has closed. Thank you to all batchmates who participated.",
+      closedAt: CLOSED_AT,
+      viewResults: "/snapshot"
+    }), {
+      status: 403,
+      headers: {
+        "content-type": "application/json",
+        "access-control-allow-origin": "*",
+        "cache-control": "no-store"
+      }
+    });
+  }
+
+  // POST: append voter (only reachable if VOTING_CLOSED = false)
   if (request.method === "POST") {
     let payload;
     try { payload = await request.json(); }

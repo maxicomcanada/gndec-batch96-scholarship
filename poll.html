@@ -1,1180 +1,187 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>1996 Batch Scholarship Selection Poll</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Voting closed — thank you · GNDEC 1996 batch scholarship</title>
+<meta name="description" content="The 1996 batch scholarship rubric poll has closed. Thank you to all batchmates who voted.">
+<meta property="og:title" content="Voting closed · thank you · GNDEC 1996 batch">
+<meta property="og:description" content="46 batchmates shaped the rubric. View the results.">
 <style>
-:root {
-  --navy: #0b2240;
-  --kesari: #ff7518;
-  --wheat: #e8c168;
-  --maroon: #6b1d2c;
-  --punjab-green: #1e6b3a;
-  --cream: #faf6ec;
-  --ink: #1a1a2e;
-  --muted: #6b6b80;
-  --line: #e5d6b8;
-  --card-bg: #ffffff;
-  --shadow: 0 4px 24px rgba(11, 34, 64, 0.08);
-}
-*, *::before, *::after { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-  background: var(--cream);
-  color: var(--ink);
-  line-height: 1.55;
-  font-size: 16px;
-  min-height: 100vh;
-}
-.banner {
-  background: linear-gradient(135deg, var(--navy) 0%, #143866 100%);
-  color: var(--cream);
-  padding: 28px 20px 26px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-.banner::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    radial-gradient(circle at 12% 30%, var(--kesari) 0.7px, transparent 1px),
-    radial-gradient(circle at 88% 70%, var(--wheat) 0.7px, transparent 1px),
-    radial-gradient(circle at 50% 50%, var(--kesari) 0.5px, transparent 1px);
-  background-size: 40px 40px, 32px 32px, 60px 60px;
-  opacity: 0.18;
-  pointer-events: none;
-}
-.banner-title { font-size: 22px; font-weight: 800; margin: 0 0 6px; position: relative; z-index: 1; }
-.banner-sub { font-size: 14px; opacity: 0.9; margin: 0; position: relative; z-index: 1; }
-.kesari-line { height: 4px; background: linear-gradient(90deg, var(--kesari) 0%, var(--wheat) 50%, var(--kesari) 100%); }
-.wrap { max-width: 720px; margin: 0 auto; padding: 22px 16px 60px; }
+  :root {
+    --navy:#0B2340;
+    --navy-soft:#E8ECF2;
+    --kesari:#FF6B1A;
+    --kesari-soft:#FFE6D6;
+    --wheat:#E8B741;
+    --wheat-soft:#FBEFD2;
+    --maroon:#7E1B2E;
+    --green:#2E7D32;
+    --green-soft:#E5F1E6;
+    --ink:#1A1D24;
+    --muted:#5C6473;
+    --paper:#FFFDF8;
+    --border:#E6DECB;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;font-size:16px;line-height:1.6}
+  .wrap{max-width:740px;margin:0 auto;padding:18px 18px 80px}
+  .topband{height:6px;background:linear-gradient(90deg,var(--navy) 0 25%,var(--kesari) 25% 50%,var(--wheat) 50% 75%,var(--green) 75% 100%);
+    border-radius:3px;margin-bottom:18px}
 
-.intro {
-  background: var(--card-bg);
-  border-radius: 14px;
-  padding: 22px 20px;
-  margin-bottom: 22px;
-  box-shadow: var(--shadow);
-  border-left: 5px solid var(--kesari);
-}
-.intro h2 { margin: 0 0 10px; font-size: 18px; color: var(--navy); }
-.intro p { margin: 0 0 9px; font-size: 14px; color: var(--ink); }
-.intro .why {
-  background: #fff7e6;
-  border-radius: 8px;
-  padding: 12px 14px;
-  font-size: 13px;
-  margin-top: 12px;
-  color: var(--maroon);
-}
-.intro .secure-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--punjab-green);
-  color: white;
-  padding: 5px 11px;
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 700;
-  margin-top: 12px;
-}
+  .closed-banner{background:linear-gradient(135deg,#7E1B2E 0%,#5C1421 100%);
+    color:#fff;border-radius:14px;padding:24px 22px;margin-bottom:18px;
+    border:2px solid var(--wheat);box-shadow:0 8px 24px rgba(126,27,46,0.2);position:relative;overflow:hidden}
+  .closed-banner::after{content:"";position:absolute;inset:0;
+    background-image:radial-gradient(circle at 18% 28%,var(--wheat) 0.8px,transparent 1px),
+                     radial-gradient(circle at 82% 72%,var(--kesari) 0.8px,transparent 1px);
+    background-size:38px 38px,30px 30px;opacity:0.18;pointer-events:none}
+  .closed-tag{display:inline-block;background:var(--wheat);color:var(--navy);
+    font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+    padding:4px 10px;border-radius:5px;margin-bottom:10px;position:relative;z-index:1}
+  .closed-title{font-size:24px;font-weight:700;line-height:1.2;margin:0 0 6px;color:#fff;position:relative;z-index:1;letter-spacing:-0.3px}
+  .closed-sub{font-size:14px;color:var(--wheat);font-weight:500;margin:0;position:relative;z-index:1}
 
-.section-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 26px 4px 14px;
-  padding: 10px 14px;
-  background: linear-gradient(135deg, var(--navy) 0%, var(--maroon) 100%);
-  border-radius: 10px;
-  color: white;
-}
-.section-header .num {
-  background: var(--wheat);
-  color: var(--maroon);
-  width: 28px;
-  height: 28px;
-  border-radius: 999px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 13px;
-  flex-shrink: 0;
-}
-.section-header .ttl { font-size: 14px; font-weight: 700; letter-spacing: 0.3px; }
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:22px}
+  .stat{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center}
+  .stat .n{font-size:32px;font-weight:700;color:var(--navy);line-height:1;font-variant-numeric:tabular-nums}
+  .stat .l{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;margin-top:6px;font-weight:600}
 
-.identity {
-  background: var(--card-bg);
-  border-radius: 14px;
-  padding: 16px 18px;
-  margin-bottom: 18px;
-  box-shadow: var(--shadow);
-}
-.identity label { display: block; font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
-.identity input {
-  width: 100%;
-  padding: 11px 13px;
-  font-size: 15px;
-  border: 1.5px solid var(--line);
-  border-radius: 8px;
-  background: #fff;
-  color: var(--ink);
-  font-family: inherit;
-}
-.identity input:focus { outline: 2px solid var(--kesari); outline-offset: 1px; }
-.identity .opt { font-size: 12px; color: var(--muted); font-weight: 400; }
+  .thanks{background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:18px;font-size:15px;line-height:1.7}
+  .thanks h2{font-size:14px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;
+    margin:0 0 12px;font-weight:700;display:flex;align-items:center;gap:10px}
+  .thanks h2::after{content:"";flex:1;height:1px;background:var(--border)}
+  .thanks p{margin:0 0 12px;color:#2C313A}
+  .thanks p:last-child{margin:0}
+  .thanks b{color:var(--navy);font-weight:600}
+  .thanks .opening{font-size:17px;font-weight:500;color:var(--navy);line-height:1.5}
+  .signoff{margin-top:16px;padding-top:16px;border-top:1px dashed var(--border);font-style:italic;color:var(--muted);font-size:14px}
 
-.q {
-  background: var(--card-bg);
-  border-radius: 14px;
-  padding: 18px 18px 12px;
-  margin-bottom: 14px;
-  box-shadow: var(--shadow);
-  border-top: 3px solid var(--punjab-green);
-}
-.q-num {
-  display: inline-block;
-  background: var(--navy);
-  color: var(--cream);
-  font-size: 12px;
-  font-weight: 700;
-  padding: 3px 9px;
-  border-radius: 999px;
-  margin-bottom: 8px;
-}
-.q-scenario {
-  background: #fff7e6;
-  border-left: 3px solid var(--kesari);
-  padding: 10px 12px;
-  border-radius: 6px;
-  margin: 0 0 12px;
-  font-size: 13.5px;
-  color: var(--maroon);
-  line-height: 1.5;
-}
-.q-scenario b { color: var(--navy); }
-.q-title { font-size: 16px; font-weight: 700; color: var(--navy); margin: 0 0 14px; line-height: 1.4; }
-.opts { display: flex; flex-direction: column; gap: 8px; padding: 0; margin: 0; list-style: none; }
-.opt-label {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 13px 14px;
-  border: 1.5px solid var(--line);
-  border-radius: 10px;
-  cursor: pointer;
-  background: #fdfbf4;
-  transition: border 0.15s, background 0.15s;
-  user-select: none;
-}
-.opt-label:hover { border-color: var(--kesari); }
-.opt-label input[type="radio"] {
-  margin-top: 3px;
-  accent-color: var(--kesari);
-  width: 18px;
-  height: 18px;
-  flex-shrink: 0;
-}
-.opt-label:has(input:checked) { border-color: var(--punjab-green); background: #f0fdf4; }
-.opt-text { font-size: 14.5px; flex: 1; line-height: 1.42; }
-.opt-text b { color: var(--navy); }
-.opt-letter {
-  display: inline-block;
-  background: var(--navy);
-  color: white;
-  width: 22px;
-  height: 22px;
-  border-radius: 999px;
-  text-align: center;
-  font-weight: 800;
-  font-size: 12px;
-  line-height: 22px;
-  margin-right: 8px;
-  flex-shrink: 0;
-}
-.opt-label:has(input:checked) .opt-letter { background: var(--punjab-green); }
+  .next h3{font-size:14px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;
+    margin:0 0 12px;font-weight:700}
+  .cta-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  .cta{display:block;background:#fff;border:1px solid var(--border);border-radius:12px;
+    padding:16px;text-decoration:none;color:var(--ink);transition:border-color 0.15s,transform 0.15s}
+  .cta:hover{border-color:var(--kesari);transform:translateY(-1px)}
+  .cta .ct{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:3px}
+  .cta .cd{font-size:12px;color:var(--muted);line-height:1.4}
+  .cta.primary{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .cta.primary .ct{color:var(--wheat)}
+  .cta.primary .cd{color:#F2EDDC}
 
-.submit-area {
-  background: var(--card-bg);
-  border-radius: 14px;
-  padding: 18px;
-  text-align: center;
-  box-shadow: var(--shadow);
-  margin-top: 24px;
-}
-.submit-area textarea {
-  width: 100%;
-  min-height: 70px;
-  padding: 11px 13px;
-  font-size: 14px;
-  border: 1.5px solid var(--line);
-  border-radius: 8px;
-  background: #fff;
-  color: var(--ink);
-  font-family: inherit;
-  margin-bottom: 14px;
-  resize: vertical;
-}
-.btn {
-  display: inline-block;
-  background: linear-gradient(135deg, var(--kesari) 0%, var(--maroon) 100%);
-  color: white;
-  font-size: 17px;
-  font-weight: 700;
-  padding: 14px 32px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  width: 100%;
-  font-family: inherit;
-  letter-spacing: 0.3px;
-  box-shadow: 0 4px 12px rgba(255, 117, 24, 0.25);
-}
-.btn:active { transform: translateY(1px); }
-.btn:disabled { opacity: 0.6; cursor: not-allowed; }
+  footer{text-align:center;margin-top:28px;font-size:11px;color:var(--muted);line-height:1.7}
+  footer .heart{color:var(--kesari)}
 
-.lockout {
-  background: var(--card-bg);
-  border-radius: 16px;
-  padding: 28px 22px;
-  text-align: center;
-  box-shadow: var(--shadow);
-  margin-top: 20px;
-  border-top: 4px solid var(--punjab-green);
-}
-.lockout .icon { font-size: 56px; line-height: 1; margin-bottom: 10px; }
-.lockout h2 { margin: 0 0 8px; font-size: 20px; color: var(--navy); }
-.lockout p { font-size: 14px; color: var(--ink); margin: 0 0 14px; }
-.lockout .prev {
-  background: #f0fdf4;
-  border: 1px solid var(--punjab-green);
-  border-radius: 10px;
-  padding: 12px 14px;
-  font-size: 12px;
-  text-align: left;
-  color: var(--ink);
-  margin-bottom: 14px;
-  max-height: 280px;
-  overflow-y: auto;
-  line-height: 1.55;
-}
-.lockout .share-btn {
-  display: inline-block;
-  background: var(--punjab-green);
-  color: white;
-  padding: 11px 22px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 700;
-  margin: 6px 4px;
-  font-size: 14px;
-}
-
-.foot { text-align: center; font-size: 12px; color: var(--muted); padding: 20px 0; }
-.foot a { color: var(--navy); text-decoration: none; }
-.security-note {
-  font-size: 11px;
-  color: var(--muted);
-  background: #f5efe2;
-  border-radius: 6px;
-  padding: 8px 10px;
-  margin-top: 6px;
-  line-height: 1.45;
-}
-
-.progress-bar {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  height: 6px;
-  background: rgba(11, 34, 64, 0.08);
-  margin: -22px -16px 0;
-}
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--kesari), var(--maroon));
-  width: 0%;
-  transition: width 0.3s ease;
-}
-.mini-progress {
-  position: sticky;
-  top: 6px;
-  z-index: 49;
-  background: rgba(250, 246, 236, 0.95);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  margin: 0 -16px 18px;
-  padding: 8px 16px;
-  border-bottom: 1px solid var(--line);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--navy);
-}
-.mini-progress .step { color: var(--kesari); font-weight: 800; }
-.mini-progress .resume-note { font-size: 10px; color: var(--punjab-green); font-weight: 600; }
-
-@media (max-width: 600px) {
-  .banner { padding: 18px 14px 16px; }
-  .banner-title { font-size: 18px; }
-  .banner-sub { font-size: 12px; }
-  .wrap { padding: 16px 12px 50px; }
-  .intro { padding: 16px 14px; }
-  .intro h2 { font-size: 16px; }
-  .intro p { font-size: 13px; }
-  .intro .why { font-size: 12px; padding: 10px; }
-  .intro .principles li { font-size: 12px; }
-  .identity { padding: 14px; }
-  .identity input { padding: 13px 14px; font-size: 16px; /* 16px prevents iOS zoom */ }
-  .q { padding: 16px 14px 12px; margin-bottom: 12px; }
-  .q-title { font-size: 15px; margin-bottom: 12px; }
-  .q-scenario { font-size: 13.5px; padding: 10px 12px; line-height: 1.55; }
-  .opt-label { padding: 14px 14px; min-height: 56px; gap: 8px; }
-  .opt-text { font-size: 14.5px; line-height: 1.45; }
-  .opt-letter { width: 26px; height: 26px; line-height: 26px; font-size: 13px; flex-shrink: 0; }
-  .opt-label input[type="radio"] { width: 20px; height: 20px; flex-shrink: 0; }
-  .section-header { padding: 8px 12px; margin: 22px 0 12px; }
-  .section-header .ttl { font-size: 12.5px; }
-  .section-header .num { width: 24px; height: 24px; font-size: 12px; }
-  .submit-area { padding: 14px; }
-  .btn { padding: 16px 24px; font-size: 16px; }
-  .security-note { font-size: 11px; padding: 10px; line-height: 1.5; }
-}
-
-/* Smooth animation when option gets selected */
-@keyframes opt-tick {
-  0% { transform: scale(1); }
-  40% { transform: scale(1.03); background: #defce4; }
-  100% { transform: scale(1); }
-}
-.opt-label.just-picked { animation: opt-tick 0.5s ease-out; }
+  @media (max-width:520px){
+    .stats{grid-template-columns:1fr 1fr}
+    .stats .stat:last-child{grid-column:1/-1}
+    .cta-grid{grid-template-columns:1fr}
+    .closed-title{font-size:20px}
+  }
 </style>
 </head>
 <body>
-
-<div class="banner">
-  <h1 class="banner-title">🎓 1996 Batch Scholarship Selection Poll</h1>
-  <p class="banner-sub">GNDEC Alumni · Clear scenarios, clear decisions</p>
-</div>
-<div class="kesari-line"></div>
-
 <div class="wrap">
+  <div class="topband"></div>
 
-  <div id="loadingState" style="text-align:center; padding:40px 20px; font-size:14px; color:var(--muted);">
-    🔄 Loading poll...
+  <!-- ===== POLL NAV ===== -->
+  <style>
+  .pn-wrap{display:flex;gap:4px;background:#fff;border:1px solid #E6DECB;border-radius:12px;
+    padding:4px;margin:0 0 16px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+    box-shadow:0 2px 8px rgba(11,34,64,0.04)}
+  .pn-wrap::-webkit-scrollbar{display:none}
+  .pn-tab{flex:1;text-align:center;padding:9px 10px;border-radius:8px;text-decoration:none;
+    color:#5C6473;font-size:12.5px;font-weight:600;white-space:nowrap;min-width:max-content;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    transition:background 0.15s,color 0.15s;letter-spacing:0.2px}
+  .pn-tab:hover{background:#E8ECF2;color:#0B2340}
+  .pn-tab.pn-active{background:#0B2340;color:#fff}
+  .pn-tab.pn-vote{background:#7E1B2E;color:#fff}
+  .pn-tab.pn-vote.pn-active{background:#7E1B2E}
+  @media (max-width:480px){.pn-tab{font-size:11.5px;padding:8px 8px}}
+  </style>
+  <div class="pn-wrap" role="navigation" aria-label="Poll sections">
+    <a class="pn-tab pn-vote" href="/poll">Voting closed</a>
+    <a class="pn-tab" href="/snapshot">Snapshot</a>
+    <a class="pn-tab" href="/charts">Charts</a>
+    <a class="pn-tab" href="/poll_results">Dashboard</a>
+    <a class="pn-tab" href="/interpretation">Verdicts</a>
+    <a class="pn-tab" href="/rubric">Rubric</a>
+  </div>
+  <script>(function(){
+    var p = location.pathname.replace(/\/$/,'').toLowerCase();
+    document.querySelectorAll('.pn-tab').forEach(function(a){
+      var h = a.getAttribute('href').toLowerCase().replace(/\/$/,'');
+      if(h === p) a.classList.add('pn-active');
+    });
+  })();</script>
+  <!-- ===== /POLL NAV ===== -->
+
+  <div class="closed-banner">
+    <div class="closed-tag">Voting closed</div>
+    <div class="closed-title">Thank you, batchmates.</div>
+    <p class="closed-sub">Sat sri akaal · the rubric is shaped by your voice now.</p>
   </div>
 
-  <div class="lockout" id="lockoutScreen" style="display:none;">
-    <div class="icon">✅</div>
-    <h2>You've already voted</h2>
-    <p>This device has already submitted a response. Thank you 🙏</p>
-    <div class="prev" id="prevVoteSummary"></div>
-    <a class="share-btn" id="shareBtnLock" href="#">📤 Share Poll on WhatsApp</a>
-    <a class="share-btn" style="background:var(--maroon);" href="poll_results">📊 View Live Results</a>
+  <div class="stats">
+    <div class="stat"><div class="n" id="totalVotes">46</div><div class="l">votes received</div></div>
+    <div class="stat"><div class="n">28</div><div class="l">questions answered</div></div>
+    <div class="stat"><div class="n">7</div><div class="l">rubric sections</div></div>
   </div>
 
-  <div id="formContainer" style="display:none;">
-    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-    <div class="mini-progress" id="miniProgress" style="display:none;">
-      <span><span class="step" id="stepIndicator">Q1</span> of 28</span>
-      <span id="progressPct">0%</span>
-      <span class="resume-note" id="resumeNote" style="display:none;">✓ Auto-saved</span>
+  <div class="thanks">
+    <h2>From our batch, for our batch</h2>
+    <p class="opening">Three decades after walking out of GNDEC's gates together, you came back to the same campus — this time as decision-makers — to set the rules for how the 1996 batch scholarship will choose its students.</p>
+    <p>Every one of you who voted brought your own lived experience to the ballot. The NRI in Toronto thinking about the kid in Tarn Taran. The Ludhiana engineer remembering the classmate who couldn't pay the term fee. The Singapore-based batchmate weighing pure meritocracy against the realities back home. The Delhi alum thinking about the working student whose marks slipped. You all showed up.</p>
+    <p>The verdict that emerged is unambiguously <b>about lifting people up</b>. Need beats merit. Working students win. Orphans, widow-mother households, disability, agrarian distress — all weighted heavily. Punjab connection matters. Spread the budget broadly. Build a culture of giving back through encouragement, not contract. Don't punish backlogs. Support the student whose marks are slipping — they're the symptom of family stress, not the cause of it.</p>
+    <p>That's the rubric you wrote — together — for the first cohort of our scholarship recipients. Every selection from this point forward carries the batch's collective conscience.</p>
+    <div class="signoff">— GNDEC 1996 batch · scholarship program · with deep gratitude</div>
+  </div>
+
+  <div class="next">
+    <h3>See what the batch decided</h3>
+    <div class="cta-grid">
+      <a class="cta primary" href="/interpretation">
+        <div class="ct">Detailed verdicts</div>
+        <div class="cd">All 28 questions with scenarios, vote breakdowns, and what each verdict means for the rubric</div>
+      </a>
+      <a class="cta" href="/rubric">
+        <div class="ct">The final rubric</div>
+        <div class="cd">Auto-generated scoring rubric the committee can apply to applications</div>
+      </a>
+      <a class="cta" href="/snapshot">
+        <div class="ct">Quick snapshot</div>
+        <div class="cd">One-page summary — strong consensus on top, contested below</div>
+      </a>
+      <a class="cta" href="/charts">
+        <div class="ct">Visual results</div>
+        <div class="cd">Charts and stacked bars showing how every question landed</div>
+      </a>
     </div>
-
-    <div class="intro">
-      <h2>Sat Sri Akal batchmate 🙏</h2>
-      <p>We are finalizing the rubric for this year's scholarship awards. Each question below is a <b>real-world scenario</b> — pick the one that best matches your view.</p>
-      <p>No abstract point values, no "committee decides" — just clear choices.</p>
-      <div class="why">
-        <b>⏱ 28 questions · 3 options each · ~6 minutes</b><br>
-        🔒 One vote per phone number · Votes anonymized in results · Live results visible
-      </div>
-      <span class="secure-badge">🔒 One Vote Per Phone · Results Anonymized</span>
-    </div>
-
-    <form id="pollForm" onsubmit="return false;">
-      <div class="identity">
-        <label>Your name <span class="opt">(required — recorded against your vote)</span></label>
-        <input type="text" name="name" placeholder="e.g. Tejpreet Singh" required>
-        <label style="margin-top:14px;">WhatsApp number <span class="opt">(required — used to verify one vote per person)</span></label>
-        <input type="tel" name="phone" placeholder="e.g. 9876543210" required pattern="[0-9+\-\s]{7,15}" inputmode="numeric">
-        <p style="font-size:11px; color:var(--muted); margin: 4px 0 0;">📞 Same WhatsApp number can vote only once. Public dashboard shows aggregate counts only — your individual answers are visible to the committee admins for review.</p>
-      </div>
-
-      <!-- ============== SECTION 1: NEED vs MERIT ============== -->
-      <div class="section-header"><div class="num">1</div><div class="ttl">NEED vs MERIT — Who deserves the scholarship most?</div></div>
-
-      <div class="q">
-        <span class="q-num">Q1</span>
-        <p class="q-scenario">Two equally-qualified students apply. One is from a <b>much poorer family</b>, the other has <b>much better marks</b>.</p>
-        <h3 class="q-title">Who gets priority?</h3>
-        <ul class="opts">
-          <li><label class="opt-label"><input type="radio" name="q1_need_vs_merit" value="A" required><span class="opt-text"><span class="opt-letter">A</span><b>The poorer family one</b> — need comes first</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q1_need_vs_merit" value="B"><span class="opt-text"><span class="opt-letter">B</span><b>The higher marks one</b> — merit comes first</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q1_need_vs_merit" value="C"><span class="opt-text"><span class="opt-letter">C</span>Equal weight to both</span></label></li>
-        </ul>
-      </div>
-
-      <div class="q">
-        <span class="q-num">Q2</span>
-        <p class="q-scenario">Student A: <b>85% marks, middle-class family</b>. Student B: <b>65% marks, father is a daily-wage labourer</b>.</p>
-        <h3 class="q-title">Who deserves the scholarship more?</h3>
-        <ul class="opts">
-          <li><label class="opt-label"><input type="radio" name="q2_low_marks_low_income" value="A" required><span class="opt-text"><span class="opt-letter">A</span><b>Student B (65%)</b> — need is the soul of this scholarship</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q2_low_marks_low_income" value="B"><span class="opt-text"><span class="opt-letter">B</span><b>Student A (85%)</b> — merit must be rewarded</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q2_low_marks_low_income" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>Both should get</b> if budget allows</span></label></li>
-        </ul>
-      </div>
-
-      <div class="q">
-        <span class="q-num">Q3</span>
-        <p class="q-scenario">A student's family earns about <b>₹60,000/month</b> — just above our typical income cutoff — but they own <b>no house, no land, no vehicles</b>, and live in rented quarters.</p>
-        <h3 class="q-title">Should they qualify?</h3>
-        <ul class="opts">
-          <li><label class="opt-label"><input type="radio" name="q3_above_threshold_no_assets" value="A" required><span class="opt-text"><span class="opt-letter">A</span><b>Yes</b> — their real situation is poor, assets don't lie</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q3_above_threshold_no_assets" value="B"><span class="opt-text"><span class="opt-letter">B</span><b>No</b> — rules are rules, income threshold is the line</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q3_above_threshold_no_assets" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>Only if</b> we physically verify their assets</span></label></li>
-        </ul>
-      </div>
-
-      <div class="q">
-        <span class="q-num">Q4</span>
-        <p class="q-scenario">Two students score <b>identically</b> on our rubric. We can only pick one.</p>
-        <h3 class="q-title">Tie-breaker should be:</h3>
-        <ul class="opts">
-          <li><label class="opt-label"><input type="radio" name="q4_tiebreaker" value="A" required><span class="opt-text"><span class="opt-letter">A</span><b>Lower family income</b> wins</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q4_tiebreaker" value="B"><span class="opt-text"><span class="opt-letter">B</span><b>Orphan / single-parent</b> wins</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q4_tiebreaker" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>Both get awards</b> — find the budget</span></label></li>
-        </ul>
-      </div>
-
-      <!-- ============== SECTION 2: IDENTITY & BACKGROUND ============== -->
-      <div class="section-header"><div class="num">2</div><div class="ttl">IDENTITY & BACKGROUND — Gender, Geography, Domicile</div></div>
-
-      <div class="q">
-        <span class="q-num">Q5</span>
-        <p class="q-scenario">A <b>brother and sister</b> from the same family apply with very similar profile.</p>
-        <h3 class="q-title">Who gets priority?</h3>
-        <ul class="opts">
-          <li><label class="opt-label"><input type="radio" name="q5_son_or_daughter" value="A" required><span class="opt-text"><span class="opt-letter">A</span><b>The sister</b> — girl-child education priority</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q5_son_or_daughter" value="B"><span class="opt-text"><span class="opt-letter">B</span><b>The brother</b> if his marks are slightly better — gender-neutral</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q5_son_or_daughter" value="C"><span class="opt-text"><span class="opt-letter">C</span>Whoever has <b>worse personal situation</b> (illness, dependents)</span></label></li>
-        </ul>
-      </div>
-
-      <div class="q">
-        <span class="q-num">Q6</span>
-        <p class="q-scenario">🪷 <b>Punjab domicile bonus</b> — final answer.</p>
-        <h3 class="q-title">Pick one:</h3>
-        <ul class="opts">
-          <li><label class="opt-label"><input type="radio" name="q6_punjab_bonus" value="A" required><span class="opt-text"><span class="opt-letter">A</span><b>No bonus</b> — all India students treated equally</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q6_punjab_bonus" value="B"><span class="opt-text"><span class="opt-letter">B</span><b>Meaningful bonus</b> — +20% to Punjab-domicile students' final score</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q6_punjab_bonus" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>Punjab-only</b> — non-Punjab students not eligible</span></label></li>
-        </ul>
-      </div>
-
-      <div class="q">
-        <span class="q-num">Q7</span>
-        <p class="q-scenario">A student is from a <b>village of 2,000 people</b> with no nearby college, has to travel 40 km daily.</p>
-        <h3 class="q-title">How much should this matter?</h3>
-        <ul class="opts">
-          <li><label class="opt-label"><input type="radio" name="q7_rural_village" value="A" required><span class="opt-text"><span class="opt-letter">A</span><b>Big bonus</b> — rural disadvantage is real and structural</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q7_rural_village" value="B"><span class="opt-text"><span class="opt-letter">B</span><b>Small recognition</b> — a few points</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q7_rural_village" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>Not a factor</b> — judge on income alone</span></label></li>
-        </ul>
-      </div>
-
-      <div class="q">
-        <span class="q-num">Q8</span>
-        <p class="q-scenario">A student is the <b>first in their family</b> to attend college — neither parent finished a degree.</p>
-        <h3 class="q-title">Should this matter?</h3>
-        <ul class="opts">
-          <li><label class="opt-label"><input type="radio" name="q8_first_gen" value="A" required><span class="opt-text"><span class="opt-letter">A</span><b>Yes, big bonus</b> — breaks generational poverty</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q8_first_gen" value="B"><span class="opt-text"><span class="opt-letter">B</span><b>Small recognition</b></span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q8_first_gen" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>Not relevant</b> to selection</span></label></li>
-        </ul>
-      </div>
-
-      <!-- ============== SECTION 3: HARDSHIP ============== -->
-      <div class="section-header"><div class="num">3</div><div class="ttl">HARDSHIP — Orphans, Widows, Disability</div></div>
-
-      <div class="q">
-        <span class="q-num">Q9</span>
-        <p class="q-scenario">An <b>orphan student</b> (both parents deceased) applies.</p>
-        <h3 class="q-title">Policy:</h3>
-        <ul class="opts">
-          <li><label class="opt-label"><input type="radio" name="q9_orphan_policy" value="A" required><span class="opt-text"><span class="opt-letter">A</span><b>Auto-qualify</b> — orphan = automatic scholarship</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q9_orphan_policy" value="B"><span class="opt-text"><span class="opt-letter">B</span><b>Big bonus</b>, but standard selection process</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q9_orphan_policy" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>Standard process</b> — judged like everyone else</span></label></li>
-        </ul>
-      </div>
-
-      <div class="q">
-        <span class="q-num">Q10</span>
-        <p class="q-scenario"><b>Mother is sole earner</b> (father absent or deceased).</p>
-        <h3 class="q-title">Policy:</h3>
-        <ul class="opts">
-          <li><label class="opt-label"><input type="radio" name="q10_widow_mother" value="A" required><span class="opt-text"><span class="opt-letter">A</span><b>Big bonus</b> (meaningful priority)</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q10_widow_mother" value="B"><span class="opt-text"><span class="opt-letter">B</span><b>Small recognition</b> (a few points)</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q10_widow_mother" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>No bonus</b> — assess by income alone</span></label></li>
-        </ul>
-      </div>
-
-      <div class="q">
-        <span class="q-num">Q11</span>
-        <p class="q-scenario">Student (or their parent) has a <b>certified disability or chronic illness</b>.</p>
-        <h3 class="q-title">Policy:</h3>
-        <ul class="opts">
-          <li><label class="opt-label"><input type="radio" name="q11_disability_policy" value="A" required><span class="opt-text"><span class="opt-letter">A</span><b>Auto-qualify</b> or major bonus</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q11_disability_policy" value="B"><span class="opt-text"><span class="opt-letter">B</span><b>Small bonus</b></span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q11_disability_policy" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>Not a separate factor</b></span></label></li>
-        </ul>
-      </div>
-
-      <!-- ============== SECTION 4: EFFORT, CHARACTER & ACADEMICS ============== -->
-      <div class="section-header"><div class="num">4</div><div class="ttl">EFFORT, CHARACTER & ACADEMICS</div></div>
-
-      <div class="q">
-        <span class="q-num">Q12</span>
-        <p class="q-scenario">Student A works <b>night-shift delivery</b> to fund studies, scored 60%. Student B doesn't work, scored 75%.</p>
-        <h3 class="q-title">Who deserves more priority?</h3>
-        <ul class="opts">
-          <li><label class="opt-label"><input type="radio" name="q12_working_student" value="A" required><span class="opt-text"><span class="opt-letter">A</span><b>The working student</b> — earned every percent</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q12_working_student" value="B"><span class="opt-text"><span class="opt-letter">B</span><b>Recognize working</b>, but marks still matter more</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q12_working_student" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>Marks come first</b> — working is irrelevant</span></label></li>
-        </ul>
-      </div>
-
-      <div class="q">
-        <span class="q-num">Q13</span>
-        <p class="q-scenario">A student has <b>one re-exam (backlog)</b> in 3 years due to illness, otherwise excellent record.</p>
-        <h3 class="q-title">Decision:</h3>
-        <ul class="opts">
-          <li><label class="opt-label"><input type="radio" name="q13_backlog_policy" value="A" required><span class="opt-text"><span class="opt-letter">A</span><b>Automatic disqualification</b> — no exceptions on backlogs</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q13_backlog_policy" value="B"><span class="opt-text"><span class="opt-letter">B</span><b>Minor deduction</b>, but allow</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q13_backlog_policy" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>No issue</b> if rest of profile is strong</span></label></li>
-        </ul>
-      </div>
-
-      <div class="q">
-        <span class="q-num">Q14</span>
-        <p class="q-scenario">Student A won a <b>national chess championship</b> but has only 60% marks. Student B has 85% marks but no extracurriculars.</p>
-        <h3 class="q-title">Who deserves more?</h3>
-        <ul class="opts">
-          <li><label class="opt-label"><input type="radio" name="q14_achievement_vs_marks" value="A" required><span class="opt-text"><span class="opt-letter">A</span><b>National champion</b> — talent + character</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q14_achievement_vs_marks" value="B"><span class="opt-text"><span class="opt-letter">B</span><b>Top scorer (85%)</b> — academic marks are the measure</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q14_achievement_vs_marks" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>Need beats both</b> — look at family income instead</span></label></li>
-        </ul>
-      </div>
-
-      <div class="q">
-        <span class="q-num">Q15</span>
-        <p class="q-scenario">A student's marks <b>dropped from 80% → 65%</b> over 3 semesters due to a family crisis (father's accident).</p>
-        <h3 class="q-title">Decision:</h3>
-        <ul class="opts">
-          <li><label class="opt-label"><input type="radio" name="q15_declining_marks" value="A" required><span class="opt-text"><span class="opt-letter">A</span><b>Support them</b> — that's exactly who we exist for</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q15_declining_marks" value="B"><span class="opt-text"><span class="opt-letter">B</span><b>Support but with warning</b> to improve next semester</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q15_declining_marks" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>Decline</b> — we need stable performers</span></label></li>
-        </ul>
-      </div>
-
-      <!-- ============== SECTION 5: POLICY & AWARDS ============== -->
-      <div class="section-header"><div class="num">5</div><div class="ttl">POLICY & AWARDS</div></div>
-
-      <div class="q">
-        <span class="q-num">Q16</span>
-        <p class="q-scenario">A <b>previous beneficiary</b> (last year's scholarship recipient) applies again with 75%+ marks.</p>
-        <h3 class="q-title">Policy:</h3>
-        <ul class="opts">
-          <li><label class="opt-label"><input type="radio" name="q16_previous_beneficiary" value="A" required><span class="opt-text"><span class="opt-letter">A</span><b>Priority</b> — finish what we started, continuity matters</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q16_previous_beneficiary" value="B"><span class="opt-text"><span class="opt-letter">B</span><b>Standard process</b> — evaluate fresh each year</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q16_previous_beneficiary" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>Disqualify</b> — give new students the chance</span></label></li>
-        </ul>
-      </div>
-
-      <div class="q">
-        <span class="q-num">Q17</span>
-        <p class="q-scenario">A student already receives <b>Punjab Govt scholarship of ₹5,000</b>. They apply to us too.</p>
-        <h3 class="q-title">Should we still consider them?</h3>
-        <ul class="opts">
-          <li><label class="opt-label"><input type="radio" name="q17_other_aid" value="A" required><span class="opt-text"><span class="opt-letter">A</span><b>Yes, no issue</b> — they may still need more</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q17_other_aid" value="B"><span class="opt-text"><span class="opt-letter">B</span><b>Yes, but deduct</b> the ₹5,000 from our award</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q17_other_aid" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>No</b> — they should leave room for fresh applicants</span></label></li>
-        </ul>
-      </div>
-
-      <div class="q">
-        <span class="q-num">Q18</span>
-        <p class="q-scenario">We have <b>₹3,00,000 budget</b> this year. Best approach?</p>
-        <h3 class="q-title">Pick one:</h3>
-        <ul class="opts">
-          <li><label class="opt-label"><input type="radio" name="q18_budget_split" value="A" required><span class="opt-text"><span class="opt-letter">A</span><b>10 students × ₹30,000</b> — focus on the most deserving, larger help</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q18_budget_split" value="B"><span class="opt-text"><span class="opt-letter">B</span><b>20 students × ₹15,000</b> — balanced reach</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q18_budget_split" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>30 students × ₹10,000</b> — help as many as possible</span></label></li>
-        </ul>
-      </div>
-
-      <!-- ============== SECTION 6: FAIRNESS TO STUDENT ============== -->
-      <div class="section-header"><div class="num">6</div><div class="ttl">FAIRNESS TO STUDENTS — Process, Dignity, Edge Cases</div></div>
-
-      <div class="q">
-        <span class="q-num">Q19</span>
-        <p class="q-scenario">A <b>current beneficiary's family</b> faces a sudden medical emergency or accident mid-year.</p>
-        <h3 class="q-title">Can we provide additional support beyond the original award?</h3>
-        <ul class="opts">
-          <li><label class="opt-label"><input type="radio" name="q19_emergency_support" value="A" required><span class="opt-text"><span class="opt-letter">A</span><b>Yes</b> — keep an emergency reserve in the budget for this</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q19_emergency_support" value="B"><span class="opt-text"><span class="opt-letter">B</span><b>Yes</b> but only if year-end budget allows</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q19_emergency_support" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>No</b> — one fixed award per year</span></label></li>
-        </ul>
-      </div>
-
-      <div class="q">
-        <span class="q-num">Q20</span>
-        <p class="q-scenario">🪷 A student's family is <b>directly affected by Punjab's drug crisis</b> — parent lost to overdose, or addiction destroyed the family earner.</p>
-        <h3 class="q-title">Policy:</h3>
-        <ul class="opts">
-          <li><label class="opt-label"><input type="radio" name="q20_drug_crisis" value="A" required><span class="opt-text"><span class="opt-letter">A</span><b>Major auto-bonus</b> — this is exactly our cause</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q20_drug_crisis" value="B"><span class="opt-text"><span class="opt-letter">B</span>Treat as <b>standard family hardship</b></span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q20_drug_crisis" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>Not a separate factor</b></span></label></li>
-        </ul>
-      </div>
-
-      <div class="q">
-        <span class="q-num">Q21</span>
-        <p class="q-scenario"><b>Two siblings</b> from the same family both qualify on merit + need.</p>
-        <h3 class="q-title">Policy:</h3>
-        <ul class="opts">
-          <li><label class="opt-label"><input type="radio" name="q21_sibling_rule" value="A" required><span class="opt-text"><span class="opt-letter">A</span><b>Both get full awards</b> — both deserve on merit</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q21_sibling_rule" value="B"><span class="opt-text"><span class="opt-letter">B</span><b>Only one</b> — help two different families instead</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q21_sibling_rule" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>Both</b> but second sibling at <b>reduced amount</b></span></label></li>
-        </ul>
-      </div>
-
-      <div class="q">
-        <span class="q-num">Q22</span>
-        <p class="q-scenario">A student is <b>estranged from family</b> (identity, religion, lifestyle, marriage choices) but academically eligible. Family income data not available.</p>
-        <h3 class="q-title">How should we treat their application?</h3>
-        <ul class="opts">
-          <li><label class="opt-label"><input type="radio" name="q22_disowned_student" value="A" required><span class="opt-text"><span class="opt-letter">A</span>Treat as <b>orphan-equivalent</b> — auto-priority, evaluate on personal income</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q22_disowned_student" value="B"><span class="opt-text"><span class="opt-letter">B</span><b>Standard process</b>, recognize the hardship</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q22_disowned_student" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>Decline</b> — family situation makes verification impossible</span></label></li>
-        </ul>
-      </div>
-
-      <div class="q">
-        <span class="q-num">Q23</span>
-        <p class="q-scenario">A student <b>discloses</b> they're managing anxiety, depression, or similar mental health condition while studying.</p>
-        <h3 class="q-title">How should this affect selection?</h3>
-        <ul class="opts">
-          <li><label class="opt-label"><input type="radio" name="q23_mental_health" value="A" required><span class="opt-text"><span class="opt-letter">A</span>Treat as an <b>additional hardship factor</b> (bonus points)</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q23_mental_health" value="B"><span class="opt-text"><span class="opt-letter">B</span>Note it sympathetically <b>but don't score</b> it (privacy)</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q23_mental_health" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>Not a scholarship factor</b> — keep mental health out of selection</span></label></li>
-        </ul>
-      </div>
-
-      <div class="q">
-        <span class="q-num">Q24</span>
-        <p class="q-scenario">Some of the poorest students <b>don't have stable internet or smartphones</b> to fill our online application.</p>
-        <h3 class="q-title">How should we handle this?</h3>
-        <ul class="opts">
-          <li><label class="opt-label"><input type="radio" name="q24_digital_divide" value="A" required><span class="opt-text"><span class="opt-letter">A</span>Accept <b>WhatsApp + paper forms</b> — extend access</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q24_digital_divide" value="B"><span class="opt-text"><span class="opt-letter">B</span>Provide <b>application help at GNDEC</b> during enrollment week</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q24_digital_divide" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>Online-only</b> — they should find a way</span></label></li>
-        </ul>
-      </div>
-
-      <!-- ============== SECTION 7: PROGRAM SOUL & LEGACY ============== -->
-      <div class="section-header"><div class="num">7</div><div class="ttl">PROGRAM SOUL — Punjab Roots & Pay-it-Forward</div></div>
-
-      <div class="q">
-        <span class="q-num">Q25</span>
-        <p class="q-scenario">Our scholarship was started by alumni who themselves came from modest Punjabi roots — many now donate to give back. Should we explicitly invite recipients to <b>become future donors</b> when they're earning?</p>
-        <h3 class="q-title">Policy:</h3>
-        <ul class="opts">
-          <li><label class="opt-label"><input type="radio" name="q25_pay_it_forward" value="A" required><span class="opt-text"><span class="opt-letter">A</span><b>Yes</b> — formal written pledge: "I commit to donate when earning"</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q25_pay_it_forward" value="B"><span class="opt-text"><span class="opt-letter">B</span><b>Strongly encouraged</b> but no obligation — just plant the seed</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q25_pay_it_forward" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>No expectations</b> — give freely, no strings attached</span></label></li>
-        </ul>
-      </div>
-
-      <div class="q">
-        <span class="q-num">Q26</span>
-        <p class="q-scenario">🌾 A student's family lost their <b>farmland</b> or is drowning in <b>farmer-loan debt</b> due to Punjab's agrarian crisis (farmer suicides, MSP issues, debt traps).</p>
-        <h3 class="q-title">Policy:</h3>
-        <ul class="opts">
-          <li><label class="opt-label"><input type="radio" name="q26_agrarian_crisis" value="A" required><span class="opt-text"><span class="opt-letter">A</span><b>Major auto-bonus</b> — Punjab's silent emergency, like the drug crisis</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q26_agrarian_crisis" value="B"><span class="opt-text"><span class="opt-letter">B</span>Treat as <b>standard family hardship</b></span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q26_agrarian_crisis" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>Not a separate factor</b></span></label></li>
-        </ul>
-      </div>
-
-      <div class="q">
-        <span class="q-num">Q27</span>
-        <p class="q-scenario">🪷 A student is from a <b>Punjab border district</b> — Tarn Taran, Ferozepur, Pathankot, Gurdaspur rural, Mansa — areas that have been historically neglected economically and educationally.</p>
-        <h3 class="q-title">Policy:</h3>
-        <ul class="opts">
-          <li><label class="opt-label"><input type="radio" name="q27_border_district" value="A" required><span class="opt-text"><span class="opt-letter">A</span><b>Major bonus</b> — these districts deserve targeted support</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q27_border_district" value="B"><span class="opt-text"><span class="opt-letter">B</span><b>Small recognition</b> (general rural classification already partially covers it)</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q27_border_district" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>Not a separate factor</b></span></label></li>
-        </ul>
-      </div>
-
-      <div class="q">
-        <span class="q-num">Q28</span>
-        <p class="q-scenario">🙏 Sikh tradition values <b>seva</b> (selfless service). Should scholarship recipients be expected to <b>perform community service or mentor next year's recipients</b>?</p>
-        <h3 class="q-title">Policy:</h3>
-        <ul class="opts">
-          <li><label class="opt-label"><input type="radio" name="q28_seva_commitment" value="A" required><span class="opt-text"><span class="opt-letter">A</span><b>Formal requirement</b> — minimum 50 hrs/year community seva or mentorship</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q28_seva_commitment" value="B"><span class="opt-text"><span class="opt-letter">B</span><b>Encouraged but not required</b> — plant the value, don't force it</span></label></li>
-          <li><label class="opt-label"><input type="radio" name="q28_seva_commitment" value="C"><span class="opt-text"><span class="opt-letter">C</span><b>No obligations</b> — they're already studying, often working too</span></label></li>
-        </ul>
-      </div>
-
-      <div class="submit-area">
-        <label style="display:block; text-align:left; font-size:13px; font-weight:700; color:var(--navy); margin-bottom:6px;">
-          Any additional thought? <span style="color:var(--muted); font-weight:400;">(optional)</span>
-        </label>
-        <textarea name="comments" placeholder="e.g. 'Consider students with mental health issues separately', 'Add a sports merit category', etc."></textarea>
-        <button class="btn" type="button" id="submitBtn">📩 Submit My Vote</button>
-        <div class="security-note">
-          🔒 <b>One vote per WhatsApp number.</b> Your name, phone, and your individual answers are recorded so the scholarship committee can review and audit decisions. The <b>public live dashboard</b> shows only aggregate counts; per-voter detail is visible to the batch committee admins only.
-        </div>
-      </div>
-
-    </form>
   </div>
 
-  <div class="foot">
-    1996 Batch GNDEC Alumni Scholarship · Need-first since 2016 · ₹1.14 Cr raised · 668 students supported<br>
-    <a href="poll_results">📊 View Live Results</a>
-  </div>
-
+  <footer>
+    GNDEC 1996 batch · scholarship program<br>
+    Built with <span class="heart">♥</span> for our batchmates · sat sri akaal<br>
+    <span style="opacity:0.7">Voting closed on <span id="closedDate"></span></span>
+  </footer>
 </div>
 
 <script>
-const POLL_KEY = "gndec_scholarship_poll_v3";
-const COOKIE_NAME = "gndec_voted_v3";
-
-function getCanvasFingerprint() {
-  try {
-    const c = document.createElement('canvas');
-    c.width = 200; c.height = 50;
-    const ctx = c.getContext('2d');
-    ctx.textBaseline = "top";
-    ctx.font = "14px Arial";
-    ctx.fillStyle = "#f60"; ctx.fillRect(0, 0, 200, 50);
-    ctx.fillStyle = "#069"; ctx.fillText("GNDEC1996🎓", 2, 15);
-    ctx.fillStyle = "rgba(102,204,0,0.5)"; ctx.fillText("Scholarship✓", 4, 30);
-    return c.toDataURL();
-  } catch (e) { return "canvas_unavailable"; }
-}
-function getWebGLFingerprint() {
-  try {
-    const c = document.createElement('canvas');
-    const gl = c.getContext('webgl') || c.getContext('experimental-webgl');
-    if (!gl) return "no_webgl";
-    const dbg = gl.getExtension('WEBGL_debug_renderer_info');
-    if (!dbg) return "no_debug_info";
-    return gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) + "|" + gl.getParameter(dbg.UNMASKED_VENDOR_WEBGL);
-  } catch (e) { return "webgl_error"; }
-}
-async function generateFingerprint() {
-  const components = [
-    navigator.userAgent || "", navigator.language || "", navigator.platform || "",
-    screen.width + "x" + screen.height + "x" + screen.colorDepth,
-    new Date().getTimezoneOffset(), navigator.hardwareConcurrency || 0,
-    navigator.deviceMemory || "unknown",
-    getCanvasFingerprint(), getWebGLFingerprint(),
-    (navigator.languages || []).join(",")
-  ];
-  const raw = components.join("###");
-  try {
-    const enc = new TextEncoder();
-    const buf = await crypto.subtle.digest('SHA-256', enc.encode(raw));
-    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('').slice(0,32);
-  } catch (e) {
-    let h = 0;
-    for (let i = 0; i < raw.length; i++) { h = ((h << 5) - h) + raw.charCodeAt(i); h |= 0; }
-    return "fb" + Math.abs(h).toString(36) + Date.now().toString(36).slice(-6);
-  }
-}
-
-function setCookie(n, v, d) {
-  const dt = new Date(); dt.setTime(dt.getTime() + d * 86400000);
-  document.cookie = n + "=" + encodeURIComponent(v) + ";expires=" + dt.toUTCString() + ";path=/;SameSite=Lax";
-}
-function getCookie(n) {
-  const m = document.cookie.match(new RegExp('(^|; )' + n + '=([^;]+)'));
-  return m ? decodeURIComponent(m[2]) : null;
-}
-function setLocal(d) { try { localStorage.setItem(POLL_KEY, JSON.stringify(d)); } catch (e) {} }
-function getLocal() { try { return JSON.parse(localStorage.getItem(POLL_KEY) || "null"); } catch (e) { return null; } }
-function setSession(d) { try { sessionStorage.setItem(POLL_KEY, JSON.stringify(d)); } catch (e) {} }
-function getSession() { try { return JSON.parse(sessionStorage.getItem(POLL_KEY) || "null"); } catch (e) { return null; } }
-
-function idbOpen() {
-  return new Promise((res, rej) => {
-    const r = indexedDB.open("gndec_poll_db_v3", 1);
-    r.onupgradeneeded = (e) => {
-      const db = e.target.result;
-      if (!db.objectStoreNames.contains("votes")) db.createObjectStore("votes", { keyPath: "id" });
-    };
-    r.onsuccess = () => res(r.result);
-    r.onerror = () => rej(r.error);
-  });
-}
-async function idbGet(id) {
-  try {
-    const db = await idbOpen();
-    return new Promise(res => {
-      const r = db.transaction("votes","readonly").objectStore("votes").get(id);
-      r.onsuccess = () => res(r.result || null);
-      r.onerror = () => res(null);
-    });
-  } catch (e) { return null; }
-}
-async function idbPut(rec) {
-  try {
-    const db = await idbOpen();
-    return new Promise(res => {
-      const r = db.transaction("votes","readwrite").objectStore("votes").put(rec);
-      r.onsuccess = () => res(true);
-      r.onerror = () => res(false);
-    });
-  } catch (e) { return false; }
-}
-
-async function checkPreviousVote() {
-  const local = getLocal(); if (local && local.submitted) return local;
-  const sess = getSession(); if (sess && sess.submitted) return sess;
-  const ck = getCookie(COOKIE_NAME);
-  if (ck) { try { return JSON.parse(ck); } catch (e) { return { submitted:true, fingerprint:ck }; } }
-  const fp = await generateFingerprint();
-  const rec = await idbGet(fp); if (rec && rec.submitted) return rec;
-  const any = await idbGet("any_vote"); if (any && any.submitted) return any;
-  return null;
-}
-
-async function markAsVoted(voteData) {
-  const fp = await generateFingerprint();
-  const rec = { id: fp, fingerprint: fp, submitted: true, submittedAt: new Date().toISOString(), answers: voteData };
-  setLocal(rec); setSession(rec);
-  setCookie(COOKIE_NAME, JSON.stringify({ submitted:true, fp, ts:Date.now() }), 365);
-  await idbPut(rec);
-  await idbPut({ ...rec, id: "any_vote" });
-  return rec;
-}
-
-const QLABELS = {
-  q1_need_vs_merit: "Need vs Merit (equally qualified)",
-  q2_low_marks_low_income: "85% middle-class vs 65% labourer's child",
-  q3_above_threshold_no_assets: "Above income but no assets",
-  q4_tiebreaker: "Tie-breaker",
-  q5_son_or_daughter: "Son vs daughter from same family",
-  q6_punjab_bonus: "🪷 Punjab domicile",
-  q7_rural_village: "Small village student",
-  q8_first_gen: "First-generation college",
-  q9_orphan_policy: "Orphan policy",
-  q10_widow_mother: "Widow mother household",
-  q11_disability_policy: "Disability / chronic illness",
-  q12_working_student: "Working student vs non-working",
-  q13_backlog_policy: "One backlog due to illness",
-  q14_achievement_vs_marks: "National champion vs top scorer",
-  q15_declining_marks: "Marks dropped due to family crisis",
-  q16_previous_beneficiary: "Previous beneficiary",
-  q17_other_aid: "Other Govt scholarship received",
-  q18_budget_split: "₹3L budget split",
-  q19_emergency_support: "Mid-year emergency support",
-  q20_drug_crisis: "🪷 Drug-crisis affected family",
-  q21_sibling_rule: "Sibling rule",
-  q22_disowned_student: "Disowned student",
-  q23_mental_health: "Mental health disclosure",
-  q24_digital_divide: "Digital divide / paper applications",
-  q25_pay_it_forward: "Pay-it-forward pledge",
-  q26_agrarian_crisis: "🌾 Punjab agrarian crisis",
-  q27_border_district: "🪷 Border district priority",
-  q28_seva_commitment: "🙏 Seva / mentorship commitment"
-};
-
-function buildPrevSummary(record) {
-  const a = record.answers || {};
-  const items = [];
-  if (record.name) items.push(`<b>Voter:</b> ${record.name}`);
-  if (record.phone) items.push(`<b>WhatsApp:</b> ${record.phone}`);
-  if (record.submittedAt) items.push(`<b>Submitted:</b> ${new Date(record.submittedAt).toLocaleString()}`);
-  items.push("<hr style='border:none;border-top:1px solid var(--line);margin:6px 0;'>");
-  Object.keys(QLABELS).forEach(k => {
-    if (a[k]) items.push(`<b>${QLABELS[k]}:</b> ${a[k]}`);
-  });
-  return items.join("<br>");
-}
-
-const SHARE_TEXT = encodeURIComponent(
-  "🎓 1996 Batch Scholarship Rubric Vote\n\n" +
-  "28 real scenarios, 3 choices each. ~6 mins. Anonymous results 🙏\n\n" +
-  window.location.origin + "/poll"
-);
-
-/* TALLY BACKEND - fresh namespace for clean start */
-const TALLY_NS = "gndec1996batchLIVE2026";
-async function bumpCounter(key) {
-  try {
-    return await fetch(`https://abacus.jasoncameron.dev/hit/${TALLY_NS}/${key}`, {
-      method: 'GET', keepalive: true, mode: 'cors', cache: 'no-store'
-    });
-  } catch (e) { return null; }
-}
-async function recordAllAnswers(answers) {
-  const tasks = [bumpCounter("total_submissions")];
-  Object.keys(answers).forEach(qKey => {
-    const val = answers[qKey];
-    if (val) tasks.push(bumpCounter(`${qKey}__${val}`));
-  });
-  return Promise.all(tasks);
-}
-
-function gatherAnswersFromForm() {
-  const form = document.getElementById('pollForm');
-  const data = new FormData(form);
-  const answers = {};
-  for (const [k, v] of data.entries()) {
-    if (['name', 'phone', 'comments'].includes(k)) continue;
-    answers[k] = v;
-  }
-  return {
-    name: data.get('name') || '',
-    phone: (data.get('phone') || '').replace(/[^0-9]/g, '').slice(-10),
-    answers
-  };
-}
-
-function validateAllAnswered() {
-  const form = document.getElementById('pollForm');
-  const required = new Set();
-  form.querySelectorAll('input[type="radio"][required]').forEach(r => required.add(r.name));
-  for (const g of required) {
-    if (!form.querySelector(`input[name="${g}"]:checked`)) {
-      const t = form.querySelector(`input[name="${g}"]`);
-      if (t) t.closest('.q').scrollIntoView({ behavior: 'smooth', block: 'center' });
-      return g;
+fetch('/api/results?_=' + Date.now(), {cache:'no-store'})
+  .then(r => r.json())
+  .then(d => {
+    if(d.ok && d.counters && d.counters.total_submissions){
+      document.getElementById('totalVotes').textContent = d.counters.total_submissions;
     }
-  }
-  const nameInput = form.querySelector('input[name="name"]');
-  if (!nameInput.value.trim()) { nameInput.focus(); return 'name'; }
-  const phoneInput = form.querySelector('input[name="phone"]');
-  const phoneClean = (phoneInput.value || '').replace(/[^0-9]/g, '');
-  if (phoneClean.length < 7) { phoneInput.focus(); return 'phone'; }
-  return null;
-}
+  })
+  .catch(() => {});
 
-async function handleSubmit() {
-  const missing = validateAllAnswered();
-  if (missing) {
-    let msg = "Please answer all 28 questions before submitting.";
-    if (missing === 'name') msg = "Please enter your name.";
-    if (missing === 'phone') msg = "Please enter a valid WhatsApp number.";
-    alert(msg);
-    return;
-  }
-  const btn = document.getElementById('submitBtn');
-  btn.disabled = true;
-  btn.textContent = '⏳ Checking…';
-
-  const { name, phone, answers } = gatherAnswersFromForm();
-  const fp = await generateFingerprint();
-
-  // Step 1: Server-side phone dedup check
-  try {
-    const r = await fetch(`/api/vote?phone=${encodeURIComponent(phone)}`, { cache: 'no-store' });
-    const data = await r.json();
-    if (data.voted) {
-      alert(`📞 This WhatsApp number has already voted on ${new Date(data.when).toLocaleString()}.\n\nIf this is wrong, contact maxicomcanada@gmail.com.`);
-      btn.disabled = false;
-      btn.textContent = '📩 Submit My Vote';
-      return;
-    }
-  } catch (e) {
-    // network failure — let them through (server still dedupes on POST)
-  }
-
-  btn.textContent = '⏳ Submitting…';
-
-  // Step 2: Submit to voter log (records name+phone+answers)
-  let voterLogged = true;
-  try {
-    const r = await fetch('/api/vote', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ name, phone, fingerprint: fp, answers })
-    });
-    if (r.status === 409) {
-      alert("📞 This WhatsApp number already voted.");
-      btn.disabled = false;
-      btn.textContent = '📩 Submit My Vote';
-      return;
-    }
-    voterLogged = r.ok;
-  } catch (e) { voterLogged = false; }
-
-  // Step 3: Bump counters
-  try { await recordAllAnswers(answers); } catch (e) {}
-
-  // Step 3b: Pre-warm the live-results edge cache so the dashboard loads instantly
-  // for this user when they click "View Live Results"
-  setTimeout(() => {
-    fetch('/api/results?warm=' + Date.now(), { cache: 'no-store' }).catch(() => {});
-  }, 1500);
-
-  // Step 4: Mark device + clear autosave progress + show thank-you
-  await markAsVoted({ ...answers, name, phone });
-  clearProgress();
-
-  document.getElementById('formContainer').style.display = 'none';
-  const lock = document.getElementById('lockoutScreen');
-  lock.style.display = 'block';
-  lock.querySelector('h2').textContent = '🙏 Vote submitted! Thank you.';
-  lock.querySelector('p').textContent = voterLogged
-    ? 'Your vote has been recorded against your name. Live results updating now.'
-    : 'Your vote has been recorded. Live results updating now.';
-  document.getElementById('prevVoteSummary').innerHTML = buildPrevSummary({
-    submittedAt: new Date().toISOString(), name, phone, answers
-  });
-  document.getElementById('shareBtnLock').href = "https://wa.me/?text=" + SHARE_TEXT;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function updateProgress() {
-  const radios = document.querySelectorAll('#pollForm input[type="radio"][required]');
-  const groups = {};
-  radios.forEach(r => { groups[r.name] = false; });
-  document.querySelectorAll('#pollForm input[type="radio"]:checked').forEach(r => { groups[r.name] = true; });
-  const total = Object.keys(groups).length;
-  const done = Object.values(groups).filter(Boolean).length;
-  const pct = total ? Math.round((done/total)*100) : 0;
-  document.getElementById('progressFill').style.width = pct + '%';
-  const mp = document.getElementById('miniProgress');
-  if (mp) {
-    mp.style.display = 'flex';
-    document.getElementById('stepIndicator').textContent = `Q${Math.min(done + 1, total)}`;
-    document.getElementById('progressPct').textContent = pct + '%';
-  }
-}
-
-/* AUTOSAVE — persists answers/name/phone to localStorage on every change. */
-const PROGRESS_KEY = 'gndec_poll_progress_v3';
-let saveTimer = null;
-
-function saveProgress() {
-  try {
-    const form = document.getElementById('pollForm');
-    if (!form) return;
-    const data = {};
-    form.querySelectorAll('input[type="radio"]:checked').forEach(r => data[r.name] = r.value);
-    form.querySelectorAll('input[type="text"], input[type="tel"], textarea').forEach(el => {
-      if (el.value) data[el.name] = el.value;
-    });
-    data.__savedAt = Date.now();
-    localStorage.setItem(PROGRESS_KEY, JSON.stringify(data));
-    const note = document.getElementById('resumeNote');
-    if (note) {
-      note.style.display = 'inline';
-      clearTimeout(saveTimer);
-      saveTimer = setTimeout(() => { note.style.display = 'none'; }, 2200);
-    }
-  } catch (e) {}
-}
-
-function restoreProgress() {
-  try {
-    const raw = localStorage.getItem(PROGRESS_KEY);
-    if (!raw) return;
-    const data = JSON.parse(raw);
-    if (!data || !data.__savedAt) return;
-    // Don't restore if older than 24h
-    if (Date.now() - data.__savedAt > 86400000) return;
-    const form = document.getElementById('pollForm');
-    let restoredCount = 0;
-    Object.entries(data).forEach(([name, value]) => {
-      if (name.startsWith('__')) return;
-      const radio = form.querySelector(`input[type="radio"][name="${name}"][value="${value}"]`);
-      if (radio) { radio.checked = true; restoredCount++; return; }
-      const text = form.querySelector(`input[name="${name}"], textarea[name="${name}"]`);
-      if (text) { text.value = value; }
-    });
-    if (restoredCount > 0) {
-      const note = document.getElementById('resumeNote');
-      if (note) {
-        note.style.display = 'inline';
-        note.textContent = `↻ Resumed (${restoredCount} answers)`;
-        setTimeout(() => { note.textContent = '✓ Auto-saved'; note.style.display = 'none'; }, 3500);
-      }
-    }
-  } catch (e) {}
-}
-
-function clearProgress() {
-  try { localStorage.removeItem(PROGRESS_KEY); } catch (e) {}
-}
-
-/* AUTO-SCROLL — after picking an answer, smoothly scroll to the next question */
-function setupAutoScrollAndSave() {
-  const form = document.getElementById('pollForm');
-  if (!form) return;
-  const allQs = Array.from(form.querySelectorAll('.q'));
-  form.querySelectorAll('input[type="radio"]').forEach(radio => {
-    radio.addEventListener('change', e => {
-      if (!radio.checked) return;
-      const label = radio.closest('.opt-label');
-      if (label) {
-        label.classList.add('just-picked');
-        setTimeout(() => label.classList.remove('just-picked'), 600);
-      }
-      saveProgress();
-      updateProgress();
-      // Auto-scroll to next unanswered question after a brief delay
-      const currentQ = radio.closest('.q');
-      const idx = allQs.indexOf(currentQ);
-      if (idx >= 0 && idx < allQs.length - 1) {
-        const nextQ = allQs[idx + 1];
-        setTimeout(() => {
-          const offset = window.innerWidth <= 600 ? 100 : 80; // account for sticky header
-          const y = nextQ.getBoundingClientRect().top + window.pageYOffset - offset;
-          window.scrollTo({ top: y, behavior: 'smooth' });
-        }, 350);
-      }
-    });
-  });
-  // Save name/phone on input too
-  form.querySelectorAll('input[type="text"], input[type="tel"], textarea').forEach(el => {
-    el.addEventListener('input', () => { saveProgress(); });
-  });
-}
-
-(async function init() {
-  const prior = await checkPreviousVote();
-  if (prior) {
-    document.getElementById('loadingState').style.display = 'none';
-    document.getElementById('lockoutScreen').style.display = 'block';
-    document.getElementById('prevVoteSummary').innerHTML = buildPrevSummary(prior);
-    document.getElementById('shareBtnLock').href = "https://wa.me/?text=" + SHARE_TEXT;
-    return;
-  }
-  document.getElementById('loadingState').style.display = 'none';
-  document.getElementById('formContainer').style.display = 'block';
-  setupAutoScrollAndSave();
-  restoreProgress();
-  updateProgress();
-  document.getElementById('submitBtn').addEventListener('click', handleSubmit);
-})();
+document.getElementById('closedDate').textContent = new Date().toLocaleDateString('en-IN', {
+  day:'numeric', month:'long', year:'numeric'
+});
 </script>
-
 </body>
 </html>

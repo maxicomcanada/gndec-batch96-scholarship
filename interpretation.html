@@ -139,6 +139,40 @@
 <div class="wrap">
   <div class="topband"></div>
 
+  <!-- ===== POLL NAV ===== -->
+  <style>
+  .pn-wrap{display:flex;gap:4px;background:#fff;border:1px solid #E6DECB;border-radius:12px;
+    padding:4px;margin:0 0 16px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+    box-shadow:0 2px 8px rgba(11,34,64,0.04)}
+  .pn-wrap::-webkit-scrollbar{display:none}
+  .pn-tab{flex:1;text-align:center;padding:9px 10px;border-radius:8px;text-decoration:none;
+    color:#5C6473;font-size:12.5px;font-weight:600;white-space:nowrap;min-width:max-content;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    transition:background 0.15s,color 0.15s;letter-spacing:0.2px}
+  .pn-tab:hover{background:#E8ECF2;color:#0B2340}
+  .pn-tab.pn-active{background:#0B2340;color:#fff}
+  .pn-tab.pn-vote{background:#FF6B1A;color:#fff}
+  .pn-tab.pn-vote:hover{background:#E55E15}
+  .pn-tab.pn-vote.pn-active{background:#0B2340}
+  @media (max-width:480px){.pn-tab{font-size:11.5px;padding:8px 8px}}
+  </style>
+  <div class="pn-wrap" role="navigation" aria-label="Poll sections">
+    <a class="pn-tab pn-vote" href="/poll">Cast vote</a>
+    <a class="pn-tab" href="/snapshot">Snapshot</a>
+    <a class="pn-tab" href="/charts">Charts</a>
+    <a class="pn-tab" href="/poll_results">Dashboard</a>
+    <a class="pn-tab" href="/interpretation">Verdicts</a>
+    <a class="pn-tab" href="/rubric">Rubric</a>
+  </div>
+  <script>(function(){
+    var p = location.pathname.replace(/\/$/,'').toLowerCase();
+    document.querySelectorAll('.pn-tab').forEach(function(a){
+      var h = a.getAttribute('href').toLowerCase().replace(/\/$/,'');
+      if(h === p) a.classList.add('pn-active');
+    });
+  })();</script>
+  <!-- ===== /POLL NAV ===== -->
+
   <header class="main">
     <div class="seal"><b>96</b><span>GNDEC</span></div>
     <div style="flex:1">

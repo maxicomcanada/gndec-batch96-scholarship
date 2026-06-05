@@ -103,7 +103,9 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-
   <a class="pn-tab" href="/interpretation">Verdicts</a>
   <a class="pn-tab" href="/rubric">Rubric</a>
   <a class="pn-tab" href="/poll_results">Dashboard</a>
+  <a class="pn-tab pn-closed" href="/poll">Voting closed</a>
 </div>
+<style>.pn-tab.pn-closed{color:#7E1B2E}.pn-tab.pn-closed.pn-active{background:#7E1B2E;color:#fff}</style>
 <script>(function(){
   var p = location.pathname.replace(/\/$/,'').toLowerCase();
   document.querySelectorAll('.pn-tab').forEach(function(a){

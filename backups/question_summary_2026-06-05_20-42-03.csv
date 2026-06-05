@@ -1,0 +1,29 @@
+Q#,Section,Title,Total votes,A,B,C,Winner,Winner %,Verdict
+Q1,Need vs merit,Need vs merit,46,31,3,12,A,67,strong
+Q2,Need vs merit,85% mid-class vs 65% labourer,47,25,7,15,A,53,medium
+Q3,Need vs merit,"Above income, no assets",46,19,10,17,A,41,contested
+Q4,Need vs merit,Tie-breaker rule,46,9,20,17,B,43,contested
+Q5,Identity & background,Brother vs sister,46,19,6,21,C,46,contested
+Q6,Identity & background,Punjab domicile,46,10,18,18,B,39,contested
+Q7,Identity & background,Small village (<5K),46,16,15,15,A,35,contested
+Q8,Identity & background,First-gen college,46,27,6,13,A,59,medium
+Q9,Hardship,Orphan policy,46,18,27,1,B,59,medium
+Q10,Hardship,Widow mother,46,28,11,7,A,61,strong
+Q11,Hardship,Disability/chronic illness,46,32,11,3,A,70,strong
+Q12,Effort & academics,Working student,46,36,9,1,A,78,strong
+Q13,Effort & academics,Backlog policy,46,3,15,28,C,61,strong
+Q14,Effort & academics,Champion vs scorer,46,15,6,25,C,54,medium
+Q15,Effort & academics,Declining marks,46,24,22,0,A,52,medium
+Q16,Policy & awards,Previous beneficiary,46,16,30,0,B,65,strong
+Q17,Policy & awards,Other govt aid,46,11,29,6,B,63,strong
+Q18,Policy & awards,3L budget split,46,9,23,14,B,50,medium
+Q19,Fairness to students,Mid-year emergency,46,13,28,5,B,61,strong
+Q20,Fairness to students,Drug crisis affected,39,15,24,0,B,62,strong
+Q21,Fairness to students,Two siblings,0,0,0,0,-,0,no-data
+Q22,Fairness to students,Disowned student,36,0,32,4,B,89,strong
+Q23,Fairness to students,Mental health,46,12,23,11,B,50,medium
+Q24,Fairness to students,Digital divide,46,15,24,7,B,52,medium
+Q25,Program soul & legacy,Pay-it-forward,46,19,22,5,B,48,contested
+Q26,Program soul & legacy,Agrarian crisis,46,20,24,2,B,52,medium
+Q27,Program soul & legacy,Border district,46,7,27,12,B,59,medium
+Q28,Program soul & legacy,Seva commitment,46,9,35,2,B,76,strong

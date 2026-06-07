@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>GNDEC 1996 batch scholarship — visual results</title>
+<meta name="description" content="Graphical interpretation of GNDEC 1996 batch scholarship rubric poll results.">
+<meta property="og:title" content="GNDEC 1996 batch scholarship — visual results">
+<meta property="og:description" content="The batch's voice, in charts.">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+  :root {
+    --navy:#0B2340;
+    --navy-soft:#E8ECF2;
+    --kesari:#FF6B1A;
+    --kesari-soft:#FFE6D6;
+    --wheat:#E8B741;
+    --wheat-soft:#FBEFD2;
+    --maroon:#7E1B2E;
+    --green:#2E7D32;
+    --green-soft:#E5F1E6;
+    --green-deep:#1F3B07;
+    --coral:#C04A2A;
+    --coral-soft:#FAECE7;
+    --coral-deep:#7A2912;
+    --ink:#1A1D24;
+    --muted:#5C6473;
+    --paper:#FFFDF8;
+    --border:#E6DECB;
+    --rule:#F1EBDB;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;font-size:16px;line-height:1.5}
+  .wrap{max-width:880px;margin:0 auto;padding:18px 18px 80px}
+  .topband{height:6px;background:linear-gradient(90deg,var(--navy) 0 25%,var(--kesari) 25% 50%,var(--wheat) 50% 75%,var(--green) 75% 100%);
+    border-radius:3px;margin-bottom:18px}
+
+  header.main{display:flex;align-items:center;gap:14px;padding:16px;background:#fff;border:1px solid var(--border);
+    border-radius:14px;margin-bottom:14px}
+  .seal{width:60px;height:60px;border-radius:12px;background:var(--navy);color:var(--wheat);display:flex;
+    align-items:center;justify-content:center;flex-direction:column;flex-shrink:0;border:2px solid var(--wheat)}
+  .seal b{font-size:18px;line-height:1;letter-spacing:0.5px}
+  .seal span{font-size:10px;letter-spacing:1px;margin-top:2px;color:#fff;opacity:0.85}
+  .htitle{font-size:18px;font-weight:700;color:var(--navy);line-height:1.2}
+  .hsub{font-size:13px;color:var(--muted);margin-top:3px}
+  .meta-pill{display:inline-flex;align-items:center;gap:6px;background:var(--navy-soft);color:var(--navy);
+    border-radius:99px;padding:3px 10px;font-size:11px;font-weight:600;margin-top:6px}
+  .meta-pill .dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+
+  /* Hero block */
+  .hero{display:grid;grid-template-columns:auto 1fr;gap:18px;background:#fff;border:1px solid var(--border);
+    border-radius:14px;padding:22px;margin-bottom:18px;align-items:center}
+  .hero-num{font-size:64px;font-weight:700;color:var(--navy);line-height:1;font-variant-numeric:tabular-nums}
+  .hero-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px}
+  .hero-title{font-size:15px;color:var(--ink);font-weight:500;margin-top:8px;line-height:1.4}
+
+  /* Two-up cards */
+  .twoup{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+  .card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px}
+  .card h3{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin:0 0 12px;font-weight:700}
+  .card.full{grid-column:1/-1}
+
+  .donut-wrap{position:relative;height:200px}
+  .donut-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none}
+  .donut-center .n{font-size:28px;font-weight:700;color:var(--navy);line-height:1;font-variant-numeric:tabular-nums}
+  .donut-center .l{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-top:4px}
+  .donut-legend{display:flex;justify-content:space-around;margin-top:12px;font-size:12px}
+  .donut-legend > div{text-align:center}
+  .donut-legend .sw{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:5px;vertical-align:middle}
+  .donut-legend .v{font-weight:700;font-size:14px;color:var(--ink);font-variant-numeric:tabular-nums}
+  .donut-legend .k{color:var(--muted);font-size:11px}
+
+  .sec-bars{height:230px}
+
+  /* 28-question stacked bar list */
+  .q-row{display:grid;grid-template-columns:24px 1fr 60px;gap:10px;align-items:center;padding:6px 0;font-size:12.5px}
+  .q-row .num{color:var(--muted);font-weight:700;font-size:11px;text-align:right;font-variant-numeric:tabular-nums}
+  .q-row .lbl{color:var(--ink);font-weight:500;line-height:1.3}
+  .q-row .pct{text-align:right;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;font-size:12px}
+  .stacked{display:flex;height:18px;border-radius:4px;overflow:hidden;background:#F0E9D6;margin:3px 0}
+  .stacked .seg{height:100%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:700}
+  .stacked .seg.muted{background:#C5C0AE}
+  .stacked .seg.winA{background:var(--kesari)}
+  .stacked .seg.winB{background:var(--green)}
+  .stacked .seg.winC{background:var(--wheat);color:var(--navy)}
+  .stacked .seg.lowpct{font-size:0}
+
+  .section-banner{background:linear-gradient(90deg,var(--navy) 0%,#1a3a66 100%);color:#fff;padding:8px 14px;
+    border-radius:8px;margin:18px 0 10px;display:flex;align-items:center;gap:10px}
+  .section-banner .sn{background:var(--wheat);color:var(--navy);padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700}
+  .section-banner .st{font-size:13px;font-weight:600}
+  .section-banner .strength{margin-left:auto;font-size:11px;background:rgba(255,255,255,0.15);padding:3px 10px;border-radius:99px}
+
+  /* Top lists */
+  .top-list{margin:0;padding:0;list-style:none}
+  .top-list li{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--rule);font-size:13px}
+  .top-list li:first-child{border-top:none}
+  .top-list .rank{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-size:11px;font-weight:700;flex-shrink:0;color:#fff}
+  .top-list.strong .rank{background:var(--green)}
+  .top-list.contested .rank{background:var(--maroon)}
+  .top-list .t{flex:1;line-height:1.3;color:var(--ink);font-weight:500}
+  .top-list .t small{display:block;color:var(--muted);font-size:11px;font-weight:400;margin-top:1px}
+  .top-list .b{font-size:12px;font-weight:700;padding:3px 9px;border-radius:6px;font-variant-numeric:tabular-nums}
+  .top-list.strong .b{background:var(--green-soft);color:var(--green-deep)}
+  .top-list.contested .b{background:var(--coral-soft);color:var(--coral-deep)}
+
+  .actions{display:flex;gap:8px;flex-wrap:wrap;margin:24px 0 0}
+  .btn{background:var(--navy);color:#fff;text-decoration:none;padding:10px 16px;border-radius:10px;
+    font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:6px;border:none;cursor:pointer}
+  .btn.alt{background:#fff;color:var(--navy);border:1.5px solid var(--navy)}
+  .btn.kes{background:var(--kesari);color:#fff}
+
+  footer{text-align:center;margin-top:28px;font-size:11px;color:var(--muted);line-height:1.6}
+  footer .heart{color:var(--kesari)}
+
+  .loading{text-align:center;padding:60px 20px;color:var(--muted)}
+  .loading .spinner{width:32px;height:32px;border:3px solid #EEE;border-top-color:var(--kesari);
+    border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 14px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* Legend for stacked bars */
+  .legend-row{display:flex;gap:14px;font-size:11px;color:var(--muted);margin-bottom:10px;flex-wrap:wrap}
+  .legend-row .sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:middle}
+
+  @media (max-width:600px){
+    .wrap{padding:12px 10px 60px}
+    .hero{grid-template-columns:1fr;text-align:center}
+    .hero-num{font-size:48px}
+    .twoup{grid-template-columns:1fr}
+    .q-row{grid-template-columns:22px 1fr 50px;font-size:11.5px;gap:6px}
+    .top-list .t{font-size:12.5px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topband"></div>
+
+  <header class="main">
+    <div class="seal"><b>96</b><span>GNDEC</span></div>
+    <div style="flex:1">
+      <div class="htitle">Visual results — the batch's voice in charts</div>
+      <div class="hsub">Live data · auto-refreshes</div>
+      <div class="meta-pill" id="metapill"><span class="dot"></span>Loading…</div>
+    </div>
+  </header>
+
+  <div id="content">
+    <div class="loading">
+      <div class="spinner"></div>
+      Pulling the latest numbers…
+    </div>
+  </div>
+
+  <div class="actions">
+    <a class="btn kes" href="https://gndec-batch96-scholarship.pages.dev/poll" target="_blank">Cast your vote</a>
+    <a class="btn alt" href="https://gndec-batch96-scholarship.pages.dev/snapshot" target="_blank">Snapshot</a>
+    <a class="btn alt" href="https://gndec-batch96-scholarship.pages.dev/interpretation" target="_blank">Detailed verdicts</a>
+    <a class="btn alt" href="https://gndec-batch96-scholarship.pages.dev/rubric" target="_blank">Auto rubric</a>
+    <button class="btn alt" onclick="window.print()">Print / save as PDF</button>
+  </div>
+
+  <footer>
+    GNDEC 1996 batch · scholarship program<br>
+    Built with <span class="heart">♥</span> for our batchmates · sat sri akaal
+  </footer>
+</div>
+
+<script>
+const SECTIONS = [
+  { num:1, title:"Need vs merit", qs:["q1_need_vs_merit","q2_low_marks_low_income","q3_above_threshold_no_assets","q4_tiebreaker"]},
+  { num:2, title:"Identity & background", qs:["q5_son_or_daughter","q6_punjab_bonus","q7_rural_village","q8_first_gen"]},
+  { num:3, title:"Hardship", qs:["q9_orphan_policy","q10_widow_mother","q11_disability_policy"]},
+  { num:4, title:"Effort & academics", qs:["q12_working_student","q13_backlog_policy","q14_achievement_vs_marks","q15_declining_marks"]},
+  { num:5, title:"Policy & awards", qs:["q16_previous_beneficiary","q17_other_aid","q18_budget_split"]},
+  { num:6, title:"Fairness to students", qs:["q19_emergency_support","q20_drug_crisis","q21_sibling_rule","q22_disowned_student","q23_mental_health","q24_digital_divide"]},
+  { num:7, title:"Program soul & legacy", qs:["q25_pay_it_forward","q26_agrarian_crisis","q27_border_district","q28_seva_commitment"]}
+];
+
+const SHORT = {
+  q1_need_vs_merit:"Need vs merit",
+  q2_low_marks_low_income:"85% mid-class vs 65% labourer",
+  q3_above_threshold_no_assets:"Above income, no assets",
+  q4_tiebreaker:"Tie-breaker rule",
+  q5_son_or_daughter:"Brother vs sister",
+  q6_punjab_bonus:"Punjab domicile bonus",
+  q7_rural_village:"Small village (<5K)",
+  q8_first_gen:"First-gen college",
+  q9_orphan_policy:"Orphan policy",
+  q10_widow_mother:"Widow mother",
+  q11_disability_policy:"Disability / chronic illness",
+  q12_working_student:"Working student",
+  q13_backlog_policy:"Backlog policy",
+  q14_achievement_vs_marks:"Champion vs scorer",
+  q15_declining_marks:"Declining marks",
+  q16_previous_beneficiary:"Previous beneficiary",
+  q17_other_aid:"Other govt aid",
+  q18_budget_split:"₹3L budget split",
+  q19_emergency_support:"Mid-year emergency",
+  q20_drug_crisis:"Drug crisis affected",
+  q21_sibling_rule:"Two siblings",
+  q22_disowned_student:"Disowned student",
+  q23_mental_health:"Mental health",
+  q24_digital_divide:"Digital divide",
+  q25_pay_it_forward:"Pay-it-forward",
+  q26_agrarian_crisis:"Agrarian crisis",
+  q27_border_district:"Border district",
+  q28_seva_commitment:"Seva commitment"
+};
+
+const WINNING_ANS = {
+  q1_need_vs_merit:{A:"Poorer family",B:"Higher marks",C:"Equal weight"},
+  q2_low_marks_low_income:{A:"Labourer's child",B:"High scorer",C:"Award both"},
+  q3_above_threshold_no_assets:{A:"Recognise reality",B:"Rules are rules",C:"Verify first"},
+  q4_tiebreaker:{A:"Lower income",B:"Orphan",C:"Award both"},
+  q5_son_or_daughter:{A:"Sister-priority",B:"Better marks",C:"Worse situation"},
+  q6_punjab_bonus:{A:"No bonus",B:"+20% bonus",C:"Punjab-only"},
+  q7_rural_village:{A:"Big bonus",B:"Small recognition",C:"Not a factor"},
+  q8_first_gen:{A:"Big bonus",B:"Small recognition",C:"Not relevant"},
+  q9_orphan_policy:{A:"Auto-qualify",B:"Big bonus, scored",C:"Standard"},
+  q10_widow_mother:{A:"Big bonus",B:"Small recognition",C:"No bonus"},
+  q11_disability_policy:{A:"Auto-qualify/major",B:"Small bonus",C:"Not a factor"},
+  q12_working_student:{A:"Working wins",B:"Marks matter too",C:"Marks first"},
+  q13_backlog_policy:{A:"Auto-disqualify",B:"Minor deduction",C:"No issue"},
+  q14_achievement_vs_marks:{A:"Champion",B:"Top scorer",C:"Need beats both"},
+  q15_declining_marks:{A:"Support",B:"Support w/ warning",C:"Decline"},
+  q16_previous_beneficiary:{A:"Priority",B:"Standard each year",C:"Disqualify"},
+  q17_other_aid:{A:"No issue",B:"Deduct amount",C:"Disqualify"},
+  q18_budget_split:{A:"10×30K",B:"20×15K",C:"30×10K"},
+  q19_emergency_support:{A:"Reserve fund",B:"If budget allows",C:"Fixed scope"},
+  q20_drug_crisis:{A:"Major bonus",B:"Standard hardship",C:"Not a factor"},
+  q21_sibling_rule:{A:"Both full",B:"One per family",C:"Both reduced"},
+  q22_disowned_student:{A:"Orphan-equivalent",B:"Standard, hardship",C:"Decline"},
+  q23_mental_health:{A:"Hardship factor",B:"Don't score",C:"Not a factor"},
+  q24_digital_divide:{A:"WhatsApp + paper",B:"Office help",C:"Online only"},
+  q25_pay_it_forward:{A:"Formal pledge",B:"Encouraged",C:"No expectations"},
+  q26_agrarian_crisis:{A:"Major bonus",B:"Standard hardship",C:"Not a factor"},
+  q27_border_district:{A:"Major bonus",B:"Small recognition",C:"Not a factor"},
+  q28_seva_commitment:{A:"Formal requirement",B:"Encouraged",C:"No obligations"}
+};
+
+let donutChart = null;
+let sectionChart = null;
+
+async function load(){
+  const root = document.getElementById('content');
+  try{
+    const r = await fetch('/api/results?_=' + Date.now(), {cache:'no-store'});
+    const d = await r.json();
+    if(!d.ok) throw new Error('api');
+    const c = d.counters || {};
+    const total = c.total_submissions || 0;
+    document.getElementById('metapill').innerHTML = `<span class="dot"></span>${total} votes received · live data`;
+
+    // Compute per-question
+    const computed = {};
+    Object.keys(SHORT).forEach(qid => {
+      const a=c[qid+'__A']||0, b=c[qid+'__B']||0, cc=c[qid+'__C']||0;
+      const s=a+b+cc;
+      const pcts = s ? [Math.round(a/s*100), Math.round(b/s*100), Math.round(cc/s*100)] : [0,0,0];
+      const winIdx = [a,b,cc].indexOf(Math.max(a,b,cc));
+      const winPct = s ? Math.round(Math.max(a,b,cc)/s*100) : 0;
+      const winLetter = ['A','B','C'][winIdx];
+      const kind = winPct>=60?'s':winPct>=50?'m':'c';
+      computed[qid] = {a,b,cc,s,pcts,winIdx,winPct,winLetter,kind,winAns:WINNING_ANS[qid][winLetter]};
+    });
+
+    let strongCount = 0, mediumCount = 0, contestedCount = 0;
+    Object.values(computed).forEach(q => {
+      if(q.kind==='s') strongCount++;
+      else if(q.kind==='m') mediumCount++;
+      else contestedCount++;
+    });
+
+    // Build all charts/cards
+    let html = `
+      <div class="hero">
+        <div>
+          <div class="hero-label">Votes received</div>
+          <div class="hero-num">${total}</div>
+        </div>
+        <div>
+          <div class="hero-title"><b>The batch has spoken on 28 questions.</b><br>Below: how the votes broke down at every level — overall, by section, and question by question.</div>
+        </div>
+      </div>
+
+      <div class="twoup">
+        <div class="card">
+          <h3>Verdict mix</h3>
+          <div class="donut-wrap">
+            <canvas id="donut"></canvas>
+            <div class="donut-center"><div class="n">${total}</div><div class="l">votes</div></div>
+          </div>
+          <div class="donut-legend">
+            <div><span class="sw" style="background:var(--green)"></span><span class="v">${strongCount}</span><div class="k">Strong<br>(≥60%)</div></div>
+            <div><span class="sw" style="background:var(--wheat)"></span><span class="v">${mediumCount}</span><div class="k">Medium<br>(50–59%)</div></div>
+            <div><span class="sw" style="background:var(--coral)"></span><span class="v">${contestedCount}</span><div class="k">Contested<br>(&lt;50%)</div></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Section health</h3>
+          <div class="sec-bars"><canvas id="sectionBars"></canvas></div>
+        </div>
+      </div>
+
+      <div class="card full">
+        <h3>Every question · how the batch voted</h3>
+        <div class="legend-row">
+          <span><span class="sw" style="background:var(--kesari)"></span>Winner = option A</span>
+          <span><span class="sw" style="background:var(--green)"></span>Winner = option B</span>
+          <span><span class="sw" style="background:var(--wheat)"></span>Winner = option C</span>
+          <span><span class="sw" style="background:#C5C0AE"></span>Other options</span>
+        </div>
+    `;
+
+    SECTIONS.forEach(sec => {
+      const secAvg = Math.round(sec.qs.reduce((sum,q)=>sum+(computed[q]?.winPct||0),0) / sec.qs.length);
+      html += `<div class="section-banner">
+        <span class="sn">S${sec.num}</span>
+        <span class="st">${sec.title}</span>
+        <span class="strength">avg ${secAvg}% on winner</span>
+      </div>`;
+      sec.qs.forEach((qid,i)=>{
+        const q = computed[qid];
+        if(!q) return;
+        const winClass = q.winLetter==='A'?'winA':q.winLetter==='B'?'winB':'winC';
+        const qNum = qid.split('_')[0].toUpperCase().replace('Q','');
+        // Build stacked bar
+        const segs = ['A','B','C'].map((L,idx) => {
+          const pct = q.pcts[idx];
+          if(pct === 0) return '';
+          const cls = (idx===q.winIdx) ? winClass : 'muted';
+          const small = pct < 12 ? ' lowpct' : '';
+          return `<div class="seg ${cls}${small}" style="width:${pct}%" title="${L}: ${pct}%">${L} ${pct}%</div>`;
+        }).join('');
+        html += `<div class="q-row">
+          <div class="num">${qNum}</div>
+          <div class="lbl">
+            ${SHORT[qid]}<br>
+            <div class="stacked">${segs}</div>
+          </div>
+          <div class="pct">${q.winPct}%<br><span style="font-size:9px;font-weight:400;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px">${q.kind==='s'?'strong':q.kind==='m'?'medium':'split'}</span></div>
+        </div>`;
+      });
+    });
+
+    html += `</div>`; // end .card full
+
+    // Top strongest & contested lists
+    const sorted = Object.entries(computed).map(([qid,q])=>({qid,...q}));
+    const topStrong = sorted.filter(q=>q.kind==='s').sort((a,b)=>b.winPct-a.winPct).slice(0,8);
+    const topContested = sorted.filter(q=>q.kind==='c').sort((a,b)=>a.winPct-b.winPct).slice(0,8);
+
+    html += `<div class="twoup">
+      <div class="card">
+        <h3>Strongest consensus</h3>
+        <ol class="top-list strong">
+          ${topStrong.map((q,i)=>`<li>
+            <div class="rank">${i+1}</div>
+            <div class="t">${SHORT[q.qid]}<small>→ ${q.winAns}</small></div>
+            <div class="b">${q.winPct}%</div>
+          </li>`).join('')}
+        </ol>
+      </div>
+
+      <div class="card">
+        <h3>Most contested</h3>
+        <ol class="top-list contested">
+          ${topContested.map((q,i)=>`<li>
+            <div class="rank">${i+1}</div>
+            <div class="t">${SHORT[q.qid]}<small>leading: ${q.winAns}</small></div>
+            <div class="b">${q.winPct}%</div>
+          </li>`).join('')}
+        </ol>
+      </div>
+    </div>`;
+
+    root.innerHTML = html;
+
+    // Render charts
+    if(donutChart) donutChart.destroy();
+    if(sectionChart) sectionChart.destroy();
+
+    const dctx = document.getElementById('donut').getContext('2d');
+    donutChart = new Chart(dctx, {
+      type:'doughnut',
+      data:{
+        labels:['Strong','Medium','Contested'],
+        datasets:[{
+          data:[strongCount, mediumCount, contestedCount],
+          backgroundColor:['#2E7D32','#E8B741','#C04A2A'],
+          borderColor:'#FFFDF8',
+          borderWidth:3
+        }]
+      },
+      options:{
+        responsive:true,maintainAspectRatio:false,cutout:'68%',
+        plugins:{ legend:{display:false}, tooltip:{
+          callbacks:{label:(ctx)=>`${ctx.label}: ${ctx.parsed} questions`}
+        }}
+      }
+    });
+
+    const sctx = document.getElementById('sectionBars').getContext('2d');
+    const secLabels = SECTIONS.map(s=>'S'+s.num);
+    const secValues = SECTIONS.map(sec => Math.round(sec.qs.reduce((sum,q)=>sum+(computed[q]?.winPct||0),0) / sec.qs.length));
+    const secColors = secValues.map(v=>v>=60?'#2E7D32':v>=50?'#E8B741':'#C04A2A');
+    sectionChart = new Chart(sctx, {
+      type:'bar',
+      data:{
+        labels:secLabels,
+        datasets:[{
+          label:'Avg winning %',
+          data:secValues,
+          backgroundColor:secColors,
+          borderRadius:6,
+          maxBarThickness:36
+        }]
+      },
+      options:{
+        responsive:true,maintainAspectRatio:false,
+        plugins:{
+          legend:{display:false},
+          tooltip:{callbacks:{
+            title:(ctx)=>SECTIONS[ctx[0].dataIndex].title,
+            label:(ctx)=>`Avg winning %: ${ctx.parsed.y}%`
+          }}
+        },
+        scales:{
+          y:{beginAtZero:true,max:100,
+            ticks:{font:{size:10},callback:v=>v+'%'},
+            grid:{color:'#F1EBDB'}},
+          x:{ticks:{font:{size:11,weight:'600'}},grid:{display:false}}
+        }
+      }
+    });
+
+  } catch(e){
+    root.innerHTML = `<div class="loading">Couldn't load the data right now. Try refreshing.</div>`;
+    console.error(e);
+  }
+}
+
+load();
+setInterval(load, 60000);
+</script>
+</body>
+</html>

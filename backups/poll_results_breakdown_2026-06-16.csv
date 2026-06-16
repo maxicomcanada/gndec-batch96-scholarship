@@ -1,0 +1,30 @@
+Q,Topic,A,B,C,Responses,A_pct,B_pct,C_pct,Leading
+1,"Need vs merit",31,3,12,46,67.4,6.5,26.1,A
+2,"Low marks + low income",25,7,15,47,53.2,14.9,31.9,A
+3,"Above threshold, no assets",19,10,17,46,41.3,21.7,37.0,A
+4,"Tiebreaker",9,20,17,46,19.6,43.5,37.0,B
+5,"Son or daughter",19,6,21,46,41.3,13.0,45.7,C
+6,"Punjab bonus",10,18,18,46,21.7,39.1,39.1,B
+7,"Rural village",16,15,15,46,34.8,32.6,32.6,A
+8,"First-generation",27,6,13,46,58.7,13.0,28.3,A
+9,"Orphan policy",18,27,1,46,39.1,58.7,2.2,B
+10,"Widow mother",28,11,0,39,71.8,28.2,0.0,A
+11,"Disability policy",0,0,0,0,0,0,0,-
+12,"Working student",0,9,1,10,0.0,90.0,10.0,B
+13,"Backlog policy",3,15,28,46,6.5,32.6,60.9,C
+14,"Achievement vs marks",15,6,25,46,32.6,13.0,54.3,C
+15,"Declining marks",24,22,0,46,52.2,47.8,0.0,A
+16,"Previous beneficiary",16,30,0,46,34.8,65.2,0.0,B
+17,"Other aid",11,29,6,46,23.9,63.0,13.0,B
+18,"Budget split",9,23,14,46,19.6,50.0,30.4,B
+19,"Emergency support",13,28,5,46,28.3,60.9,10.9,B
+20,"Drug crisis",15,24,7,46,32.6,52.2,15.2,B
+21,"Sibling rule",21,10,15,46,45.7,21.7,32.6,A
+22,"Disowned student",10,0,0,10,100.0,0.0,0.0,A
+23,"Mental health",0,0,0,0,0,0,0,-
+24,"Digital divide",15,24,7,46,32.6,52.2,15.2,B
+25,"Pay it forward",19,22,5,46,41.3,47.8,10.9,B
+26,"Agrarian crisis",20,24,2,46,43.5,52.2,4.3,B
+27,"Border district",7,27,12,46,15.2,58.7,26.1,B
+28,"Seva commitment",9,35,2,46,19.6,76.1,4.3,B
+TOTAL,total_submissions,,,,46,,,,
